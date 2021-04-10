@@ -1,0 +1,12 @@
+D:\.Development\CSharp\Crypto\CryptoUtils\obj\Debug\Interop.Shell32.dll
+D:\.Development\CSharp\Crypto\CryptoUtils\obj\Debug\CryptoUtils.csproj.ResolveComReference.cache
+D:\.Development\CSharp\Crypto\CryptoUtils\obj\Debug\CryptoUtils.frmMain.resources
+D:\.Development\CSharp\Crypto\CryptoUtils\obj\Debug\CryptoUtils.Properties.Resources.resources
+D:\.Development\CSharp\Crypto\CryptoUtils\obj\Debug\CryptoUtils.csproj.GenerateResource.cache
+D:\.Development\CSharp\Crypto\CryptoUtils\obj\Debug\CryptoUtils.csproj.CoreCompileInputs.cache
+D:\.Development\CSharp\Crypto\CryptoUtils\bin\Debug\CryptoUtils.exe.config
+D:\.Development\CSharp\Crypto\CryptoUtils\bin\Debug\CryptoUtils.exe
+D:\.Development\CSharp\Crypto\CryptoUtils\bin\Debug\CryptoUtils.pdb
+D:\.Development\CSharp\Crypto\CryptoUtils\obj\Debug\CryptoUtils.exe
+D:\.Development\CSharp\Crypto\CryptoUtils\obj\Debug\CryptoUtils.pdb
+D:\.Development\CSharp\Crypto\CryptoUtils\obj\Debug\CryptoUtils.exe.config

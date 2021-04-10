@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CudafyModule Version="1.29.5576.13786" Name="CudafyEx" DebugInfo="false" HasCudaSourceCode="false" HasPTX="true" HasBinary="false">
+  <CudaSourceCode></CudaSourceCode>
+  <PTXMODULES>
+    <PTXMODULE Platform="x64" Arch="sm_50" SourceCodeFile="7d755d15-503c-4214-b870-6f5effeb44e7">Ly8NCi8vIEdlbmVyYXRlZCBieSBOVklESUEgTlZWTSBDb21waWxlcg0KLy8NCi8vIENvbXBpbGVyIEJ1aWxkIElEOiBDTC0yOTYxODUyOA0KLy8gQ3VkYSBjb21waWxhdGlvbiB0b29scywgcmVsZWFzZSAxMS4yLCBWMTEuMi4xNTINCi8vIEJhc2VkIG9uIE5WVk0gNy4wLjENCi8vDQoNCi52ZXJzaW9uIDcuMg0KLnRhcmdldCBzbV81MA0KLmFkZHJlc3Nfc2l6ZSA2NA0KDQoJLy8gLmdsb2JsCWFkZA0KDQoudmlzaWJsZSAuZW50cnkgYWRkKA0KCS5wYXJhbSAudTY0IGFkZF9wYXJhbV8wLA0KCS5wYXJhbSAudTMyIGFkZF9wYXJhbV8xLA0KCS5wYXJhbSAudTY0IGFkZF9wYXJhbV8yLA0KCS5wYXJhbSAudTMyIGFkZF9wYXJhbV8zLA0KCS5wYXJhbSAudTY0IGFkZF9wYXJhbV80LA0KCS5wYXJhbSAudTMyIGFkZF9wYXJhbV81DQopDQp7DQoJLnJlZyAucHJlZCAJJXA8Mj47DQoJLnJlZyAuYjMyIAklcjw1PjsNCgkucmVnIC5iNjQgCSVyZDwxMT47DQoNCg0KCWxkLnBhcmFtLnU2NCAJJXJkMSwgW2FkZF9wYXJhbV8wXTsNCglsZC5wYXJhbS51NjQgCSVyZDIsIFthZGRfcGFyYW1fMl07DQoJbGQucGFyYW0udTY0IAklcmQzLCBbYWRkX3BhcmFtXzRdOw0KCW1vdi51MzIgCSVyMSwgJWN0YWlkLng7DQoJc2V0cC5ndC5zMzIgCSVwMSwgJXIxLCA5Ow0KCUAlcDEgYnJhIAlMQkIwXzI7DQoNCgljdnRhLnRvLmdsb2JhbC51NjQgCSVyZDQsICVyZDE7DQoJbXVsLndpZGUuczMyIAklcmQ1LCAlcjEsIDQ7DQoJYWRkLnM2NCAJJXJkNiwgJXJkNCwgJXJkNTsNCgljdnRhLnRvLmdsb2JhbC51NjQgCSVyZDcsICVyZDI7DQoJYWRkLnM2NCAJJXJkOCwgJXJkNywgJXJkNTsNCglsZC5nbG9iYWwudTMyIAklcjIsIFslcmQ4XTsNCglsZC5nbG9iYWwudTMyIAklcjMsIFslcmQ2XTsNCglhZGQuczMyIAklcjQsICVyMiwgJXIzOw0KCWN2dGEudG8uZ2xvYmFsLnU2NCAJJXJkOSwgJXJkMzsNCglhZGQuczY0IAklcmQxMCwgJXJkOSwgJXJkNTsNCglzdC5nbG9iYWwudTMyIAlbJXJkMTBdLCAlcjQ7DQoNCkxCQjBfMjoNCglyZXQ7DQoNCn0NCg0K</PTXMODULE>
+  </PTXMODULES>
+  <BinaryModules />
+  <SourceCodes>
+    <SourceCodeFile ID="7d755d15-503c-4214-b870-6f5effeb44e7" Language="Cuda" Arch="sm_50">DQovLyBSU0EuQ3VkYWZ5RXgNCmV4dGVybiAiQyIgX19nbG9iYWxfXyAgdm9pZCBhZGQoIGludCogYSwgaW50IGFMZW4wLCAgaW50KiBiLCBpbnQgYkxlbjAsICBpbnQqIGMsIGludCBjTGVuMCk7DQoNCi8vIFJTQS5DdWRhZnlFeA0KZXh0ZXJuICJDIiBfX2dsb2JhbF9fICB2b2lkIGFkZCggaW50KiBhLCBpbnQgYUxlbjAsICBpbnQqIGIsIGludCBiTGVuMCwgIGludCogYywgaW50IGNMZW4wKQ0Kew0KCWludCB4ID0gYmxvY2tJZHgueDsNCglib29sIGZsYWcgPSB4IDwgMTA7DQoJaWYgKGZsYWcpDQoJew0KCQljWyh4KV0gPSBhWyh4KV0gKyBiWyh4KV07DQoJfQ0KfQ0K</SourceCodeFile>
+  </SourceCodes>
+  <Functions>
+    <CudafyKernelMethod Name="add" Type="Global" IsDummy="false" DummyBehaviour="Default">
+      <Type>RSA.CudafyEx</Type>
+      <Assembly>RSA, Version=1.0.115.0, Culture=neutral, PublicKeyToken=null</Assembly>
+      <AssemblyName>RSA</AssemblyName>
+      <AssemblyPath>D:\.NewDev\CSharp\RSA\RSA\bin\x64\Debug\RSA.exe</AssemblyPath>
+      <Checksum>801390540</Checksum>
+      <Parameters>
+        <ReturnType>System.Void</ReturnType>
+        <Parameter Type="Cudafy.GThread" Name="thread" Position="0" />
+        <Parameter Type="System.Int32[]" Name="a" Position="1" />
+        <Parameter Type="System.Int32[]" Name="b" Position="2" />
+        <Parameter Type="System.Int32[]" Name="c" Position="3" />
+      </Parameters>
+    </CudafyKernelMethod>
+  </Functions>
+  <Constants />
+  <Types />
+</CudafyModule>
