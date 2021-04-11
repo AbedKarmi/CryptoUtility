@@ -398,23 +398,24 @@ namespace CryptoUtility
             this.btnSendToCalc = new System.Windows.Forms.Button();
             this.btnOpenHexFile = new System.Windows.Forms.Button();
             this.tabImage = new System.Windows.Forms.TabPage();
+            this.chkINV = new System.Windows.Forms.CheckBox();
+            this.chkFlipX = new System.Windows.Forms.CheckBox();
+            this.chkFlipY = new System.Windows.Forms.CheckBox();
+            this.chkFixPadding = new System.Windows.Forms.CheckBox();
+            this.lblPointSize = new System.Windows.Forms.Label();
+            this.btnSMinus = new System.Windows.Forms.Button();
+            this.btnSPlus = new System.Windows.Forms.Button();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
+            this.cmbSizeMode = new System.Windows.Forms.ComboBox();
+            this.btnResetImage = new System.Windows.Forms.Button();
+            this.btnRotate = new System.Windows.Forms.Button();
             this.picQuran2 = new System.Windows.Forms.PictureBox();
             this.picQuran1 = new System.Windows.Forms.PictureBox();
             this.lstLog = new System.Windows.Forms.ListBox();
             this.txtInfo = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.btnRotate = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.cmbSizeMode = new System.Windows.Forms.ComboBox();
-            this.label47 = new System.Windows.Forms.Label();
-            this.lblScale = new System.Windows.Forms.Label();
-            this.btnSMinus = new System.Windows.Forms.Button();
-            this.btnSPlus = new System.Windows.Forms.Button();
-            this.label49 = new System.Windows.Forms.Label();
-            this.btnResetImage = new System.Windows.Forms.Button();
-            this.chkFixPadding = new System.Windows.Forms.CheckBox();
-            this.chkFixRoot = new System.Windows.Forms.CheckBox();
             this.tabCrypto.SuspendLayout();
             this.tabRSA.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -4832,17 +4833,18 @@ namespace CryptoUtility
             // 
             // tabImage
             // 
-            this.tabImage.BackColor = System.Drawing.Color.Silver;
-            this.tabImage.Controls.Add(this.chkFixRoot);
+            this.tabImage.BackColor = System.Drawing.Color.White;
+            this.tabImage.Controls.Add(this.chkINV);
+            this.tabImage.Controls.Add(this.chkFlipX);
+            this.tabImage.Controls.Add(this.chkFlipY);
             this.tabImage.Controls.Add(this.chkFixPadding);
-            this.tabImage.Controls.Add(this.lblScale);
+            this.tabImage.Controls.Add(this.lblPointSize);
             this.tabImage.Controls.Add(this.btnSMinus);
             this.tabImage.Controls.Add(this.btnSPlus);
             this.tabImage.Controls.Add(this.label49);
             this.tabImage.Controls.Add(this.label47);
             this.tabImage.Controls.Add(this.cmbSizeMode);
             this.tabImage.Controls.Add(this.btnResetImage);
-            this.tabImage.Controls.Add(this.button7);
             this.tabImage.Controls.Add(this.btnRotate);
             this.tabImage.Controls.Add(this.picQuran2);
             this.tabImage.Controls.Add(this.picQuran1);
@@ -4852,6 +4854,141 @@ namespace CryptoUtility
             this.tabImage.TabIndex = 8;
             this.tabImage.Text = "X_Ray";
             this.tabImage.Click += new System.EventHandler(this.tabImage_Click);
+            // 
+            // chkINV
+            // 
+            this.chkINV.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkINV.Location = new System.Drawing.Point(230, 615);
+            this.chkINV.Name = "chkINV";
+            this.chkINV.Size = new System.Drawing.Size(55, 40);
+            this.chkINV.TabIndex = 14;
+            this.chkINV.Text = "INV";
+            this.chkINV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkINV.UseVisualStyleBackColor = true;
+            this.chkINV.CheckedChanged += new System.EventHandler(this.chkINV_CheckedChanged);
+            // 
+            // chkFlipX
+            // 
+            this.chkFlipX.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkFlipX.Location = new System.Drawing.Point(177, 615);
+            this.chkFlipX.Name = "chkFlipX";
+            this.chkFlipX.Size = new System.Drawing.Size(55, 40);
+            this.chkFlipX.TabIndex = 14;
+            this.chkFlipX.Text = "FlipX";
+            this.chkFlipX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkFlipX.UseVisualStyleBackColor = true;
+            this.chkFlipX.CheckedChanged += new System.EventHandler(this.chkFlipX_CheckedChanged);
+            // 
+            // chkFlipY
+            // 
+            this.chkFlipY.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkFlipY.Location = new System.Drawing.Point(125, 615);
+            this.chkFlipY.Name = "chkFlipY";
+            this.chkFlipY.Size = new System.Drawing.Size(55, 40);
+            this.chkFlipY.TabIndex = 14;
+            this.chkFlipY.Text = "FlipY";
+            this.chkFlipY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.chkFlipY.UseVisualStyleBackColor = true;
+            this.chkFlipY.CheckedChanged += new System.EventHandler(this.chkFlipY_CheckedChanged);
+            // 
+            // chkFixPadding
+            // 
+            this.chkFixPadding.AutoSize = true;
+            this.chkFixPadding.Location = new System.Drawing.Point(546, 626);
+            this.chkFixPadding.Name = "chkFixPadding";
+            this.chkFixPadding.Size = new System.Drawing.Size(92, 23);
+            this.chkFixPadding.TabIndex = 13;
+            this.chkFixPadding.Text = "Padding";
+            this.chkFixPadding.UseVisualStyleBackColor = true;
+            this.chkFixPadding.CheckedChanged += new System.EventHandler(this.chkFixSquare_CheckedChanged);
+            // 
+            // lblPointSize
+            // 
+            this.lblPointSize.BackColor = System.Drawing.Color.White;
+            this.lblPointSize.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblPointSize.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.lblPointSize.Location = new System.Drawing.Point(1196, 618);
+            this.lblPointSize.Name = "lblPointSize";
+            this.lblPointSize.Size = new System.Drawing.Size(58, 33);
+            this.lblPointSize.TabIndex = 11;
+            this.lblPointSize.Text = "1";
+            this.lblPointSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPointSize.TextChanged += new System.EventHandler(this.lblScale_TextChanged);
+            this.lblPointSize.Click += new System.EventHandler(this.lblScale_Click);
+            // 
+            // btnSMinus
+            // 
+            this.btnSMinus.Location = new System.Drawing.Point(1160, 617);
+            this.btnSMinus.Name = "btnSMinus";
+            this.btnSMinus.Size = new System.Drawing.Size(38, 37);
+            this.btnSMinus.TabIndex = 10;
+            this.btnSMinus.Text = "-";
+            this.btnSMinus.UseVisualStyleBackColor = true;
+            this.btnSMinus.Click += new System.EventHandler(this.btnSMinus_Click);
+            // 
+            // btnSPlus
+            // 
+            this.btnSPlus.Location = new System.Drawing.Point(1253, 617);
+            this.btnSPlus.Name = "btnSPlus";
+            this.btnSPlus.Size = new System.Drawing.Size(38, 37);
+            this.btnSPlus.TabIndex = 12;
+            this.btnSPlus.Text = "+";
+            this.btnSPlus.UseVisualStyleBackColor = true;
+            this.btnSPlus.Click += new System.EventHandler(this.btnSPlus_Click);
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(1073, 626);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(84, 19);
+            this.label49.TabIndex = 3;
+            this.label49.Text = "PointSize :";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(689, 626);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(91, 19);
+            this.label47.TabIndex = 3;
+            this.label47.Text = "Size Mode :";
+            // 
+            // cmbSizeMode
+            // 
+            this.cmbSizeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSizeMode.FormattingEnabled = true;
+            this.cmbSizeMode.Items.AddRange(new object[] {
+            "Normal",
+            "StrechImage",
+            "AutoSize",
+            "CenterImage",
+            "Zoom"});
+            this.cmbSizeMode.Location = new System.Drawing.Point(786, 623);
+            this.cmbSizeMode.Name = "cmbSizeMode";
+            this.cmbSizeMode.Size = new System.Drawing.Size(272, 27);
+            this.cmbSizeMode.TabIndex = 2;
+            this.cmbSizeMode.SelectedIndexChanged += new System.EventHandler(this.cmbSizeMode_SelectedIndexChanged);
+            // 
+            // btnResetImage
+            // 
+            this.btnResetImage.Location = new System.Drawing.Point(291, 615);
+            this.btnResetImage.Name = "btnResetImage";
+            this.btnResetImage.Size = new System.Drawing.Size(100, 40);
+            this.btnResetImage.TabIndex = 1;
+            this.btnResetImage.Text = "Reset";
+            this.btnResetImage.UseVisualStyleBackColor = true;
+            this.btnResetImage.Click += new System.EventHandler(this.btnResetImage_Click);
+            // 
+            // btnRotate
+            // 
+            this.btnRotate.Location = new System.Drawing.Point(38, 615);
+            this.btnRotate.Name = "btnRotate";
+            this.btnRotate.Size = new System.Drawing.Size(90, 40);
+            this.btnRotate.TabIndex = 1;
+            this.btnRotate.Text = "Rotate >";
+            this.btnRotate.UseVisualStyleBackColor = true;
+            this.btnRotate.Click += new System.EventHandler(this.btnRotate_Click);
             // 
             // picQuran2
             // 
@@ -4914,126 +5051,6 @@ namespace CryptoUtility
             this.lblStatus.Size = new System.Drawing.Size(561, 32);
             this.lblStatus.TabIndex = 8;
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnRotate
-            // 
-            this.btnRotate.Location = new System.Drawing.Point(38, 615);
-            this.btnRotate.Name = "btnRotate";
-            this.btnRotate.Size = new System.Drawing.Size(100, 40);
-            this.btnRotate.TabIndex = 1;
-            this.btnRotate.Text = "Rotate";
-            this.btnRotate.UseVisualStyleBackColor = true;
-            this.btnRotate.Click += new System.EventHandler(this.btnRotate_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(144, 615);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(100, 40);
-            this.button7.TabIndex = 1;
-            this.button7.Text = "Flip Y";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // cmbSizeMode
-            // 
-            this.cmbSizeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSizeMode.FormattingEnabled = true;
-            this.cmbSizeMode.Items.AddRange(new object[] {
-            "Normal",
-            "StrechImage",
-            "AutoSize",
-            "CenterImage",
-            "Zoom"});
-            this.cmbSizeMode.Location = new System.Drawing.Point(786, 623);
-            this.cmbSizeMode.Name = "cmbSizeMode";
-            this.cmbSizeMode.Size = new System.Drawing.Size(272, 27);
-            this.cmbSizeMode.TabIndex = 2;
-            this.cmbSizeMode.SelectedIndexChanged += new System.EventHandler(this.cmbSizeMode_SelectedIndexChanged);
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(689, 626);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(91, 19);
-            this.label47.TabIndex = 3;
-            this.label47.Text = "Size Mode :";
-            // 
-            // lblScale
-            // 
-            this.lblScale.BackColor = System.Drawing.Color.White;
-            this.lblScale.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblScale.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.lblScale.Location = new System.Drawing.Point(1168, 618);
-            this.lblScale.Name = "lblScale";
-            this.lblScale.Size = new System.Drawing.Size(86, 33);
-            this.lblScale.TabIndex = 11;
-            this.lblScale.Text = "1";
-            this.lblScale.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblScale.TextChanged += new System.EventHandler(this.lblScale_TextChanged);
-            this.lblScale.Click += new System.EventHandler(this.lblScale_Click);
-            // 
-            // btnSMinus
-            // 
-            this.btnSMinus.Location = new System.Drawing.Point(1132, 617);
-            this.btnSMinus.Name = "btnSMinus";
-            this.btnSMinus.Size = new System.Drawing.Size(38, 37);
-            this.btnSMinus.TabIndex = 10;
-            this.btnSMinus.Text = "-";
-            this.btnSMinus.UseVisualStyleBackColor = true;
-            this.btnSMinus.Click += new System.EventHandler(this.btnSMinus_Click);
-            // 
-            // btnSPlus
-            // 
-            this.btnSPlus.Location = new System.Drawing.Point(1253, 617);
-            this.btnSPlus.Name = "btnSPlus";
-            this.btnSPlus.Size = new System.Drawing.Size(38, 37);
-            this.btnSPlus.TabIndex = 12;
-            this.btnSPlus.Text = "+";
-            this.btnSPlus.UseVisualStyleBackColor = true;
-            this.btnSPlus.Click += new System.EventHandler(this.btnSPlus_Click);
-            // 
-            // label49
-            // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(1070, 626);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(56, 19);
-            this.label49.TabIndex = 3;
-            this.label49.Text = "Scale :";
-            // 
-            // btnResetImage
-            // 
-            this.btnResetImage.Location = new System.Drawing.Point(250, 615);
-            this.btnResetImage.Name = "btnResetImage";
-            this.btnResetImage.Size = new System.Drawing.Size(100, 40);
-            this.btnResetImage.TabIndex = 1;
-            this.btnResetImage.Text = "Reset";
-            this.btnResetImage.UseVisualStyleBackColor = true;
-            this.btnResetImage.Click += new System.EventHandler(this.btnResetImage_Click);
-            // 
-            // chkFixPadding
-            // 
-            this.chkFixPadding.AutoSize = true;
-            this.chkFixPadding.Location = new System.Drawing.Point(529, 623);
-            this.chkFixPadding.Name = "chkFixPadding";
-            this.chkFixPadding.Size = new System.Drawing.Size(92, 23);
-            this.chkFixPadding.TabIndex = 13;
-            this.chkFixPadding.Text = "Padding";
-            this.chkFixPadding.UseVisualStyleBackColor = true;
-            this.chkFixPadding.CheckedChanged += new System.EventHandler(this.chkFixSquare_CheckedChanged);
-            // 
-            // chkFixRoot
-            // 
-            this.chkFixRoot.AutoSize = true;
-            this.chkFixRoot.Location = new System.Drawing.Point(421, 625);
-            this.chkFixRoot.Name = "chkFixRoot";
-            this.chkFixRoot.Size = new System.Drawing.Size(93, 23);
-            this.chkFixRoot.TabIndex = 13;
-            this.chkFixRoot.Text = "Fix Root";
-            this.chkFixRoot.UseVisualStyleBackColor = true;
-            this.chkFixRoot.CheckedChanged += new System.EventHandler(this.chkFixRoot_CheckedChanged);
             // 
             // frmMain
             // 
@@ -5471,15 +5488,16 @@ namespace CryptoUtility
         private System.Windows.Forms.PictureBox picQuran2;
         private System.Windows.Forms.Button btnRotate;
         private System.Windows.Forms.ComboBox cmbSizeMode;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.Label lblScale;
+        private System.Windows.Forms.Label lblPointSize;
         private System.Windows.Forms.Button btnSMinus;
         private System.Windows.Forms.Button btnSPlus;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Button btnResetImage;
         private System.Windows.Forms.CheckBox chkFixPadding;
-        private System.Windows.Forms.CheckBox chkFixRoot;
+        private System.Windows.Forms.CheckBox chkFlipY;
+        private System.Windows.Forms.CheckBox chkFlipX;
+        private System.Windows.Forms.CheckBox chkINV;
     }
 }
 

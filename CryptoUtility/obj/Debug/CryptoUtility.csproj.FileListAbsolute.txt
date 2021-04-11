@@ -1,3 +1,8 @@
+D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\CryptoUtility.exe.config
+D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\CryptoUtility.exe
+D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\CryptoUtility.pdb
+D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\Be.Windows.Forms.HexBox.dll
+D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\WindowsBase.dll
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.exe.config
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\Interop.Shell32.dll
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.csproj.ResolveComReference.cache
@@ -5,12 +10,6 @@ D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.frmMain.reso
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.Properties.Resources.resources
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.csproj.GenerateResource.cache
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.csproj.CoreCompileInputs.cache
-D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\CryptoUtility.exe.config
-D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\CryptoUtility.exe
-D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\CryptoUtility.pdb
-D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\Be.Windows.Forms.HexBox.dll
-D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\C1.Win.2.dll
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.csproj.CopyComplete
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.exe
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.pdb
-D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\WindowsBase.dll
