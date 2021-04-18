@@ -177,6 +177,11 @@ namespace CryptoUtility
             this.txtPrimeQ = new System.Windows.Forms.TextBox();
             this.txtPrimeP = new System.Windows.Forms.TextBox();
             this.tabEncoding = new System.Windows.Forms.TabPage();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.btnSCrypto = new System.Windows.Forms.Button();
+            this.btnSImage = new System.Windows.Forms.Button();
+            this.btnSCalc = new System.Windows.Forms.Button();
+            this.btnSHex = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.rbFiles = new System.Windows.Forms.RadioButton();
             this.rbText = new System.Windows.Forms.RadioButton();
@@ -184,7 +189,7 @@ namespace CryptoUtility
             this.chkRTL = new System.Windows.Forms.CheckBox();
             this.chkOutText = new System.Windows.Forms.CheckBox();
             this.chkALLEncodings = new System.Windows.Forms.CheckBox();
-            this.chkSendToHexViewer = new System.Windows.Forms.CheckBox();
+            this.chkJommalWord = new System.Windows.Forms.CheckBox();
             this.chkSendToBuffer = new System.Windows.Forms.CheckBox();
             this.chkDiacritics = new System.Windows.Forms.CheckBox();
             this.chkzStrings = new System.Windows.Forms.CheckBox();
@@ -194,10 +199,6 @@ namespace CryptoUtility
             this.chkMeta = new System.Windows.Forms.CheckBox();
             this.progFiles = new System.Windows.Forms.ProgressBar();
             this.btnToHex = new System.Windows.Forms.Button();
-            this.btnSHex = new System.Windows.Forms.Button();
-            this.btnSCrypto = new System.Windows.Forms.Button();
-            this.btnSImage = new System.Windows.Forms.Button();
-            this.btnSCalc = new System.Windows.Forms.Button();
             this.btnRun = new System.Windows.Forms.Button();
             this.btnClearFiles = new System.Windows.Forms.Button();
             this.btnOpenFile = new System.Windows.Forms.Button();
@@ -408,6 +409,7 @@ namespace CryptoUtility
             this.label49 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.cmbSizeMode = new System.Windows.Forms.ComboBox();
+            this.btnSaveImage = new System.Windows.Forms.Button();
             this.btnResetImage = new System.Windows.Forms.Button();
             this.btnRotate = new System.Windows.Forms.Button();
             this.picQuran2 = new System.Windows.Forms.PictureBox();
@@ -422,6 +424,7 @@ namespace CryptoUtility
             this.tabDSA.SuspendLayout();
             this.tabCalculator.SuspendLayout();
             this.tabEncoding.SuspendLayout();
+            this.panel7.SuspendLayout();
             this.panel5.SuspendLayout();
             this.grpOptions.SuspendLayout();
             this.grpSource.SuspendLayout();
@@ -2083,14 +2086,11 @@ namespace CryptoUtility
             // tabEncoding
             // 
             this.tabEncoding.BackColor = System.Drawing.Color.Silver;
+            this.tabEncoding.Controls.Add(this.panel7);
             this.tabEncoding.Controls.Add(this.panel5);
             this.tabEncoding.Controls.Add(this.grpOptions);
             this.tabEncoding.Controls.Add(this.progFiles);
             this.tabEncoding.Controls.Add(this.btnToHex);
-            this.tabEncoding.Controls.Add(this.btnSHex);
-            this.tabEncoding.Controls.Add(this.btnSCrypto);
-            this.tabEncoding.Controls.Add(this.btnSImage);
-            this.tabEncoding.Controls.Add(this.btnSCalc);
             this.tabEncoding.Controls.Add(this.btnRun);
             this.tabEncoding.Controls.Add(this.btnClearFiles);
             this.tabEncoding.Controls.Add(this.btnOpenFile);
@@ -2104,9 +2104,65 @@ namespace CryptoUtility
             this.tabEncoding.Enter += new System.EventHandler(this.tabEncoding_Enter);
             this.tabEncoding.Leave += new System.EventHandler(this.tabEncoding_Leave);
             // 
+            // panel7
+            // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.btnSCrypto);
+            this.panel7.Controls.Add(this.btnSImage);
+            this.panel7.Controls.Add(this.btnSCalc);
+            this.panel7.Controls.Add(this.btnSHex);
+            this.panel7.Location = new System.Drawing.Point(905, 608);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(387, 44);
+            this.panel7.TabIndex = 11;
+            // 
+            // btnSCrypto
+            // 
+            this.btnSCrypto.Location = new System.Drawing.Point(196, 3);
+            this.btnSCrypto.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSCrypto.Name = "btnSCrypto";
+            this.btnSCrypto.Size = new System.Drawing.Size(88, 35);
+            this.btnSCrypto.TabIndex = 5;
+            this.btnSCrypto.Text = "> Crypto";
+            this.btnSCrypto.UseVisualStyleBackColor = true;
+            this.btnSCrypto.Click += new System.EventHandler(this.btnSCrypto_Click);
+            // 
+            // btnSImage
+            // 
+            this.btnSImage.Location = new System.Drawing.Point(4, 3);
+            this.btnSImage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSImage.Name = "btnSImage";
+            this.btnSImage.Size = new System.Drawing.Size(88, 35);
+            this.btnSImage.TabIndex = 4;
+            this.btnSImage.Text = "> X-Ray";
+            this.btnSImage.UseVisualStyleBackColor = true;
+            this.btnSImage.Click += new System.EventHandler(this.btnSImage_Click);
+            // 
+            // btnSCalc
+            // 
+            this.btnSCalc.Location = new System.Drawing.Point(100, 3);
+            this.btnSCalc.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSCalc.Name = "btnSCalc";
+            this.btnSCalc.Size = new System.Drawing.Size(88, 35);
+            this.btnSCalc.TabIndex = 4;
+            this.btnSCalc.Text = "> Calc";
+            this.btnSCalc.UseVisualStyleBackColor = true;
+            this.btnSCalc.Click += new System.EventHandler(this.btnSCalc_Click);
+            // 
+            // btnSHex
+            // 
+            this.btnSHex.Location = new System.Drawing.Point(292, 3);
+            this.btnSHex.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSHex.Name = "btnSHex";
+            this.btnSHex.Size = new System.Drawing.Size(88, 35);
+            this.btnSHex.TabIndex = 6;
+            this.btnSHex.Text = "> Hex";
+            this.btnSHex.UseVisualStyleBackColor = true;
+            this.btnSHex.Click += new System.EventHandler(this.btnSHex_Click);
+            // 
             // panel5
             // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel5.Controls.Add(this.rbFiles);
             this.panel5.Controls.Add(this.rbText);
             this.panel5.Location = new System.Drawing.Point(40, 556);
@@ -2141,7 +2197,7 @@ namespace CryptoUtility
             this.grpOptions.Controls.Add(this.chkRTL);
             this.grpOptions.Controls.Add(this.chkOutText);
             this.grpOptions.Controls.Add(this.chkALLEncodings);
-            this.grpOptions.Controls.Add(this.chkSendToHexViewer);
+            this.grpOptions.Controls.Add(this.chkJommalWord);
             this.grpOptions.Controls.Add(this.chkSendToBuffer);
             this.grpOptions.Controls.Add(this.chkDiacritics);
             this.grpOptions.Controls.Add(this.chkzStrings);
@@ -2195,18 +2251,18 @@ namespace CryptoUtility
             this.chkALLEncodings.UseVisualStyleBackColor = true;
             this.chkALLEncodings.CheckedChanged += new System.EventHandler(this.chkALLEncodings_CheckedChanged);
             // 
-            // chkSendToHexViewer
+            // chkJommalWord
             // 
-            this.chkSendToHexViewer.AutoSize = true;
-            this.chkSendToHexViewer.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chkSendToHexViewer.Location = new System.Drawing.Point(25, 149);
-            this.chkSendToHexViewer.Margin = new System.Windows.Forms.Padding(4);
-            this.chkSendToHexViewer.Name = "chkSendToHexViewer";
-            this.chkSendToHexViewer.Size = new System.Drawing.Size(179, 23);
-            this.chkSendToHexViewer.TabIndex = 8;
-            this.chkSendToHexViewer.Text = "Send To Hex Viewer";
-            this.chkSendToHexViewer.UseVisualStyleBackColor = true;
-            this.chkSendToHexViewer.CheckedChanged += new System.EventHandler(this.chkSendToHexViewer_CheckedChanged);
+            this.chkJommalWord.AutoSize = true;
+            this.chkJommalWord.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkJommalWord.Location = new System.Drawing.Point(25, 149);
+            this.chkJommalWord.Margin = new System.Windows.Forms.Padding(4);
+            this.chkJommalWord.Name = "chkJommalWord";
+            this.chkJommalWord.Size = new System.Drawing.Size(143, 23);
+            this.chkJommalWord.TabIndex = 8;
+            this.chkJommalWord.Text = "Jommal WORD";
+            this.chkJommalWord.UseVisualStyleBackColor = true;
+            this.chkJommalWord.CheckedChanged += new System.EventHandler(this.chkJommalWORD_CheckedChanged);
             // 
             // chkSendToBuffer
             // 
@@ -2308,53 +2364,9 @@ namespace CryptoUtility
             this.btnToHex.Name = "btnToHex";
             this.btnToHex.Size = new System.Drawing.Size(100, 45);
             this.btnToHex.TabIndex = 2;
-            this.btnToHex.Text = "Hex";
+            this.btnToHex.Text = "UTF8>Hex";
             this.btnToHex.UseVisualStyleBackColor = true;
             this.btnToHex.Click += new System.EventHandler(this.btnToHex_Click);
-            // 
-            // btnSHex
-            // 
-            this.btnSHex.Location = new System.Drawing.Point(1202, 607);
-            this.btnSHex.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSHex.Name = "btnSHex";
-            this.btnSHex.Size = new System.Drawing.Size(90, 45);
-            this.btnSHex.TabIndex = 6;
-            this.btnSHex.Text = "> Hex";
-            this.btnSHex.UseVisualStyleBackColor = true;
-            this.btnSHex.Click += new System.EventHandler(this.btnSHex_Click);
-            // 
-            // btnSCrypto
-            // 
-            this.btnSCrypto.Location = new System.Drawing.Point(1104, 607);
-            this.btnSCrypto.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSCrypto.Name = "btnSCrypto";
-            this.btnSCrypto.Size = new System.Drawing.Size(90, 45);
-            this.btnSCrypto.TabIndex = 5;
-            this.btnSCrypto.Text = "> Crypto";
-            this.btnSCrypto.UseVisualStyleBackColor = true;
-            this.btnSCrypto.Click += new System.EventHandler(this.btnSCrypto_Click);
-            // 
-            // btnSImage
-            // 
-            this.btnSImage.Location = new System.Drawing.Point(908, 607);
-            this.btnSImage.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSImage.Name = "btnSImage";
-            this.btnSImage.Size = new System.Drawing.Size(90, 45);
-            this.btnSImage.TabIndex = 4;
-            this.btnSImage.Text = "> X-Ray";
-            this.btnSImage.UseVisualStyleBackColor = true;
-            this.btnSImage.Click += new System.EventHandler(this.btnSImage_Click);
-            // 
-            // btnSCalc
-            // 
-            this.btnSCalc.Location = new System.Drawing.Point(1006, 607);
-            this.btnSCalc.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSCalc.Name = "btnSCalc";
-            this.btnSCalc.Size = new System.Drawing.Size(90, 45);
-            this.btnSCalc.TabIndex = 4;
-            this.btnSCalc.Text = "> Calc";
-            this.btnSCalc.UseVisualStyleBackColor = true;
-            this.btnSCalc.Click += new System.EventHandler(this.btnSCalc_Click);
             // 
             // btnRun
             // 
@@ -2435,6 +2447,7 @@ namespace CryptoUtility
             this.rtxtData.Location = new System.Drawing.Point(28, 327);
             this.rtxtData.Multiline = true;
             this.rtxtData.Name = "rtxtData";
+            this.rtxtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.rtxtData.Size = new System.Drawing.Size(762, 219);
             this.rtxtData.TabIndex = 2;
             this.rtxtData.TextChanged += new System.EventHandler(this.rtxtData_TextChanged);
@@ -4844,6 +4857,7 @@ namespace CryptoUtility
             this.tabImage.Controls.Add(this.label49);
             this.tabImage.Controls.Add(this.label47);
             this.tabImage.Controls.Add(this.cmbSizeMode);
+            this.tabImage.Controls.Add(this.btnSaveImage);
             this.tabImage.Controls.Add(this.btnResetImage);
             this.tabImage.Controls.Add(this.btnRotate);
             this.tabImage.Controls.Add(this.picQuran2);
@@ -4894,7 +4908,7 @@ namespace CryptoUtility
             // chkFixPadding
             // 
             this.chkFixPadding.AutoSize = true;
-            this.chkFixPadding.Location = new System.Drawing.Point(546, 626);
+            this.chkFixPadding.Location = new System.Drawing.Point(549, 626);
             this.chkFixPadding.Name = "chkFixPadding";
             this.chkFixPadding.Size = new System.Drawing.Size(92, 23);
             this.chkFixPadding.TabIndex = 13;
@@ -4970,11 +4984,21 @@ namespace CryptoUtility
             this.cmbSizeMode.TabIndex = 2;
             this.cmbSizeMode.SelectedIndexChanged += new System.EventHandler(this.cmbSizeMode_SelectedIndexChanged);
             // 
+            // btnSaveImage
+            // 
+            this.btnSaveImage.Location = new System.Drawing.Point(377, 615);
+            this.btnSaveImage.Name = "btnSaveImage";
+            this.btnSaveImage.Size = new System.Drawing.Size(80, 40);
+            this.btnSaveImage.TabIndex = 1;
+            this.btnSaveImage.Text = "Save";
+            this.btnSaveImage.UseVisualStyleBackColor = true;
+            this.btnSaveImage.Click += new System.EventHandler(this.btnSaveImage_Click);
+            // 
             // btnResetImage
             // 
             this.btnResetImage.Location = new System.Drawing.Point(291, 615);
             this.btnResetImage.Name = "btnResetImage";
-            this.btnResetImage.Size = new System.Drawing.Size(100, 40);
+            this.btnResetImage.Size = new System.Drawing.Size(80, 40);
             this.btnResetImage.TabIndex = 1;
             this.btnResetImage.Text = "Reset";
             this.btnResetImage.UseVisualStyleBackColor = true;
@@ -5007,6 +5031,8 @@ namespace CryptoUtility
             this.picQuran1.Size = new System.Drawing.Size(600, 600);
             this.picQuran1.TabIndex = 0;
             this.picQuran1.TabStop = false;
+            this.picQuran1.Click += new System.EventHandler(this.picQuran1_Click);
+            this.picQuran1.DoubleClick += new System.EventHandler(this.picQuran1_DoubleClick);
             // 
             // lstLog
             // 
@@ -5078,6 +5104,7 @@ namespace CryptoUtility
             this.tabCalculator.ResumeLayout(false);
             this.tabCalculator.PerformLayout();
             this.tabEncoding.ResumeLayout(false);
+            this.panel7.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.grpOptions.ResumeLayout(false);
@@ -5463,7 +5490,7 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnClearHex;
         private System.Windows.Forms.Button btnOpenHexFile;
         private System.Windows.Forms.Label lblHexFile;
-        private System.Windows.Forms.CheckBox chkSendToHexViewer;
+        private System.Windows.Forms.CheckBox chkJommalWord;
         private System.Windows.Forms.ComboBox cmbHEncoding;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.ComboBox cmbBytesPerLine;
@@ -5498,6 +5525,8 @@ namespace CryptoUtility
         private System.Windows.Forms.CheckBox chkFlipY;
         private System.Windows.Forms.CheckBox chkFlipX;
         private System.Windows.Forms.CheckBox chkINV;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Button btnSaveImage;
     }
 }
 

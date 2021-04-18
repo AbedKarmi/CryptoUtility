@@ -68,7 +68,7 @@ namespace CryptoUtility
             {
                 //                if (aya.soraName != sn)
                 //                {
-                SoraNames.Add(aya.soraName);
+                SoraNames.Add("[" + aya.soraNo.ToString("d2") + "] " + aya.soraName);
                 //                  sn = aya.soraName;
                 //                }
             }

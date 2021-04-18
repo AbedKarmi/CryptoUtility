@@ -21,6 +21,12 @@ using System.Drawing.Text;
 using System.Data.OleDb;
 using Be.Windows.Forms;
 using System.Windows.Media.Imaging;
+using ZXing;
+using ZXing.Client.Result;
+using ZXing.Common;
+using ZXing.PDF417.Internal;
+using ZXing.QrCode.Internal;
+using ZXing.Rendering;
 //using System.Windows.Input;
 
 
@@ -28,7 +34,9 @@ namespace CryptoUtility
 {    public partial class frmMain : Form
     {
         string[][] fonts = { new [] { "KFGQPC Uthman Taha Naskh", "Uthmani.otf" }, new[] { "DQ7 Quran Koufi A", "DQ7QuranKoufiA.ttf" } };
-
+        private EncodingOptions EncodingOptions { get; set; }
+        private Type Renderer { get; set; }
+        string sentSora="", encoding="";
         InputLanguage original ;
         IQuran quran;
         private ISettings AppSettings;
@@ -71,6 +79,7 @@ namespace CryptoUtility
                                        new byte[] {0xA1,0xA2,0xA3,0xA4,0xA5,0xA6,0xA7,0xA8,0xA9,0xAA,0xAB,0xAC,0xAD,0xAE,0xAF,0xB0,0xB1,0xB2,0xB3,0xB4,0xB5,0xB6,0xB7,0xB8,0xB9,0xBA,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8A,0x8B,0x8C,0x8D,0x8E,0x8F,0x90,0x91,0x92},
                                        new byte[] {0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D, 0x2E, 0x2F, 0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x3A, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x4B, 0x4C, 0x4D, 0x4E, 0x4F, 0x50, 0x51, 0x52 }
                                     };
+        private Int16[] jommalCharset = { 0, 1, 1, 6, 1, 10, 1, 2, 400, 400, 500, 3, 8, 600, 4, 700, 200, 7, 60, 300, 90, 800, 9, 900, 70, 1000, 80, 100, 20, 30, 40, 50, 5, 6, 10, 10, 0, 0, 0, 0, 0, 0, 0, 0 };
         public frmMain()
         {
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
@@ -343,7 +352,7 @@ namespace CryptoUtility
                 cmbSizeMode.SelectedIndex = Int32.Parse(AppSettings.ReadValue("Settings", "SizeMode", "0"));
                 chkALLEncodings.Checked = (AppSettings.ReadValue("Settings", "AllEncodings", "Yes").ToUpper() == "YES");
                 chkSendToBuffer.Checked = (AppSettings.ReadValue("Settings", "SendToBuffer", "Yes").ToUpper() == "YES");
-                chkSendToHexViewer.Checked = (AppSettings.ReadValue("Settings", "SendToHexViewer", "Yes").ToUpper() == "YES");
+                chkJommalWord.Checked = (AppSettings.ReadValue("Settings", "JommalWORD", "Yes").ToUpper() == "YES");
                 chkFixPadding.Checked = (AppSettings.ReadValue("Settings", "Padding", "Yes").ToUpper() == "YES");
                 chkFlipX.Checked = (AppSettings.ReadValue("Settings", "FlipX", "Yes").ToUpper() == "YES");
                 chkFlipY.Checked = (AppSettings.ReadValue("Settings", "FlipY", "No").ToUpper() == "YES");
@@ -1182,7 +1191,9 @@ namespace CryptoUtility
  
             hexBox.ByteProvider = new FileByteProvider(sFile);
             lblHexFile.Text = sFile;
-            cmbHEncoding.SelectedIndex = cmbDestEnc.SelectedIndex;
+            int i= 0;
+            while (cmbHEncoding.Items[i].ToString()!=cmbSourceEnc.Text) i++;
+            cmbHEncoding.SelectedIndex = i;
             hexBox.Refresh();
             CalcHHash();
         }
@@ -1244,7 +1255,19 @@ namespace CryptoUtility
         }
         #endregion
 
-
+        private void toJommal(string sFile)
+        {
+            List<byte> jBuffer = new();
+            byte[] buffer = File.ReadAllBytes(sFile);
+            for (int i=0;i<buffer.Length;i++)
+            {
+                byte h = (byte) (jommalCharset[buffer[i]-1] >> 8);
+                byte l = (byte) (jommalCharset[buffer[i]-1] & 0xFF);
+                if (h > 0 || chkJommalWord.Checked) jBuffer.Add(h);
+                jBuffer.Add(l);
+            }
+            File.WriteAllBytes(sFile,jBuffer.ToArray());
+        }
 
         #region "Run the conversion"
         /// <summary>
@@ -1259,6 +1282,8 @@ namespace CryptoUtility
             string res;
             int iSuccess = 0;
             string sFile;
+            bool Jommal = false;
+
             Converter.SpecialTypes specialType = Converter.SpecialTypes.None;
 
             //03/05/2007 tidy up the UI
@@ -1273,6 +1298,7 @@ namespace CryptoUtility
                 //get the conversion codepages
                 sourceCP = cmbSourceEnc.SelectedItem.ToString();
                 destCP = cmbDestEnc.SelectedItem.ToString();
+                if (destCP.Contains("Jommal")) { destCP = "Arabic [Common] - 65537"; Jommal = true; }
 
                 //check for special options
                 if (chkUnicodeAsDecimal.Checked == true)
@@ -1288,7 +1314,7 @@ namespace CryptoUtility
                         s = lsSource.Items[i].ToString();
                         logMsg("Converting " + (i + 1).ToString() + " of " + _sourceFiles.Length + System.Environment.NewLine);
 
-
+                        
                         //do the conversion
                         if ((sFile = Converter.ConvertFile( _sourceFiles[i], destDir,
                                                             sourceCP, destCP, specialType, chkMeta.Checked, chkDiscardChars.Checked, 
@@ -1296,6 +1322,7 @@ namespace CryptoUtility
                         {
                             //success
                             res = char.ConvertFromUtf32(9745);
+                            if (Jommal) toJommal(sFile);
 
                             if (chkOutText.Checked)
                             {
@@ -1315,10 +1342,7 @@ namespace CryptoUtility
 
                             iSuccess++;
                             if (chkSendToBuffer.Checked) { rbFileBuffer.Checked = true; fileBuffer = File.ReadAllBytes(sFile); }
-                            if (chkSendToHexViewer.Checked) 
-                            {
-                                SendToHexViewer(sFile);
-                            }
+                            encoding = cmbDestEnc.Text;
                         }
                         else
                         {
@@ -1343,14 +1367,14 @@ namespace CryptoUtility
                     byte[] sOut = Converter.ConvertText(rtxtData.Text, sourceCP, destCP, specialType,
                                                         chkMeta.Checked, chkDiscardChars.Checked, chkDiacritics.Checked, chkzStrings.Checked);
                     File.WriteAllBytes(sFile, sOut);
+
+                    if (Jommal) { toJommal(sFile); sOut = File.ReadAllBytes(sFile); }
+
                     logMsg("Written to " + sFile);
                     if (chkSendToBuffer.Checked) { rbFileBuffer.Checked = true; fileBuffer = sOut; }
-                    if (chkSendToHexViewer.Checked)
-                    {
-                        SendToHexViewer(sFile);
-                    }
                     txtInfo.Text = chkHexText.Checked ? MyClass.BinaryToHexString(sOut) : Converter.ReadAllText(sFile, destCP);
                     lblStatus.Text = sOut.Length.ToString();
+                    encoding = cmbDestEnc.Text;
                 }
                 else logMsg("Nothing to encode");
             }
@@ -1408,6 +1432,7 @@ namespace CryptoUtility
         private void rtxtData_TextChanged(object sender, EventArgs e)
         {
             validateForRun();
+            sentSora = "";encoding = "";
             rbText.Checked = true;
         }
 
@@ -1460,6 +1485,7 @@ namespace CryptoUtility
         }
         private void btnSendToEncoding_Click(object sender, EventArgs e)
         {
+            
             rtxtData.Text = txtQuranText.Text;
             tabControl1.SelectedTab = tabEncoding;
             cmbSourceEnc.SelectedIndex = 0;
@@ -1485,7 +1511,7 @@ namespace CryptoUtility
            else 
             */
             SelectEncoding("["+s+"]");
-
+            sentSora = lbSoras.Text;
             chkRTL.Checked = true;
         }
 
@@ -2192,11 +2218,14 @@ Red    : Diacritics";
         {
             if (!string.IsNullOrEmpty(rtxtData.Text))
             {
+                CloseHex();
+
                 chkHexText.Checked = true;
                 rbText.Checked= true;
                 string s = rtxtData.Text;
                 s = Converter.FilterData(s, 65001, chkDiscardChars.Checked, chkDiacritics.Checked, chkzStrings.Checked);
                 byte[] b = MyClass.GetBytes(s);
+                File.WriteAllBytes(Application.StartupPath + "\\Enc.txt", b);
                 txtInfo.Text = MyClass.BinaryToHexString(b);
             }
         }
@@ -2345,13 +2374,6 @@ Red    : Diacritics";
                 }
             }
             catch (Exception ex) { logMsg(ex.Message); }
-        }
-
-        private void chkSendToHexViewer_CheckedChanged(object sender, EventArgs e)
-        {
-            AppSettings.WriteValue("Settings", "SendToHexViewer", chkSendToHexViewer.Checked?"Yes":"No");
-            hexBox.BytesPerLine=Int32.Parse(cmbBytesPerLine.Text);
-            hexBox.Refresh();
         }
 
         private void chkSendToBuffer_CheckedChanged(object sender, EventArgs e)
@@ -2599,7 +2621,7 @@ Red    : Diacritics";
         }
         private void DrawImage()
         {
-            tabControl1.SelectedTab = tabImage;
+           
             byte[] buffer = SafeRead(Application.StartupPath + "\\enc.txt");
             if (buffer.Length == 0) return;
             int padding = 0;
@@ -2622,21 +2644,12 @@ Red    : Diacritics";
             picQuran1.Image = new Bitmap(bpl*pointSize, bpl*pointSize);
             var g = Graphics.FromImage(picQuran1.Image);
 
-            int n2 = buffer.Length * 8 + 8*8*3+5*5;
-            int bpl2 = (int)Math.Sqrt(n2);
-            while (bpl2 * bpl2 < n2) bpl2++;
-            picQuran2.Image = new Bitmap(bpl2 * pointSize, bpl2 * pointSize);
-            var g2 = Graphics.FromImage(picQuran2.Image);
-
             SolidBrush brush = new SolidBrush(chkINV.Checked?Color.Black:Color.White);
             Pen pen = new Pen(chkINV.Checked ? Color.Black : Color.White, pointSize);// float.Parse(lblScale.Text));
 
             picQuran1.BackColor = backColor;
-            picQuran2.BackColor = backColor;
 
             g.Clear(picQuran1.BackColor);picQuran1.Invalidate();
-            g2.Clear(picQuran2.BackColor); picQuran2.Invalidate();
-
 
             for (int i = 0; i < bin.Length+ padding; i++)
             {
@@ -2651,42 +2664,16 @@ Red    : Diacritics";
                 case 3: picQuran1.Image.RotateFlip(RotateFlipType.RotateNoneFlipXY); break;
             }
 
-            areas.Clear();
-            areas.Add(DrawQRBlock(g2,brush, 0,bpl2));
-            areas.Add(DrawQRBlock(g2,brush, 1,bpl2));
-            areas.Add(DrawQRBlock(g2,brush, 2,bpl2,chkFlipX.Checked));
-            areas.Add(DrawQRBlock(g2,brush, 3,bpl2,chkFlipX.Checked));
-           
-            int j = 0;
-            for (int i = 0; i < bin.Length ; i++)
-            {
-                int x,y;
-                do
-                {
-                    y = (j / bpl2)+1;
-                    x = (j % bpl2)+1;
-                    j++;
-                } while (InArea(x, y,bpl2));
-
-                if (bin[i] == '1') drawPoint(g2, brush, 1, x  , y  );
-            }
-            
-            switch ((chkFlipX.Checked ? 2 : 0) + (chkFlipY.Checked ? 1 : 0))
-            {
-                case 1: picQuran2.Image.RotateFlip(RotateFlipType.RotateNoneFlipY); break;
-                case 2: picQuran2.Image.RotateFlip(RotateFlipType.RotateNoneFlipX); break;
-                case 3: picQuran2.Image.RotateFlip(RotateFlipType.RotateNoneFlipXY); break;
-            }
-
             picQuran1.Invalidate();
-            picQuran2.Invalidate();
             pen.Dispose();
             brush.Dispose();
             g.Dispose();
         }
         private void btnSImage_Click(object sender, EventArgs e)
         {
+            tabControl1.SelectedTab = tabImage;
             DrawImage();
+            CreateBarcode(rtxtData.Text,BarcodeFormat.QR_CODE);
         }
 
         private void lstLog_SelectedIndexChanged(object sender, EventArgs e)
@@ -2706,8 +2693,9 @@ Red    : Diacritics";
             }
             */
             picQuran1.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
-
             picQuran1.Invalidate();
+            picQuran2.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            picQuran2.Invalidate();
         }
 
         private void btnSPlus_Click(object sender, EventArgs e)
@@ -2750,7 +2738,13 @@ Red    : Diacritics";
 
         private void btnResetImage_Click(object sender, EventArgs e)
         {
-            DrawImage();
+            picQuran1.Image = null;
+            picQuran2.Image=null;
+            picQuran1.BackColor = Color.Black;
+            picQuran2.BackColor = Color.Black;
+            picQuran1.Invalidate();
+            picQuran2.Invalidate();
+            Application.DoEvents();
         }
 
         private void chkFixSquare_CheckedChanged(object sender, EventArgs e)
@@ -2777,6 +2771,96 @@ Red    : Diacritics";
             DrawImage();
         }
 
+        private void chkJommalWORD_CheckedChanged(object sender, EventArgs e)
+        {
+            AppSettings.WriteValue("Settings", "JommalWORD", chkJommalWord.Checked ? "Yes" : "No");
+            hexBox.BytesPerLine = Int32.Parse(cmbBytesPerLine.Text);
+            hexBox.Refresh();
+        }
+
+        private void btnSaveImage_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Title = "Save Image File";
+            dlg.DefaultExt = "Image";
+            dlg.Filter = "Image File|*.jpg";
+            dlg.InitialDirectory = Application.StartupPath;
+            dlg.FileName = sentSora!=""?sentSora+"-"+encoding:".jpg";
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                picQuran1.Image.Save(dlg.FileName);
+                logMsg("Image Saved :" + dlg.FileName);
+            }
+        }
+
+        private void picQuran1_DoubleClick(object sender, EventArgs e)
+        {
+            if (!picQuran1.Enabled) return;
+            picQuran1.Enabled = false;
+            try
+            {
+                string photo = Application.StartupPath + "\\~tmp.jpg";
+                picQuran1.Image.Save(photo, System.Drawing.Imaging.ImageFormat.Jpeg);
+
+                // this will not return proc, will be null, since it will not start viewer directly, done via dllhost
+                //var proc=Process.Start(new ProcessStartInfo(photo) { Verb = "open" });      // you can use "edit" to edit image   
+
+                string imageViewerAssoc = FileAssociation.GetExecFileAssociatedToExtension(".jpg", "open");
+                string imageViewer = Environment.ExpandEnvironmentVariables("%ProgramFiles(x86)%") + "\\Windows Photo Viewer\\PhotoViewer.dll";
+                Process proc;
+
+                if (!string.IsNullOrEmpty(imageViewerAssoc))
+                    proc = Process.Start(imageViewerAssoc, photo);
+                else
+                    proc = Process.Start("rundll32.exe", "\"" + imageViewer + "\", ImageView_Fullscreen " + photo);
+
+                proc.WaitForInputIdle();                        // wait for program to start
+
+                if (proc != null && proc.HasExited != true)
+                {
+                    proc.WaitForExit();                         // wait for porgram to finish
+                }
+                else
+                {
+                    // Process is null or have exited
+                }
+
+                File.Delete(photo);
+            }
+            catch (Exception ex) { logMsg(ex.Message); }
+
+            picQuran1.Enabled = true;
+        }
+
+        private void picQuran1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CreateBarcode(string str,BarcodeFormat format= BarcodeFormat.QR_CODE)
+        {
+            try
+            { 
+                Renderer = typeof(BitmapRenderer);
+                var writer = new BarcodeWriter
+                {
+                    Format = format,
+                    Options = EncodingOptions ?? new EncodingOptions
+                    {
+                        Height = picSpace.size2,
+                        Width = picSpace.size2
+                    },
+                    Renderer = (IBarcodeRenderer<Bitmap>)Activator.CreateInstance(Renderer)
+                };
+                picQuran2.Image = writer.Write(str);
+            }
+            catch (Exception exc)
+            {
+               logMsg(exc.Message);
+            }
+        }
+
         /// <summary>
         /// Can we run the conversion
         /// </summary>
@@ -2788,7 +2872,8 @@ Red    : Diacritics";
                 btnRun.Enabled = ((_sourceFiles != null && _sourceFiles.Length > 0) || rtxtData.Text.Length > 0)
                             && cmbSourceEnc.SelectedIndex >= 0
                             && cmbDestEnc.SelectedIndex >= 0
-                            && cmbSourceEnc.Text != cmbDestEnc.Text;
+                            && cmbSourceEnc.Text != cmbDestEnc.Text &&
+                            !cmbSourceEnc.Text.Contains("Jommal");
                 //&& !(Converter.IsACCO(Converter.GetEncodingEx(cmbSourceEnc.Text)) && Converter.IsACCO(Converter.GetEncodingEx(cmbDestEnc.Text)));
                 if (btnRun.Enabled)
                 {
@@ -2832,19 +2917,10 @@ Red    : Diacritics";
             cmbDestEnc.Items.Clear();
             cmbSourceEnc.Items.Clear();
             cmbHEncoding.Items.Clear();
-/*
-            cmbSourceEnc.Items.Add("Arabic Common Charset Order - 65536");
-            cmbDestEnc.Items.Add("Arabic Common Charset Order - 65536");
 
-            cmbSourceEnc.Items.Add("Arabic UTF8 (SingleByte) - 65540");
-            cmbDestEnc.Items.Add("Arabic UTF8 (SingleByte) - 65540");
+            cmbSourceEnc.Items.Add("Arabic [Jommal] - 65538");
+            cmbDestEnc.Items.Add("Arabic [Jommal] - 65538");
 
-            cmbSourceEnc.Items.Add("Arabic UNICODE (SingleByte) - 65537");
-            cmbDestEnc.Items.Add("Arabic UNICODE (SingleByte) - 65537");
-
-            cmbSourceEnc.Items.Add("Arabic CUSTOM Order - 65541");
-            cmbDestEnc.Items.Add("Arabic CUSTOM Order - 65541");
-*/
             string[] customCharsets = Directory.GetFiles(Application.StartupPath, "*.Charset");
             foreach (var file in customCharsets)
             {

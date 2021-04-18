@@ -18,8 +18,36 @@ namespace CryptoUtility
     {
         public const int SW_HIDE = 0;
         public const int SW_SHOWNORMAL = 1;
+
         [DllImport("User32.dll", ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        [DllImport("user32", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private extern static bool EnumThreadWindows(int threadId, EnumWindowsProc callback, IntPtr lParam);
+
+        [DllImport("user32", SetLastError = true, CharSet = CharSet.Auto)]
+        private extern static int GetWindowText(IntPtr hWnd, StringBuilder text, int maxCount);
+
+        private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
+
+
+        public static IEnumerable<string> GetWindowText(Process p)
+        {
+            List<string> titles = new List<string>();
+            foreach (ProcessThread t in p.Threads)
+            {
+                EnumThreadWindows(t.Id, (hWnd, lParam) =>
+                {
+                    StringBuilder text = new StringBuilder(200);
+                    GetWindowText(hWnd, text, 200);
+                    titles.Add(text.ToString());
+                    return true;
+                }, IntPtr.Zero);
+            }
+            return titles;
+        }
+
 
         public static bool isHex(this string hex)
         {

@@ -256,6 +256,14 @@
     <Reference Include="WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsBase_Core.STW.4.0.30319.1\lib\net40\WindowsBase.dll</HintPath>
     </Reference>
+    <Reference Include="zxing, Version=0.16.6.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation, Version=0.16.6.0, Culture=neutral, PublicKeyToken=4e88037ac681fe60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\zxing.presentation.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BigIntegerHelper.cs" />
@@ -279,6 +287,7 @@
     <Compile Include="QuranXLS.cs" />
     <Compile Include="RSAClass.cs" />
     <Compile Include="PEMClass.cs" />
+    <Compile Include="FileAssociation.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -326,6 +335,8 @@
     <EmbeddedResource Include="Lib\System.Runtime.CompilerServices.Unsafe.dll" />
     <EmbeddedResource Include="DB\Quran.accdb" />
     <EmbeddedResource Include="Lib\Be.Windows.Forms.HexBox.dll" />
+    <Content Include="Lib\zxing.dll" />
+    <Content Include="Lib\zxing.presentation.dll" />
     <Content Include="Quran.ico" />
     <Content Include="Quran2.ico" />
     <Content Include="Readme\CUDA.NET.Readme.txt" />
