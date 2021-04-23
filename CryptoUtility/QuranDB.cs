@@ -75,7 +75,8 @@ namespace CryptoUtility
             List<string> SoraNames = new();
             foreach (var aya in quranIndex)
             {
-                SoraNames.Add("[" + aya.soraNo.ToString("d2") + "] "+ aya.soraName );
+                
+                SoraNames.Add(string.Format("[{0,-3}] ", aya.soraNo) + aya.soraName );
             }
             return SoraNames.ToArray();
         }
