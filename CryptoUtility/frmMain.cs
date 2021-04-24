@@ -219,8 +219,6 @@ namespace CryptoUtility
             }
         }
 
-		
-
         public static void AppendAllBytes(string path, byte[] bytes,bool crlf=false)
         {
             //argument-checking here.
@@ -231,9 +229,6 @@ namespace CryptoUtility
                 if (crlf) stream.Write(new byte[] { 0x0d, 0x0a }, 0, 2);
             }
         }
-		
-		
-  
 		
         private InputLanguage GetArabicLanguage()
         {
@@ -278,15 +273,38 @@ namespace CryptoUtility
                 File.Delete(file + ".tmp");
                 return buffer;
             } catch (Exception ex) { logMsg(ex.Message); }
-            return null;
+            return new byte[0];
         }
 
-    #endregion
- 
-	#region Forms
-	      
-	  
-	    public frmMain()
+        private void SelectIndex(ComboBox cmb, string text)
+        {
+            for (int i = 0; i < cmb.Items.Count; i++)
+                if (cmb.Items[i].ToString().Equals(text)) { cmb.SelectedIndex = i; return; };
+            cmb.SelectedIndex = -1;
+            cmb.Text = text;
+        }
+
+        #endregion
+
+    #region Forms
+
+        private void DumpAssembly(string assembly)
+        {
+            try
+            {
+                string resource = Array.Find(this.GetType().Assembly.GetManifestResourceNames(), element => element.EndsWith(assembly.Replace("\\",".")));
+                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
+                {
+                    Byte[] assemblyData = new Byte[stream.Length];
+                    stream.Read(assemblyData, 0, assemblyData.Length);
+                    string file = Application.StartupPath + "\\" + assembly;
+                    string dir = Path.GetDirectoryName(file);
+                    if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+                    File.WriteAllBytes(file, assemblyData);
+                }
+            } catch (Exception ) {  }
+        }
+        public frmMain()
         {
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
@@ -300,8 +318,12 @@ namespace CryptoUtility
                     return Assembly.Load(assemblyData);
                 }
             };
+            DumpAssembly("bin32\\libiomp5md.dll");
+            DumpAssembly("bin32\\mkl_custom.dll");
+            DumpAssembly("bin64\\libiomp5md.dll");
+            DumpAssembly("bin64\\mkl_custom.dll");
             InitializeComponent();
-            loadEncodings();
+            
         }
 	      private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -323,10 +345,10 @@ namespace CryptoUtility
 
                 AppSettings = new IniFile(Application.ExecutablePath.Substring(0, Application.ExecutablePath.Length - 4) + ".ini");
 
-                InitSpectrum();
-
                 ResetCharsets();
                 GetCharsetControls();
+
+                loadEncodings();
 
                 quran = new QuranDB(Application.StartupPath);
                 // quran = new QuranXLS(Application.StartupPath);
@@ -402,6 +424,12 @@ namespace CryptoUtility
                         break;
                 }
 
+                chkPlay.Checked = (AppSettings.ReadValue("Settings", "PlayWhileRecord", "No").ToUpper() == "YES");
+                SelectIndex(cmbSampleRate, AppSettings.ReadValue("Settings", "SampleRate", cmbSampleRate.Items[0].ToString()));
+                SelectIndex(cmbBits, AppSettings.ReadValue("Settings", "Bits", cmbBits.Items[0].ToString()));
+                SelectIndex(cmbChannels, AppSettings.ReadValue("Settings", "Channels", cmbChannels.Items[0].ToString()));
+
+                InitSpectrum();
 
             } catch (Exception ex) { logMsg("Error:" + ex.Message); }
         }
@@ -488,7 +516,11 @@ Red    : Diacritics";
                 {
                     txtInfo.Text = "Spectrum Analyzer\r\n\r\nConvert binary data to frequency using FFT and display in spectrum analyzer\r\nLooking for meaningful voice";
                 }
-            } catch (Exception ex) { logMsg("Eror :" + ex.Message);}
+                else if (tabControl1.SelectedTab == tabColor)
+                {
+                    txtInfo.Text = "Color Spectrum\r\n\r\nConvert binary data to colors using RGB and display in spectrum analyzer\r\nLooking for meaningful color";
+                }
+            } catch (Exception ex) { logMsg("Error :" + ex.Message);}
         }
 
 
@@ -2139,7 +2171,7 @@ Red    : Diacritics";
             txtQuranText.Text = dgvQuran.Rows[dgvQuran.CurrentRow.Index].Cells[quran.CurQuranTextIndex()].Value.ToString();
         }
  
-		        private void btnSendToEncoding_Click(object sender, EventArgs e)
+		private void btnSendToEncoding_Click(object sender, EventArgs e)
         {
             
             rtxtData.Text = txtQuranText.Text;
@@ -2868,11 +2900,9 @@ Red    : Diacritics";
             Spectrum,
         }
 
-        const int readCount = 8000 * 50 / 1000; // 50 ms
-        const int shift = 8000 * 40 / 1000; // 40 ms
-
+        int readCount = 8000 * 50 / 1000; // 50 ms
+        int shift = 8000 * 40 / 1000; // 40 ms
         int readIdx = 0;
-
         bool recording = false;
 
         AudioSensor sensor;
@@ -2883,9 +2913,23 @@ Red    : Diacritics";
 
         Bitmap spectrumBmp = new Bitmap(800, 60, PixelFormat.Format24bppRgb);
 
-        private void InitSpectrum()
+        private void InitSpectrum(int sampleRate=8000,int bits=16,AudioType aType=AudioType.Monaural)
         {
-            sensor = new AudioSensor(8000, 16, AudioType.Monaural, OnUpdate);
+            //sensor = new AudioSensor(8000, 16, AudioType.Monaural, OnUpdate);
+            spectrums.Clear();
+            
+            int readCount = sampleRate * 50 / 1000; // 50 ms
+            int shift = sampleRate * 40 / 1000; // 40 ms
+            pts = new PointF[sampleRate];
+            readIdx = 0;
+            recording = false;
+
+            if (sensor!=null)
+            {
+                sensor.Dispose();
+                sensor = null;
+            }
+            sensor = new AudioSensor(sampleRate, bits, aType, OnUpdate);
             for (int i = 0; i < sensor.Data.Channels; i++)
                 spectrums.Add(new List<double>());
             UpdateGUI();
@@ -2998,9 +3042,8 @@ Red    : Diacritics";
             byte[] buffer = SafeRead(quranBin);
             sensor.Start(quranWav, false, true);
             sensor.Reset();
-            
             sensor.AddBytes(buffer, buffer.Length);
-            OnUpdate(buffer, buffer.Length);
+//            OnUpdate(buffer, buffer.Length);
             canvas.Invalidate();
             while (sensor.PlayerPosition<buffer.Length)
             {
@@ -3050,51 +3093,54 @@ Red    : Diacritics";
         unsafe void PredrawSpectrums(List<List<double>> spectrums, Bitmap spectrumBmp)
         {
             const int dx = 10;
-
-            if (spectrums == null || spectrums.Count <= 0)
-                return;
-
-            if (spectrumBmp == null || spectrumBmp.Width <= 0 || spectrumBmp.Height <= 0)
-                return;
-
-            using (Graphics g = Graphics.FromImage(spectrumBmp))
-                g.DrawImage(spectrumBmp, -dx, 0);
-
-            BitmapData lck = spectrumBmp.LockBits(new Rectangle(Point.Empty, spectrumBmp.Size), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
-
-            byte* data = (byte*)lck.Scan0;
-            int stride = lck.Width * 3;
-            stride = stride % 4 == 0 ? stride : (stride / 4 + 1) * 4;
-
-            float minIdx = 0;
-            float maxIdx = spectrums[0].Count - 1;
-
-            float yto01 = 1f / spectrumBmp.Height * spectrums.Count;
-            float invdy = spectrums[0].Count * spectrums.Count / spectrumBmp.Height;
-
-            for (int y = 0; y < spectrumBmp.Height; y++)
+            try
             {
-                int channel = (int)(y * yto01);
+                if (spectrums == null || spectrums.Count <= 0)
+                    return;
 
-                if (spectrums.Count <= channel)
-                    continue;
+                if (spectrumBmp == null || spectrumBmp.Width <= 0 || spectrumBmp.Height <= 0)
+                    return;
 
-                float oy = channel * spectrumBmp.Height / spectrums.Count;
-                float t = Math.Max(0, Math.Min(1, (y - oy) * yto01));
-                int i = (int)(t * maxIdx + (1 - t) * minIdx);
-                double val = spectrums[channel][i];
-                byte c = (byte)Math.Max(0, Math.Min(255, val * 255));
+                using (Graphics g = Graphics.FromImage(spectrumBmp))
+                    g.DrawImage(spectrumBmp, -dx, 0);
 
-                for (int x = spectrumBmp.Width - dx; x < spectrumBmp.Width; x++)
+                BitmapData lck = spectrumBmp.LockBits(new Rectangle(Point.Empty, spectrumBmp.Size), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+
+                byte* data = (byte*)lck.Scan0;
+                int stride = lck.Width * 3;
+                stride = stride % 4 == 0 ? stride : (stride / 4 + 1) * 4;
+
+                float minIdx = 0;
+                float maxIdx = spectrums[0].Count - 1;
+
+                float yto01 = 1f / spectrumBmp.Height * spectrums.Count;
+                float invdy = spectrums[0].Count * spectrums.Count / spectrumBmp.Height;
+
+                for (int y = 0; y < spectrumBmp.Height; y++)
                 {
-                    int offset = stride * y + 3 * x;
-                    data[offset + 0] = 0;
-                    data[offset + 1] = c;
-                    data[offset + 2] = 0;
-                }
-            }
+                    int channel = (int)(y * yto01);
 
-            spectrumBmp.UnlockBits(lck);
+                    if (spectrums.Count <= channel)
+                        continue;
+
+                    float oy = channel * spectrumBmp.Height / spectrums.Count;
+                    float t = Math.Max(0, Math.Min(1, (y - oy) * yto01));
+                    int i = (int)(t * maxIdx + (1 - t) * minIdx);
+                    double val = spectrums[channel][i];
+                    byte c = (byte)Math.Max(0, Math.Min(255, val * 255));
+
+                    for (int x = spectrumBmp.Width - dx; x < spectrumBmp.Width; x++)
+                    {
+                        int offset = stride * y + 3 * x;
+                        data[offset + 0] = 0;
+                        data[offset + 1] = c;
+                        data[offset + 2] = 0;
+                    }
+                }
+
+                spectrumBmp.UnlockBits(lck);
+            }
+            catch (Exception ex) { logMsg(ex.Message); }
         }
 
         private void btnPlay_Click(object sender, EventArgs e)
@@ -3140,14 +3186,76 @@ Red    : Diacritics";
             Visible = true;
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        private void ReInitSpectrum()
         {
-
+            try
+            {
+                if (cmbChannels.SelectedIndex>=0 && !string.IsNullOrEmpty(cmbBits.Text) && !string.IsNullOrEmpty(cmbSampleRate.Text))
+                    InitSpectrum(int.Parse(cmbSampleRate.Text), int.Parse(cmbBits.Text), (cmbChannels.SelectedIndex == 0 ? AudioType.Monaural : AudioType.Stereo));
+            }
+            catch (Exception ex) { logMsg(ex.Message); }
+        }
+        private void cmbSampleRate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AppSettings.WriteValue("Settings", "SampleRate", cmbSampleRate.Text);
+            ReInitSpectrum();
         }
 
-        private void tabSpectrum_Click(object sender, EventArgs e)
+        private void cmbBits_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AppSettings.WriteValue("Settings", "Bits", cmbBits.Text);
+            ReInitSpectrum();
+        }
+
+        private void cmbChannels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AppSettings.WriteValue("Settings", "Channels", cmbChannels.Text);
+            ReInitSpectrum();
+        }
+
+        private void chkPlay_CheckedChanged(object sender, EventArgs e)
+        {
+            AppSettings.WriteValue("Settings", "PlayWhileRecord", chkPlay.Checked?"YESY":"NO");
+        }
+
+        private void tabSpectrum_Enter(object sender, EventArgs e)
+        {
+           splitContainer1.SplitterDistance=(int)(cmbSampleRate.Width*1.5);
+            
+        }
+
+        private void btnResetSpectrum_Click(object sender, EventArgs e)
         {
 
+            Graphics g = Graphics.FromImage(spectrumBmp);
+            g.Clear(Color.Black);
+
+            ReInitSpectrum();
+            canvas.Invalidate();
+        }
+
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectedTab = tabColor;
+            byte[] byteArray = SafeRead(quranBin);
+            var colorArray = new Color[byteArray.Length / 3];
+            for (var i = 0; i < byteArray.Length-3; i += 3)
+            {
+                var color = Color.FromArgb(byteArray[i + 0], byteArray[i + 1], byteArray[i + 2]);
+                colorArray[i / 3] = color;
+            }
+            int n = (int) Math.Sqrt(colorArray.Length);
+            if (n * n < colorArray.Length) n++;
+            var bmp = new Bitmap(n, n, PixelFormat.Format24bppRgb);
+            var bmp2 = new Bitmap(colorArray.Length, 1, PixelFormat.Format24bppRgb);
+            for (int i= 0;i< colorArray.Length; i++)
+            {
+                bmp.SetPixel(i % n, i / n, colorArray[i]);
+                bmp2.SetPixel(i,0, colorArray[i]);
+            }
+
+            texture.Image = bmp;
+            texture2.Image = bmp2;
         }
 
         private void btnStop_KeyUp(object sender, MouseEventArgs e)

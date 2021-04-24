@@ -60,6 +60,7 @@ namespace SpectrumAnalyzerLib
         private MonitoredWaveProvider monitoredgWaveProvider;
         private WaveOut player;
         private WaveFileWriter writer;
+        private int channels=0;
         public AudioSensorData Data { get { return data; } }
 
         AudioSensorData data;
@@ -80,7 +81,8 @@ namespace SpectrumAnalyzerLib
         {
             this.rate = rate;
             this.bits = bits;
-            this.data = new AudioSensorData(audioType == AudioType.Monaural ? 1 : 2);
+            this.channels = audioType == AudioType.Monaural ? 1 : 2;
+            this.data = new AudioSensorData(channels);
             this.action = onUpdate;
         }
 
@@ -176,16 +178,8 @@ namespace SpectrumAnalyzerLib
             if (e.Exception != null)
                 throw e.Exception;
         }
-
         public void AddBytes(byte[] bytes, int count)
         {
-            if (player != null)
-                bufferedWaveProvider.AddSamples(bytes, 0, count);
-            if (writer!=null)
-                writer.Write(bytes, 0, count);
-            if (action != null)
-                action(bytes, count);
-
             if (bytes == null || bytes.Length < count)
                 return;
 
@@ -218,6 +212,13 @@ namespace SpectrumAnalyzerLib
                 if (data.Buffer[i].Count > maxSize)
                     data.Buffer[i].RemoveRange(0, data.Buffer[i].Count - maxSize);
             }
+
+            if (player != null)
+                bufferedWaveProvider.AddSamples(bytes, 0, count);
+            if (writer != null)
+                writer.Write(bytes, 0, count);
+            if (action != null)
+                action(bytes, count);
         }
     }
 }

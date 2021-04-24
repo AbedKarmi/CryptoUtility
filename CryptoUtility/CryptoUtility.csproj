@@ -72,7 +72,6 @@
       <HintPath>Lib\BouncyCastle.Crypto.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="C1.Win.2, Version=2.0.20201.416, Culture=neutral, PublicKeyToken=944ae1ea0e47ca04, processorArchitecture=MSIL" />
     <Reference Include="ILGPU">
       <HintPath>Lib\ILGPU.dll</HintPath>
       <Private>False</Private>
@@ -349,9 +348,17 @@
     <EmbeddedResource Include="Lib\System.Runtime.CompilerServices.Unsafe.dll" />
     <EmbeddedResource Include="DB\Quran.accdb" />
     <EmbeddedResource Include="Lib\Be.Windows.Forms.HexBox.dll" />
-    <Content Include="Lib\PdfSharp.dll" />
-    <Content Include="Lib\zxing.dll" />
-    <Content Include="Lib\zxing.presentation.dll" />
+    <EmbeddedResource Include="Lib\ILGPU.Lightning.Native.dll" />
+    <EmbeddedResource Include="Lib\ILNumerics.dll" />
+    <EmbeddedResource Include="Lib\NAudio.dll" />
+    <EmbeddedResource Include="Lib\PdfSharp.dll" />
+    <EmbeddedResource Include="Lib\zxing.dll" />
+    <EmbeddedResource Include="Lib\zxing.presentation.dll" />
+    <EmbeddedResource Include="Lib\SpectrumAnalyzerLib.dll" />
+    <EmbeddedResource Include="Lib\bin32\libiomp5md.dll" />
+    <EmbeddedResource Include="Lib\bin32\mkl_custom.dll" />
+    <EmbeddedResource Include="Lib\bin64\libiomp5md.dll" />
+    <EmbeddedResource Include="Lib\bin64\mkl_custom.dll" />
     <Content Include="Quran.ico" />
     <Content Include="Quran2.ico" />
     <Content Include="Readme\CUDA.NET.Readme.txt" />

@@ -177,15 +177,6 @@ namespace CryptoUtility
             this.txtPrimeQ = new System.Windows.Forms.TextBox();
             this.txtPrimeP = new System.Windows.Forms.TextBox();
             this.tabEncoding = new System.Windows.Forms.TabPage();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.btnSCrypto = new System.Windows.Forms.Button();
-            this.btnSImage = new System.Windows.Forms.Button();
-            this.btnSCalc = new System.Windows.Forms.Button();
-            this.btnSpectrum = new System.Windows.Forms.Button();
-            this.btnSHex = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.rbFiles = new System.Windows.Forms.RadioButton();
-            this.rbText = new System.Windows.Forms.RadioButton();
             this.grpOptions = new System.Windows.Forms.GroupBox();
             this.chkRTL = new System.Windows.Forms.CheckBox();
             this.chkOutText = new System.Windows.Forms.CheckBox();
@@ -198,6 +189,16 @@ namespace CryptoUtility
             this.chkHexText = new System.Windows.Forms.CheckBox();
             this.chkUnicodeAsDecimal = new System.Windows.Forms.CheckBox();
             this.chkMeta = new System.Windows.Forms.CheckBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.btnSCrypto = new System.Windows.Forms.Button();
+            this.btnSImage = new System.Windows.Forms.Button();
+            this.btnSCalc = new System.Windows.Forms.Button();
+            this.btnColor = new System.Windows.Forms.Button();
+            this.btnSpectrum = new System.Windows.Forms.Button();
+            this.btnSHex = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.rbFiles = new System.Windows.Forms.RadioButton();
+            this.rbText = new System.Windows.Forms.RadioButton();
             this.progFiles = new System.Windows.Forms.ProgressBar();
             this.btnToHex = new System.Windows.Forms.Button();
             this.btnRun = new System.Windows.Forms.Button();
@@ -421,25 +422,35 @@ namespace CryptoUtility
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.spectrumRButton = new System.Windows.Forms.RadioButton();
             this.waveRButton = new System.Windows.Forms.RadioButton();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.cmbChannels = new System.Windows.Forms.ComboBox();
+            this.cmbBits = new System.Windows.Forms.ComboBox();
+            this.cmbSampleRate = new System.Windows.Forms.ComboBox();
+            this.chkPlay = new System.Windows.Forms.CheckBox();
             this.stopButton = new System.Windows.Forms.Button();
+            this.btnResetSpectrum = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
             this.canvas = new System.Windows.Forms.PictureBox();
+            this.tabColor = new System.Windows.Forms.TabPage();
+            this.texture = new System.Windows.Forms.PictureBox();
             this.lstLog = new System.Windows.Forms.ListBox();
             this.txtInfo = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.chkPlay = new System.Windows.Forms.CheckBox();
+            this.texture2 = new System.Windows.Forms.PictureBox();
             this.tabCrypto.SuspendLayout();
             this.tabRSA.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabDSA.SuspendLayout();
             this.tabCalculator.SuspendLayout();
             this.tabEncoding.SuspendLayout();
+            this.grpOptions.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.grpOptions.SuspendLayout();
             this.grpSource.SuspendLayout();
             this.grpEncodings.SuspendLayout();
             this.tabQuran.SuspendLayout();
@@ -460,11 +471,14 @@ namespace CryptoUtility
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
+            this.tabColor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.texture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.texture2)).BeginInit();
             this.SuspendLayout();
             // 
             // tabCrypto
             // 
-            this.tabCrypto.BackColor = System.Drawing.Color.Silver;
+            this.tabCrypto.BackColor = System.Drawing.Color.LightGray;
             this.tabCrypto.Controls.Add(this.chkPadding);
             this.tabCrypto.Controls.Add(this.rbFileBuffer);
             this.tabCrypto.Controls.Add(this.rbTextBox);
@@ -889,7 +903,7 @@ namespace CryptoUtility
             // 
             // tabRSA
             // 
-            this.tabRSA.BackColor = System.Drawing.Color.Silver;
+            this.tabRSA.BackColor = System.Drawing.Color.LightGray;
             this.tabRSA.Controls.Add(this.label32);
             this.tabRSA.Controls.Add(this.cmbRSAKeyLen);
             this.tabRSA.Controls.Add(this.btnImportPrivateKey);
@@ -1226,6 +1240,7 @@ namespace CryptoUtility
             this.tabControl1.Controls.Add(this.tabHexViewer);
             this.tabControl1.Controls.Add(this.tabXRay);
             this.tabControl1.Controls.Add(this.tabSpectrum);
+            this.tabControl1.Controls.Add(this.tabColor);
             this.tabControl1.Location = new System.Drawing.Point(19, 31);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -1235,7 +1250,7 @@ namespace CryptoUtility
             // 
             // tabDSA
             // 
-            this.tabDSA.BackColor = System.Drawing.Color.Silver;
+            this.tabDSA.BackColor = System.Drawing.Color.LightGray;
             this.tabDSA.Controls.Add(this.cmbDSAKeyLen);
             this.tabDSA.Controls.Add(this.btnDSAImportPrivate);
             this.tabDSA.Controls.Add(this.btnDSAImportPublic);
@@ -1463,7 +1478,7 @@ namespace CryptoUtility
             // 
             // tabCalculator
             // 
-            this.tabCalculator.BackColor = System.Drawing.Color.Silver;
+            this.tabCalculator.BackColor = System.Drawing.Color.LightGray;
             this.tabCalculator.Controls.Add(this.chkPositives);
             this.tabCalculator.Controls.Add(this.rb64b);
             this.tabCalculator.Controls.Add(this.rb16);
@@ -2092,10 +2107,10 @@ namespace CryptoUtility
             // 
             // tabEncoding
             // 
-            this.tabEncoding.BackColor = System.Drawing.Color.Silver;
+            this.tabEncoding.BackColor = System.Drawing.Color.LightGray;
+            this.tabEncoding.Controls.Add(this.grpOptions);
             this.tabEncoding.Controls.Add(this.panel7);
             this.tabEncoding.Controls.Add(this.panel5);
-            this.tabEncoding.Controls.Add(this.grpOptions);
             this.tabEncoding.Controls.Add(this.progFiles);
             this.tabEncoding.Controls.Add(this.btnToHex);
             this.tabEncoding.Controls.Add(this.btnRun);
@@ -2111,108 +2126,9 @@ namespace CryptoUtility
             this.tabEncoding.Enter += new System.EventHandler(this.tabEncoding_Enter);
             this.tabEncoding.Leave += new System.EventHandler(this.tabEncoding_Leave);
             // 
-            // panel7
-            // 
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.btnSCrypto);
-            this.panel7.Controls.Add(this.btnSImage);
-            this.panel7.Controls.Add(this.btnSCalc);
-            this.panel7.Controls.Add(this.btnSpectrum);
-            this.panel7.Controls.Add(this.btnSHex);
-            this.panel7.Location = new System.Drawing.Point(825, 608);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(467, 44);
-            this.panel7.TabIndex = 11;
-            // 
-            // btnSCrypto
-            // 
-            this.btnSCrypto.Location = new System.Drawing.Point(190, 4);
-            this.btnSCrypto.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSCrypto.Name = "btnSCrypto";
-            this.btnSCrypto.Size = new System.Drawing.Size(85, 35);
-            this.btnSCrypto.TabIndex = 5;
-            this.btnSCrypto.Text = ">Crypto";
-            this.btnSCrypto.UseVisualStyleBackColor = true;
-            this.btnSCrypto.Click += new System.EventHandler(this.btnSCrypto_Click);
-            // 
-            // btnSImage
-            // 
-            this.btnSImage.Location = new System.Drawing.Point(4, 3);
-            this.btnSImage.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSImage.Name = "btnSImage";
-            this.btnSImage.Size = new System.Drawing.Size(85, 35);
-            this.btnSImage.TabIndex = 4;
-            this.btnSImage.Text = ">X-Ray";
-            this.btnSImage.UseVisualStyleBackColor = true;
-            this.btnSImage.Click += new System.EventHandler(this.btnSImage_Click);
-            // 
-            // btnSCalc
-            // 
-            this.btnSCalc.Location = new System.Drawing.Point(97, 4);
-            this.btnSCalc.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSCalc.Name = "btnSCalc";
-            this.btnSCalc.Size = new System.Drawing.Size(85, 35);
-            this.btnSCalc.TabIndex = 4;
-            this.btnSCalc.Text = ">Calc";
-            this.btnSCalc.UseVisualStyleBackColor = true;
-            this.btnSCalc.Click += new System.EventHandler(this.btnSCalc_Click);
-            // 
-            // btnSpectrum
-            // 
-            this.btnSpectrum.Location = new System.Drawing.Point(373, 4);
-            this.btnSpectrum.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSpectrum.Name = "btnSpectrum";
-            this.btnSpectrum.Size = new System.Drawing.Size(85, 35);
-            this.btnSpectrum.TabIndex = 6;
-            this.btnSpectrum.Text = ">Spct";
-            this.btnSpectrum.UseVisualStyleBackColor = true;
-            this.btnSpectrum.Click += new System.EventHandler(this.btnSpectrum_Click);
-            // 
-            // btnSHex
-            // 
-            this.btnSHex.Location = new System.Drawing.Point(280, 4);
-            this.btnSHex.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSHex.Name = "btnSHex";
-            this.btnSHex.Size = new System.Drawing.Size(85, 35);
-            this.btnSHex.TabIndex = 6;
-            this.btnSHex.Text = ">Hex";
-            this.btnSHex.UseVisualStyleBackColor = true;
-            this.btnSHex.Click += new System.EventHandler(this.btnSHex_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.rbFiles);
-            this.panel5.Controls.Add(this.rbText);
-            this.panel5.Location = new System.Drawing.Point(40, 556);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(407, 45);
-            this.panel5.TabIndex = 10;
-            // 
-            // rbFiles
-            // 
-            this.rbFiles.AutoSize = true;
-            this.rbFiles.Checked = true;
-            this.rbFiles.Location = new System.Drawing.Point(25, 10);
-            this.rbFiles.Name = "rbFiles";
-            this.rbFiles.Size = new System.Drawing.Size(162, 23);
-            this.rbFiles.TabIndex = 0;
-            this.rbFiles.TabStop = true;
-            this.rbFiles.Text = "Encode Files (List)";
-            this.rbFiles.UseVisualStyleBackColor = true;
-            // 
-            // rbText
-            // 
-            this.rbText.AutoSize = true;
-            this.rbText.Location = new System.Drawing.Point(210, 10);
-            this.rbText.Name = "rbText";
-            this.rbText.Size = new System.Drawing.Size(147, 23);
-            this.rbText.TabIndex = 1;
-            this.rbText.Text = "Encode TextBox";
-            this.rbText.UseVisualStyleBackColor = true;
-            // 
             // grpOptions
             // 
+            this.grpOptions.BackColor = System.Drawing.Color.LightGray;
             this.grpOptions.Controls.Add(this.chkRTL);
             this.grpOptions.Controls.Add(this.chkOutText);
             this.grpOptions.Controls.Add(this.chkALLEncodings);
@@ -2224,7 +2140,7 @@ namespace CryptoUtility
             this.grpOptions.Controls.Add(this.chkHexText);
             this.grpOptions.Controls.Add(this.chkUnicodeAsDecimal);
             this.grpOptions.Controls.Add(this.chkMeta);
-            this.grpOptions.Location = new System.Drawing.Point(40, 338);
+            this.grpOptions.Location = new System.Drawing.Point(40, 312);
             this.grpOptions.Margin = new System.Windows.Forms.Padding(4);
             this.grpOptions.Name = "grpOptions";
             this.grpOptions.Padding = new System.Windows.Forms.Padding(4);
@@ -2368,20 +2284,133 @@ namespace CryptoUtility
             this.chkMeta.Text = "Output Metadata";
             this.chkMeta.UseVisualStyleBackColor = true;
             // 
+            // panel7
+            // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.btnSCrypto);
+            this.panel7.Controls.Add(this.btnSImage);
+            this.panel7.Controls.Add(this.btnSCalc);
+            this.panel7.Controls.Add(this.btnColor);
+            this.panel7.Controls.Add(this.btnSpectrum);
+            this.panel7.Controls.Add(this.btnSHex);
+            this.panel7.Location = new System.Drawing.Point(477, 608);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(815, 44);
+            this.panel7.TabIndex = 11;
+            // 
+            // btnSCrypto
+            // 
+            this.btnSCrypto.Location = new System.Drawing.Point(190, 4);
+            this.btnSCrypto.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSCrypto.Name = "btnSCrypto";
+            this.btnSCrypto.Size = new System.Drawing.Size(85, 35);
+            this.btnSCrypto.TabIndex = 5;
+            this.btnSCrypto.Text = ">Crypto";
+            this.btnSCrypto.UseVisualStyleBackColor = true;
+            this.btnSCrypto.Click += new System.EventHandler(this.btnSCrypto_Click);
+            // 
+            // btnSImage
+            // 
+            this.btnSImage.Location = new System.Drawing.Point(4, 3);
+            this.btnSImage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSImage.Name = "btnSImage";
+            this.btnSImage.Size = new System.Drawing.Size(85, 35);
+            this.btnSImage.TabIndex = 4;
+            this.btnSImage.Text = ">X-Ray";
+            this.btnSImage.UseVisualStyleBackColor = true;
+            this.btnSImage.Click += new System.EventHandler(this.btnSImage_Click);
+            // 
+            // btnSCalc
+            // 
+            this.btnSCalc.Location = new System.Drawing.Point(97, 4);
+            this.btnSCalc.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSCalc.Name = "btnSCalc";
+            this.btnSCalc.Size = new System.Drawing.Size(85, 35);
+            this.btnSCalc.TabIndex = 4;
+            this.btnSCalc.Text = ">Calc";
+            this.btnSCalc.UseVisualStyleBackColor = true;
+            this.btnSCalc.Click += new System.EventHandler(this.btnSCalc_Click);
+            // 
+            // btnColor
+            // 
+            this.btnColor.Location = new System.Drawing.Point(466, 4);
+            this.btnColor.Margin = new System.Windows.Forms.Padding(4);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(85, 35);
+            this.btnColor.TabIndex = 6;
+            this.btnColor.Text = ">Color";
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
+            // btnSpectrum
+            // 
+            this.btnSpectrum.Location = new System.Drawing.Point(373, 4);
+            this.btnSpectrum.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSpectrum.Name = "btnSpectrum";
+            this.btnSpectrum.Size = new System.Drawing.Size(85, 35);
+            this.btnSpectrum.TabIndex = 6;
+            this.btnSpectrum.Text = ">Spct";
+            this.btnSpectrum.UseVisualStyleBackColor = true;
+            this.btnSpectrum.Click += new System.EventHandler(this.btnSpectrum_Click);
+            // 
+            // btnSHex
+            // 
+            this.btnSHex.Location = new System.Drawing.Point(280, 4);
+            this.btnSHex.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSHex.Name = "btnSHex";
+            this.btnSHex.Size = new System.Drawing.Size(85, 35);
+            this.btnSHex.TabIndex = 6;
+            this.btnSHex.Text = ">Hex";
+            this.btnSHex.UseVisualStyleBackColor = true;
+            this.btnSHex.Click += new System.EventHandler(this.btnSHex_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.LightGray;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.rbFiles);
+            this.panel5.Controls.Add(this.rbText);
+            this.panel5.Location = new System.Drawing.Point(40, 530);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(407, 45);
+            this.panel5.TabIndex = 10;
+            // 
+            // rbFiles
+            // 
+            this.rbFiles.AutoSize = true;
+            this.rbFiles.Checked = true;
+            this.rbFiles.Location = new System.Drawing.Point(25, 10);
+            this.rbFiles.Name = "rbFiles";
+            this.rbFiles.Size = new System.Drawing.Size(162, 23);
+            this.rbFiles.TabIndex = 0;
+            this.rbFiles.TabStop = true;
+            this.rbFiles.Text = "Encode Files (List)";
+            this.rbFiles.UseVisualStyleBackColor = true;
+            // 
+            // rbText
+            // 
+            this.rbText.AutoSize = true;
+            this.rbText.Location = new System.Drawing.Point(210, 10);
+            this.rbText.Name = "rbText";
+            this.rbText.Size = new System.Drawing.Size(147, 23);
+            this.rbText.TabIndex = 1;
+            this.rbText.Text = "Encode TextBox";
+            this.rbText.UseVisualStyleBackColor = true;
+            // 
             // progFiles
             // 
-            this.progFiles.Location = new System.Drawing.Point(40, 608);
+            this.progFiles.Location = new System.Drawing.Point(40, 580);
             this.progFiles.Margin = new System.Windows.Forms.Padding(4);
             this.progFiles.Name = "progFiles";
-            this.progFiles.Size = new System.Drawing.Size(407, 45);
+            this.progFiles.Size = new System.Drawing.Size(407, 24);
             this.progFiles.TabIndex = 4;
             // 
             // btnToHex
             // 
-            this.btnToHex.Location = new System.Drawing.Point(650, 607);
+            this.btnToHex.Location = new System.Drawing.Point(244, 607);
             this.btnToHex.Margin = new System.Windows.Forms.Padding(4);
             this.btnToHex.Name = "btnToHex";
-            this.btnToHex.Size = new System.Drawing.Size(80, 45);
+            this.btnToHex.Size = new System.Drawing.Size(100, 45);
             this.btnToHex.TabIndex = 2;
             this.btnToHex.Text = "To Hex";
             this.btnToHex.UseVisualStyleBackColor = true;
@@ -2390,10 +2419,10 @@ namespace CryptoUtility
             // btnRun
             // 
             this.btnRun.Enabled = false;
-            this.btnRun.Location = new System.Drawing.Point(738, 607);
+            this.btnRun.Location = new System.Drawing.Point(347, 607);
             this.btnRun.Margin = new System.Windows.Forms.Padding(4);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(80, 45);
+            this.btnRun.Size = new System.Drawing.Size(100, 45);
             this.btnRun.TabIndex = 3;
             this.btnRun.Text = "Encode";
             this.btnRun.UseVisualStyleBackColor = true;
@@ -2401,9 +2430,9 @@ namespace CryptoUtility
             // 
             // btnClearFiles
             // 
-            this.btnClearFiles.Location = new System.Drawing.Point(563, 607);
+            this.btnClearFiles.Location = new System.Drawing.Point(142, 607);
             this.btnClearFiles.Name = "btnClearFiles";
-            this.btnClearFiles.Size = new System.Drawing.Size(80, 45);
+            this.btnClearFiles.Size = new System.Drawing.Size(100, 45);
             this.btnClearFiles.TabIndex = 1;
             this.btnClearFiles.Text = "Clear";
             this.btnClearFiles.UseVisualStyleBackColor = true;
@@ -2411,9 +2440,9 @@ namespace CryptoUtility
             // 
             // btnOpenFile
             // 
-            this.btnOpenFile.Location = new System.Drawing.Point(477, 607);
+            this.btnOpenFile.Location = new System.Drawing.Point(40, 607);
             this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(80, 45);
+            this.btnOpenFile.Size = new System.Drawing.Size(100, 45);
             this.btnOpenFile.TabIndex = 0;
             this.btnOpenFile.Text = "Open";
             this.btnOpenFile.UseVisualStyleBackColor = true;
@@ -2421,12 +2450,13 @@ namespace CryptoUtility
             // 
             // grpSource
             // 
+            this.grpSource.BackColor = System.Drawing.Color.LightGray;
             this.grpSource.Controls.Add(this.lsSource);
             this.grpSource.Location = new System.Drawing.Point(40, 23);
             this.grpSource.Margin = new System.Windows.Forms.Padding(4);
             this.grpSource.Name = "grpSource";
             this.grpSource.Padding = new System.Windows.Forms.Padding(4);
-            this.grpSource.Size = new System.Drawing.Size(407, 307);
+            this.grpSource.Size = new System.Drawing.Size(407, 289);
             this.grpSource.TabIndex = 8;
             this.grpSource.TabStop = false;
             this.grpSource.Text = "Open Files";
@@ -2435,14 +2465,15 @@ namespace CryptoUtility
             // 
             this.lsSource.FormattingEnabled = true;
             this.lsSource.ItemHeight = 19;
-            this.lsSource.Location = new System.Drawing.Point(25, 28);
+            this.lsSource.Location = new System.Drawing.Point(20, 28);
             this.lsSource.Margin = new System.Windows.Forms.Padding(4);
             this.lsSource.Name = "lsSource";
-            this.lsSource.Size = new System.Drawing.Size(359, 251);
+            this.lsSource.Size = new System.Drawing.Size(364, 251);
             this.lsSource.TabIndex = 0;
             // 
             // grpEncodings
             // 
+            this.grpEncodings.BackColor = System.Drawing.Color.LightGray;
             this.grpEncodings.Controls.Add(this.rtxtData);
             this.grpEncodings.Controls.Add(this.txtDestEnc);
             this.grpEncodings.Controls.Add(this.txtSourceEnc);
@@ -2476,7 +2507,7 @@ namespace CryptoUtility
             // 
             // txtDestEnc
             // 
-            this.txtDestEnc.BackColor = System.Drawing.Color.Silver;
+            this.txtDestEnc.BackColor = System.Drawing.Color.LightGray;
             this.txtDestEnc.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtDestEnc.Location = new System.Drawing.Point(124, 219);
             this.txtDestEnc.Margin = new System.Windows.Forms.Padding(4);
@@ -2488,7 +2519,7 @@ namespace CryptoUtility
             // 
             // txtSourceEnc
             // 
-            this.txtSourceEnc.BackColor = System.Drawing.Color.Silver;
+            this.txtSourceEnc.BackColor = System.Drawing.Color.LightGray;
             this.txtSourceEnc.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtSourceEnc.Location = new System.Drawing.Point(124, 83);
             this.txtSourceEnc.Margin = new System.Windows.Forms.Padding(4);
@@ -2552,7 +2583,7 @@ namespace CryptoUtility
             // 
             // tabQuran
             // 
-            this.tabQuran.BackColor = System.Drawing.Color.Silver;
+            this.tabQuran.BackColor = System.Drawing.Color.LightGray;
             this.tabQuran.Controls.Add(this.rbDiacritics);
             this.tabQuran.Controls.Add(this.rbNoDiacritics);
             this.tabQuran.Controls.Add(this.rbFirstOriginalDots);
@@ -2639,6 +2670,7 @@ namespace CryptoUtility
             this.dgvQuran.AllowUserToOrderColumns = true;
             this.dgvQuran.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvQuran.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
+            this.dgvQuran.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvQuran.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQuran.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Serial,
@@ -2794,7 +2826,7 @@ namespace CryptoUtility
             // 
             // tabCharset
             // 
-            this.tabCharset.BackColor = System.Drawing.Color.Silver;
+            this.tabCharset.BackColor = System.Drawing.Color.LightGray;
             this.tabCharset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabCharset.Controls.Add(this.panel6);
             this.tabCharset.Controls.Add(this.txtPlus);
@@ -4677,7 +4709,7 @@ namespace CryptoUtility
             // tabHexViewer
             // 
             this.tabHexViewer.AllowDrop = true;
-            this.tabHexViewer.BackColor = System.Drawing.Color.Silver;
+            this.tabHexViewer.BackColor = System.Drawing.Color.LightGray;
             this.tabHexViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabHexViewer.Controls.Add(this.hexBox);
             this.tabHexViewer.Controls.Add(this.lblHash);
@@ -4864,7 +4896,7 @@ namespace CryptoUtility
             // 
             // tabXRay
             // 
-            this.tabXRay.BackColor = System.Drawing.Color.White;
+            this.tabXRay.BackColor = System.Drawing.Color.LightGray;
             this.tabXRay.Controls.Add(this.chkINV);
             this.tabXRay.Controls.Add(this.chkFlipX);
             this.tabXRay.Controls.Add(this.chkFlipY);
@@ -4884,7 +4916,7 @@ namespace CryptoUtility
             this.tabXRay.Controls.Add(this.picQuran1);
             this.tabXRay.Location = new System.Drawing.Point(4, 28);
             this.tabXRay.Name = "tabXRay";
-            this.tabXRay.Size = new System.Drawing.Size(1344, 663);
+            this.tabXRay.Size = new System.Drawing.Size(1331, 663);
             this.tabXRay.TabIndex = 8;
             this.tabXRay.Text = "X-Ray";
             this.tabXRay.Click += new System.EventHandler(this.tabImage_Click);
@@ -5083,7 +5115,7 @@ namespace CryptoUtility
             this.tabSpectrum.Size = new System.Drawing.Size(1331, 663);
             this.tabSpectrum.TabIndex = 9;
             this.tabSpectrum.Text = "Spectrum";
-            this.tabSpectrum.Click += new System.EventHandler(this.tabSpectrum_Click);
+            this.tabSpectrum.Enter += new System.EventHandler(this.tabSpectrum_Enter);
             // 
             // splitContainer1
             // 
@@ -5092,11 +5124,18 @@ namespace CryptoUtility
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.splitContainer1.Panel1.Controls.Add(this.chkPlay);
+            this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightGray;
             this.splitContainer1.Panel1.Controls.Add(this.spectrumRButton);
             this.splitContainer1.Panel1.Controls.Add(this.waveRButton);
+            this.splitContainer1.Panel1.Controls.Add(this.label51);
+            this.splitContainer1.Panel1.Controls.Add(this.label50);
+            this.splitContainer1.Panel1.Controls.Add(this.label48);
+            this.splitContainer1.Panel1.Controls.Add(this.cmbChannels);
+            this.splitContainer1.Panel1.Controls.Add(this.cmbBits);
+            this.splitContainer1.Panel1.Controls.Add(this.cmbSampleRate);
+            this.splitContainer1.Panel1.Controls.Add(this.chkPlay);
             this.splitContainer1.Panel1.Controls.Add(this.stopButton);
+            this.splitContainer1.Panel1.Controls.Add(this.btnResetSpectrum);
             this.splitContainer1.Panel1.Controls.Add(this.btnStop);
             this.splitContainer1.Panel1.Controls.Add(this.btnPlay);
             this.splitContainer1.Panel1.Controls.Add(this.startButton);
@@ -5104,7 +5143,6 @@ namespace CryptoUtility
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.canvas);
-            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(1335, 663);
             this.splitContainer1.SplitterDistance = 185;
             this.splitContainer1.TabIndex = 1;
@@ -5112,11 +5150,13 @@ namespace CryptoUtility
             // spectrumRButton
             // 
             this.spectrumRButton.AutoSize = true;
-            this.spectrumRButton.Location = new System.Drawing.Point(30, 230);
+            this.spectrumRButton.Checked = true;
+            this.spectrumRButton.Location = new System.Drawing.Point(29, 382);
             this.spectrumRButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.spectrumRButton.Name = "spectrumRButton";
             this.spectrumRButton.Size = new System.Drawing.Size(101, 23);
-            this.spectrumRButton.TabIndex = 12;
+            this.spectrumRButton.TabIndex = 17;
+            this.spectrumRButton.TabStop = true;
             this.spectrumRButton.Text = "Spectrum";
             this.spectrumRButton.UseVisualStyleBackColor = true;
             this.spectrumRButton.CheckedChanged += new System.EventHandler(this.spectrumRButton_CheckedChanged);
@@ -5124,20 +5164,99 @@ namespace CryptoUtility
             // waveRButton
             // 
             this.waveRButton.AutoSize = true;
-            this.waveRButton.Checked = true;
-            this.waveRButton.Location = new System.Drawing.Point(30, 197);
+            this.waveRButton.Location = new System.Drawing.Point(29, 349);
             this.waveRButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.waveRButton.Name = "waveRButton";
             this.waveRButton.Size = new System.Drawing.Size(101, 23);
-            this.waveRButton.TabIndex = 11;
-            this.waveRButton.TabStop = true;
+            this.waveRButton.TabIndex = 16;
             this.waveRButton.Text = "Raw Data";
             this.waveRButton.UseVisualStyleBackColor = true;
             this.waveRButton.CheckedChanged += new System.EventHandler(this.waveRButton_CheckedChanged);
             // 
+            // label51
+            // 
+            this.label51.Location = new System.Drawing.Point(31, 144);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(109, 25);
+            this.label51.TabIndex = 15;
+            this.label51.Text = "Channels";
+            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label50
+            // 
+            this.label50.Location = new System.Drawing.Point(31, 77);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(109, 25);
+            this.label50.TabIndex = 15;
+            this.label50.Text = "Bits";
+            this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label48
+            // 
+            this.label48.Location = new System.Drawing.Point(32, 17);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(109, 25);
+            this.label48.TabIndex = 15;
+            this.label48.Text = "Sample Rate";
+            this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbChannels
+            // 
+            this.cmbChannels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbChannels.FormattingEnabled = true;
+            this.cmbChannels.Items.AddRange(new object[] {
+            "Mono",
+            "Stereo"});
+            this.cmbChannels.Location = new System.Drawing.Point(29, 172);
+            this.cmbChannels.Name = "cmbChannels";
+            this.cmbChannels.Size = new System.Drawing.Size(112, 27);
+            this.cmbChannels.TabIndex = 14;
+            this.cmbChannels.SelectedIndexChanged += new System.EventHandler(this.cmbChannels_SelectedIndexChanged);
+            // 
+            // cmbBits
+            // 
+            this.cmbBits.FormattingEnabled = true;
+            this.cmbBits.Items.AddRange(new object[] {
+            "8",
+            "16"});
+            this.cmbBits.Location = new System.Drawing.Point(29, 105);
+            this.cmbBits.Name = "cmbBits";
+            this.cmbBits.Size = new System.Drawing.Size(112, 27);
+            this.cmbBits.TabIndex = 14;
+            this.cmbBits.SelectedIndexChanged += new System.EventHandler(this.cmbBits_SelectedIndexChanged);
+            this.cmbBits.TextChanged += new System.EventHandler(this.cmbBits_SelectedIndexChanged);
+            // 
+            // cmbSampleRate
+            // 
+            this.cmbSampleRate.FormattingEnabled = true;
+            this.cmbSampleRate.Items.AddRange(new object[] {
+            "8000",
+            "11025",
+            "22050",
+            "32000",
+            "44100",
+            "48000"});
+            this.cmbSampleRate.Location = new System.Drawing.Point(30, 42);
+            this.cmbSampleRate.Name = "cmbSampleRate";
+            this.cmbSampleRate.Size = new System.Drawing.Size(112, 27);
+            this.cmbSampleRate.TabIndex = 14;
+            this.cmbSampleRate.SelectedIndexChanged += new System.EventHandler(this.cmbSampleRate_SelectedIndexChanged);
+            this.cmbSampleRate.TextChanged += new System.EventHandler(this.cmbSampleRate_SelectedIndexChanged);
+            // 
+            // chkPlay
+            // 
+            this.chkPlay.AutoSize = true;
+            this.chkPlay.Location = new System.Drawing.Point(29, 426);
+            this.chkPlay.Name = "chkPlay";
+            this.chkPlay.Size = new System.Drawing.Size(134, 23);
+            this.chkPlay.TabIndex = 13;
+            this.chkPlay.Text = "Play && Record";
+            this.chkPlay.UseVisualStyleBackColor = true;
+            this.chkPlay.CheckedChanged += new System.EventHandler(this.chkPlay_CheckedChanged);
+            // 
             // stopButton
             // 
-            this.stopButton.Location = new System.Drawing.Point(30, 87);
+            this.stopButton.Location = new System.Drawing.Point(30, 285);
             this.stopButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(112, 36);
@@ -5146,9 +5265,20 @@ namespace CryptoUtility
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
+            // btnResetSpectrum
+            // 
+            this.btnResetSpectrum.Location = new System.Drawing.Point(28, 595);
+            this.btnResetSpectrum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnResetSpectrum.Name = "btnResetSpectrum";
+            this.btnResetSpectrum.Size = new System.Drawing.Size(112, 36);
+            this.btnResetSpectrum.TabIndex = 9;
+            this.btnResetSpectrum.Text = "Reset";
+            this.btnResetSpectrum.UseVisualStyleBackColor = true;
+            this.btnResetSpectrum.Click += new System.EventHandler(this.btnResetSpectrum_Click);
+            // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(30, 355);
+            this.btnStop.Location = new System.Drawing.Point(28, 549);
             this.btnStop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(112, 36);
@@ -5162,7 +5292,7 @@ namespace CryptoUtility
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(30, 299);
+            this.btnPlay.Location = new System.Drawing.Point(28, 503);
             this.btnPlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(112, 36);
@@ -5173,7 +5303,7 @@ namespace CryptoUtility
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(30, 41);
+            this.startButton.Location = new System.Drawing.Point(30, 239);
             this.startButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(112, 36);
@@ -5192,6 +5322,27 @@ namespace CryptoUtility
             this.canvas.TabStop = false;
             this.canvas.Click += new System.EventHandler(this.canvas_Click);
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
+            // 
+            // tabColor
+            // 
+            this.tabColor.Controls.Add(this.texture2);
+            this.tabColor.Controls.Add(this.texture);
+            this.tabColor.Location = new System.Drawing.Point(4, 28);
+            this.tabColor.Name = "tabColor";
+            this.tabColor.Size = new System.Drawing.Size(1331, 663);
+            this.tabColor.TabIndex = 10;
+            this.tabColor.Text = "Color";
+            this.tabColor.UseVisualStyleBackColor = true;
+            // 
+            // texture
+            // 
+            this.texture.BackColor = System.Drawing.Color.Black;
+            this.texture.Location = new System.Drawing.Point(11, 10);
+            this.texture.Name = "texture";
+            this.texture.Size = new System.Drawing.Size(640, 640);
+            this.texture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.texture.TabIndex = 0;
+            this.texture.TabStop = false;
             // 
             // lstLog
             // 
@@ -5236,15 +5387,15 @@ namespace CryptoUtility
             this.lblStatus.TabIndex = 8;
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // chkPlay
+            // texture2
             // 
-            this.chkPlay.AutoSize = true;
-            this.chkPlay.Location = new System.Drawing.Point(30, 156);
-            this.chkPlay.Name = "chkPlay";
-            this.chkPlay.Size = new System.Drawing.Size(134, 23);
-            this.chkPlay.TabIndex = 13;
-            this.chkPlay.Text = "Play && Record";
-            this.chkPlay.UseVisualStyleBackColor = true;
+            this.texture2.BackColor = System.Drawing.Color.Black;
+            this.texture2.Location = new System.Drawing.Point(679, 10);
+            this.texture2.Name = "texture2";
+            this.texture2.Size = new System.Drawing.Size(640, 640);
+            this.texture2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.texture2.TabIndex = 0;
+            this.texture2.TabStop = false;
             // 
             // frmMain
             // 
@@ -5272,11 +5423,11 @@ namespace CryptoUtility
             this.tabCalculator.ResumeLayout(false);
             this.tabCalculator.PerformLayout();
             this.tabEncoding.ResumeLayout(false);
+            this.grpOptions.ResumeLayout(false);
+            this.grpOptions.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.grpOptions.ResumeLayout(false);
-            this.grpOptions.PerformLayout();
             this.grpSource.ResumeLayout(false);
             this.grpEncodings.ResumeLayout(false);
             this.grpEncodings.PerformLayout();
@@ -5307,6 +5458,9 @@ namespace CryptoUtility
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
+            this.tabColor.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.texture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.texture2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5705,8 +5859,6 @@ namespace CryptoUtility
         private System.Windows.Forms.TabPage tabSpectrum;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.PictureBox canvas;
-        private System.Windows.Forms.RadioButton spectrumRButton;
-        private System.Windows.Forms.RadioButton waveRButton;
         private System.Windows.Forms.Button stopButton;
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Button btnSpectrum;
@@ -5715,6 +5867,19 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnScreenShot;
         private System.Windows.Forms.CheckBox chkPlay;
+        private System.Windows.Forms.RadioButton spectrumRButton;
+        private System.Windows.Forms.RadioButton waveRButton;
+        private System.Windows.Forms.Label label51;
+        private System.Windows.Forms.Label label50;
+        private System.Windows.Forms.Label label48;
+        private System.Windows.Forms.ComboBox cmbChannels;
+        private System.Windows.Forms.ComboBox cmbBits;
+        private System.Windows.Forms.ComboBox cmbSampleRate;
+        private System.Windows.Forms.Button btnResetSpectrum;
+        private System.Windows.Forms.Button btnColor;
+        private System.Windows.Forms.TabPage tabColor;
+        private System.Windows.Forms.PictureBox texture;
+        private System.Windows.Forms.PictureBox texture2;
     }
 }
 

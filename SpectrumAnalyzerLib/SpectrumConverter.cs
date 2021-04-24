@@ -5,6 +5,7 @@ using System.Text;
 using NAudio;
 using NAudio.Wave;
 using ILNumerics;
+using System.Threading;
 
 namespace SpectrumAnalyzerLib
 {
@@ -38,7 +39,7 @@ namespace SpectrumAnalyzerLib
 
             for (int channel = 0; channel < buffer.Count; channel++)
             {
-                if (buffer[channel].Count <= to)
+                 if (buffer[channel].Count <= to)
                     return false;
 
                 outSpectrums[channel].Clear();
