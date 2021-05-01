@@ -23,3 +23,10 @@ D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\Debug\ILNumerics.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\Debug\NAudio.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\Debug\ILNumerics.xml
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\Debug\NAudio.xml
+D:\.Development\CSharp\Crypto\CryptoUtility\Lib\SpectrumAnalyzerLib.dll
+D:\.Development\CSharp\Crypto\CryptoUtility\Lib\SpectrumAnalyzerLib.pdb
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\Debug\SpectrumAnalyzerLib.csprojAssemblyReference.cache
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\Debug\SpectrumAnalyzerLib.csproj.CoreCompileInputs.cache
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\Debug\SpectrumAnalyzerLib.csproj.CopyComplete
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\Debug\SpectrumAnalyzerLib.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\Debug\SpectrumAnalyzerLib.pdb
