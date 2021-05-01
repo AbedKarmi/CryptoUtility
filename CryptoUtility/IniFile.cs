@@ -46,11 +46,11 @@ namespace CryptoUtility
         /// <PARAM name="Key"></PARAM>
         /// <PARAM name="DefaultValue"></PARAM>
         /// <returns></returns>
-        public string ReadValue(string section, string key, string defaultValue = "")
+        public string ReadValue(string section, string key, string defaultValue = "\0")
         {
             StringBuilder temp = new StringBuilder(255);
             int i = GetPrivateProfileString(section, key, defaultValue, temp, 255, this.path);
-            if (i == 0 && defaultValue == "")
+            if (i == 0 && defaultValue == "\0")
                 throw new Exception("Value not found");
             else return temp.ToString();
 

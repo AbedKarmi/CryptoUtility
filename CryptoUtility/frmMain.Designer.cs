@@ -5179,6 +5179,7 @@ namespace CryptoUtility
             this.picQuran2.Location = new System.Drawing.Point(691, 7);
             this.picQuran2.Name = "picQuran2";
             this.picQuran2.Size = new System.Drawing.Size(600, 480);
+            this.picQuran2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picQuran2.TabIndex = 0;
             this.picQuran2.TabStop = false;
             // 

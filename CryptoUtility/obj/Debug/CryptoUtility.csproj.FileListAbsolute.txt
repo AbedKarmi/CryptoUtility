@@ -22,3 +22,7 @@ D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.csproj.CoreC
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.csproj.CopyComplete
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.exe
 D:\.Development\CSharp\Crypto\CryptoUtility\obj\Debug\CryptoUtility.pdb
+D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\bin32\libiomp5md.dll
+D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\bin32\mkl_custom.dll
+D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\bin64\libiomp5md.dll
+D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\bin64\mkl_custom.dll

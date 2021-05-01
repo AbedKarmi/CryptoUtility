@@ -99,7 +99,7 @@ namespace CryptoUtility
                 Marshal.ReleaseComObject(xlWorkSheet);
                 Marshal.ReleaseComObject(xlWorkBook);
                 Marshal.ReleaseComObject(xlApp);
-                File.Delete(StartupPath + "\\Quran.xlsx");
+                //File.Delete(StartupPath + "\\Quran.xlsx");
             } catch (Exception ex) { Debug.Print(ex.Message); }
         }
         

@@ -60,12 +60,14 @@ namespace CryptoUtility
                 GC.Collect();
                 connection.Close();
                 connection.Dispose();
+                /*
                 int i = 0;
                 do
                 {
                     File.Delete(startupPath + "\\Quran.accdb");
                     Thread.Sleep(250);
                 } while (File.Exists(startupPath + "\\Quran.accdb") & i++<15);
+                */
                 return true;
             }
             catch (Exception ex) {Console.WriteLine(ex.Message); return false; }

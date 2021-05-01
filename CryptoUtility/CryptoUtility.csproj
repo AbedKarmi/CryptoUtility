@@ -14,6 +14,7 @@
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,7 +27,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -78,6 +78,31 @@
   <PropertyGroup>
     <ApplicationIcon>Quran2.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>9.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>9.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Be.Windows.Forms.HexBox">
       <HintPath>Lib\Be.Windows.Forms.HexBox.dll</HintPath>
@@ -94,6 +119,10 @@
     <Reference Include="ILGPU.Algorithms">
       <HintPath>Lib\ILGPU.Algorithms.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="ILNumerics, Version=3.3.3.0, Culture=neutral, PublicKeyToken=e00823afcff9a03a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\ILNumerics.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
@@ -331,8 +360,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="DB\ACCO.xlsx" />
+    <None Include="app.manifest" />
+    <None Include="XLS\ACCO.xlsx" />
     <EmbeddedResource Include="Fonts\DQ7QuranKoufiA.ttf" />
+    <None Include="XLS\Quran.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -343,7 +374,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="DB\Quran.xlsx" />
     <None Include="Tools\place_these_executables_in_same_folder_as_Cudafy.NET.dll_" />
     <EmbeddedResource Include="Fonts\Uthmani.otf" />
   </ItemGroup>
@@ -351,31 +381,29 @@
     <EmbeddedResource Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Lib\BouncyCastle.Crypto.dll" />
-    <Content Include="Lib\ILGPU.Algorithms.dll" />
-    <Content Include="Lib\ILGPU.dll" />
-    <Content Include="Lib\ILGPU.Lightning.dll" />
-    <Content Include="Lib\System.Buffers.dll" />
-    <Content Include="Lib\System.Collections.Immutable.dll" />
-    <Content Include="Lib\System.Diagnostics.DiagnosticSource.dll" />
-    <Content Include="Lib\System.Memory.dll" />
-    <Content Include="Lib\System.Numerics.Vectors.dll" />
-    <Content Include="Lib\System.Reflection.Metadata.dll" />
-    <Content Include="Lib\System.Runtime.CompilerServices.Unsafe.dll" />
-    <EmbeddedResource Include="DB\Quran.accdb" />
-    <Content Include="Lib\Be.Windows.Forms.HexBox.dll" />
-    <Content Include="Lib\ILGPU.Lightning.Native.dll" />
-    <Content Include="Lib\ILNumerics.dll" />
-    <Content Include="Lib\NAudio.dll" />
-    <Content Include="Lib\PdfSharp.dll" />
-    <Content Include="Lib\WindowsBase.dll" />
-    <Content Include="Lib\zxing.dll" />
-    <Content Include="Lib\zxing.presentation.dll" />
-    <Content Include="Lib\SpectrumAnalyzerLib.dll" />
-    <Content Include="Lib\bin32\libiomp5md.dll" />
-    <Content Include="Lib\bin32\mkl_custom.dll" />
-    <Content Include="Lib\bin64\libiomp5md.dll" />
-    <Content Include="Lib\bin64\mkl_custom.dll" />
+    <None Include="Lib\BouncyCastle.Crypto.dll" />
+    <None Include="Lib\ILGPU.Algorithms.dll" />
+    <None Include="Lib\ILGPU.dll" />
+    <None Include="Lib\ILGPU.Lightning.dll" />
+    <None Include="Lib\System.Buffers.dll" />
+    <None Include="Lib\System.Collections.Immutable.dll" />
+    <None Include="Lib\System.Diagnostics.DiagnosticSource.dll" />
+    <None Include="Lib\System.Memory.dll" />
+    <None Include="Lib\System.Numerics.Vectors.dll" />
+    <None Include="Lib\System.Reflection.Metadata.dll" />
+    <None Include="Lib\System.Runtime.CompilerServices.Unsafe.dll" />
+    <None Include="Lib\Be.Windows.Forms.HexBox.dll" />
+    <None Include="Lib\ILGPU.Lightning.Native.dll" />
+    <None Include="Lib\ILNumerics.dll" />
+    <None Include="Lib\NAudio.dll" />
+    <None Include="Lib\PdfSharp.dll" />
+    <None Include="Lib\WindowsBase.dll" />
+    <None Include="Lib\zxing.dll" />
+    <None Include="Lib\zxing.presentation.dll" />
+    <None Include="Lib\SpectrumAnalyzerLib.dll" />
+    <Content Include="Quran.accdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Quran.ico" />
     <Content Include="Quran2.ico" />
     <Content Include="Readme\CUDA.NET.Readme.txt" />

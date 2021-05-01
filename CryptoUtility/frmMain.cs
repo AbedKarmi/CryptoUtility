@@ -41,9 +41,10 @@ namespace CryptoUtility
     {
 	#region Defs
         string[][] fonts = { new [] { "KFGQPC Uthman Taha Naskh", "Uthmani.otf" }, new[] { "DQ7 Quran Koufi A", "DQ7QuranKoufiA.ttf" } };
-        string[] resources = { "bin32\\libiomp5md.dll", "bin32\\mkl_custom.dll", "bin64\\libiomp5md.dll", "bin64\\mkl_custom.dll" };
+        string[] resources = { }; //{ "bin32\\libiomp5md.dll", "bin32\\mkl_custom.dll", "bin64\\libiomp5md.dll", "bin64\\mkl_custom.dll" };
         int currentThread = -1;
         int lockThread = -1;
+        bool needRestart = false;
         private EncodingOptions EncodingOptions { get; set; }
         private string stackTrace = "";
         private string lastPlayed;
@@ -139,6 +140,7 @@ namespace CryptoUtility
 		
         void logMsg(string msg,int threadID=-1)
         {
+            if (string.IsNullOrEmpty(stackTrace)) stackTrace = Environment.StackTrace;
             string[] msgs = msg.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var str in msgs)
             {
@@ -178,6 +180,7 @@ namespace CryptoUtility
 
         void InstallFont(string fontFile)
         {
+            needRestart = true;
             File.WriteAllBytes(Application.StartupPath + "\\"+fontFile, MyClass.ResourceReadAllBytes("Fonts\\"+fontFile));
 
             Shell32.Shell shell = new Shell32.Shell();
@@ -542,6 +545,12 @@ namespace CryptoUtility
 
                 CheckQuranFont();
 
+                if (needRestart)
+                {
+                    Process.Start(Application.ExecutablePath);
+                    Application.Exit();
+                }
+
                 txtQuranText.Font = new Font(fonts[0][0], 12);
                // lbSoras.Font = new Font(QuranFont, 10);
                 
@@ -551,11 +560,11 @@ namespace CryptoUtility
                 lblPointSize.Text = AppSettings.ReadValue("Settings", "Scale", "1");
 
                 cmbBytesPerLine.Text = AppSettings.ReadValue("Settings", "BytesPerLine", "16");
-                cmbSizeMode.SelectedIndex = Int32.Parse(AppSettings.ReadValue("Settings", "SizeMode", "0"));
+                cmbSizeMode.SelectedIndex = Int32.Parse(AppSettings.ReadValue("Settings", "SizeMode", "1"));
                 chkALLEncodings.Checked = (AppSettings.ReadValue("Settings", "AllEncodings", "Yes").ToUpper() == "NO");
                 chkSendToBuffer.Checked = (AppSettings.ReadValue("Settings", "SendToBuffer", "Yes").ToUpper() == "YES");
                 chkJommalWord.Checked = (AppSettings.ReadValue("Settings", "JommalWORD", "Yes").ToUpper() == "YES");
-                chkFixPadding.Checked = (AppSettings.ReadValue("Settings", "Padding", "Yes").ToUpper() == "YES");
+                chkFixPadding.Checked = (AppSettings.ReadValue("Settings", "Padding", "No").ToUpper() == "YES");
                 chkFlipX.Checked = (AppSettings.ReadValue("Settings", "FlipX", "Yes").ToUpper() == "YES");
                 chkFlipY.Checked = (AppSettings.ReadValue("Settings", "FlipY", "No").ToUpper() == "YES");
                 chkINV.Checked = (AppSettings.ReadValue("Settings", "Inversed", "No").ToUpper() == "YES");
@@ -586,6 +595,9 @@ namespace CryptoUtility
                 canvas.AllowDrop = true;
 
                 trkDB.Value = 13;
+
+                //Adjust Width
+                this.Width =(int) (txtInfo.Left + txtInfo.Width + tabControl.Left*2.5); 
 
             } catch (Exception ex) { logMsg("Error:" + ex.Message); }
         }
@@ -2925,7 +2937,8 @@ Red    : Diacritics";
         private void CreateBarcode(string str,BarcodeFormat format= BarcodeFormat.QR_CODE)
         {
             try
-            { 
+            {
+                if (string.IsNullOrEmpty(str)) return;
                 Renderer = typeof(BitmapRenderer);
                 var writer = new BarcodeWriter
                 {
@@ -3035,71 +3048,77 @@ Red    : Diacritics";
 
         private void DrawImage()
         {
-           
-            byte[] buffer = SafeRead(quranBin);
-            if (buffer.Length == 0) return;
-            int padding = 0;
-            int n = buffer.Length * 8;
-            int bpl =  (int)Math.Sqrt(n);
-            while (bpl * bpl < n) bpl++;
-            if (chkFixPadding.Checked)
+            try
             {
-                padding = bpl * bpl-n;
-                if (padding < 0) padding *= -1;
-            }
+                if (!File.Exists(quranBin)) return;
+                byte[] buffer = SafeRead(quranBin);
+                if (buffer.Length == 0) return;
+                int padding = 0;
+                int n = buffer.Length * 8;
+                int bpl = (int)Math.Sqrt(n);
+                
+                while ((bpl * bpl) < n) bpl++;
             
-            int pointSize = Int32.Parse(lblPointSize.Text);
+                if (chkFixPadding.Checked)
+                {
+                    padding = bpl * bpl - n;
+                    //if (padding < 0) padding *= -1;
+                }
 
-            string bin = ToBinaryString(buffer);
+                int pointSize = Int32.Parse(lblPointSize.Text);
 
-            SetSizeMod();
-            
-            //var g= picQuran.CreateGraphics();
-            picQuran1.Image = new Bitmap(bpl*pointSize, bpl*pointSize);
-            picQuran3.Image = new Bitmap(n*pointSize, picQuran3.Height);
+                string bin = ToBinaryString(buffer);
 
-            var g = Graphics.FromImage(picQuran1.Image);
-            var g2 = Graphics.FromImage(picQuran3.Image);
+                SetSizeMod();
 
-            SolidBrush brush = new(chkINV.Checked?Color.Black:Color.White);
-            Pen pen = new(chkINV.Checked ? Color.Black : Color.White, pointSize);// float.Parse(lblScale.Text));
+                //var g= picQuran.CreateGraphics();
+                picQuran1.Image = new Bitmap(bpl * pointSize, bpl * pointSize);
+                picQuran3.Image = new Bitmap(n * pointSize, picQuran3.Height);
 
-            picQuran1.BackColor = backColor;
-            picQuran3.BackColor = backColor;
+                var g = Graphics.FromImage(picQuran1.Image);
+                var g2 = Graphics.FromImage(picQuran3.Image);
 
-            g.Clear(picQuran1.BackColor);picQuran1.Invalidate();
+                SolidBrush brush = new(chkINV.Checked ? Color.Black : Color.White);
+                Pen pen = new(chkINV.Checked ? Color.Black : Color.White, pointSize);// float.Parse(lblScale.Text));
 
-            for (int i = 0; i < bin.Length+ padding; i++)
-            {
-                int y = (i / bpl)+1;
-                int x = (i % bpl)+1;
-                if (i>= padding) if (bin[i- padding] == '1') drawPoint(g, brush, 1 , x   , y  );
-                if (bin[i]=='1') g2.DrawLine(pen, i*pointSize, 0, i*pointSize, picQuran3.Height);
+                picQuran1.BackColor = backColor;
+                picQuran3.BackColor = backColor;
+
+                g.Clear(picQuran1.BackColor); picQuran1.Invalidate();
+
+                for (int i = 0; i < bin.Length + padding; i++)
+                {
+                    int y = (i / bpl) + 1;
+                    int x = (i % bpl) + 1;
+                    if (bin[i > padding ? i - padding : i] == '1') drawPoint(g, brush, 1, x, y);
+                    if (bin[i > padding ? i - padding : i] == '1') g2.DrawLine(pen, i * pointSize, 0, i * pointSize, picQuran3.Height);
+                }
+                switch ((chkFlipX.Checked ? 2 : 0) + (chkFlipY.Checked ? 1 : 0))
+                {
+                    case 1: picQuran1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY); break;
+                    case 2: picQuran1.Image.RotateFlip(RotateFlipType.RotateNoneFlipX); break;
+                    case 3: picQuran1.Image.RotateFlip(RotateFlipType.RotateNoneFlipXY); break;
+                }
+
+                picQuran1.Invalidate();
+                picQuran3.Invalidate();
+                pen.Dispose();
+                brush.Dispose();
+                g.Dispose();
+                g2.Dispose();
             }
-            switch ((chkFlipX.Checked ? 2 : 0) + (chkFlipY.Checked ? 1 : 0))
-            {
-                case 1: picQuran1.Image.RotateFlip(RotateFlipType.RotateNoneFlipY); break;
-                case 2: picQuran1.Image.RotateFlip(RotateFlipType.RotateNoneFlipX); break;
-                case 3: picQuran1.Image.RotateFlip(RotateFlipType.RotateNoneFlipXY); break;
-            }
-
-            picQuran1.Invalidate();
-            picQuran3.Invalidate();
-            pen.Dispose();
-            brush.Dispose();
-            g.Dispose();
-            g2.Dispose();
+            catch (Exception ex) { logMsg(ex); };
         }
          private void SetSizeMod()
         {
 
             switch (cmbSizeMode.SelectedIndex)
             {
-                case 0: picQuran1.SizeMode = PictureBoxSizeMode.Normal; picQuran2.SizeMode = PictureBoxSizeMode.Normal; break;
-                case 1: picQuran1.SizeMode = PictureBoxSizeMode.StretchImage; picQuran2.SizeMode = PictureBoxSizeMode.StretchImage; break;
-                case 2: picQuran1.SizeMode = PictureBoxSizeMode.AutoSize; picQuran2.SizeMode = PictureBoxSizeMode.AutoSize; break;
-                case 3: picQuran1.SizeMode = PictureBoxSizeMode.CenterImage; picQuran2.SizeMode = PictureBoxSizeMode.CenterImage; break;
-                case 4: picQuran1.SizeMode = PictureBoxSizeMode.Zoom; picQuran2.SizeMode = PictureBoxSizeMode.Zoom; break;
+                case 0: picQuran1.SizeMode = PictureBoxSizeMode.Normal; picQuran1.SizeMode = PictureBoxSizeMode.Normal; break;
+                case 1: picQuran1.SizeMode = PictureBoxSizeMode.StretchImage; picQuran1.SizeMode = PictureBoxSizeMode.StretchImage; break;
+                case 2: picQuran1.SizeMode = PictureBoxSizeMode.AutoSize; picQuran1.SizeMode = PictureBoxSizeMode.AutoSize; break;
+                case 3: picQuran1.SizeMode = PictureBoxSizeMode.CenterImage; picQuran1.SizeMode = PictureBoxSizeMode.CenterImage; break;
+                case 4: picQuran1.SizeMode = PictureBoxSizeMode.Zoom; picQuran1.SizeMode = PictureBoxSizeMode.Zoom; break;
             }
             picQuran1.Width = picSpace.size1;
             picQuran1.Height = picSpace.size1;
@@ -3226,9 +3245,13 @@ Red    : Diacritics";
 
         private void CloseSpectrum()
         {
-            spectrums.Clear();
-            sensor.Dispose();
-            sensor = null;
+            try
+            {
+                spectrums.Clear();
+                sensor.Dispose();
+                sensor = null;
+            }
+            catch (Exception) { };
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -3581,7 +3604,6 @@ Red    : Diacritics";
         }
         void OnPreVolumeMeter(object sender, StreamVolumeEventArgs e)
         {
-            // we know it is stereo
             waveformPainter1.AddMax(e.MaxSampleValues[0]);
             waveformPainter2.AddMax(e.MaxSampleValues.Length > 1?e.MaxSampleValues[1]:0f);
 
@@ -3589,7 +3611,6 @@ Red    : Diacritics";
 
         void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e)
         {
-            // we know it is stereo
             volumeMeter1.Amplitude = e.MaxSampleValues[0];
             volumeMeter2.Amplitude = e.MaxSampleValues.Length > 1?e.MaxSampleValues[1]:0f;
         }

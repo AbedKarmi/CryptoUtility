@@ -30,3 +30,7 @@ D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\Debug\SpectrumAnalyzerLib.
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\Debug\SpectrumAnalyzerLib.csproj.CopyComplete
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\Debug\SpectrumAnalyzerLib.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\Debug\SpectrumAnalyzerLib.pdb
+D:\.Development\CSharp\Crypto\CryptoUtility\Lib\bin32\libiomp5md.dll
+D:\.Development\CSharp\Crypto\CryptoUtility\Lib\bin32\mkl_custom.dll
+D:\.Development\CSharp\Crypto\CryptoUtility\Lib\bin64\libiomp5md.dll
+D:\.Development\CSharp\Crypto\CryptoUtility\Lib\bin64\mkl_custom.dll
