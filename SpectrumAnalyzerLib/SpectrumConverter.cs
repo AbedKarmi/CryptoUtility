@@ -19,7 +19,7 @@ namespace SpectrumAnalyzerLib
         /// <param name="count">Length of waveform area you want to FFT</param>
         /// <param name="outSpectrums">Output: Amplitude spectrum (per channel). Has count / 2 elements per channel</param>
         /// <returns></returns>
-        public static bool GetSpectrum(List<List<short>> buffer, int offset, int count, List<List<double>> outSpectrums)
+        public static bool GetSpectrum(List<List<short>> buffer, int offset, int count, List<List<double>> outSpectrums,int bits)
         {
             if (buffer == null || outSpectrums == null)
                 return false;
@@ -35,7 +35,7 @@ namespace SpectrumAnalyzerLib
 
             double[] _fftIn = new double[count];
 
-            float ratio = 1f / short.MaxValue;
+            float ratio = 1f / (bits==16?short.MaxValue:Byte.MaxValue);
 
             for (int channel = 0; channel < buffer.Count; channel++)
             {

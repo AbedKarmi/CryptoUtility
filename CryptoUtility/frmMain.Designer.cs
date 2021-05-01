@@ -99,123 +99,9 @@ namespace CryptoUtility
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabDSA = new System.Windows.Forms.TabPage();
-            this.cmbDSAKeyLen = new System.Windows.Forms.ComboBox();
-            this.btnDSAImportPrivate = new System.Windows.Forms.Button();
-            this.btnDSAImportPublic = new System.Windows.Forms.Button();
-            this.btnGenDSAKeys = new System.Windows.Forms.Button();
-            this.btnExportDSAPublic = new System.Windows.Forms.Button();
-            this.btnExportDSA = new System.Windows.Forms.Button();
-            this.txtDSA_X = new System.Windows.Forms.TextBox();
-            this.txtDSA_Y = new System.Windows.Forms.TextBox();
-            this.txtDSA_G = new System.Windows.Forms.TextBox();
-            this.txtDSA_Q = new System.Windows.Forms.TextBox();
-            this.txtDSA_P = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.txtDSAPEMPrivate = new System.Windows.Forms.TextBox();
-            this.txtDSAPEMPublic = new System.Windows.Forms.TextBox();
-            this.tabCalculator = new System.Windows.Forms.TabPage();
-            this.chkPositives = new System.Windows.Forms.CheckBox();
-            this.rb64b = new System.Windows.Forms.RadioButton();
-            this.rb16 = new System.Windows.Forms.RadioButton();
-            this.rb2 = new System.Windows.Forms.RadioButton();
-            this.rb10 = new System.Windows.Forms.RadioButton();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.cmbKeyLen = new System.Windows.Forms.ComboBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.cmbExponentMethod = new System.Windows.Forms.ComboBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.cmbMULMethod = new System.Windows.Forms.ComboBox();
-            this.label36 = new System.Windows.Forms.Label();
-            this.cmbAccelerator = new System.Windows.Forms.ComboBox();
-            this.btnRTP = new System.Windows.Forms.Button();
-            this.btnFCD = new System.Windows.Forms.Button();
-            this.btnLCM = new System.Windows.Forms.Button();
-            this.btnPWM = new System.Windows.Forms.Button();
-            this.btnPOW = new System.Windows.Forms.Button();
-            this.btnMOD = new System.Windows.Forms.Button();
-            this.btnDIV = new System.Windows.Forms.Button();
-            this.btnMUL = new System.Windows.Forms.Button();
-            this.btnSUB = new System.Windows.Forms.Button();
-            this.btnClearCalc = new System.Windows.Forms.Button();
-            this.btnGenPrime = new System.Windows.Forms.Button();
-            this.btnXOR = new System.Windows.Forms.Button();
-            this.btnOR = new System.Windows.Forms.Button();
-            this.btnSHR = new System.Windows.Forms.Button();
-            this.btnSHL = new System.Windows.Forms.Button();
-            this.btnBezout = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.btnSqrt = new System.Windows.Forms.Button();
-            this.btnFactorizeQ = new System.Windows.Forms.Button();
-            this.btnFactorizeP = new System.Windows.Forms.Button();
-            this.btnFactorDbQ = new System.Windows.Forms.Button();
-            this.btnFactorDbP = new System.Windows.Forms.Button();
-            this.btnReverseQ = new System.Windows.Forms.Button();
-            this.btnReverseP = new System.Windows.Forms.Button();
-            this.btnIsEven = new System.Windows.Forms.Button();
-            this.btnIsPrime = new System.Windows.Forms.Button();
-            this.btnADD = new System.Windows.Forms.Button();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txtResultR = new System.Windows.Forms.TextBox();
-            this.txtModulN = new System.Windows.Forms.TextBox();
-            this.txtPrimeQ = new System.Windows.Forms.TextBox();
-            this.txtPrimeP = new System.Windows.Forms.TextBox();
-            this.tabEncoding = new System.Windows.Forms.TabPage();
-            this.grpOptions = new System.Windows.Forms.GroupBox();
-            this.chkRTL = new System.Windows.Forms.CheckBox();
-            this.chkOutText = new System.Windows.Forms.CheckBox();
-            this.chkALLEncodings = new System.Windows.Forms.CheckBox();
-            this.chkJommalWord = new System.Windows.Forms.CheckBox();
-            this.chkSendToBuffer = new System.Windows.Forms.CheckBox();
-            this.chkDiacritics = new System.Windows.Forms.CheckBox();
-            this.chkzStrings = new System.Windows.Forms.CheckBox();
-            this.chkDiscardChars = new System.Windows.Forms.CheckBox();
-            this.chkHexText = new System.Windows.Forms.CheckBox();
-            this.chkUnicodeAsDecimal = new System.Windows.Forms.CheckBox();
-            this.chkMeta = new System.Windows.Forms.CheckBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.btnSCrypto = new System.Windows.Forms.Button();
-            this.btnSImage = new System.Windows.Forms.Button();
-            this.btnSCalc = new System.Windows.Forms.Button();
-            this.btnColor = new System.Windows.Forms.Button();
-            this.btnSpectrum = new System.Windows.Forms.Button();
-            this.btnSHex = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.rbFiles = new System.Windows.Forms.RadioButton();
-            this.rbText = new System.Windows.Forms.RadioButton();
-            this.progFiles = new System.Windows.Forms.ProgressBar();
-            this.btnToHex = new System.Windows.Forms.Button();
-            this.btnRun = new System.Windows.Forms.Button();
-            this.btnClearFiles = new System.Windows.Forms.Button();
-            this.btnOpenFile = new System.Windows.Forms.Button();
-            this.grpSource = new System.Windows.Forms.GroupBox();
-            this.lsSource = new System.Windows.Forms.ListBox();
-            this.grpEncodings = new System.Windows.Forms.GroupBox();
-            this.rtxtData = new System.Windows.Forms.TextBox();
-            this.txtDestEnc = new System.Windows.Forms.TextBox();
-            this.txtSourceEnc = new System.Windows.Forms.TextBox();
-            this.label35 = new System.Windows.Forms.Label();
-            this.labDestEnc = new System.Windows.Forms.Label();
-            this.cmbDestEnc = new System.Windows.Forms.ComboBox();
-            this.cmbSourceEnc = new System.Windows.Forms.ComboBox();
-            this.labSourceEnc = new System.Windows.Forms.Label();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.tabQuran = new System.Windows.Forms.TabPage();
+            this.txtSoraSearch = new System.Windows.Forms.TextBox();
             this.rbDiacritics = new System.Windows.Forms.RadioButton();
             this.rbNoDiacritics = new System.Windows.Forms.RadioButton();
             this.rbFirstOriginalDots = new System.Windows.Forms.RadioButton();
@@ -384,6 +270,123 @@ namespace CryptoUtility
             this.lblCS3 = new System.Windows.Forms.Label();
             this.lblCS2 = new System.Windows.Forms.Label();
             this.lblCS1 = new System.Windows.Forms.Label();
+            this.tabEncoding = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSCrypto = new System.Windows.Forms.Button();
+            this.btnSImage = new System.Windows.Forms.Button();
+            this.btnSHex = new System.Windows.Forms.Button();
+            this.btnSCalc = new System.Windows.Forms.Button();
+            this.btnSpectrum = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.btnColor = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.grpOptions = new System.Windows.Forms.GroupBox();
+            this.chkRTL = new System.Windows.Forms.CheckBox();
+            this.chkOutText = new System.Windows.Forms.CheckBox();
+            this.chkALLEncodings = new System.Windows.Forms.CheckBox();
+            this.chkJommalWord = new System.Windows.Forms.CheckBox();
+            this.chkSendToBuffer = new System.Windows.Forms.CheckBox();
+            this.chkDiacritics = new System.Windows.Forms.CheckBox();
+            this.chkzStrings = new System.Windows.Forms.CheckBox();
+            this.chkDiscardChars = new System.Windows.Forms.CheckBox();
+            this.chkHexText = new System.Windows.Forms.CheckBox();
+            this.chkUnicodeAsDecimal = new System.Windows.Forms.CheckBox();
+            this.chkMeta = new System.Windows.Forms.CheckBox();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.rbFiles = new System.Windows.Forms.RadioButton();
+            this.rbText = new System.Windows.Forms.RadioButton();
+            this.progFiles = new System.Windows.Forms.ProgressBar();
+            this.btnToHex = new System.Windows.Forms.Button();
+            this.btnRun = new System.Windows.Forms.Button();
+            this.btnClearFiles = new System.Windows.Forms.Button();
+            this.btnOpenFile = new System.Windows.Forms.Button();
+            this.grpSource = new System.Windows.Forms.GroupBox();
+            this.lsSource = new System.Windows.Forms.ListBox();
+            this.grpEncodings = new System.Windows.Forms.GroupBox();
+            this.rtxtData = new System.Windows.Forms.TextBox();
+            this.txtDestEnc = new System.Windows.Forms.TextBox();
+            this.txtSourceEnc = new System.Windows.Forms.TextBox();
+            this.label35 = new System.Windows.Forms.Label();
+            this.labDestEnc = new System.Windows.Forms.Label();
+            this.cmbDestEnc = new System.Windows.Forms.ComboBox();
+            this.cmbSourceEnc = new System.Windows.Forms.ComboBox();
+            this.labSourceEnc = new System.Windows.Forms.Label();
+            this.tabCalculator = new System.Windows.Forms.TabPage();
+            this.chkPositives = new System.Windows.Forms.CheckBox();
+            this.rb64b = new System.Windows.Forms.RadioButton();
+            this.rb16 = new System.Windows.Forms.RadioButton();
+            this.rb2 = new System.Windows.Forms.RadioButton();
+            this.rb10 = new System.Windows.Forms.RadioButton();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.cmbKeyLen = new System.Windows.Forms.ComboBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.cmbExponentMethod = new System.Windows.Forms.ComboBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.cmbMULMethod = new System.Windows.Forms.ComboBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.cmbAccelerator = new System.Windows.Forms.ComboBox();
+            this.btnRTP = new System.Windows.Forms.Button();
+            this.btnFCD = new System.Windows.Forms.Button();
+            this.btnLCM = new System.Windows.Forms.Button();
+            this.btnPWM = new System.Windows.Forms.Button();
+            this.btnPOW = new System.Windows.Forms.Button();
+            this.btnMOD = new System.Windows.Forms.Button();
+            this.btnDIV = new System.Windows.Forms.Button();
+            this.btnMUL = new System.Windows.Forms.Button();
+            this.btnSUB = new System.Windows.Forms.Button();
+            this.btnClearCalc = new System.Windows.Forms.Button();
+            this.btnGenPrime = new System.Windows.Forms.Button();
+            this.btnXOR = new System.Windows.Forms.Button();
+            this.btnOR = new System.Windows.Forms.Button();
+            this.btnSHR = new System.Windows.Forms.Button();
+            this.btnSHL = new System.Windows.Forms.Button();
+            this.btnBezout = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnSqrt = new System.Windows.Forms.Button();
+            this.btnFactorizeQ = new System.Windows.Forms.Button();
+            this.btnFactorizeP = new System.Windows.Forms.Button();
+            this.btnFactorDbQ = new System.Windows.Forms.Button();
+            this.btnFactorDbP = new System.Windows.Forms.Button();
+            this.btnReverseQ = new System.Windows.Forms.Button();
+            this.btnReverseP = new System.Windows.Forms.Button();
+            this.btnIsEven = new System.Windows.Forms.Button();
+            this.btnIsPrime = new System.Windows.Forms.Button();
+            this.btnADD = new System.Windows.Forms.Button();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtResultR = new System.Windows.Forms.TextBox();
+            this.txtModulN = new System.Windows.Forms.TextBox();
+            this.txtPrimeQ = new System.Windows.Forms.TextBox();
+            this.txtPrimeP = new System.Windows.Forms.TextBox();
+            this.tabDSA = new System.Windows.Forms.TabPage();
+            this.cmbDSAKeyLen = new System.Windows.Forms.ComboBox();
+            this.btnDSAImportPrivate = new System.Windows.Forms.Button();
+            this.btnDSAImportPublic = new System.Windows.Forms.Button();
+            this.btnGenDSAKeys = new System.Windows.Forms.Button();
+            this.btnExportDSAPublic = new System.Windows.Forms.Button();
+            this.btnExportDSA = new System.Windows.Forms.Button();
+            this.txtDSA_X = new System.Windows.Forms.TextBox();
+            this.txtDSA_Y = new System.Windows.Forms.TextBox();
+            this.txtDSA_G = new System.Windows.Forms.TextBox();
+            this.txtDSA_Q = new System.Windows.Forms.TextBox();
+            this.txtDSA_P = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txtDSAPEMPrivate = new System.Windows.Forms.TextBox();
+            this.txtDSAPEMPublic = new System.Windows.Forms.TextBox();
             this.tabHexViewer = new System.Windows.Forms.TabPage();
             this.hexBox = new Be.Windows.Forms.HexBox();
             this.lblHash = new System.Windows.Forms.TextBox();
@@ -400,7 +403,9 @@ namespace CryptoUtility
             this.btnSendToCrypto = new System.Windows.Forms.Button();
             this.btnSendToCalc = new System.Windows.Forms.Button();
             this.btnOpenHexFile = new System.Windows.Forms.Button();
-            this.tabXRay = new System.Windows.Forms.TabPage();
+            this.tabTexture = new System.Windows.Forms.TabPage();
+            this.chkQR = new System.Windows.Forms.CheckBox();
+            this.picQuran3 = new System.Windows.Forms.PictureBox();
             this.chkINV = new System.Windows.Forms.CheckBox();
             this.chkFlipX = new System.Windows.Forms.CheckBox();
             this.chkFlipY = new System.Windows.Forms.CheckBox();
@@ -418,13 +423,22 @@ namespace CryptoUtility
             this.btnRotate = new System.Windows.Forms.Button();
             this.picQuran2 = new System.Windows.Forms.PictureBox();
             this.picQuran1 = new System.Windows.Forms.PictureBox();
-            this.tabSpectrum = new System.Windows.Forms.TabPage();
+            this.tabAudioSpectrum = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.spectrumRButton = new System.Windows.Forms.RadioButton();
+            this.waveformPainter2 = new NAudio.Gui.WaveformPainter();
+            this.waveformPainter1 = new NAudio.Gui.WaveformPainter();
+            this.label53 = new System.Windows.Forms.Label();
+            this.volumeMeter2 = new NAudio.Gui.VolumeMeter();
+            this.volumeMeter1 = new NAudio.Gui.VolumeMeter();
+            this.volumeSlider1 = new NAudio.Gui.VolumeSlider();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label52 = new System.Windows.Forms.Label();
+            this.lblDB = new System.Windows.Forms.Label();
+            this.trkDB = new System.Windows.Forms.TrackBar();
+            this.panel7 = new System.Windows.Forms.Panel();
             this.waveRButton = new System.Windows.Forms.RadioButton();
+            this.spectrumRButton = new System.Windows.Forms.RadioButton();
             this.label51 = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
             this.cmbChannels = new System.Windows.Forms.ComboBox();
             this.cmbBits = new System.Windows.Forms.ComboBox();
             this.cmbSampleRate = new System.Windows.Forms.ComboBox();
@@ -432,27 +446,25 @@ namespace CryptoUtility
             this.stopButton = new System.Windows.Forms.Button();
             this.btnResetSpectrum = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
+            this.btnRePlay = new System.Windows.Forms.Button();
             this.btnPlay = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
+            this.label50 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
             this.canvas = new System.Windows.Forms.PictureBox();
+            this.picSpectrum = new System.Windows.Forms.PictureBox();
             this.tabColor = new System.Windows.Forms.TabPage();
+            this.texture3 = new System.Windows.Forms.PictureBox();
+            this.texture2 = new System.Windows.Forms.PictureBox();
             this.texture = new System.Windows.Forms.PictureBox();
             this.lstLog = new System.Windows.Forms.ListBox();
             this.txtInfo = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.texture2 = new System.Windows.Forms.PictureBox();
+            this.btnStackTrace = new System.Windows.Forms.Button();
             this.tabCrypto.SuspendLayout();
             this.tabRSA.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabDSA.SuspendLayout();
-            this.tabCalculator.SuspendLayout();
-            this.tabEncoding.SuspendLayout();
-            this.grpOptions.SuspendLayout();
-            this.panel7.SuspendLayout();
-            this.panel5.SuspendLayout();
-            this.grpSource.SuspendLayout();
-            this.grpEncodings.SuspendLayout();
+            this.tabControl.SuspendLayout();
             this.tabQuran.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuran)).BeginInit();
             this.tabCharset.SuspendLayout();
@@ -461,19 +473,33 @@ namespace CryptoUtility
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tabEncoding.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.grpOptions.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.grpSource.SuspendLayout();
+            this.grpEncodings.SuspendLayout();
+            this.tabCalculator.SuspendLayout();
+            this.tabDSA.SuspendLayout();
             this.tabHexViewer.SuspendLayout();
-            this.tabXRay.SuspendLayout();
+            this.tabTexture.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picQuran3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picQuran2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picQuran1)).BeginInit();
-            this.tabSpectrum.SuspendLayout();
+            this.tabAudioSpectrum.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trkDB)).BeginInit();
+            this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSpectrum)).BeginInit();
             this.tabColor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.texture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.texture3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.texture2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.texture)).BeginInit();
             this.SuspendLayout();
             // 
             // tabCrypto
@@ -1228,1362 +1254,30 @@ namespace CryptoUtility
             this.label1.TabIndex = 2;
             this.label1.Text = "Exponent (E)";
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabRSA);
-            this.tabControl1.Controls.Add(this.tabDSA);
-            this.tabControl1.Controls.Add(this.tabCrypto);
-            this.tabControl1.Controls.Add(this.tabCalculator);
-            this.tabControl1.Controls.Add(this.tabEncoding);
-            this.tabControl1.Controls.Add(this.tabQuran);
-            this.tabControl1.Controls.Add(this.tabCharset);
-            this.tabControl1.Controls.Add(this.tabHexViewer);
-            this.tabControl1.Controls.Add(this.tabXRay);
-            this.tabControl1.Controls.Add(this.tabSpectrum);
-            this.tabControl1.Controls.Add(this.tabColor);
-            this.tabControl1.Location = new System.Drawing.Point(19, 31);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1339, 695);
-            this.tabControl1.TabIndex = 0;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // tabDSA
-            // 
-            this.tabDSA.BackColor = System.Drawing.Color.LightGray;
-            this.tabDSA.Controls.Add(this.cmbDSAKeyLen);
-            this.tabDSA.Controls.Add(this.btnDSAImportPrivate);
-            this.tabDSA.Controls.Add(this.btnDSAImportPublic);
-            this.tabDSA.Controls.Add(this.btnGenDSAKeys);
-            this.tabDSA.Controls.Add(this.btnExportDSAPublic);
-            this.tabDSA.Controls.Add(this.btnExportDSA);
-            this.tabDSA.Controls.Add(this.txtDSA_X);
-            this.tabDSA.Controls.Add(this.txtDSA_Y);
-            this.tabDSA.Controls.Add(this.txtDSA_G);
-            this.tabDSA.Controls.Add(this.txtDSA_Q);
-            this.tabDSA.Controls.Add(this.txtDSA_P);
-            this.tabDSA.Controls.Add(this.label23);
-            this.tabDSA.Controls.Add(this.label24);
-            this.tabDSA.Controls.Add(this.label25);
-            this.tabDSA.Controls.Add(this.label26);
-            this.tabDSA.Controls.Add(this.label28);
-            this.tabDSA.Controls.Add(this.label33);
-            this.tabDSA.Controls.Add(this.label29);
-            this.tabDSA.Controls.Add(this.label27);
-            this.tabDSA.Controls.Add(this.txtDSAPEMPrivate);
-            this.tabDSA.Controls.Add(this.txtDSAPEMPublic);
-            this.tabDSA.Location = new System.Drawing.Point(4, 28);
-            this.tabDSA.Name = "tabDSA";
-            this.tabDSA.Size = new System.Drawing.Size(1331, 663);
-            this.tabDSA.TabIndex = 3;
-            this.tabDSA.Text = "DSA Keys";
-            // 
-            // cmbDSAKeyLen
-            // 
-            this.cmbDSAKeyLen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDSAKeyLen.FormattingEnabled = true;
-            this.cmbDSAKeyLen.Items.AddRange(new object[] {
-            "512",
-            "1024",
-            "2048",
-            "4096"});
-            this.cmbDSAKeyLen.Location = new System.Drawing.Point(154, 205);
-            this.cmbDSAKeyLen.Name = "cmbDSAKeyLen";
-            this.cmbDSAKeyLen.Size = new System.Drawing.Size(531, 27);
-            this.cmbDSAKeyLen.TabIndex = 2;
-            // 
-            // btnDSAImportPrivate
-            // 
-            this.btnDSAImportPrivate.Location = new System.Drawing.Point(1094, 596);
-            this.btnDSAImportPrivate.Name = "btnDSAImportPrivate";
-            this.btnDSAImportPrivate.Size = new System.Drawing.Size(200, 56);
-            this.btnDSAImportPrivate.TabIndex = 12;
-            this.btnDSAImportPrivate.Text = "Import Private";
-            this.btnDSAImportPrivate.UseVisualStyleBackColor = true;
-            this.btnDSAImportPrivate.Click += new System.EventHandler(this.btnDSAImportPrivate_Click);
-            // 
-            // btnDSAImportPublic
-            // 
-            this.btnDSAImportPublic.Location = new System.Drawing.Point(888, 596);
-            this.btnDSAImportPublic.Name = "btnDSAImportPublic";
-            this.btnDSAImportPublic.Size = new System.Drawing.Size(200, 56);
-            this.btnDSAImportPublic.TabIndex = 11;
-            this.btnDSAImportPublic.Text = "Import Public";
-            this.btnDSAImportPublic.UseVisualStyleBackColor = true;
-            this.btnDSAImportPublic.Click += new System.EventHandler(this.btnDSAImportPublic_Click);
-            // 
-            // btnGenDSAKeys
-            // 
-            this.btnGenDSAKeys.Location = new System.Drawing.Point(154, 596);
-            this.btnGenDSAKeys.Name = "btnGenDSAKeys";
-            this.btnGenDSAKeys.Size = new System.Drawing.Size(316, 56);
-            this.btnGenDSAKeys.TabIndex = 8;
-            this.btnGenDSAKeys.Text = "Generate Keys";
-            this.btnGenDSAKeys.UseVisualStyleBackColor = true;
-            this.btnGenDSAKeys.Click += new System.EventHandler(this.btnGenDSAKeys_Click);
-            // 
-            // btnExportDSAPublic
-            // 
-            this.btnExportDSAPublic.Location = new System.Drawing.Point(682, 596);
-            this.btnExportDSAPublic.Name = "btnExportDSAPublic";
-            this.btnExportDSAPublic.Size = new System.Drawing.Size(200, 56);
-            this.btnExportDSAPublic.TabIndex = 10;
-            this.btnExportDSAPublic.Text = "Export Public Key";
-            this.btnExportDSAPublic.UseVisualStyleBackColor = true;
-            this.btnExportDSAPublic.Click += new System.EventHandler(this.btnExportDSAPublic_Click);
-            // 
-            // btnExportDSA
-            // 
-            this.btnExportDSA.Location = new System.Drawing.Point(476, 596);
-            this.btnExportDSA.Name = "btnExportDSA";
-            this.btnExportDSA.Size = new System.Drawing.Size(200, 56);
-            this.btnExportDSA.TabIndex = 9;
-            this.btnExportDSA.Text = "Export Private Key";
-            this.btnExportDSA.UseVisualStyleBackColor = true;
-            this.btnExportDSA.Click += new System.EventHandler(this.btnExportDSA_Click);
-            // 
-            // txtDSA_X
-            // 
-            this.txtDSA_X.Location = new System.Drawing.Point(154, 525);
-            this.txtDSA_X.Multiline = true;
-            this.txtDSA_X.Name = "txtDSA_X";
-            this.txtDSA_X.Size = new System.Drawing.Size(1140, 65);
-            this.txtDSA_X.TabIndex = 7;
-            // 
-            // txtDSA_Y
-            // 
-            this.txtDSA_Y.Location = new System.Drawing.Point(154, 454);
-            this.txtDSA_Y.Multiline = true;
-            this.txtDSA_Y.Name = "txtDSA_Y";
-            this.txtDSA_Y.Size = new System.Drawing.Size(1140, 65);
-            this.txtDSA_Y.TabIndex = 6;
-            // 
-            // txtDSA_G
-            // 
-            this.txtDSA_G.Location = new System.Drawing.Point(154, 383);
-            this.txtDSA_G.Multiline = true;
-            this.txtDSA_G.Name = "txtDSA_G";
-            this.txtDSA_G.Size = new System.Drawing.Size(1140, 65);
-            this.txtDSA_G.TabIndex = 5;
-            // 
-            // txtDSA_Q
-            // 
-            this.txtDSA_Q.Location = new System.Drawing.Point(154, 312);
-            this.txtDSA_Q.Multiline = true;
-            this.txtDSA_Q.Name = "txtDSA_Q";
-            this.txtDSA_Q.Size = new System.Drawing.Size(1140, 65);
-            this.txtDSA_Q.TabIndex = 4;
-            // 
-            // txtDSA_P
-            // 
-            this.txtDSA_P.Location = new System.Drawing.Point(154, 241);
-            this.txtDSA_P.Multiline = true;
-            this.txtDSA_P.Name = "txtDSA_P";
-            this.txtDSA_P.Size = new System.Drawing.Size(1140, 65);
-            this.txtDSA_P.TabIndex = 3;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(31, 543);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(108, 19);
-            this.label23.TabIndex = 9;
-            this.label23.Text = "X (PrivateKey)";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(32, 474);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(103, 19);
-            this.label24.TabIndex = 10;
-            this.label24.Text = "Y (PublicKey)";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(32, 403);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(20, 19);
-            this.label25.TabIndex = 11;
-            this.label25.Text = "G";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(32, 326);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(67, 19);
-            this.label26.TabIndex = 12;
-            this.label26.Text = "Prime.Q";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(28, 51);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(39, 19);
-            this.label28.TabIndex = 13;
-            this.label28.Text = "PEM";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(31, 208);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(87, 19);
-            this.label33.TabIndex = 13;
-            this.label33.Text = "Key Length";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(29, 277);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(80, 19);
-            this.label29.TabIndex = 13;
-            this.label29.Text = "(Modulus)";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(32, 255);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(64, 19);
-            this.label27.TabIndex = 13;
-            this.label27.Text = "Prime.P";
-            // 
-            // txtDSAPEMPrivate
-            // 
-            this.txtDSAPEMPrivate.AllowDrop = true;
-            this.txtDSAPEMPrivate.Location = new System.Drawing.Point(712, 37);
-            this.txtDSAPEMPrivate.Multiline = true;
-            this.txtDSAPEMPrivate.Name = "txtDSAPEMPrivate";
-            this.txtDSAPEMPrivate.Size = new System.Drawing.Size(582, 195);
-            this.txtDSAPEMPrivate.TabIndex = 1;
-            this.txtDSAPEMPrivate.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtDSAPEM_DragDrop);
-            this.txtDSAPEMPrivate.DragOver += new System.Windows.Forms.DragEventHandler(this.txtDSAPEM_DragOver);
-            // 
-            // txtDSAPEMPublic
-            // 
-            this.txtDSAPEMPublic.AllowDrop = true;
-            this.txtDSAPEMPublic.Location = new System.Drawing.Point(154, 37);
-            this.txtDSAPEMPublic.Multiline = true;
-            this.txtDSAPEMPublic.Name = "txtDSAPEMPublic";
-            this.txtDSAPEMPublic.Size = new System.Drawing.Size(531, 159);
-            this.txtDSAPEMPublic.TabIndex = 0;
-            this.txtDSAPEMPublic.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtDSAPEM_DragDrop);
-            this.txtDSAPEMPublic.DragOver += new System.Windows.Forms.DragEventHandler(this.txtDSAPEM_DragOver);
-            // 
-            // tabCalculator
-            // 
-            this.tabCalculator.BackColor = System.Drawing.Color.LightGray;
-            this.tabCalculator.Controls.Add(this.chkPositives);
-            this.tabCalculator.Controls.Add(this.rb64b);
-            this.tabCalculator.Controls.Add(this.rb16);
-            this.tabCalculator.Controls.Add(this.rb2);
-            this.tabCalculator.Controls.Add(this.rb10);
-            this.tabCalculator.Controls.Add(this.label43);
-            this.tabCalculator.Controls.Add(this.label42);
-            this.tabCalculator.Controls.Add(this.label41);
-            this.tabCalculator.Controls.Add(this.cmbKeyLen);
-            this.tabCalculator.Controls.Add(this.label40);
-            this.tabCalculator.Controls.Add(this.cmbExponentMethod);
-            this.tabCalculator.Controls.Add(this.label39);
-            this.tabCalculator.Controls.Add(this.cmbMULMethod);
-            this.tabCalculator.Controls.Add(this.label36);
-            this.tabCalculator.Controls.Add(this.cmbAccelerator);
-            this.tabCalculator.Controls.Add(this.btnRTP);
-            this.tabCalculator.Controls.Add(this.btnFCD);
-            this.tabCalculator.Controls.Add(this.btnLCM);
-            this.tabCalculator.Controls.Add(this.btnPWM);
-            this.tabCalculator.Controls.Add(this.btnPOW);
-            this.tabCalculator.Controls.Add(this.btnMOD);
-            this.tabCalculator.Controls.Add(this.btnDIV);
-            this.tabCalculator.Controls.Add(this.btnMUL);
-            this.tabCalculator.Controls.Add(this.btnSUB);
-            this.tabCalculator.Controls.Add(this.btnClearCalc);
-            this.tabCalculator.Controls.Add(this.btnGenPrime);
-            this.tabCalculator.Controls.Add(this.btnXOR);
-            this.tabCalculator.Controls.Add(this.btnOR);
-            this.tabCalculator.Controls.Add(this.btnSHR);
-            this.tabCalculator.Controls.Add(this.btnSHL);
-            this.tabCalculator.Controls.Add(this.btnBezout);
-            this.tabCalculator.Controls.Add(this.button5);
-            this.tabCalculator.Controls.Add(this.button4);
-            this.tabCalculator.Controls.Add(this.button2);
-            this.tabCalculator.Controls.Add(this.button1);
-            this.tabCalculator.Controls.Add(this.btnSqrt);
-            this.tabCalculator.Controls.Add(this.btnFactorizeQ);
-            this.tabCalculator.Controls.Add(this.btnFactorizeP);
-            this.tabCalculator.Controls.Add(this.btnFactorDbQ);
-            this.tabCalculator.Controls.Add(this.btnFactorDbP);
-            this.tabCalculator.Controls.Add(this.btnReverseQ);
-            this.tabCalculator.Controls.Add(this.btnReverseP);
-            this.tabCalculator.Controls.Add(this.btnIsEven);
-            this.tabCalculator.Controls.Add(this.btnIsPrime);
-            this.tabCalculator.Controls.Add(this.btnADD);
-            this.tabCalculator.Controls.Add(this.label22);
-            this.tabCalculator.Controls.Add(this.label21);
-            this.tabCalculator.Controls.Add(this.label20);
-            this.tabCalculator.Controls.Add(this.label19);
-            this.tabCalculator.Controls.Add(this.txtResultR);
-            this.tabCalculator.Controls.Add(this.txtModulN);
-            this.tabCalculator.Controls.Add(this.txtPrimeQ);
-            this.tabCalculator.Controls.Add(this.txtPrimeP);
-            this.tabCalculator.Location = new System.Drawing.Point(4, 28);
-            this.tabCalculator.Name = "tabCalculator";
-            this.tabCalculator.Size = new System.Drawing.Size(1331, 663);
-            this.tabCalculator.TabIndex = 2;
-            this.tabCalculator.Text = "Calculator";
-            // 
-            // chkPositives
-            // 
-            this.chkPositives.AutoSize = true;
-            this.chkPositives.Checked = true;
-            this.chkPositives.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPositives.Location = new System.Drawing.Point(1163, 249);
-            this.chkPositives.Name = "chkPositives";
-            this.chkPositives.Size = new System.Drawing.Size(130, 23);
-            this.chkPositives.TabIndex = 10;
-            this.chkPositives.Text = "Postives Only";
-            this.chkPositives.UseVisualStyleBackColor = true;
-            // 
-            // rb64b
-            // 
-            this.rb64b.AutoSize = true;
-            this.rb64b.Location = new System.Drawing.Point(1073, 248);
-            this.rb64b.Name = "rb64b";
-            this.rb64b.Size = new System.Drawing.Size(84, 23);
-            this.rb64b.TabIndex = 9;
-            this.rb64b.TabStop = true;
-            this.rb64b.Text = "Base64";
-            this.rb64b.UseVisualStyleBackColor = true;
-            this.rb64b.CheckedChanged += new System.EventHandler(this.rbNumberBaseCheckedChanged);
-            // 
-            // rb16
-            // 
-            this.rb16.AutoSize = true;
-            this.rb16.Location = new System.Drawing.Point(1013, 248);
-            this.rb16.Name = "rb16";
-            this.rb16.Size = new System.Drawing.Size(52, 23);
-            this.rb16.TabIndex = 8;
-            this.rb16.TabStop = true;
-            this.rb16.Text = "16";
-            this.rb16.UseVisualStyleBackColor = true;
-            this.rb16.CheckedChanged += new System.EventHandler(this.rbNumberBaseCheckedChanged);
-            // 
-            // rb2
-            // 
-            this.rb2.AutoSize = true;
-            this.rb2.Location = new System.Drawing.Point(906, 248);
-            this.rb2.Name = "rb2";
-            this.rb2.Size = new System.Drawing.Size(43, 23);
-            this.rb2.TabIndex = 6;
-            this.rb2.TabStop = true;
-            this.rb2.Text = "2";
-            this.rb2.UseVisualStyleBackColor = true;
-            this.rb2.CheckedChanged += new System.EventHandler(this.rbNumberBaseCheckedChanged);
-            // 
-            // rb10
-            // 
-            this.rb10.AutoSize = true;
-            this.rb10.Location = new System.Drawing.Point(954, 248);
-            this.rb10.Name = "rb10";
-            this.rb10.Size = new System.Drawing.Size(52, 23);
-            this.rb10.TabIndex = 7;
-            this.rb10.TabStop = true;
-            this.rb10.Text = "10";
-            this.rb10.UseVisualStyleBackColor = true;
-            this.rb10.CheckedChanged += new System.EventHandler(this.rbNumberBaseCheckedChanged);
-            // 
-            // label43
-            // 
-            this.label43.BackColor = System.Drawing.SystemColors.Info;
-            this.label43.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label43.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label43.Location = new System.Drawing.Point(1163, 212);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(138, 33);
-            this.label43.TabIndex = 8;
-            this.label43.Text = "Key Length";
-            this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label42
-            // 
-            this.label42.BackColor = System.Drawing.SystemColors.Info;
-            this.label42.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label42.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(1163, 150);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(138, 33);
-            this.label42.TabIndex = 8;
-            this.label42.Text = "Key Length";
-            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label41
-            // 
-            this.label41.BackColor = System.Drawing.SystemColors.Info;
-            this.label41.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label41.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(906, 212);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(251, 33);
-            this.label41.TabIndex = 8;
-            this.label41.Text = "Number Base";
-            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cmbKeyLen
-            // 
-            this.cmbKeyLen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbKeyLen.FormattingEnabled = true;
-            this.cmbKeyLen.Items.AddRange(new object[] {
-            "512",
-            "1024",
-            "2048",
-            "4096"});
-            this.cmbKeyLen.Location = new System.Drawing.Point(1163, 182);
-            this.cmbKeyLen.Name = "cmbKeyLen";
-            this.cmbKeyLen.Size = new System.Drawing.Size(138, 27);
-            this.cmbKeyLen.TabIndex = 5;
-            // 
-            // label40
-            // 
-            this.label40.BackColor = System.Drawing.SystemColors.Info;
-            this.label40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label40.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.Location = new System.Drawing.Point(906, 150);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(251, 33);
-            this.label40.TabIndex = 8;
-            this.label40.Text = "Exponentiation Method";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cmbExponentMethod
-            // 
-            this.cmbExponentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbExponentMethod.FormattingEnabled = true;
-            this.cmbExponentMethod.Items.AddRange(new object[] {
-            "Regular",
-            "Squaring",
-            "Fast"});
-            this.cmbExponentMethod.Location = new System.Drawing.Point(906, 182);
-            this.cmbExponentMethod.Name = "cmbExponentMethod";
-            this.cmbExponentMethod.Size = new System.Drawing.Size(251, 27);
-            this.cmbExponentMethod.TabIndex = 4;
-            // 
-            // label39
-            // 
-            this.label39.BackColor = System.Drawing.SystemColors.Info;
-            this.label39.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label39.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.Location = new System.Drawing.Point(906, 88);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(395, 33);
-            this.label39.TabIndex = 8;
-            this.label39.Text = "Multiplaction Method";
-            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cmbMULMethod
-            // 
-            this.cmbMULMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMULMethod.FormattingEnabled = true;
-            this.cmbMULMethod.Items.AddRange(new object[] {
-            "Regular",
-            "Karatsuba"});
-            this.cmbMULMethod.Location = new System.Drawing.Point(906, 120);
-            this.cmbMULMethod.Name = "cmbMULMethod";
-            this.cmbMULMethod.Size = new System.Drawing.Size(395, 27);
-            this.cmbMULMethod.TabIndex = 3;
-            // 
-            // label36
-            // 
-            this.label36.BackColor = System.Drawing.SystemColors.Info;
-            this.label36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label36.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(906, 26);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(395, 33);
-            this.label36.TabIndex = 8;
-            this.label36.Text = "Accelerator";
-            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cmbAccelerator
-            // 
-            this.cmbAccelerator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbAccelerator.FormattingEnabled = true;
-            this.cmbAccelerator.Location = new System.Drawing.Point(906, 58);
-            this.cmbAccelerator.Name = "cmbAccelerator";
-            this.cmbAccelerator.Size = new System.Drawing.Size(395, 27);
-            this.cmbAccelerator.TabIndex = 2;
-            this.cmbAccelerator.SelectedIndexChanged += new System.EventHandler(this.cmbAccelerator_SelectedIndexChanged);
-            // 
-            // btnRTP
-            // 
-            this.btnRTP.Location = new System.Drawing.Point(1191, 531);
-            this.btnRTP.Name = "btnRTP";
-            this.btnRTP.Size = new System.Drawing.Size(110, 40);
-            this.btnRTP.TabIndex = 22;
-            this.btnRTP.Text = "R -> P";
-            this.btnRTP.UseVisualStyleBackColor = true;
-            this.btnRTP.Click += new System.EventHandler(this.btnRTP_Click);
-            // 
-            // btnFCD
-            // 
-            this.btnFCD.Location = new System.Drawing.Point(1075, 531);
-            this.btnFCD.Name = "btnFCD";
-            this.btnFCD.Size = new System.Drawing.Size(110, 40);
-            this.btnFCD.TabIndex = 21;
-            this.btnFCD.Text = "GCD (P,Q)";
-            this.btnFCD.UseVisualStyleBackColor = true;
-            this.btnFCD.Click += new System.EventHandler(this.btnFCD_Click);
-            // 
-            // btnLCM
-            // 
-            this.btnLCM.Location = new System.Drawing.Point(959, 531);
-            this.btnLCM.Name = "btnLCM";
-            this.btnLCM.Size = new System.Drawing.Size(110, 40);
-            this.btnLCM.TabIndex = 20;
-            this.btnLCM.Text = "LCM (P,Q)";
-            this.btnLCM.UseVisualStyleBackColor = true;
-            this.btnLCM.Click += new System.EventHandler(this.btnLCM_Click);
-            // 
-            // btnPWM
-            // 
-            this.btnPWM.Location = new System.Drawing.Point(843, 531);
-            this.btnPWM.Name = "btnPWM";
-            this.btnPWM.Size = new System.Drawing.Size(110, 40);
-            this.btnPWM.TabIndex = 19;
-            this.btnPWM.Text = "P ^ Q % N";
-            this.btnPWM.UseVisualStyleBackColor = true;
-            this.btnPWM.Click += new System.EventHandler(this.btnPWM_Click);
-            // 
-            // btnPOW
-            // 
-            this.btnPOW.Location = new System.Drawing.Point(727, 531);
-            this.btnPOW.Name = "btnPOW";
-            this.btnPOW.Size = new System.Drawing.Size(110, 40);
-            this.btnPOW.TabIndex = 18;
-            this.btnPOW.Text = "P ^ Q";
-            this.btnPOW.UseVisualStyleBackColor = true;
-            this.btnPOW.Click += new System.EventHandler(this.btnPOW_Click);
-            // 
-            // btnMOD
-            // 
-            this.btnMOD.Location = new System.Drawing.Point(611, 531);
-            this.btnMOD.Name = "btnMOD";
-            this.btnMOD.Size = new System.Drawing.Size(110, 40);
-            this.btnMOD.TabIndex = 17;
-            this.btnMOD.Text = "P % Q";
-            this.btnMOD.UseVisualStyleBackColor = true;
-            this.btnMOD.Click += new System.EventHandler(this.btnMOD_Click);
-            // 
-            // btnDIV
-            // 
-            this.btnDIV.Location = new System.Drawing.Point(495, 531);
-            this.btnDIV.Name = "btnDIV";
-            this.btnDIV.Size = new System.Drawing.Size(110, 40);
-            this.btnDIV.TabIndex = 16;
-            this.btnDIV.Text = "P / Q";
-            this.btnDIV.UseVisualStyleBackColor = true;
-            this.btnDIV.Click += new System.EventHandler(this.btnDIV_Click);
-            // 
-            // btnMUL
-            // 
-            this.btnMUL.Location = new System.Drawing.Point(379, 531);
-            this.btnMUL.Name = "btnMUL";
-            this.btnMUL.Size = new System.Drawing.Size(110, 40);
-            this.btnMUL.TabIndex = 15;
-            this.btnMUL.Text = "P * Q";
-            this.btnMUL.UseVisualStyleBackColor = true;
-            this.btnMUL.Click += new System.EventHandler(this.btnMUL_Click);
-            // 
-            // btnSUB
-            // 
-            this.btnSUB.Location = new System.Drawing.Point(263, 531);
-            this.btnSUB.Name = "btnSUB";
-            this.btnSUB.Size = new System.Drawing.Size(110, 40);
-            this.btnSUB.TabIndex = 14;
-            this.btnSUB.Text = "P - Q";
-            this.btnSUB.UseVisualStyleBackColor = true;
-            this.btnSUB.Click += new System.EventHandler(this.btnSUB_Click);
-            // 
-            // btnClearCalc
-            // 
-            this.btnClearCalc.Location = new System.Drawing.Point(1191, 617);
-            this.btnClearCalc.Name = "btnClearCalc";
-            this.btnClearCalc.Size = new System.Drawing.Size(110, 40);
-            this.btnClearCalc.TabIndex = 42;
-            this.btnClearCalc.Text = "Clear";
-            this.btnClearCalc.UseVisualStyleBackColor = true;
-            this.btnClearCalc.Click += new System.EventHandler(this.btnClearCalc_Click);
-            // 
-            // btnGenPrime
-            // 
-            this.btnGenPrime.Location = new System.Drawing.Point(611, 574);
-            this.btnGenPrime.Name = "btnGenPrime";
-            this.btnGenPrime.Size = new System.Drawing.Size(110, 40);
-            this.btnGenPrime.TabIndex = 27;
-            this.btnGenPrime.Text = "Gen Primes";
-            this.btnGenPrime.UseVisualStyleBackColor = true;
-            this.btnGenPrime.Click += new System.EventHandler(this.btnGenPrime_Click);
-            // 
-            // btnXOR
-            // 
-            this.btnXOR.Location = new System.Drawing.Point(1191, 574);
-            this.btnXOR.Name = "btnXOR";
-            this.btnXOR.Size = new System.Drawing.Size(110, 40);
-            this.btnXOR.TabIndex = 32;
-            this.btnXOR.Text = "P  xor Q";
-            this.btnXOR.UseVisualStyleBackColor = true;
-            this.btnXOR.Click += new System.EventHandler(this.btnXOR_Click);
-            // 
-            // btnOR
-            // 
-            this.btnOR.Location = new System.Drawing.Point(1075, 574);
-            this.btnOR.Name = "btnOR";
-            this.btnOR.Size = new System.Drawing.Size(110, 40);
-            this.btnOR.TabIndex = 31;
-            this.btnOR.Text = "P  or Q";
-            this.btnOR.UseVisualStyleBackColor = true;
-            this.btnOR.Click += new System.EventHandler(this.btnOR_Click);
-            // 
-            // btnSHR
-            // 
-            this.btnSHR.Location = new System.Drawing.Point(959, 574);
-            this.btnSHR.Name = "btnSHR";
-            this.btnSHR.Size = new System.Drawing.Size(110, 40);
-            this.btnSHR.TabIndex = 30;
-            this.btnSHR.Text = "P  >>";
-            this.btnSHR.UseVisualStyleBackColor = true;
-            this.btnSHR.Click += new System.EventHandler(this.btnSHR_Click);
-            // 
-            // btnSHL
-            // 
-            this.btnSHL.Location = new System.Drawing.Point(843, 574);
-            this.btnSHL.Name = "btnSHL";
-            this.btnSHL.Size = new System.Drawing.Size(110, 40);
-            this.btnSHL.TabIndex = 29;
-            this.btnSHL.Text = "<< P";
-            this.btnSHL.UseVisualStyleBackColor = true;
-            this.btnSHL.Click += new System.EventHandler(this.btnSHL_Click);
-            // 
-            // btnBezout
-            // 
-            this.btnBezout.Location = new System.Drawing.Point(727, 574);
-            this.btnBezout.Name = "btnBezout";
-            this.btnBezout.Size = new System.Drawing.Size(110, 40);
-            this.btnBezout.TabIndex = 28;
-            this.btnBezout.Text = "Bezout P,Q";
-            this.btnBezout.UseVisualStyleBackColor = true;
-            this.btnBezout.Click += new System.EventHandler(this.btnBezout_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(1075, 617);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(110, 40);
-            this.button5.TabIndex = 41;
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(959, 617);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(110, 40);
-            this.button4.TabIndex = 40;
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(843, 617);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(110, 40);
-            this.button2.TabIndex = 39;
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(727, 617);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(110, 40);
-            this.button1.TabIndex = 38;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // btnSqrt
-            // 
-            this.btnSqrt.Location = new System.Drawing.Point(611, 617);
-            this.btnSqrt.Name = "btnSqrt";
-            this.btnSqrt.Size = new System.Drawing.Size(110, 40);
-            this.btnSqrt.TabIndex = 37;
-            this.btnSqrt.Text = "SQRT P";
-            this.btnSqrt.UseVisualStyleBackColor = true;
-            this.btnSqrt.Click += new System.EventHandler(this.btnSqrt_Click);
-            // 
-            // btnFactorizeQ
-            // 
-            this.btnFactorizeQ.Location = new System.Drawing.Point(495, 574);
-            this.btnFactorizeQ.Name = "btnFactorizeQ";
-            this.btnFactorizeQ.Size = new System.Drawing.Size(110, 40);
-            this.btnFactorizeQ.TabIndex = 26;
-            this.btnFactorizeQ.Text = "Factorize Q";
-            this.btnFactorizeQ.UseVisualStyleBackColor = true;
-            this.btnFactorizeQ.Click += new System.EventHandler(this.btnFactorizeQ_Click);
-            // 
-            // btnFactorizeP
-            // 
-            this.btnFactorizeP.Location = new System.Drawing.Point(379, 574);
-            this.btnFactorizeP.Name = "btnFactorizeP";
-            this.btnFactorizeP.Size = new System.Drawing.Size(110, 40);
-            this.btnFactorizeP.TabIndex = 25;
-            this.btnFactorizeP.Text = "Factorize P";
-            this.btnFactorizeP.UseVisualStyleBackColor = true;
-            this.btnFactorizeP.Click += new System.EventHandler(this.btnFactorizeP_Click);
-            // 
-            // btnFactorDbQ
-            // 
-            this.btnFactorDbQ.Location = new System.Drawing.Point(495, 617);
-            this.btnFactorDbQ.Name = "btnFactorDbQ";
-            this.btnFactorDbQ.Size = new System.Drawing.Size(110, 40);
-            this.btnFactorDbQ.TabIndex = 36;
-            this.btnFactorDbQ.Text = "Factordb Q";
-            this.btnFactorDbQ.UseVisualStyleBackColor = true;
-            this.btnFactorDbQ.Click += new System.EventHandler(this.btnFactorDbQ_Click);
-            // 
-            // btnFactorDbP
-            // 
-            this.btnFactorDbP.Location = new System.Drawing.Point(379, 617);
-            this.btnFactorDbP.Name = "btnFactorDbP";
-            this.btnFactorDbP.Size = new System.Drawing.Size(110, 40);
-            this.btnFactorDbP.TabIndex = 35;
-            this.btnFactorDbP.Text = "Factordb P";
-            this.btnFactorDbP.UseVisualStyleBackColor = true;
-            this.btnFactorDbP.Click += new System.EventHandler(this.btnFactorDbP_Click);
-            // 
-            // btnReverseQ
-            // 
-            this.btnReverseQ.Location = new System.Drawing.Point(263, 617);
-            this.btnReverseQ.Name = "btnReverseQ";
-            this.btnReverseQ.Size = new System.Drawing.Size(110, 40);
-            this.btnReverseQ.TabIndex = 34;
-            this.btnReverseQ.Text = "Reverse Q";
-            this.btnReverseQ.UseVisualStyleBackColor = true;
-            this.btnReverseQ.Click += new System.EventHandler(this.btnReverseQ_Click);
-            // 
-            // btnReverseP
-            // 
-            this.btnReverseP.Location = new System.Drawing.Point(143, 617);
-            this.btnReverseP.Name = "btnReverseP";
-            this.btnReverseP.Size = new System.Drawing.Size(110, 40);
-            this.btnReverseP.TabIndex = 33;
-            this.btnReverseP.Text = "Reverse P";
-            this.btnReverseP.UseVisualStyleBackColor = true;
-            this.btnReverseP.Click += new System.EventHandler(this.btnReverseP_Click);
-            // 
-            // btnIsEven
-            // 
-            this.btnIsEven.Location = new System.Drawing.Point(263, 574);
-            this.btnIsEven.Name = "btnIsEven";
-            this.btnIsEven.Size = new System.Drawing.Size(110, 40);
-            this.btnIsEven.TabIndex = 24;
-            this.btnIsEven.Text = "IsEven";
-            this.btnIsEven.UseVisualStyleBackColor = true;
-            this.btnIsEven.Click += new System.EventHandler(this.btnIsEven_Click);
-            // 
-            // btnIsPrime
-            // 
-            this.btnIsPrime.Location = new System.Drawing.Point(143, 574);
-            this.btnIsPrime.Name = "btnIsPrime";
-            this.btnIsPrime.Size = new System.Drawing.Size(110, 40);
-            this.btnIsPrime.TabIndex = 23;
-            this.btnIsPrime.Text = "IsPrime";
-            this.btnIsPrime.UseVisualStyleBackColor = true;
-            this.btnIsPrime.Click += new System.EventHandler(this.btnIsPrime_Click);
-            // 
-            // btnADD
-            // 
-            this.btnADD.Location = new System.Drawing.Point(143, 531);
-            this.btnADD.Name = "btnADD";
-            this.btnADD.Size = new System.Drawing.Size(110, 40);
-            this.btnADD.TabIndex = 13;
-            this.btnADD.Text = "P + Q";
-            this.btnADD.UseVisualStyleBackColor = true;
-            this.btnADD.Click += new System.EventHandler(this.btnADD_Click);
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(35, 407);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(73, 19);
-            this.label22.TabIndex = 1;
-            this.label22.Text = "Result R:";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(35, 280);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(74, 19);
-            this.label21.TabIndex = 1;
-            this.label21.Text = "Modul N:";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(35, 153);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(73, 19);
-            this.label20.TabIndex = 1;
-            this.label20.Text = "Prime Q:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(35, 26);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(70, 19);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "Prime P:";
-            // 
-            // txtResultR
-            // 
-            this.txtResultR.BackColor = System.Drawing.SystemColors.MenuText;
-            this.txtResultR.ForeColor = System.Drawing.SystemColors.Window;
-            this.txtResultR.Location = new System.Drawing.Point(143, 404);
-            this.txtResultR.Multiline = true;
-            this.txtResultR.Name = "txtResultR";
-            this.txtResultR.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResultR.Size = new System.Drawing.Size(1158, 121);
-            this.txtResultR.TabIndex = 12;
-            this.txtResultR.DoubleClick += new System.EventHandler(this.txtResultR_DoubleClick);
-            // 
-            // txtModulN
-            // 
-            this.txtModulN.AllowDrop = true;
-            this.txtModulN.BackColor = System.Drawing.SystemColors.MenuText;
-            this.txtModulN.ForeColor = System.Drawing.SystemColors.Window;
-            this.txtModulN.Location = new System.Drawing.Point(143, 277);
-            this.txtModulN.Multiline = true;
-            this.txtModulN.Name = "txtModulN";
-            this.txtModulN.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtModulN.Size = new System.Drawing.Size(1158, 121);
-            this.txtModulN.TabIndex = 11;
-            this.txtModulN.TextChanged += new System.EventHandler(this.txtModulN_TextChanged);
-            this.txtModulN.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtModulN_DragDrop);
-            this.txtModulN.DragOver += new System.Windows.Forms.DragEventHandler(this.txtModulN_DragOver);
-            this.txtModulN.DoubleClick += new System.EventHandler(this.txtModulN_DoubleClick);
-            // 
-            // txtPrimeQ
-            // 
-            this.txtPrimeQ.AllowDrop = true;
-            this.txtPrimeQ.BackColor = System.Drawing.SystemColors.MenuText;
-            this.txtPrimeQ.ForeColor = System.Drawing.SystemColors.Window;
-            this.txtPrimeQ.Location = new System.Drawing.Point(143, 150);
-            this.txtPrimeQ.Multiline = true;
-            this.txtPrimeQ.Name = "txtPrimeQ";
-            this.txtPrimeQ.Size = new System.Drawing.Size(757, 121);
-            this.txtPrimeQ.TabIndex = 1;
-            this.txtPrimeQ.TextChanged += new System.EventHandler(this.txtPrimeQ_TextChanged);
-            this.txtPrimeQ.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtPrimeQ_DragDrop);
-            this.txtPrimeQ.DragOver += new System.Windows.Forms.DragEventHandler(this.txtPrimeQ_DragOver);
-            this.txtPrimeQ.DoubleClick += new System.EventHandler(this.txtPrimeQ_DoubleClick);
-            // 
-            // txtPrimeP
-            // 
-            this.txtPrimeP.AllowDrop = true;
-            this.txtPrimeP.BackColor = System.Drawing.SystemColors.MenuText;
-            this.txtPrimeP.ForeColor = System.Drawing.SystemColors.Window;
-            this.txtPrimeP.Location = new System.Drawing.Point(143, 23);
-            this.txtPrimeP.Multiline = true;
-            this.txtPrimeP.Name = "txtPrimeP";
-            this.txtPrimeP.Size = new System.Drawing.Size(757, 121);
-            this.txtPrimeP.TabIndex = 0;
-            this.txtPrimeP.TextChanged += new System.EventHandler(this.txtPrimeP_TextChanged);
-            this.txtPrimeP.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtPrimeP_DragDrop);
-            this.txtPrimeP.DragOver += new System.Windows.Forms.DragEventHandler(this.txtPrimeP_DragOver);
-            this.txtPrimeP.DoubleClick += new System.EventHandler(this.txtPrimeP_DoubleClick);
-            // 
-            // tabEncoding
-            // 
-            this.tabEncoding.BackColor = System.Drawing.Color.LightGray;
-            this.tabEncoding.Controls.Add(this.grpOptions);
-            this.tabEncoding.Controls.Add(this.panel7);
-            this.tabEncoding.Controls.Add(this.panel5);
-            this.tabEncoding.Controls.Add(this.progFiles);
-            this.tabEncoding.Controls.Add(this.btnToHex);
-            this.tabEncoding.Controls.Add(this.btnRun);
-            this.tabEncoding.Controls.Add(this.btnClearFiles);
-            this.tabEncoding.Controls.Add(this.btnOpenFile);
-            this.tabEncoding.Controls.Add(this.grpSource);
-            this.tabEncoding.Controls.Add(this.grpEncodings);
-            this.tabEncoding.Location = new System.Drawing.Point(4, 28);
-            this.tabEncoding.Name = "tabEncoding";
-            this.tabEncoding.Size = new System.Drawing.Size(1331, 663);
-            this.tabEncoding.TabIndex = 4;
-            this.tabEncoding.Text = "Encoding";
-            this.tabEncoding.Enter += new System.EventHandler(this.tabEncoding_Enter);
-            this.tabEncoding.Leave += new System.EventHandler(this.tabEncoding_Leave);
-            // 
-            // grpOptions
-            // 
-            this.grpOptions.BackColor = System.Drawing.Color.LightGray;
-            this.grpOptions.Controls.Add(this.chkRTL);
-            this.grpOptions.Controls.Add(this.chkOutText);
-            this.grpOptions.Controls.Add(this.chkALLEncodings);
-            this.grpOptions.Controls.Add(this.chkJommalWord);
-            this.grpOptions.Controls.Add(this.chkSendToBuffer);
-            this.grpOptions.Controls.Add(this.chkDiacritics);
-            this.grpOptions.Controls.Add(this.chkzStrings);
-            this.grpOptions.Controls.Add(this.chkDiscardChars);
-            this.grpOptions.Controls.Add(this.chkHexText);
-            this.grpOptions.Controls.Add(this.chkUnicodeAsDecimal);
-            this.grpOptions.Controls.Add(this.chkMeta);
-            this.grpOptions.Location = new System.Drawing.Point(40, 312);
-            this.grpOptions.Margin = new System.Windows.Forms.Padding(4);
-            this.grpOptions.Name = "grpOptions";
-            this.grpOptions.Padding = new System.Windows.Forms.Padding(4);
-            this.grpOptions.Size = new System.Drawing.Size(407, 213);
-            this.grpOptions.TabIndex = 7;
-            this.grpOptions.TabStop = false;
-            this.grpOptions.Text = "Special Options";
-            // 
-            // chkRTL
-            // 
-            this.chkRTL.AutoSize = true;
-            this.chkRTL.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chkRTL.Location = new System.Drawing.Point(211, 28);
-            this.chkRTL.Margin = new System.Windows.Forms.Padding(4);
-            this.chkRTL.Name = "chkRTL";
-            this.chkRTL.Size = new System.Drawing.Size(63, 23);
-            this.chkRTL.TabIndex = 1;
-            this.chkRTL.Text = "RTL";
-            this.chkRTL.UseVisualStyleBackColor = true;
-            this.chkRTL.CheckedChanged += new System.EventHandler(this.chkRTL_CheckedChanged);
-            // 
-            // chkOutText
-            // 
-            this.chkOutText.AutoSize = true;
-            this.chkOutText.Location = new System.Drawing.Point(25, 87);
-            this.chkOutText.Margin = new System.Windows.Forms.Padding(4);
-            this.chkOutText.Name = "chkOutText";
-            this.chkOutText.Size = new System.Drawing.Size(165, 23);
-            this.chkOutText.TabIndex = 4;
-            this.chkOutText.Text = "Output to Window";
-            this.chkOutText.UseVisualStyleBackColor = true;
-            // 
-            // chkALLEncodings
-            // 
-            this.chkALLEncodings.AutoSize = true;
-            this.chkALLEncodings.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chkALLEncodings.Location = new System.Drawing.Point(211, 149);
-            this.chkALLEncodings.Margin = new System.Windows.Forms.Padding(4);
-            this.chkALLEncodings.Name = "chkALLEncodings";
-            this.chkALLEncodings.Size = new System.Drawing.Size(168, 23);
-            this.chkALLEncodings.TabIndex = 9;
-            this.chkALLEncodings.Text = "List ALL Encodings";
-            this.chkALLEncodings.UseVisualStyleBackColor = true;
-            this.chkALLEncodings.CheckedChanged += new System.EventHandler(this.chkALLEncodings_CheckedChanged);
-            // 
-            // chkJommalWord
-            // 
-            this.chkJommalWord.AutoSize = true;
-            this.chkJommalWord.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chkJommalWord.Location = new System.Drawing.Point(25, 149);
-            this.chkJommalWord.Margin = new System.Windows.Forms.Padding(4);
-            this.chkJommalWord.Name = "chkJommalWord";
-            this.chkJommalWord.Size = new System.Drawing.Size(143, 23);
-            this.chkJommalWord.TabIndex = 8;
-            this.chkJommalWord.Text = "Jommal WORD";
-            this.chkJommalWord.UseVisualStyleBackColor = true;
-            this.chkJommalWord.CheckedChanged += new System.EventHandler(this.chkJommalWORD_CheckedChanged);
-            // 
-            // chkSendToBuffer
-            // 
-            this.chkSendToBuffer.AutoSize = true;
-            this.chkSendToBuffer.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chkSendToBuffer.Location = new System.Drawing.Point(25, 118);
-            this.chkSendToBuffer.Margin = new System.Windows.Forms.Padding(4);
-            this.chkSendToBuffer.Name = "chkSendToBuffer";
-            this.chkSendToBuffer.Size = new System.Drawing.Size(141, 23);
-            this.chkSendToBuffer.TabIndex = 6;
-            this.chkSendToBuffer.Text = "Send To Buffer";
-            this.chkSendToBuffer.UseVisualStyleBackColor = true;
-            this.chkSendToBuffer.CheckedChanged += new System.EventHandler(this.chkSendToBuffer_CheckedChanged);
-            // 
-            // chkDiacritics
-            // 
-            this.chkDiacritics.AutoSize = true;
-            this.chkDiacritics.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chkDiacritics.Location = new System.Drawing.Point(211, 118);
-            this.chkDiacritics.Margin = new System.Windows.Forms.Padding(4);
-            this.chkDiacritics.Name = "chkDiacritics";
-            this.chkDiacritics.Size = new System.Drawing.Size(155, 23);
-            this.chkDiacritics.TabIndex = 7;
-            this.chkDiacritics.Text = "Discard Diacritics";
-            this.chkDiacritics.UseVisualStyleBackColor = true;
-            // 
-            // chkzStrings
-            // 
-            this.chkzStrings.AutoSize = true;
-            this.chkzStrings.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chkzStrings.Location = new System.Drawing.Point(211, 87);
-            this.chkzStrings.Margin = new System.Windows.Forms.Padding(4);
-            this.chkzStrings.Name = "chkzStrings";
-            this.chkzStrings.Size = new System.Drawing.Size(91, 23);
-            this.chkzStrings.TabIndex = 5;
-            this.chkzStrings.Text = "zStrings";
-            this.chkzStrings.UseVisualStyleBackColor = true;
-            // 
-            // chkDiscardChars
-            // 
-            this.chkDiscardChars.AutoSize = true;
-            this.chkDiscardChars.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chkDiscardChars.Location = new System.Drawing.Point(211, 59);
-            this.chkDiscardChars.Margin = new System.Windows.Forms.Padding(4);
-            this.chkDiscardChars.Name = "chkDiscardChars";
-            this.chkDiscardChars.Size = new System.Drawing.Size(173, 23);
-            this.chkDiscardChars.TabIndex = 3;
-            this.chkDiscardChars.Text = "Discard Extra Chars";
-            this.chkDiscardChars.UseVisualStyleBackColor = true;
-            // 
-            // chkHexText
-            // 
-            this.chkHexText.AutoSize = true;
-            this.chkHexText.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chkHexText.Location = new System.Drawing.Point(25, 56);
-            this.chkHexText.Margin = new System.Windows.Forms.Padding(4);
-            this.chkHexText.Name = "chkHexText";
-            this.chkHexText.Size = new System.Drawing.Size(154, 23);
-            this.chkHexText.TabIndex = 2;
-            this.chkHexText.Text = "Output HEX Text";
-            this.chkHexText.UseVisualStyleBackColor = true;
-            this.chkHexText.CheckedChanged += new System.EventHandler(this.chkHexText_CheckedChanged);
-            // 
-            // chkUnicodeAsDecimal
-            // 
-            this.chkUnicodeAsDecimal.AutoSize = true;
-            this.chkUnicodeAsDecimal.Location = new System.Drawing.Point(25, 180);
-            this.chkUnicodeAsDecimal.Margin = new System.Windows.Forms.Padding(4);
-            this.chkUnicodeAsDecimal.Name = "chkUnicodeAsDecimal";
-            this.chkUnicodeAsDecimal.Size = new System.Drawing.Size(327, 23);
-            this.chkUnicodeAsDecimal.TabIndex = 10;
-            this.chkUnicodeAsDecimal.Text = "Source Unicode Decimals (e.g. &&#1075;)";
-            this.chkUnicodeAsDecimal.UseVisualStyleBackColor = true;
-            // 
-            // chkMeta
-            // 
-            this.chkMeta.AutoSize = true;
-            this.chkMeta.Cursor = System.Windows.Forms.Cursors.Default;
-            this.chkMeta.Location = new System.Drawing.Point(25, 28);
-            this.chkMeta.Margin = new System.Windows.Forms.Padding(4);
-            this.chkMeta.Name = "chkMeta";
-            this.chkMeta.Size = new System.Drawing.Size(152, 23);
-            this.chkMeta.TabIndex = 0;
-            this.chkMeta.Text = "Output Metadata";
-            this.chkMeta.UseVisualStyleBackColor = true;
-            // 
-            // panel7
-            // 
-            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel7.Controls.Add(this.btnSCrypto);
-            this.panel7.Controls.Add(this.btnSImage);
-            this.panel7.Controls.Add(this.btnSCalc);
-            this.panel7.Controls.Add(this.btnColor);
-            this.panel7.Controls.Add(this.btnSpectrum);
-            this.panel7.Controls.Add(this.btnSHex);
-            this.panel7.Location = new System.Drawing.Point(477, 608);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(815, 44);
-            this.panel7.TabIndex = 11;
-            // 
-            // btnSCrypto
-            // 
-            this.btnSCrypto.Location = new System.Drawing.Point(190, 4);
-            this.btnSCrypto.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSCrypto.Name = "btnSCrypto";
-            this.btnSCrypto.Size = new System.Drawing.Size(85, 35);
-            this.btnSCrypto.TabIndex = 5;
-            this.btnSCrypto.Text = ">Crypto";
-            this.btnSCrypto.UseVisualStyleBackColor = true;
-            this.btnSCrypto.Click += new System.EventHandler(this.btnSCrypto_Click);
-            // 
-            // btnSImage
-            // 
-            this.btnSImage.Location = new System.Drawing.Point(4, 3);
-            this.btnSImage.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSImage.Name = "btnSImage";
-            this.btnSImage.Size = new System.Drawing.Size(85, 35);
-            this.btnSImage.TabIndex = 4;
-            this.btnSImage.Text = ">X-Ray";
-            this.btnSImage.UseVisualStyleBackColor = true;
-            this.btnSImage.Click += new System.EventHandler(this.btnSImage_Click);
-            // 
-            // btnSCalc
-            // 
-            this.btnSCalc.Location = new System.Drawing.Point(97, 4);
-            this.btnSCalc.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSCalc.Name = "btnSCalc";
-            this.btnSCalc.Size = new System.Drawing.Size(85, 35);
-            this.btnSCalc.TabIndex = 4;
-            this.btnSCalc.Text = ">Calc";
-            this.btnSCalc.UseVisualStyleBackColor = true;
-            this.btnSCalc.Click += new System.EventHandler(this.btnSCalc_Click);
-            // 
-            // btnColor
-            // 
-            this.btnColor.Location = new System.Drawing.Point(466, 4);
-            this.btnColor.Margin = new System.Windows.Forms.Padding(4);
-            this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(85, 35);
-            this.btnColor.TabIndex = 6;
-            this.btnColor.Text = ">Color";
-            this.btnColor.UseVisualStyleBackColor = true;
-            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
-            // 
-            // btnSpectrum
-            // 
-            this.btnSpectrum.Location = new System.Drawing.Point(373, 4);
-            this.btnSpectrum.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSpectrum.Name = "btnSpectrum";
-            this.btnSpectrum.Size = new System.Drawing.Size(85, 35);
-            this.btnSpectrum.TabIndex = 6;
-            this.btnSpectrum.Text = ">Spct";
-            this.btnSpectrum.UseVisualStyleBackColor = true;
-            this.btnSpectrum.Click += new System.EventHandler(this.btnSpectrum_Click);
-            // 
-            // btnSHex
-            // 
-            this.btnSHex.Location = new System.Drawing.Point(280, 4);
-            this.btnSHex.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSHex.Name = "btnSHex";
-            this.btnSHex.Size = new System.Drawing.Size(85, 35);
-            this.btnSHex.TabIndex = 6;
-            this.btnSHex.Text = ">Hex";
-            this.btnSHex.UseVisualStyleBackColor = true;
-            this.btnSHex.Click += new System.EventHandler(this.btnSHex_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.LightGray;
-            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel5.Controls.Add(this.rbFiles);
-            this.panel5.Controls.Add(this.rbText);
-            this.panel5.Location = new System.Drawing.Point(40, 530);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(407, 45);
-            this.panel5.TabIndex = 10;
-            // 
-            // rbFiles
-            // 
-            this.rbFiles.AutoSize = true;
-            this.rbFiles.Checked = true;
-            this.rbFiles.Location = new System.Drawing.Point(25, 10);
-            this.rbFiles.Name = "rbFiles";
-            this.rbFiles.Size = new System.Drawing.Size(162, 23);
-            this.rbFiles.TabIndex = 0;
-            this.rbFiles.TabStop = true;
-            this.rbFiles.Text = "Encode Files (List)";
-            this.rbFiles.UseVisualStyleBackColor = true;
-            // 
-            // rbText
-            // 
-            this.rbText.AutoSize = true;
-            this.rbText.Location = new System.Drawing.Point(210, 10);
-            this.rbText.Name = "rbText";
-            this.rbText.Size = new System.Drawing.Size(147, 23);
-            this.rbText.TabIndex = 1;
-            this.rbText.Text = "Encode TextBox";
-            this.rbText.UseVisualStyleBackColor = true;
-            // 
-            // progFiles
-            // 
-            this.progFiles.Location = new System.Drawing.Point(40, 580);
-            this.progFiles.Margin = new System.Windows.Forms.Padding(4);
-            this.progFiles.Name = "progFiles";
-            this.progFiles.Size = new System.Drawing.Size(407, 24);
-            this.progFiles.TabIndex = 4;
-            // 
-            // btnToHex
-            // 
-            this.btnToHex.Location = new System.Drawing.Point(244, 607);
-            this.btnToHex.Margin = new System.Windows.Forms.Padding(4);
-            this.btnToHex.Name = "btnToHex";
-            this.btnToHex.Size = new System.Drawing.Size(100, 45);
-            this.btnToHex.TabIndex = 2;
-            this.btnToHex.Text = "To Hex";
-            this.btnToHex.UseVisualStyleBackColor = true;
-            this.btnToHex.Click += new System.EventHandler(this.btnToHex_Click);
-            // 
-            // btnRun
-            // 
-            this.btnRun.Enabled = false;
-            this.btnRun.Location = new System.Drawing.Point(347, 607);
-            this.btnRun.Margin = new System.Windows.Forms.Padding(4);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(100, 45);
-            this.btnRun.TabIndex = 3;
-            this.btnRun.Text = "Encode";
-            this.btnRun.UseVisualStyleBackColor = true;
-            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
-            // 
-            // btnClearFiles
-            // 
-            this.btnClearFiles.Location = new System.Drawing.Point(142, 607);
-            this.btnClearFiles.Name = "btnClearFiles";
-            this.btnClearFiles.Size = new System.Drawing.Size(100, 45);
-            this.btnClearFiles.TabIndex = 1;
-            this.btnClearFiles.Text = "Clear";
-            this.btnClearFiles.UseVisualStyleBackColor = true;
-            this.btnClearFiles.Click += new System.EventHandler(this.btnClearFiles_Click);
-            // 
-            // btnOpenFile
-            // 
-            this.btnOpenFile.Location = new System.Drawing.Point(40, 607);
-            this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(100, 45);
-            this.btnOpenFile.TabIndex = 0;
-            this.btnOpenFile.Text = "Open";
-            this.btnOpenFile.UseVisualStyleBackColor = true;
-            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
-            // 
-            // grpSource
-            // 
-            this.grpSource.BackColor = System.Drawing.Color.LightGray;
-            this.grpSource.Controls.Add(this.lsSource);
-            this.grpSource.Location = new System.Drawing.Point(40, 23);
-            this.grpSource.Margin = new System.Windows.Forms.Padding(4);
-            this.grpSource.Name = "grpSource";
-            this.grpSource.Padding = new System.Windows.Forms.Padding(4);
-            this.grpSource.Size = new System.Drawing.Size(407, 289);
-            this.grpSource.TabIndex = 8;
-            this.grpSource.TabStop = false;
-            this.grpSource.Text = "Open Files";
-            // 
-            // lsSource
-            // 
-            this.lsSource.FormattingEnabled = true;
-            this.lsSource.ItemHeight = 19;
-            this.lsSource.Location = new System.Drawing.Point(20, 28);
-            this.lsSource.Margin = new System.Windows.Forms.Padding(4);
-            this.lsSource.Name = "lsSource";
-            this.lsSource.Size = new System.Drawing.Size(364, 251);
-            this.lsSource.TabIndex = 0;
-            // 
-            // grpEncodings
-            // 
-            this.grpEncodings.BackColor = System.Drawing.Color.LightGray;
-            this.grpEncodings.Controls.Add(this.rtxtData);
-            this.grpEncodings.Controls.Add(this.txtDestEnc);
-            this.grpEncodings.Controls.Add(this.txtSourceEnc);
-            this.grpEncodings.Controls.Add(this.label35);
-            this.grpEncodings.Controls.Add(this.labDestEnc);
-            this.grpEncodings.Controls.Add(this.cmbDestEnc);
-            this.grpEncodings.Controls.Add(this.cmbSourceEnc);
-            this.grpEncodings.Controls.Add(this.labSourceEnc);
-            this.grpEncodings.Location = new System.Drawing.Point(477, 23);
-            this.grpEncodings.Margin = new System.Windows.Forms.Padding(4);
-            this.grpEncodings.Name = "grpEncodings";
-            this.grpEncodings.Padding = new System.Windows.Forms.Padding(4);
-            this.grpEncodings.Size = new System.Drawing.Size(815, 569);
-            this.grpEncodings.TabIndex = 7;
-            this.grpEncodings.TabStop = false;
-            this.grpEncodings.Text = "Encodings";
-            // 
-            // rtxtData
-            // 
-            this.rtxtData.AllowDrop = true;
-            this.rtxtData.Location = new System.Drawing.Point(28, 327);
-            this.rtxtData.Multiline = true;
-            this.rtxtData.Name = "rtxtData";
-            this.rtxtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.rtxtData.Size = new System.Drawing.Size(762, 219);
-            this.rtxtData.TabIndex = 2;
-            this.rtxtData.TextChanged += new System.EventHandler(this.rtxtData_TextChanged);
-            this.rtxtData.DragDrop += new System.Windows.Forms.DragEventHandler(this.rtxtData_DragDrop);
-            this.rtxtData.DragOver += new System.Windows.Forms.DragEventHandler(this.rtxtData_DragOver);
-            this.rtxtData.DoubleClick += new System.EventHandler(this.rtxtData_DoubleClick);
-            // 
-            // txtDestEnc
-            // 
-            this.txtDestEnc.BackColor = System.Drawing.Color.LightGray;
-            this.txtDestEnc.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDestEnc.Location = new System.Drawing.Point(124, 219);
-            this.txtDestEnc.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDestEnc.Multiline = true;
-            this.txtDestEnc.Name = "txtDestEnc";
-            this.txtDestEnc.ReadOnly = true;
-            this.txtDestEnc.Size = new System.Drawing.Size(632, 88);
-            this.txtDestEnc.TabIndex = 5;
-            // 
-            // txtSourceEnc
-            // 
-            this.txtSourceEnc.BackColor = System.Drawing.Color.LightGray;
-            this.txtSourceEnc.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSourceEnc.Location = new System.Drawing.Point(124, 83);
-            this.txtSourceEnc.Margin = new System.Windows.Forms.Padding(4);
-            this.txtSourceEnc.Multiline = true;
-            this.txtSourceEnc.Name = "txtSourceEnc";
-            this.txtSourceEnc.ReadOnly = true;
-            this.txtSourceEnc.Size = new System.Drawing.Size(632, 88);
-            this.txtSourceEnc.TabIndex = 4;
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(24, 301);
-            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(93, 19);
-            this.label35.TabIndex = 3;
-            this.label35.Text = "Source Text";
-            // 
-            // labDestEnc
-            // 
-            this.labDestEnc.AutoSize = true;
-            this.labDestEnc.Location = new System.Drawing.Point(24, 184);
-            this.labDestEnc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labDestEnc.Name = "labDestEnc";
-            this.labDestEnc.Size = new System.Drawing.Size(88, 19);
-            this.labDestEnc.TabIndex = 3;
-            this.labDestEnc.Text = "Destination";
-            // 
-            // cmbDestEnc
-            // 
-            this.cmbDestEnc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbDestEnc.FormattingEnabled = true;
-            this.cmbDestEnc.Location = new System.Drawing.Point(124, 180);
-            this.cmbDestEnc.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbDestEnc.Name = "cmbDestEnc";
-            this.cmbDestEnc.Size = new System.Drawing.Size(666, 27);
-            this.cmbDestEnc.TabIndex = 1;
-            this.cmbDestEnc.SelectedIndexChanged += new System.EventHandler(this.cmbDestEnc_SelectedIndexChanged);
-            // 
-            // cmbSourceEnc
-            // 
-            this.cmbSourceEnc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSourceEnc.FormattingEnabled = true;
-            this.cmbSourceEnc.Location = new System.Drawing.Point(124, 44);
-            this.cmbSourceEnc.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbSourceEnc.Name = "cmbSourceEnc";
-            this.cmbSourceEnc.Size = new System.Drawing.Size(666, 27);
-            this.cmbSourceEnc.TabIndex = 0;
-            this.cmbSourceEnc.SelectedIndexChanged += new System.EventHandler(this.cmbSourceEnc_SelectedIndexChanged);
-            // 
-            // labSourceEnc
-            // 
-            this.labSourceEnc.AutoSize = true;
-            this.labSourceEnc.Location = new System.Drawing.Point(24, 47);
-            this.labSourceEnc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labSourceEnc.Name = "labSourceEnc";
-            this.labSourceEnc.Size = new System.Drawing.Size(57, 19);
-            this.labSourceEnc.TabIndex = 0;
-            this.labSourceEnc.Text = "Source";
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabQuran);
+            this.tabControl.Controls.Add(this.tabCharset);
+            this.tabControl.Controls.Add(this.tabEncoding);
+            this.tabControl.Controls.Add(this.tabCalculator);
+            this.tabControl.Controls.Add(this.tabRSA);
+            this.tabControl.Controls.Add(this.tabDSA);
+            this.tabControl.Controls.Add(this.tabCrypto);
+            this.tabControl.Controls.Add(this.tabHexViewer);
+            this.tabControl.Controls.Add(this.tabTexture);
+            this.tabControl.Controls.Add(this.tabAudioSpectrum);
+            this.tabControl.Controls.Add(this.tabColor);
+            this.tabControl.Location = new System.Drawing.Point(19, 31);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(1339, 695);
+            this.tabControl.TabIndex = 0;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabQuran
             // 
             this.tabQuran.BackColor = System.Drawing.Color.LightGray;
+            this.tabQuran.Controls.Add(this.txtSoraSearch);
             this.tabQuran.Controls.Add(this.rbDiacritics);
             this.tabQuran.Controls.Add(this.rbNoDiacritics);
             this.tabQuran.Controls.Add(this.rbFirstOriginalDots);
@@ -2605,6 +1299,18 @@ namespace CryptoUtility
             this.tabQuran.Size = new System.Drawing.Size(1331, 663);
             this.tabQuran.TabIndex = 5;
             this.tabQuran.Text = "Quran Text";
+            // 
+            // txtSoraSearch
+            // 
+            this.txtSoraSearch.Font = new System.Drawing.Font("Tahoma", 11F);
+            this.txtSoraSearch.Location = new System.Drawing.Point(1095, 615);
+            this.txtSoraSearch.Name = "txtSoraSearch";
+            this.txtSoraSearch.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtSoraSearch.Size = new System.Drawing.Size(209, 34);
+            this.txtSoraSearch.TabIndex = 13;
+            this.txtSoraSearch.TextChanged += new System.EventHandler(this.txtSoraSearch_TextChanged);
+            this.txtSoraSearch.Enter += new System.EventHandler(this.txtSoraSearch_Enter);
+            this.txtSoraSearch.Leave += new System.EventHandler(this.txtSoraSearch_Leave);
             // 
             // rbDiacritics
             // 
@@ -2658,7 +1364,7 @@ namespace CryptoUtility
             this.txtSearch.Location = new System.Drawing.Point(217, 615);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtSearch.Size = new System.Drawing.Size(741, 34);
+            this.txtSearch.Size = new System.Drawing.Size(611, 34);
             this.txtSearch.TabIndex = 10;
             this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
             this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
@@ -2775,9 +1481,9 @@ namespace CryptoUtility
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(964, 609);
+            this.btnSearch.Location = new System.Drawing.Point(834, 615);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(128, 47);
+            this.btnSearch.Size = new System.Drawing.Size(83, 34);
             this.btnSearch.TabIndex = 11;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
@@ -2785,9 +1491,9 @@ namespace CryptoUtility
             // 
             // btnSendToEncoding
             // 
-            this.btnSendToEncoding.Location = new System.Drawing.Point(1095, 609);
+            this.btnSendToEncoding.Location = new System.Drawing.Point(923, 615);
             this.btnSendToEncoding.Name = "btnSendToEncoding";
-            this.btnSendToEncoding.Size = new System.Drawing.Size(209, 47);
+            this.btnSendToEncoding.Size = new System.Drawing.Size(169, 34);
             this.btnSendToEncoding.TabIndex = 12;
             this.btnSendToEncoding.Text = "Send to Encoding";
             this.btnSendToEncoding.UseVisualStyleBackColor = true;
@@ -2799,6 +1505,7 @@ namespace CryptoUtility
             this.txtQuranText.Location = new System.Drawing.Point(42, 50);
             this.txtQuranText.Multiline = true;
             this.txtQuranText.Name = "txtQuranText";
+            this.txtQuranText.ReadOnly = true;
             this.txtQuranText.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txtQuranText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtQuranText.Size = new System.Drawing.Size(1050, 245);
@@ -4706,6 +3413,1360 @@ namespace CryptoUtility
             this.lblCS1.Text = "ء";
             this.lblCS1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // tabEncoding
+            // 
+            this.tabEncoding.BackColor = System.Drawing.Color.LightGray;
+            this.tabEncoding.Controls.Add(this.groupBox1);
+            this.tabEncoding.Controls.Add(this.grpOptions);
+            this.tabEncoding.Controls.Add(this.panel5);
+            this.tabEncoding.Controls.Add(this.progFiles);
+            this.tabEncoding.Controls.Add(this.btnToHex);
+            this.tabEncoding.Controls.Add(this.btnRun);
+            this.tabEncoding.Controls.Add(this.btnClearFiles);
+            this.tabEncoding.Controls.Add(this.btnOpenFile);
+            this.tabEncoding.Controls.Add(this.grpSource);
+            this.tabEncoding.Controls.Add(this.grpEncodings);
+            this.tabEncoding.Location = new System.Drawing.Point(4, 28);
+            this.tabEncoding.Name = "tabEncoding";
+            this.tabEncoding.Size = new System.Drawing.Size(1331, 663);
+            this.tabEncoding.TabIndex = 4;
+            this.tabEncoding.Text = "Encoding";
+            this.tabEncoding.Enter += new System.EventHandler(this.tabEncoding_Enter);
+            this.tabEncoding.Leave += new System.EventHandler(this.tabEncoding_Leave);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnSCrypto);
+            this.groupBox1.Controls.Add(this.btnSImage);
+            this.groupBox1.Controls.Add(this.btnSHex);
+            this.groupBox1.Controls.Add(this.btnSCalc);
+            this.groupBox1.Controls.Add(this.btnSpectrum);
+            this.groupBox1.Controls.Add(this.button8);
+            this.groupBox1.Controls.Add(this.btnColor);
+            this.groupBox1.Controls.Add(this.button7);
+            this.groupBox1.Location = new System.Drawing.Point(477, 593);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(815, 61);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Send to";
+            // 
+            // btnSCrypto
+            // 
+            this.btnSCrypto.Location = new System.Drawing.Point(115, 19);
+            this.btnSCrypto.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSCrypto.Name = "btnSCrypto";
+            this.btnSCrypto.Size = new System.Drawing.Size(90, 35);
+            this.btnSCrypto.TabIndex = 5;
+            this.btnSCrypto.Text = "Crypto";
+            this.btnSCrypto.UseVisualStyleBackColor = true;
+            this.btnSCrypto.Click += new System.EventHandler(this.btnSCrypto_Click);
+            // 
+            // btnSImage
+            // 
+            this.btnSImage.Location = new System.Drawing.Point(311, 19);
+            this.btnSImage.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSImage.Name = "btnSImage";
+            this.btnSImage.Size = new System.Drawing.Size(90, 35);
+            this.btnSImage.TabIndex = 4;
+            this.btnSImage.Text = "Texture";
+            this.btnSImage.UseVisualStyleBackColor = true;
+            this.btnSImage.Click += new System.EventHandler(this.btnSImage_Click);
+            // 
+            // btnSHex
+            // 
+            this.btnSHex.Location = new System.Drawing.Point(213, 19);
+            this.btnSHex.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSHex.Name = "btnSHex";
+            this.btnSHex.Size = new System.Drawing.Size(90, 35);
+            this.btnSHex.TabIndex = 6;
+            this.btnSHex.Text = "Hex";
+            this.btnSHex.UseVisualStyleBackColor = true;
+            this.btnSHex.Click += new System.EventHandler(this.btnSHex_Click);
+            // 
+            // btnSCalc
+            // 
+            this.btnSCalc.Location = new System.Drawing.Point(17, 19);
+            this.btnSCalc.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSCalc.Name = "btnSCalc";
+            this.btnSCalc.Size = new System.Drawing.Size(90, 35);
+            this.btnSCalc.TabIndex = 4;
+            this.btnSCalc.Text = "Calc";
+            this.btnSCalc.UseVisualStyleBackColor = true;
+            this.btnSCalc.Click += new System.EventHandler(this.btnSCalc_Click);
+            // 
+            // btnSpectrum
+            // 
+            this.btnSpectrum.Location = new System.Drawing.Point(409, 19);
+            this.btnSpectrum.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSpectrum.Name = "btnSpectrum";
+            this.btnSpectrum.Size = new System.Drawing.Size(90, 35);
+            this.btnSpectrum.TabIndex = 6;
+            this.btnSpectrum.Text = "Audio";
+            this.btnSpectrum.UseVisualStyleBackColor = true;
+            this.btnSpectrum.Click += new System.EventHandler(this.btnSpectrum_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(703, 19);
+            this.button8.Margin = new System.Windows.Forms.Padding(4);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(90, 35);
+            this.button8.TabIndex = 6;
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // btnColor
+            // 
+            this.btnColor.Location = new System.Drawing.Point(507, 19);
+            this.btnColor.Margin = new System.Windows.Forms.Padding(4);
+            this.btnColor.Name = "btnColor";
+            this.btnColor.Size = new System.Drawing.Size(90, 35);
+            this.btnColor.TabIndex = 6;
+            this.btnColor.Text = "Color";
+            this.btnColor.UseVisualStyleBackColor = true;
+            this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(605, 19);
+            this.button7.Margin = new System.Windows.Forms.Padding(4);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(90, 35);
+            this.button7.TabIndex = 6;
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // grpOptions
+            // 
+            this.grpOptions.BackColor = System.Drawing.Color.LightGray;
+            this.grpOptions.Controls.Add(this.chkRTL);
+            this.grpOptions.Controls.Add(this.chkOutText);
+            this.grpOptions.Controls.Add(this.chkALLEncodings);
+            this.grpOptions.Controls.Add(this.chkJommalWord);
+            this.grpOptions.Controls.Add(this.chkSendToBuffer);
+            this.grpOptions.Controls.Add(this.chkDiacritics);
+            this.grpOptions.Controls.Add(this.chkzStrings);
+            this.grpOptions.Controls.Add(this.chkDiscardChars);
+            this.grpOptions.Controls.Add(this.chkHexText);
+            this.grpOptions.Controls.Add(this.chkUnicodeAsDecimal);
+            this.grpOptions.Controls.Add(this.chkMeta);
+            this.grpOptions.Location = new System.Drawing.Point(40, 312);
+            this.grpOptions.Margin = new System.Windows.Forms.Padding(4);
+            this.grpOptions.Name = "grpOptions";
+            this.grpOptions.Padding = new System.Windows.Forms.Padding(4);
+            this.grpOptions.Size = new System.Drawing.Size(407, 213);
+            this.grpOptions.TabIndex = 7;
+            this.grpOptions.TabStop = false;
+            this.grpOptions.Text = "Special Options";
+            // 
+            // chkRTL
+            // 
+            this.chkRTL.AutoSize = true;
+            this.chkRTL.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkRTL.Location = new System.Drawing.Point(211, 28);
+            this.chkRTL.Margin = new System.Windows.Forms.Padding(4);
+            this.chkRTL.Name = "chkRTL";
+            this.chkRTL.Size = new System.Drawing.Size(63, 23);
+            this.chkRTL.TabIndex = 1;
+            this.chkRTL.Text = "RTL";
+            this.chkRTL.UseVisualStyleBackColor = true;
+            this.chkRTL.CheckedChanged += new System.EventHandler(this.chkRTL_CheckedChanged);
+            // 
+            // chkOutText
+            // 
+            this.chkOutText.AutoSize = true;
+            this.chkOutText.Location = new System.Drawing.Point(25, 87);
+            this.chkOutText.Margin = new System.Windows.Forms.Padding(4);
+            this.chkOutText.Name = "chkOutText";
+            this.chkOutText.Size = new System.Drawing.Size(165, 23);
+            this.chkOutText.TabIndex = 4;
+            this.chkOutText.Text = "Output to Window";
+            this.chkOutText.UseVisualStyleBackColor = true;
+            // 
+            // chkALLEncodings
+            // 
+            this.chkALLEncodings.AutoSize = true;
+            this.chkALLEncodings.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkALLEncodings.Location = new System.Drawing.Point(211, 149);
+            this.chkALLEncodings.Margin = new System.Windows.Forms.Padding(4);
+            this.chkALLEncodings.Name = "chkALLEncodings";
+            this.chkALLEncodings.Size = new System.Drawing.Size(168, 23);
+            this.chkALLEncodings.TabIndex = 9;
+            this.chkALLEncodings.Text = "List ALL Encodings";
+            this.chkALLEncodings.UseVisualStyleBackColor = true;
+            this.chkALLEncodings.CheckedChanged += new System.EventHandler(this.chkALLEncodings_CheckedChanged);
+            // 
+            // chkJommalWord
+            // 
+            this.chkJommalWord.AutoSize = true;
+            this.chkJommalWord.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkJommalWord.Location = new System.Drawing.Point(25, 149);
+            this.chkJommalWord.Margin = new System.Windows.Forms.Padding(4);
+            this.chkJommalWord.Name = "chkJommalWord";
+            this.chkJommalWord.Size = new System.Drawing.Size(143, 23);
+            this.chkJommalWord.TabIndex = 8;
+            this.chkJommalWord.Text = "Jommal WORD";
+            this.chkJommalWord.UseVisualStyleBackColor = true;
+            this.chkJommalWord.CheckedChanged += new System.EventHandler(this.chkJommalWORD_CheckedChanged);
+            // 
+            // chkSendToBuffer
+            // 
+            this.chkSendToBuffer.AutoSize = true;
+            this.chkSendToBuffer.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkSendToBuffer.Location = new System.Drawing.Point(25, 118);
+            this.chkSendToBuffer.Margin = new System.Windows.Forms.Padding(4);
+            this.chkSendToBuffer.Name = "chkSendToBuffer";
+            this.chkSendToBuffer.Size = new System.Drawing.Size(141, 23);
+            this.chkSendToBuffer.TabIndex = 6;
+            this.chkSendToBuffer.Text = "Send To Buffer";
+            this.chkSendToBuffer.UseVisualStyleBackColor = true;
+            this.chkSendToBuffer.CheckedChanged += new System.EventHandler(this.chkSendToBuffer_CheckedChanged);
+            // 
+            // chkDiacritics
+            // 
+            this.chkDiacritics.AutoSize = true;
+            this.chkDiacritics.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkDiacritics.Location = new System.Drawing.Point(211, 118);
+            this.chkDiacritics.Margin = new System.Windows.Forms.Padding(4);
+            this.chkDiacritics.Name = "chkDiacritics";
+            this.chkDiacritics.Size = new System.Drawing.Size(155, 23);
+            this.chkDiacritics.TabIndex = 7;
+            this.chkDiacritics.Text = "Discard Diacritics";
+            this.chkDiacritics.UseVisualStyleBackColor = true;
+            // 
+            // chkzStrings
+            // 
+            this.chkzStrings.AutoSize = true;
+            this.chkzStrings.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkzStrings.Location = new System.Drawing.Point(211, 87);
+            this.chkzStrings.Margin = new System.Windows.Forms.Padding(4);
+            this.chkzStrings.Name = "chkzStrings";
+            this.chkzStrings.Size = new System.Drawing.Size(91, 23);
+            this.chkzStrings.TabIndex = 5;
+            this.chkzStrings.Text = "zStrings";
+            this.chkzStrings.UseVisualStyleBackColor = true;
+            // 
+            // chkDiscardChars
+            // 
+            this.chkDiscardChars.AutoSize = true;
+            this.chkDiscardChars.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkDiscardChars.Location = new System.Drawing.Point(211, 59);
+            this.chkDiscardChars.Margin = new System.Windows.Forms.Padding(4);
+            this.chkDiscardChars.Name = "chkDiscardChars";
+            this.chkDiscardChars.Size = new System.Drawing.Size(173, 23);
+            this.chkDiscardChars.TabIndex = 3;
+            this.chkDiscardChars.Text = "Discard Extra Chars";
+            this.chkDiscardChars.UseVisualStyleBackColor = true;
+            // 
+            // chkHexText
+            // 
+            this.chkHexText.AutoSize = true;
+            this.chkHexText.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkHexText.Location = new System.Drawing.Point(25, 56);
+            this.chkHexText.Margin = new System.Windows.Forms.Padding(4);
+            this.chkHexText.Name = "chkHexText";
+            this.chkHexText.Size = new System.Drawing.Size(154, 23);
+            this.chkHexText.TabIndex = 2;
+            this.chkHexText.Text = "Output HEX Text";
+            this.chkHexText.UseVisualStyleBackColor = true;
+            this.chkHexText.CheckedChanged += new System.EventHandler(this.chkHexText_CheckedChanged);
+            // 
+            // chkUnicodeAsDecimal
+            // 
+            this.chkUnicodeAsDecimal.AutoSize = true;
+            this.chkUnicodeAsDecimal.Location = new System.Drawing.Point(25, 180);
+            this.chkUnicodeAsDecimal.Margin = new System.Windows.Forms.Padding(4);
+            this.chkUnicodeAsDecimal.Name = "chkUnicodeAsDecimal";
+            this.chkUnicodeAsDecimal.Size = new System.Drawing.Size(327, 23);
+            this.chkUnicodeAsDecimal.TabIndex = 10;
+            this.chkUnicodeAsDecimal.Text = "Source Unicode Decimals (e.g. &&#1075;)";
+            this.chkUnicodeAsDecimal.UseVisualStyleBackColor = true;
+            // 
+            // chkMeta
+            // 
+            this.chkMeta.AutoSize = true;
+            this.chkMeta.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkMeta.Location = new System.Drawing.Point(25, 28);
+            this.chkMeta.Margin = new System.Windows.Forms.Padding(4);
+            this.chkMeta.Name = "chkMeta";
+            this.chkMeta.Size = new System.Drawing.Size(152, 23);
+            this.chkMeta.TabIndex = 0;
+            this.chkMeta.Text = "Output Metadata";
+            this.chkMeta.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.LightGray;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.rbFiles);
+            this.panel5.Controls.Add(this.rbText);
+            this.panel5.Location = new System.Drawing.Point(40, 530);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(407, 45);
+            this.panel5.TabIndex = 10;
+            // 
+            // rbFiles
+            // 
+            this.rbFiles.AutoSize = true;
+            this.rbFiles.Checked = true;
+            this.rbFiles.Location = new System.Drawing.Point(25, 10);
+            this.rbFiles.Name = "rbFiles";
+            this.rbFiles.Size = new System.Drawing.Size(162, 23);
+            this.rbFiles.TabIndex = 0;
+            this.rbFiles.TabStop = true;
+            this.rbFiles.Text = "Encode Files (List)";
+            this.rbFiles.UseVisualStyleBackColor = true;
+            // 
+            // rbText
+            // 
+            this.rbText.AutoSize = true;
+            this.rbText.Location = new System.Drawing.Point(210, 10);
+            this.rbText.Name = "rbText";
+            this.rbText.Size = new System.Drawing.Size(147, 23);
+            this.rbText.TabIndex = 1;
+            this.rbText.Text = "Encode TextBox";
+            this.rbText.UseVisualStyleBackColor = true;
+            // 
+            // progFiles
+            // 
+            this.progFiles.Location = new System.Drawing.Point(40, 580);
+            this.progFiles.Margin = new System.Windows.Forms.Padding(4);
+            this.progFiles.Name = "progFiles";
+            this.progFiles.Size = new System.Drawing.Size(407, 24);
+            this.progFiles.TabIndex = 4;
+            // 
+            // btnToHex
+            // 
+            this.btnToHex.Location = new System.Drawing.Point(244, 607);
+            this.btnToHex.Margin = new System.Windows.Forms.Padding(4);
+            this.btnToHex.Name = "btnToHex";
+            this.btnToHex.Size = new System.Drawing.Size(100, 45);
+            this.btnToHex.TabIndex = 2;
+            this.btnToHex.Text = "UTF>Hex";
+            this.btnToHex.UseVisualStyleBackColor = true;
+            this.btnToHex.Click += new System.EventHandler(this.btnToHex_Click);
+            // 
+            // btnRun
+            // 
+            this.btnRun.Enabled = false;
+            this.btnRun.Location = new System.Drawing.Point(347, 607);
+            this.btnRun.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(100, 45);
+            this.btnRun.TabIndex = 3;
+            this.btnRun.Text = "Encode";
+            this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            // 
+            // btnClearFiles
+            // 
+            this.btnClearFiles.Location = new System.Drawing.Point(142, 607);
+            this.btnClearFiles.Name = "btnClearFiles";
+            this.btnClearFiles.Size = new System.Drawing.Size(100, 45);
+            this.btnClearFiles.TabIndex = 1;
+            this.btnClearFiles.Text = "Clear";
+            this.btnClearFiles.UseVisualStyleBackColor = true;
+            this.btnClearFiles.Click += new System.EventHandler(this.btnClearFiles_Click);
+            // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Location = new System.Drawing.Point(40, 607);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(100, 45);
+            this.btnOpenFile.TabIndex = 0;
+            this.btnOpenFile.Text = "Open";
+            this.btnOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.btnOpenFile_Click);
+            // 
+            // grpSource
+            // 
+            this.grpSource.BackColor = System.Drawing.Color.LightGray;
+            this.grpSource.Controls.Add(this.lsSource);
+            this.grpSource.Location = new System.Drawing.Point(40, 23);
+            this.grpSource.Margin = new System.Windows.Forms.Padding(4);
+            this.grpSource.Name = "grpSource";
+            this.grpSource.Padding = new System.Windows.Forms.Padding(4);
+            this.grpSource.Size = new System.Drawing.Size(407, 289);
+            this.grpSource.TabIndex = 8;
+            this.grpSource.TabStop = false;
+            this.grpSource.Text = "Open Files";
+            // 
+            // lsSource
+            // 
+            this.lsSource.FormattingEnabled = true;
+            this.lsSource.ItemHeight = 19;
+            this.lsSource.Location = new System.Drawing.Point(20, 28);
+            this.lsSource.Margin = new System.Windows.Forms.Padding(4);
+            this.lsSource.Name = "lsSource";
+            this.lsSource.Size = new System.Drawing.Size(364, 251);
+            this.lsSource.TabIndex = 0;
+            // 
+            // grpEncodings
+            // 
+            this.grpEncodings.BackColor = System.Drawing.Color.LightGray;
+            this.grpEncodings.Controls.Add(this.rtxtData);
+            this.grpEncodings.Controls.Add(this.txtDestEnc);
+            this.grpEncodings.Controls.Add(this.txtSourceEnc);
+            this.grpEncodings.Controls.Add(this.label35);
+            this.grpEncodings.Controls.Add(this.labDestEnc);
+            this.grpEncodings.Controls.Add(this.cmbDestEnc);
+            this.grpEncodings.Controls.Add(this.cmbSourceEnc);
+            this.grpEncodings.Controls.Add(this.labSourceEnc);
+            this.grpEncodings.Location = new System.Drawing.Point(477, 23);
+            this.grpEncodings.Margin = new System.Windows.Forms.Padding(4);
+            this.grpEncodings.Name = "grpEncodings";
+            this.grpEncodings.Padding = new System.Windows.Forms.Padding(4);
+            this.grpEncodings.Size = new System.Drawing.Size(815, 569);
+            this.grpEncodings.TabIndex = 7;
+            this.grpEncodings.TabStop = false;
+            this.grpEncodings.Text = "Encodings";
+            // 
+            // rtxtData
+            // 
+            this.rtxtData.AllowDrop = true;
+            this.rtxtData.Location = new System.Drawing.Point(28, 327);
+            this.rtxtData.Multiline = true;
+            this.rtxtData.Name = "rtxtData";
+            this.rtxtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.rtxtData.Size = new System.Drawing.Size(762, 219);
+            this.rtxtData.TabIndex = 2;
+            this.rtxtData.TextChanged += new System.EventHandler(this.rtxtData_TextChanged);
+            this.rtxtData.DragDrop += new System.Windows.Forms.DragEventHandler(this.rtxtData_DragDrop);
+            this.rtxtData.DragOver += new System.Windows.Forms.DragEventHandler(this.rtxtData_DragOver);
+            this.rtxtData.DoubleClick += new System.EventHandler(this.rtxtData_DoubleClick);
+            // 
+            // txtDestEnc
+            // 
+            this.txtDestEnc.BackColor = System.Drawing.Color.LightGray;
+            this.txtDestEnc.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtDestEnc.Location = new System.Drawing.Point(124, 219);
+            this.txtDestEnc.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDestEnc.Multiline = true;
+            this.txtDestEnc.Name = "txtDestEnc";
+            this.txtDestEnc.ReadOnly = true;
+            this.txtDestEnc.Size = new System.Drawing.Size(632, 88);
+            this.txtDestEnc.TabIndex = 5;
+            // 
+            // txtSourceEnc
+            // 
+            this.txtSourceEnc.BackColor = System.Drawing.Color.LightGray;
+            this.txtSourceEnc.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSourceEnc.Location = new System.Drawing.Point(124, 83);
+            this.txtSourceEnc.Margin = new System.Windows.Forms.Padding(4);
+            this.txtSourceEnc.Multiline = true;
+            this.txtSourceEnc.Name = "txtSourceEnc";
+            this.txtSourceEnc.ReadOnly = true;
+            this.txtSourceEnc.Size = new System.Drawing.Size(632, 88);
+            this.txtSourceEnc.TabIndex = 4;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(24, 301);
+            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(93, 19);
+            this.label35.TabIndex = 3;
+            this.label35.Text = "Source Text";
+            // 
+            // labDestEnc
+            // 
+            this.labDestEnc.AutoSize = true;
+            this.labDestEnc.Location = new System.Drawing.Point(24, 184);
+            this.labDestEnc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labDestEnc.Name = "labDestEnc";
+            this.labDestEnc.Size = new System.Drawing.Size(88, 19);
+            this.labDestEnc.TabIndex = 3;
+            this.labDestEnc.Text = "Destination";
+            // 
+            // cmbDestEnc
+            // 
+            this.cmbDestEnc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDestEnc.FormattingEnabled = true;
+            this.cmbDestEnc.Location = new System.Drawing.Point(124, 180);
+            this.cmbDestEnc.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbDestEnc.Name = "cmbDestEnc";
+            this.cmbDestEnc.Size = new System.Drawing.Size(666, 27);
+            this.cmbDestEnc.TabIndex = 1;
+            this.cmbDestEnc.SelectedIndexChanged += new System.EventHandler(this.cmbDestEnc_SelectedIndexChanged);
+            // 
+            // cmbSourceEnc
+            // 
+            this.cmbSourceEnc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSourceEnc.FormattingEnabled = true;
+            this.cmbSourceEnc.Location = new System.Drawing.Point(124, 44);
+            this.cmbSourceEnc.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbSourceEnc.Name = "cmbSourceEnc";
+            this.cmbSourceEnc.Size = new System.Drawing.Size(666, 27);
+            this.cmbSourceEnc.TabIndex = 0;
+            this.cmbSourceEnc.SelectedIndexChanged += new System.EventHandler(this.cmbSourceEnc_SelectedIndexChanged);
+            // 
+            // labSourceEnc
+            // 
+            this.labSourceEnc.AutoSize = true;
+            this.labSourceEnc.Location = new System.Drawing.Point(24, 47);
+            this.labSourceEnc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labSourceEnc.Name = "labSourceEnc";
+            this.labSourceEnc.Size = new System.Drawing.Size(57, 19);
+            this.labSourceEnc.TabIndex = 0;
+            this.labSourceEnc.Text = "Source";
+            // 
+            // tabCalculator
+            // 
+            this.tabCalculator.BackColor = System.Drawing.Color.LightGray;
+            this.tabCalculator.Controls.Add(this.chkPositives);
+            this.tabCalculator.Controls.Add(this.rb64b);
+            this.tabCalculator.Controls.Add(this.rb16);
+            this.tabCalculator.Controls.Add(this.rb2);
+            this.tabCalculator.Controls.Add(this.rb10);
+            this.tabCalculator.Controls.Add(this.label43);
+            this.tabCalculator.Controls.Add(this.label42);
+            this.tabCalculator.Controls.Add(this.label41);
+            this.tabCalculator.Controls.Add(this.cmbKeyLen);
+            this.tabCalculator.Controls.Add(this.label40);
+            this.tabCalculator.Controls.Add(this.cmbExponentMethod);
+            this.tabCalculator.Controls.Add(this.label39);
+            this.tabCalculator.Controls.Add(this.cmbMULMethod);
+            this.tabCalculator.Controls.Add(this.label36);
+            this.tabCalculator.Controls.Add(this.cmbAccelerator);
+            this.tabCalculator.Controls.Add(this.btnRTP);
+            this.tabCalculator.Controls.Add(this.btnFCD);
+            this.tabCalculator.Controls.Add(this.btnLCM);
+            this.tabCalculator.Controls.Add(this.btnPWM);
+            this.tabCalculator.Controls.Add(this.btnPOW);
+            this.tabCalculator.Controls.Add(this.btnMOD);
+            this.tabCalculator.Controls.Add(this.btnDIV);
+            this.tabCalculator.Controls.Add(this.btnMUL);
+            this.tabCalculator.Controls.Add(this.btnSUB);
+            this.tabCalculator.Controls.Add(this.btnClearCalc);
+            this.tabCalculator.Controls.Add(this.btnGenPrime);
+            this.tabCalculator.Controls.Add(this.btnXOR);
+            this.tabCalculator.Controls.Add(this.btnOR);
+            this.tabCalculator.Controls.Add(this.btnSHR);
+            this.tabCalculator.Controls.Add(this.btnSHL);
+            this.tabCalculator.Controls.Add(this.btnBezout);
+            this.tabCalculator.Controls.Add(this.button5);
+            this.tabCalculator.Controls.Add(this.button4);
+            this.tabCalculator.Controls.Add(this.button2);
+            this.tabCalculator.Controls.Add(this.button1);
+            this.tabCalculator.Controls.Add(this.btnSqrt);
+            this.tabCalculator.Controls.Add(this.btnFactorizeQ);
+            this.tabCalculator.Controls.Add(this.btnFactorizeP);
+            this.tabCalculator.Controls.Add(this.btnFactorDbQ);
+            this.tabCalculator.Controls.Add(this.btnFactorDbP);
+            this.tabCalculator.Controls.Add(this.btnReverseQ);
+            this.tabCalculator.Controls.Add(this.btnReverseP);
+            this.tabCalculator.Controls.Add(this.btnIsEven);
+            this.tabCalculator.Controls.Add(this.btnIsPrime);
+            this.tabCalculator.Controls.Add(this.btnADD);
+            this.tabCalculator.Controls.Add(this.label22);
+            this.tabCalculator.Controls.Add(this.label21);
+            this.tabCalculator.Controls.Add(this.label20);
+            this.tabCalculator.Controls.Add(this.label19);
+            this.tabCalculator.Controls.Add(this.txtResultR);
+            this.tabCalculator.Controls.Add(this.txtModulN);
+            this.tabCalculator.Controls.Add(this.txtPrimeQ);
+            this.tabCalculator.Controls.Add(this.txtPrimeP);
+            this.tabCalculator.Location = new System.Drawing.Point(4, 28);
+            this.tabCalculator.Name = "tabCalculator";
+            this.tabCalculator.Size = new System.Drawing.Size(1331, 663);
+            this.tabCalculator.TabIndex = 2;
+            this.tabCalculator.Text = "Calculator";
+            // 
+            // chkPositives
+            // 
+            this.chkPositives.AutoSize = true;
+            this.chkPositives.Checked = true;
+            this.chkPositives.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPositives.Location = new System.Drawing.Point(1163, 249);
+            this.chkPositives.Name = "chkPositives";
+            this.chkPositives.Size = new System.Drawing.Size(130, 23);
+            this.chkPositives.TabIndex = 10;
+            this.chkPositives.Text = "Postives Only";
+            this.chkPositives.UseVisualStyleBackColor = true;
+            // 
+            // rb64b
+            // 
+            this.rb64b.AutoSize = true;
+            this.rb64b.Location = new System.Drawing.Point(1073, 248);
+            this.rb64b.Name = "rb64b";
+            this.rb64b.Size = new System.Drawing.Size(84, 23);
+            this.rb64b.TabIndex = 9;
+            this.rb64b.TabStop = true;
+            this.rb64b.Text = "Base64";
+            this.rb64b.UseVisualStyleBackColor = true;
+            this.rb64b.CheckedChanged += new System.EventHandler(this.rbNumberBaseCheckedChanged);
+            // 
+            // rb16
+            // 
+            this.rb16.AutoSize = true;
+            this.rb16.Location = new System.Drawing.Point(1013, 248);
+            this.rb16.Name = "rb16";
+            this.rb16.Size = new System.Drawing.Size(52, 23);
+            this.rb16.TabIndex = 8;
+            this.rb16.TabStop = true;
+            this.rb16.Text = "16";
+            this.rb16.UseVisualStyleBackColor = true;
+            this.rb16.CheckedChanged += new System.EventHandler(this.rbNumberBaseCheckedChanged);
+            // 
+            // rb2
+            // 
+            this.rb2.AutoSize = true;
+            this.rb2.Location = new System.Drawing.Point(906, 248);
+            this.rb2.Name = "rb2";
+            this.rb2.Size = new System.Drawing.Size(43, 23);
+            this.rb2.TabIndex = 6;
+            this.rb2.TabStop = true;
+            this.rb2.Text = "2";
+            this.rb2.UseVisualStyleBackColor = true;
+            this.rb2.CheckedChanged += new System.EventHandler(this.rbNumberBaseCheckedChanged);
+            // 
+            // rb10
+            // 
+            this.rb10.AutoSize = true;
+            this.rb10.Location = new System.Drawing.Point(954, 248);
+            this.rb10.Name = "rb10";
+            this.rb10.Size = new System.Drawing.Size(52, 23);
+            this.rb10.TabIndex = 7;
+            this.rb10.TabStop = true;
+            this.rb10.Text = "10";
+            this.rb10.UseVisualStyleBackColor = true;
+            this.rb10.CheckedChanged += new System.EventHandler(this.rbNumberBaseCheckedChanged);
+            // 
+            // label43
+            // 
+            this.label43.BackColor = System.Drawing.SystemColors.Info;
+            this.label43.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label43.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(1163, 212);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(138, 33);
+            this.label43.TabIndex = 8;
+            this.label43.Text = "Key Length";
+            this.label43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label42
+            // 
+            this.label42.BackColor = System.Drawing.SystemColors.Info;
+            this.label42.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label42.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(1163, 150);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(138, 33);
+            this.label42.TabIndex = 8;
+            this.label42.Text = "Key Length";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label41
+            // 
+            this.label41.BackColor = System.Drawing.SystemColors.Info;
+            this.label41.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label41.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(906, 212);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(251, 33);
+            this.label41.TabIndex = 8;
+            this.label41.Text = "Number Base";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbKeyLen
+            // 
+            this.cmbKeyLen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbKeyLen.FormattingEnabled = true;
+            this.cmbKeyLen.Items.AddRange(new object[] {
+            "512",
+            "1024",
+            "2048",
+            "4096"});
+            this.cmbKeyLen.Location = new System.Drawing.Point(1163, 182);
+            this.cmbKeyLen.Name = "cmbKeyLen";
+            this.cmbKeyLen.Size = new System.Drawing.Size(138, 27);
+            this.cmbKeyLen.TabIndex = 5;
+            // 
+            // label40
+            // 
+            this.label40.BackColor = System.Drawing.SystemColors.Info;
+            this.label40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label40.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(906, 150);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(251, 33);
+            this.label40.TabIndex = 8;
+            this.label40.Text = "Exponentiation Method";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbExponentMethod
+            // 
+            this.cmbExponentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbExponentMethod.FormattingEnabled = true;
+            this.cmbExponentMethod.Items.AddRange(new object[] {
+            "Regular",
+            "Squaring",
+            "Fast"});
+            this.cmbExponentMethod.Location = new System.Drawing.Point(906, 182);
+            this.cmbExponentMethod.Name = "cmbExponentMethod";
+            this.cmbExponentMethod.Size = new System.Drawing.Size(251, 27);
+            this.cmbExponentMethod.TabIndex = 4;
+            // 
+            // label39
+            // 
+            this.label39.BackColor = System.Drawing.SystemColors.Info;
+            this.label39.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label39.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(906, 88);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(395, 33);
+            this.label39.TabIndex = 8;
+            this.label39.Text = "Multiplaction Method";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbMULMethod
+            // 
+            this.cmbMULMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMULMethod.FormattingEnabled = true;
+            this.cmbMULMethod.Items.AddRange(new object[] {
+            "Regular",
+            "Karatsuba"});
+            this.cmbMULMethod.Location = new System.Drawing.Point(906, 120);
+            this.cmbMULMethod.Name = "cmbMULMethod";
+            this.cmbMULMethod.Size = new System.Drawing.Size(395, 27);
+            this.cmbMULMethod.TabIndex = 3;
+            // 
+            // label36
+            // 
+            this.label36.BackColor = System.Drawing.SystemColors.Info;
+            this.label36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label36.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(906, 26);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(395, 33);
+            this.label36.TabIndex = 8;
+            this.label36.Text = "Accelerator";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbAccelerator
+            // 
+            this.cmbAccelerator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbAccelerator.FormattingEnabled = true;
+            this.cmbAccelerator.Location = new System.Drawing.Point(906, 58);
+            this.cmbAccelerator.Name = "cmbAccelerator";
+            this.cmbAccelerator.Size = new System.Drawing.Size(395, 27);
+            this.cmbAccelerator.TabIndex = 2;
+            this.cmbAccelerator.SelectedIndexChanged += new System.EventHandler(this.cmbAccelerator_SelectedIndexChanged);
+            // 
+            // btnRTP
+            // 
+            this.btnRTP.Location = new System.Drawing.Point(1191, 531);
+            this.btnRTP.Name = "btnRTP";
+            this.btnRTP.Size = new System.Drawing.Size(110, 40);
+            this.btnRTP.TabIndex = 22;
+            this.btnRTP.Text = "R -> P";
+            this.btnRTP.UseVisualStyleBackColor = true;
+            this.btnRTP.Click += new System.EventHandler(this.btnRTP_Click);
+            // 
+            // btnFCD
+            // 
+            this.btnFCD.Location = new System.Drawing.Point(1075, 531);
+            this.btnFCD.Name = "btnFCD";
+            this.btnFCD.Size = new System.Drawing.Size(110, 40);
+            this.btnFCD.TabIndex = 21;
+            this.btnFCD.Text = "GCD (P,Q)";
+            this.btnFCD.UseVisualStyleBackColor = true;
+            this.btnFCD.Click += new System.EventHandler(this.btnFCD_Click);
+            // 
+            // btnLCM
+            // 
+            this.btnLCM.Location = new System.Drawing.Point(959, 531);
+            this.btnLCM.Name = "btnLCM";
+            this.btnLCM.Size = new System.Drawing.Size(110, 40);
+            this.btnLCM.TabIndex = 20;
+            this.btnLCM.Text = "LCM (P,Q)";
+            this.btnLCM.UseVisualStyleBackColor = true;
+            this.btnLCM.Click += new System.EventHandler(this.btnLCM_Click);
+            // 
+            // btnPWM
+            // 
+            this.btnPWM.Location = new System.Drawing.Point(843, 531);
+            this.btnPWM.Name = "btnPWM";
+            this.btnPWM.Size = new System.Drawing.Size(110, 40);
+            this.btnPWM.TabIndex = 19;
+            this.btnPWM.Text = "P ^ Q % N";
+            this.btnPWM.UseVisualStyleBackColor = true;
+            this.btnPWM.Click += new System.EventHandler(this.btnPWM_Click);
+            // 
+            // btnPOW
+            // 
+            this.btnPOW.Location = new System.Drawing.Point(727, 531);
+            this.btnPOW.Name = "btnPOW";
+            this.btnPOW.Size = new System.Drawing.Size(110, 40);
+            this.btnPOW.TabIndex = 18;
+            this.btnPOW.Text = "P ^ Q";
+            this.btnPOW.UseVisualStyleBackColor = true;
+            this.btnPOW.Click += new System.EventHandler(this.btnPOW_Click);
+            // 
+            // btnMOD
+            // 
+            this.btnMOD.Location = new System.Drawing.Point(611, 531);
+            this.btnMOD.Name = "btnMOD";
+            this.btnMOD.Size = new System.Drawing.Size(110, 40);
+            this.btnMOD.TabIndex = 17;
+            this.btnMOD.Text = "P % Q";
+            this.btnMOD.UseVisualStyleBackColor = true;
+            this.btnMOD.Click += new System.EventHandler(this.btnMOD_Click);
+            // 
+            // btnDIV
+            // 
+            this.btnDIV.Location = new System.Drawing.Point(495, 531);
+            this.btnDIV.Name = "btnDIV";
+            this.btnDIV.Size = new System.Drawing.Size(110, 40);
+            this.btnDIV.TabIndex = 16;
+            this.btnDIV.Text = "P / Q";
+            this.btnDIV.UseVisualStyleBackColor = true;
+            this.btnDIV.Click += new System.EventHandler(this.btnDIV_Click);
+            // 
+            // btnMUL
+            // 
+            this.btnMUL.Location = new System.Drawing.Point(379, 531);
+            this.btnMUL.Name = "btnMUL";
+            this.btnMUL.Size = new System.Drawing.Size(110, 40);
+            this.btnMUL.TabIndex = 15;
+            this.btnMUL.Text = "P * Q";
+            this.btnMUL.UseVisualStyleBackColor = true;
+            this.btnMUL.Click += new System.EventHandler(this.btnMUL_Click);
+            // 
+            // btnSUB
+            // 
+            this.btnSUB.Location = new System.Drawing.Point(263, 531);
+            this.btnSUB.Name = "btnSUB";
+            this.btnSUB.Size = new System.Drawing.Size(110, 40);
+            this.btnSUB.TabIndex = 14;
+            this.btnSUB.Text = "P - Q";
+            this.btnSUB.UseVisualStyleBackColor = true;
+            this.btnSUB.Click += new System.EventHandler(this.btnSUB_Click);
+            // 
+            // btnClearCalc
+            // 
+            this.btnClearCalc.Location = new System.Drawing.Point(1191, 617);
+            this.btnClearCalc.Name = "btnClearCalc";
+            this.btnClearCalc.Size = new System.Drawing.Size(110, 40);
+            this.btnClearCalc.TabIndex = 42;
+            this.btnClearCalc.Text = "Clear";
+            this.btnClearCalc.UseVisualStyleBackColor = true;
+            this.btnClearCalc.Click += new System.EventHandler(this.btnClearCalc_Click);
+            // 
+            // btnGenPrime
+            // 
+            this.btnGenPrime.Location = new System.Drawing.Point(611, 574);
+            this.btnGenPrime.Name = "btnGenPrime";
+            this.btnGenPrime.Size = new System.Drawing.Size(110, 40);
+            this.btnGenPrime.TabIndex = 27;
+            this.btnGenPrime.Text = "Gen Primes";
+            this.btnGenPrime.UseVisualStyleBackColor = true;
+            this.btnGenPrime.Click += new System.EventHandler(this.btnGenPrime_Click);
+            // 
+            // btnXOR
+            // 
+            this.btnXOR.Location = new System.Drawing.Point(1191, 574);
+            this.btnXOR.Name = "btnXOR";
+            this.btnXOR.Size = new System.Drawing.Size(110, 40);
+            this.btnXOR.TabIndex = 32;
+            this.btnXOR.Text = "P  xor Q";
+            this.btnXOR.UseVisualStyleBackColor = true;
+            this.btnXOR.Click += new System.EventHandler(this.btnXOR_Click);
+            // 
+            // btnOR
+            // 
+            this.btnOR.Location = new System.Drawing.Point(1075, 574);
+            this.btnOR.Name = "btnOR";
+            this.btnOR.Size = new System.Drawing.Size(110, 40);
+            this.btnOR.TabIndex = 31;
+            this.btnOR.Text = "P  or Q";
+            this.btnOR.UseVisualStyleBackColor = true;
+            this.btnOR.Click += new System.EventHandler(this.btnOR_Click);
+            // 
+            // btnSHR
+            // 
+            this.btnSHR.Location = new System.Drawing.Point(959, 574);
+            this.btnSHR.Name = "btnSHR";
+            this.btnSHR.Size = new System.Drawing.Size(110, 40);
+            this.btnSHR.TabIndex = 30;
+            this.btnSHR.Text = "P  >>";
+            this.btnSHR.UseVisualStyleBackColor = true;
+            this.btnSHR.Click += new System.EventHandler(this.btnSHR_Click);
+            // 
+            // btnSHL
+            // 
+            this.btnSHL.Location = new System.Drawing.Point(843, 574);
+            this.btnSHL.Name = "btnSHL";
+            this.btnSHL.Size = new System.Drawing.Size(110, 40);
+            this.btnSHL.TabIndex = 29;
+            this.btnSHL.Text = "<< P";
+            this.btnSHL.UseVisualStyleBackColor = true;
+            this.btnSHL.Click += new System.EventHandler(this.btnSHL_Click);
+            // 
+            // btnBezout
+            // 
+            this.btnBezout.Location = new System.Drawing.Point(727, 574);
+            this.btnBezout.Name = "btnBezout";
+            this.btnBezout.Size = new System.Drawing.Size(110, 40);
+            this.btnBezout.TabIndex = 28;
+            this.btnBezout.Text = "Bezout P,Q";
+            this.btnBezout.UseVisualStyleBackColor = true;
+            this.btnBezout.Click += new System.EventHandler(this.btnBezout_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(1075, 617);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(110, 40);
+            this.button5.TabIndex = 41;
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(959, 617);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(110, 40);
+            this.button4.TabIndex = 40;
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(843, 617);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(110, 40);
+            this.button2.TabIndex = 39;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(727, 617);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(110, 40);
+            this.button1.TabIndex = 38;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnSqrt
+            // 
+            this.btnSqrt.Location = new System.Drawing.Point(611, 617);
+            this.btnSqrt.Name = "btnSqrt";
+            this.btnSqrt.Size = new System.Drawing.Size(110, 40);
+            this.btnSqrt.TabIndex = 37;
+            this.btnSqrt.Text = "SQRT P";
+            this.btnSqrt.UseVisualStyleBackColor = true;
+            this.btnSqrt.Click += new System.EventHandler(this.btnSqrt_Click);
+            // 
+            // btnFactorizeQ
+            // 
+            this.btnFactorizeQ.Location = new System.Drawing.Point(495, 574);
+            this.btnFactorizeQ.Name = "btnFactorizeQ";
+            this.btnFactorizeQ.Size = new System.Drawing.Size(110, 40);
+            this.btnFactorizeQ.TabIndex = 26;
+            this.btnFactorizeQ.Text = "Factorize Q";
+            this.btnFactorizeQ.UseVisualStyleBackColor = true;
+            this.btnFactorizeQ.Click += new System.EventHandler(this.btnFactorizeQ_Click);
+            // 
+            // btnFactorizeP
+            // 
+            this.btnFactorizeP.Location = new System.Drawing.Point(379, 574);
+            this.btnFactorizeP.Name = "btnFactorizeP";
+            this.btnFactorizeP.Size = new System.Drawing.Size(110, 40);
+            this.btnFactorizeP.TabIndex = 25;
+            this.btnFactorizeP.Text = "Factorize P";
+            this.btnFactorizeP.UseVisualStyleBackColor = true;
+            this.btnFactorizeP.Click += new System.EventHandler(this.btnFactorizeP_Click);
+            // 
+            // btnFactorDbQ
+            // 
+            this.btnFactorDbQ.Location = new System.Drawing.Point(495, 617);
+            this.btnFactorDbQ.Name = "btnFactorDbQ";
+            this.btnFactorDbQ.Size = new System.Drawing.Size(110, 40);
+            this.btnFactorDbQ.TabIndex = 36;
+            this.btnFactorDbQ.Text = "Factordb Q";
+            this.btnFactorDbQ.UseVisualStyleBackColor = true;
+            this.btnFactorDbQ.Click += new System.EventHandler(this.btnFactorDbQ_Click);
+            // 
+            // btnFactorDbP
+            // 
+            this.btnFactorDbP.Location = new System.Drawing.Point(379, 617);
+            this.btnFactorDbP.Name = "btnFactorDbP";
+            this.btnFactorDbP.Size = new System.Drawing.Size(110, 40);
+            this.btnFactorDbP.TabIndex = 35;
+            this.btnFactorDbP.Text = "Factordb P";
+            this.btnFactorDbP.UseVisualStyleBackColor = true;
+            this.btnFactorDbP.Click += new System.EventHandler(this.btnFactorDbP_Click);
+            // 
+            // btnReverseQ
+            // 
+            this.btnReverseQ.Location = new System.Drawing.Point(263, 617);
+            this.btnReverseQ.Name = "btnReverseQ";
+            this.btnReverseQ.Size = new System.Drawing.Size(110, 40);
+            this.btnReverseQ.TabIndex = 34;
+            this.btnReverseQ.Text = "Reverse Q";
+            this.btnReverseQ.UseVisualStyleBackColor = true;
+            this.btnReverseQ.Click += new System.EventHandler(this.btnReverseQ_Click);
+            // 
+            // btnReverseP
+            // 
+            this.btnReverseP.Location = new System.Drawing.Point(143, 617);
+            this.btnReverseP.Name = "btnReverseP";
+            this.btnReverseP.Size = new System.Drawing.Size(110, 40);
+            this.btnReverseP.TabIndex = 33;
+            this.btnReverseP.Text = "Reverse P";
+            this.btnReverseP.UseVisualStyleBackColor = true;
+            this.btnReverseP.Click += new System.EventHandler(this.btnReverseP_Click);
+            // 
+            // btnIsEven
+            // 
+            this.btnIsEven.Location = new System.Drawing.Point(263, 574);
+            this.btnIsEven.Name = "btnIsEven";
+            this.btnIsEven.Size = new System.Drawing.Size(110, 40);
+            this.btnIsEven.TabIndex = 24;
+            this.btnIsEven.Text = "IsEven";
+            this.btnIsEven.UseVisualStyleBackColor = true;
+            this.btnIsEven.Click += new System.EventHandler(this.btnIsEven_Click);
+            // 
+            // btnIsPrime
+            // 
+            this.btnIsPrime.Location = new System.Drawing.Point(143, 574);
+            this.btnIsPrime.Name = "btnIsPrime";
+            this.btnIsPrime.Size = new System.Drawing.Size(110, 40);
+            this.btnIsPrime.TabIndex = 23;
+            this.btnIsPrime.Text = "IsPrime";
+            this.btnIsPrime.UseVisualStyleBackColor = true;
+            this.btnIsPrime.Click += new System.EventHandler(this.btnIsPrime_Click);
+            // 
+            // btnADD
+            // 
+            this.btnADD.Location = new System.Drawing.Point(143, 531);
+            this.btnADD.Name = "btnADD";
+            this.btnADD.Size = new System.Drawing.Size(110, 40);
+            this.btnADD.TabIndex = 13;
+            this.btnADD.Text = "P + Q";
+            this.btnADD.UseVisualStyleBackColor = true;
+            this.btnADD.Click += new System.EventHandler(this.btnADD_Click);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(35, 407);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(73, 19);
+            this.label22.TabIndex = 1;
+            this.label22.Text = "Result R:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(35, 280);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(74, 19);
+            this.label21.TabIndex = 1;
+            this.label21.Text = "Modul N:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(35, 153);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(73, 19);
+            this.label20.TabIndex = 1;
+            this.label20.Text = "Prime Q:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(35, 26);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(70, 19);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Prime P:";
+            // 
+            // txtResultR
+            // 
+            this.txtResultR.BackColor = System.Drawing.SystemColors.MenuText;
+            this.txtResultR.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtResultR.Location = new System.Drawing.Point(143, 404);
+            this.txtResultR.Multiline = true;
+            this.txtResultR.Name = "txtResultR";
+            this.txtResultR.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtResultR.Size = new System.Drawing.Size(1158, 121);
+            this.txtResultR.TabIndex = 12;
+            this.txtResultR.DoubleClick += new System.EventHandler(this.txtResultR_DoubleClick);
+            // 
+            // txtModulN
+            // 
+            this.txtModulN.AllowDrop = true;
+            this.txtModulN.BackColor = System.Drawing.SystemColors.MenuText;
+            this.txtModulN.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtModulN.Location = new System.Drawing.Point(143, 277);
+            this.txtModulN.Multiline = true;
+            this.txtModulN.Name = "txtModulN";
+            this.txtModulN.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtModulN.Size = new System.Drawing.Size(1158, 121);
+            this.txtModulN.TabIndex = 11;
+            this.txtModulN.TextChanged += new System.EventHandler(this.txtModulN_TextChanged);
+            this.txtModulN.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtModulN_DragDrop);
+            this.txtModulN.DragOver += new System.Windows.Forms.DragEventHandler(this.txtModulN_DragOver);
+            this.txtModulN.DoubleClick += new System.EventHandler(this.txtModulN_DoubleClick);
+            // 
+            // txtPrimeQ
+            // 
+            this.txtPrimeQ.AllowDrop = true;
+            this.txtPrimeQ.BackColor = System.Drawing.SystemColors.MenuText;
+            this.txtPrimeQ.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtPrimeQ.Location = new System.Drawing.Point(143, 150);
+            this.txtPrimeQ.Multiline = true;
+            this.txtPrimeQ.Name = "txtPrimeQ";
+            this.txtPrimeQ.Size = new System.Drawing.Size(757, 121);
+            this.txtPrimeQ.TabIndex = 1;
+            this.txtPrimeQ.TextChanged += new System.EventHandler(this.txtPrimeQ_TextChanged);
+            this.txtPrimeQ.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtPrimeQ_DragDrop);
+            this.txtPrimeQ.DragOver += new System.Windows.Forms.DragEventHandler(this.txtPrimeQ_DragOver);
+            this.txtPrimeQ.DoubleClick += new System.EventHandler(this.txtPrimeQ_DoubleClick);
+            // 
+            // txtPrimeP
+            // 
+            this.txtPrimeP.AllowDrop = true;
+            this.txtPrimeP.BackColor = System.Drawing.SystemColors.MenuText;
+            this.txtPrimeP.ForeColor = System.Drawing.SystemColors.Window;
+            this.txtPrimeP.Location = new System.Drawing.Point(143, 23);
+            this.txtPrimeP.Multiline = true;
+            this.txtPrimeP.Name = "txtPrimeP";
+            this.txtPrimeP.Size = new System.Drawing.Size(757, 121);
+            this.txtPrimeP.TabIndex = 0;
+            this.txtPrimeP.TextChanged += new System.EventHandler(this.txtPrimeP_TextChanged);
+            this.txtPrimeP.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtPrimeP_DragDrop);
+            this.txtPrimeP.DragOver += new System.Windows.Forms.DragEventHandler(this.txtPrimeP_DragOver);
+            this.txtPrimeP.DoubleClick += new System.EventHandler(this.txtPrimeP_DoubleClick);
+            // 
+            // tabDSA
+            // 
+            this.tabDSA.BackColor = System.Drawing.Color.LightGray;
+            this.tabDSA.Controls.Add(this.cmbDSAKeyLen);
+            this.tabDSA.Controls.Add(this.btnDSAImportPrivate);
+            this.tabDSA.Controls.Add(this.btnDSAImportPublic);
+            this.tabDSA.Controls.Add(this.btnGenDSAKeys);
+            this.tabDSA.Controls.Add(this.btnExportDSAPublic);
+            this.tabDSA.Controls.Add(this.btnExportDSA);
+            this.tabDSA.Controls.Add(this.txtDSA_X);
+            this.tabDSA.Controls.Add(this.txtDSA_Y);
+            this.tabDSA.Controls.Add(this.txtDSA_G);
+            this.tabDSA.Controls.Add(this.txtDSA_Q);
+            this.tabDSA.Controls.Add(this.txtDSA_P);
+            this.tabDSA.Controls.Add(this.label23);
+            this.tabDSA.Controls.Add(this.label24);
+            this.tabDSA.Controls.Add(this.label25);
+            this.tabDSA.Controls.Add(this.label26);
+            this.tabDSA.Controls.Add(this.label28);
+            this.tabDSA.Controls.Add(this.label33);
+            this.tabDSA.Controls.Add(this.label29);
+            this.tabDSA.Controls.Add(this.label27);
+            this.tabDSA.Controls.Add(this.txtDSAPEMPrivate);
+            this.tabDSA.Controls.Add(this.txtDSAPEMPublic);
+            this.tabDSA.Location = new System.Drawing.Point(4, 28);
+            this.tabDSA.Name = "tabDSA";
+            this.tabDSA.Size = new System.Drawing.Size(1331, 663);
+            this.tabDSA.TabIndex = 3;
+            this.tabDSA.Text = "DSA Keys";
+            // 
+            // cmbDSAKeyLen
+            // 
+            this.cmbDSAKeyLen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDSAKeyLen.FormattingEnabled = true;
+            this.cmbDSAKeyLen.Items.AddRange(new object[] {
+            "512",
+            "1024",
+            "2048",
+            "4096"});
+            this.cmbDSAKeyLen.Location = new System.Drawing.Point(154, 205);
+            this.cmbDSAKeyLen.Name = "cmbDSAKeyLen";
+            this.cmbDSAKeyLen.Size = new System.Drawing.Size(531, 27);
+            this.cmbDSAKeyLen.TabIndex = 2;
+            // 
+            // btnDSAImportPrivate
+            // 
+            this.btnDSAImportPrivate.Location = new System.Drawing.Point(1094, 596);
+            this.btnDSAImportPrivate.Name = "btnDSAImportPrivate";
+            this.btnDSAImportPrivate.Size = new System.Drawing.Size(200, 56);
+            this.btnDSAImportPrivate.TabIndex = 12;
+            this.btnDSAImportPrivate.Text = "Import Private";
+            this.btnDSAImportPrivate.UseVisualStyleBackColor = true;
+            this.btnDSAImportPrivate.Click += new System.EventHandler(this.btnDSAImportPrivate_Click);
+            // 
+            // btnDSAImportPublic
+            // 
+            this.btnDSAImportPublic.Location = new System.Drawing.Point(888, 596);
+            this.btnDSAImportPublic.Name = "btnDSAImportPublic";
+            this.btnDSAImportPublic.Size = new System.Drawing.Size(200, 56);
+            this.btnDSAImportPublic.TabIndex = 11;
+            this.btnDSAImportPublic.Text = "Import Public";
+            this.btnDSAImportPublic.UseVisualStyleBackColor = true;
+            this.btnDSAImportPublic.Click += new System.EventHandler(this.btnDSAImportPublic_Click);
+            // 
+            // btnGenDSAKeys
+            // 
+            this.btnGenDSAKeys.Location = new System.Drawing.Point(154, 596);
+            this.btnGenDSAKeys.Name = "btnGenDSAKeys";
+            this.btnGenDSAKeys.Size = new System.Drawing.Size(316, 56);
+            this.btnGenDSAKeys.TabIndex = 8;
+            this.btnGenDSAKeys.Text = "Generate Keys";
+            this.btnGenDSAKeys.UseVisualStyleBackColor = true;
+            this.btnGenDSAKeys.Click += new System.EventHandler(this.btnGenDSAKeys_Click);
+            // 
+            // btnExportDSAPublic
+            // 
+            this.btnExportDSAPublic.Location = new System.Drawing.Point(682, 596);
+            this.btnExportDSAPublic.Name = "btnExportDSAPublic";
+            this.btnExportDSAPublic.Size = new System.Drawing.Size(200, 56);
+            this.btnExportDSAPublic.TabIndex = 10;
+            this.btnExportDSAPublic.Text = "Export Public Key";
+            this.btnExportDSAPublic.UseVisualStyleBackColor = true;
+            this.btnExportDSAPublic.Click += new System.EventHandler(this.btnExportDSAPublic_Click);
+            // 
+            // btnExportDSA
+            // 
+            this.btnExportDSA.Location = new System.Drawing.Point(476, 596);
+            this.btnExportDSA.Name = "btnExportDSA";
+            this.btnExportDSA.Size = new System.Drawing.Size(200, 56);
+            this.btnExportDSA.TabIndex = 9;
+            this.btnExportDSA.Text = "Export Private Key";
+            this.btnExportDSA.UseVisualStyleBackColor = true;
+            this.btnExportDSA.Click += new System.EventHandler(this.btnExportDSA_Click);
+            // 
+            // txtDSA_X
+            // 
+            this.txtDSA_X.Location = new System.Drawing.Point(154, 525);
+            this.txtDSA_X.Multiline = true;
+            this.txtDSA_X.Name = "txtDSA_X";
+            this.txtDSA_X.Size = new System.Drawing.Size(1140, 65);
+            this.txtDSA_X.TabIndex = 7;
+            // 
+            // txtDSA_Y
+            // 
+            this.txtDSA_Y.Location = new System.Drawing.Point(154, 454);
+            this.txtDSA_Y.Multiline = true;
+            this.txtDSA_Y.Name = "txtDSA_Y";
+            this.txtDSA_Y.Size = new System.Drawing.Size(1140, 65);
+            this.txtDSA_Y.TabIndex = 6;
+            // 
+            // txtDSA_G
+            // 
+            this.txtDSA_G.Location = new System.Drawing.Point(154, 383);
+            this.txtDSA_G.Multiline = true;
+            this.txtDSA_G.Name = "txtDSA_G";
+            this.txtDSA_G.Size = new System.Drawing.Size(1140, 65);
+            this.txtDSA_G.TabIndex = 5;
+            // 
+            // txtDSA_Q
+            // 
+            this.txtDSA_Q.Location = new System.Drawing.Point(154, 312);
+            this.txtDSA_Q.Multiline = true;
+            this.txtDSA_Q.Name = "txtDSA_Q";
+            this.txtDSA_Q.Size = new System.Drawing.Size(1140, 65);
+            this.txtDSA_Q.TabIndex = 4;
+            // 
+            // txtDSA_P
+            // 
+            this.txtDSA_P.Location = new System.Drawing.Point(154, 241);
+            this.txtDSA_P.Multiline = true;
+            this.txtDSA_P.Name = "txtDSA_P";
+            this.txtDSA_P.Size = new System.Drawing.Size(1140, 65);
+            this.txtDSA_P.TabIndex = 3;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(31, 543);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(108, 19);
+            this.label23.TabIndex = 9;
+            this.label23.Text = "X (PrivateKey)";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(32, 474);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(103, 19);
+            this.label24.TabIndex = 10;
+            this.label24.Text = "Y (PublicKey)";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(32, 403);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(20, 19);
+            this.label25.TabIndex = 11;
+            this.label25.Text = "G";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(32, 326);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(67, 19);
+            this.label26.TabIndex = 12;
+            this.label26.Text = "Prime.Q";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(28, 51);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(39, 19);
+            this.label28.TabIndex = 13;
+            this.label28.Text = "PEM";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(31, 208);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(87, 19);
+            this.label33.TabIndex = 13;
+            this.label33.Text = "Key Length";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(29, 277);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(80, 19);
+            this.label29.TabIndex = 13;
+            this.label29.Text = "(Modulus)";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(32, 255);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(64, 19);
+            this.label27.TabIndex = 13;
+            this.label27.Text = "Prime.P";
+            // 
+            // txtDSAPEMPrivate
+            // 
+            this.txtDSAPEMPrivate.AllowDrop = true;
+            this.txtDSAPEMPrivate.Location = new System.Drawing.Point(712, 37);
+            this.txtDSAPEMPrivate.Multiline = true;
+            this.txtDSAPEMPrivate.Name = "txtDSAPEMPrivate";
+            this.txtDSAPEMPrivate.Size = new System.Drawing.Size(582, 195);
+            this.txtDSAPEMPrivate.TabIndex = 1;
+            this.txtDSAPEMPrivate.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtDSAPEM_DragDrop);
+            this.txtDSAPEMPrivate.DragOver += new System.Windows.Forms.DragEventHandler(this.txtDSAPEM_DragOver);
+            // 
+            // txtDSAPEMPublic
+            // 
+            this.txtDSAPEMPublic.AllowDrop = true;
+            this.txtDSAPEMPublic.Location = new System.Drawing.Point(154, 37);
+            this.txtDSAPEMPublic.Multiline = true;
+            this.txtDSAPEMPublic.Name = "txtDSAPEMPublic";
+            this.txtDSAPEMPublic.Size = new System.Drawing.Size(531, 159);
+            this.txtDSAPEMPublic.TabIndex = 0;
+            this.txtDSAPEMPublic.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtDSAPEM_DragDrop);
+            this.txtDSAPEMPublic.DragOver += new System.Windows.Forms.DragEventHandler(this.txtDSAPEM_DragOver);
+            // 
             // tabHexViewer
             // 
             this.tabHexViewer.AllowDrop = true;
@@ -4894,32 +4955,58 @@ namespace CryptoUtility
             this.btnOpenHexFile.UseVisualStyleBackColor = true;
             this.btnOpenHexFile.Click += new System.EventHandler(this.btnOpenHexFile_Click);
             // 
-            // tabXRay
+            // tabTexture
             // 
-            this.tabXRay.BackColor = System.Drawing.Color.LightGray;
-            this.tabXRay.Controls.Add(this.chkINV);
-            this.tabXRay.Controls.Add(this.chkFlipX);
-            this.tabXRay.Controls.Add(this.chkFlipY);
-            this.tabXRay.Controls.Add(this.chkFixPadding);
-            this.tabXRay.Controls.Add(this.lblPointSize);
-            this.tabXRay.Controls.Add(this.btnSMinus);
-            this.tabXRay.Controls.Add(this.btnSPlus);
-            this.tabXRay.Controls.Add(this.label49);
-            this.tabXRay.Controls.Add(this.label47);
-            this.tabXRay.Controls.Add(this.cmbSizeMode);
-            this.tabXRay.Controls.Add(this.btnScreenShot);
-            this.tabXRay.Controls.Add(this.btnScan);
-            this.tabXRay.Controls.Add(this.btnSaveImage);
-            this.tabXRay.Controls.Add(this.btnResetImage);
-            this.tabXRay.Controls.Add(this.btnRotate);
-            this.tabXRay.Controls.Add(this.picQuran2);
-            this.tabXRay.Controls.Add(this.picQuran1);
-            this.tabXRay.Location = new System.Drawing.Point(4, 28);
-            this.tabXRay.Name = "tabXRay";
-            this.tabXRay.Size = new System.Drawing.Size(1331, 663);
-            this.tabXRay.TabIndex = 8;
-            this.tabXRay.Text = "X-Ray";
-            this.tabXRay.Click += new System.EventHandler(this.tabImage_Click);
+            this.tabTexture.BackColor = System.Drawing.Color.LightGray;
+            this.tabTexture.Controls.Add(this.chkQR);
+            this.tabTexture.Controls.Add(this.picQuran3);
+            this.tabTexture.Controls.Add(this.chkINV);
+            this.tabTexture.Controls.Add(this.chkFlipX);
+            this.tabTexture.Controls.Add(this.chkFlipY);
+            this.tabTexture.Controls.Add(this.chkFixPadding);
+            this.tabTexture.Controls.Add(this.lblPointSize);
+            this.tabTexture.Controls.Add(this.btnSMinus);
+            this.tabTexture.Controls.Add(this.btnSPlus);
+            this.tabTexture.Controls.Add(this.label49);
+            this.tabTexture.Controls.Add(this.label47);
+            this.tabTexture.Controls.Add(this.cmbSizeMode);
+            this.tabTexture.Controls.Add(this.btnScreenShot);
+            this.tabTexture.Controls.Add(this.btnScan);
+            this.tabTexture.Controls.Add(this.btnSaveImage);
+            this.tabTexture.Controls.Add(this.btnResetImage);
+            this.tabTexture.Controls.Add(this.btnRotate);
+            this.tabTexture.Controls.Add(this.picQuran2);
+            this.tabTexture.Controls.Add(this.picQuran1);
+            this.tabTexture.Location = new System.Drawing.Point(4, 28);
+            this.tabTexture.Name = "tabTexture";
+            this.tabTexture.Size = new System.Drawing.Size(1331, 663);
+            this.tabTexture.TabIndex = 8;
+            this.tabTexture.Text = "Texture";
+            this.tabTexture.Click += new System.EventHandler(this.tabImage_Click);
+            // 
+            // chkQR
+            // 
+            this.chkQR.AutoSize = true;
+            this.chkQR.Checked = true;
+            this.chkQR.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkQR.Location = new System.Drawing.Point(915, 625);
+            this.chkQR.Name = "chkQR";
+            this.chkQR.Size = new System.Drawing.Size(57, 23);
+            this.chkQR.TabIndex = 16;
+            this.chkQR.Text = "QR";
+            this.chkQR.UseVisualStyleBackColor = true;
+            this.chkQR.CheckedChanged += new System.EventHandler(this.chkQR_CheckedChanged);
+            // 
+            // picQuran3
+            // 
+            this.picQuran3.BackColor = System.Drawing.Color.Black;
+            this.picQuran3.Location = new System.Drawing.Point(691, 493);
+            this.picQuran3.Name = "picQuran3";
+            this.picQuran3.Size = new System.Drawing.Size(600, 113);
+            this.picQuran3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picQuran3.TabIndex = 15;
+            this.picQuran3.TabStop = false;
+            this.picQuran3.DoubleClick += new System.EventHandler(this.picQuran3_DoubleClick);
             // 
             // chkINV
             // 
@@ -5014,7 +5101,7 @@ namespace CryptoUtility
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(689, 626);
+            this.label47.Location = new System.Drawing.Point(621, 626);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(91, 19);
             this.label47.TabIndex = 3;
@@ -5030,7 +5117,7 @@ namespace CryptoUtility
             "AutoSize",
             "CenterImage",
             "Zoom"});
-            this.cmbSizeMode.Location = new System.Drawing.Point(786, 623);
+            this.cmbSizeMode.Location = new System.Drawing.Point(715, 623);
             this.cmbSizeMode.Name = "cmbSizeMode";
             this.cmbSizeMode.Size = new System.Drawing.Size(184, 27);
             this.cmbSizeMode.TabIndex = 2;
@@ -5038,7 +5125,7 @@ namespace CryptoUtility
             // 
             // btnScreenShot
             // 
-            this.btnScreenShot.Location = new System.Drawing.Point(549, 615);
+            this.btnScreenShot.Location = new System.Drawing.Point(524, 615);
             this.btnScreenShot.Name = "btnScreenShot";
             this.btnScreenShot.Size = new System.Drawing.Size(89, 40);
             this.btnScreenShot.TabIndex = 1;
@@ -5048,7 +5135,7 @@ namespace CryptoUtility
             // 
             // btnScan
             // 
-            this.btnScan.Location = new System.Drawing.Point(463, 615);
+            this.btnScan.Location = new System.Drawing.Point(445, 615);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(80, 40);
             this.btnScan.TabIndex = 1;
@@ -5058,7 +5145,7 @@ namespace CryptoUtility
             // 
             // btnSaveImage
             // 
-            this.btnSaveImage.Location = new System.Drawing.Point(377, 615);
+            this.btnSaveImage.Location = new System.Drawing.Point(368, 615);
             this.btnSaveImage.Name = "btnSaveImage";
             this.btnSaveImage.Size = new System.Drawing.Size(80, 40);
             this.btnSaveImage.TabIndex = 1;
@@ -5089,9 +5176,9 @@ namespace CryptoUtility
             // picQuran2
             // 
             this.picQuran2.BackColor = System.Drawing.Color.Black;
-            this.picQuran2.Location = new System.Drawing.Point(693, 6);
+            this.picQuran2.Location = new System.Drawing.Point(691, 7);
             this.picQuran2.Name = "picQuran2";
-            this.picQuran2.Size = new System.Drawing.Size(600, 600);
+            this.picQuran2.Size = new System.Drawing.Size(600, 480);
             this.picQuran2.TabIndex = 0;
             this.picQuran2.TabStop = false;
             // 
@@ -5103,19 +5190,18 @@ namespace CryptoUtility
             this.picQuran1.Size = new System.Drawing.Size(600, 600);
             this.picQuran1.TabIndex = 0;
             this.picQuran1.TabStop = false;
-            this.picQuran1.Click += new System.EventHandler(this.picQuran1_Click);
             this.picQuran1.DoubleClick += new System.EventHandler(this.picQuran1_DoubleClick);
             // 
-            // tabSpectrum
+            // tabAudioSpectrum
             // 
-            this.tabSpectrum.BackColor = System.Drawing.SystemColors.Control;
-            this.tabSpectrum.Controls.Add(this.splitContainer1);
-            this.tabSpectrum.Location = new System.Drawing.Point(4, 28);
-            this.tabSpectrum.Name = "tabSpectrum";
-            this.tabSpectrum.Size = new System.Drawing.Size(1331, 663);
-            this.tabSpectrum.TabIndex = 9;
-            this.tabSpectrum.Text = "Spectrum";
-            this.tabSpectrum.Enter += new System.EventHandler(this.tabSpectrum_Enter);
+            this.tabAudioSpectrum.BackColor = System.Drawing.SystemColors.Control;
+            this.tabAudioSpectrum.Controls.Add(this.splitContainer1);
+            this.tabAudioSpectrum.Location = new System.Drawing.Point(4, 28);
+            this.tabAudioSpectrum.Name = "tabAudioSpectrum";
+            this.tabAudioSpectrum.Size = new System.Drawing.Size(1331, 663);
+            this.tabAudioSpectrum.TabIndex = 9;
+            this.tabAudioSpectrum.Text = "Audio Spectrum";
+            this.tabAudioSpectrum.Enter += new System.EventHandler(this.tabSpectrum_Enter);
             // 
             // splitContainer1
             // 
@@ -5125,11 +5211,15 @@ namespace CryptoUtility
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightGray;
-            this.splitContainer1.Panel1.Controls.Add(this.spectrumRButton);
-            this.splitContainer1.Panel1.Controls.Add(this.waveRButton);
+            this.splitContainer1.Panel1.Controls.Add(this.waveformPainter2);
+            this.splitContainer1.Panel1.Controls.Add(this.waveformPainter1);
+            this.splitContainer1.Panel1.Controls.Add(this.label53);
+            this.splitContainer1.Panel1.Controls.Add(this.volumeMeter2);
+            this.splitContainer1.Panel1.Controls.Add(this.volumeMeter1);
+            this.splitContainer1.Panel1.Controls.Add(this.volumeSlider1);
+            this.splitContainer1.Panel1.Controls.Add(this.panel8);
+            this.splitContainer1.Panel1.Controls.Add(this.panel7);
             this.splitContainer1.Panel1.Controls.Add(this.label51);
-            this.splitContainer1.Panel1.Controls.Add(this.label50);
-            this.splitContainer1.Panel1.Controls.Add(this.label48);
             this.splitContainer1.Panel1.Controls.Add(this.cmbChannels);
             this.splitContainer1.Panel1.Controls.Add(this.cmbBits);
             this.splitContainer1.Panel1.Controls.Add(this.cmbSampleRate);
@@ -5137,21 +5227,148 @@ namespace CryptoUtility
             this.splitContainer1.Panel1.Controls.Add(this.stopButton);
             this.splitContainer1.Panel1.Controls.Add(this.btnResetSpectrum);
             this.splitContainer1.Panel1.Controls.Add(this.btnStop);
+            this.splitContainer1.Panel1.Controls.Add(this.btnRePlay);
             this.splitContainer1.Panel1.Controls.Add(this.btnPlay);
             this.splitContainer1.Panel1.Controls.Add(this.startButton);
+            this.splitContainer1.Panel1.Controls.Add(this.label50);
+            this.splitContainer1.Panel1.Controls.Add(this.label48);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.canvas);
+            this.splitContainer1.Panel2.Controls.Add(this.picSpectrum);
             this.splitContainer1.Size = new System.Drawing.Size(1335, 663);
             this.splitContainer1.SplitterDistance = 185;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // waveformPainter2
+            // 
+            this.waveformPainter2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.waveformPainter2.Location = new System.Drawing.Point(14, 427);
+            this.waveformPainter2.Name = "waveformPainter2";
+            this.waveformPainter2.Size = new System.Drawing.Size(158, 40);
+            this.waveformPainter2.TabIndex = 24;
+            this.waveformPainter2.Text = "waveformPainter1";
+            // 
+            // waveformPainter1
+            // 
+            this.waveformPainter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.waveformPainter1.Location = new System.Drawing.Point(15, 381);
+            this.waveformPainter1.Name = "waveformPainter1";
+            this.waveformPainter1.Size = new System.Drawing.Size(158, 40);
+            this.waveformPainter1.TabIndex = 24;
+            this.waveformPainter1.Text = "waveformPainter1";
+            // 
+            // label53
+            // 
+            this.label53.Location = new System.Drawing.Point(19, 471);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(149, 25);
+            this.label53.TabIndex = 20;
+            this.label53.Text = "Volume";
+            this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // volumeMeter2
+            // 
+            this.volumeMeter2.Amplitude = 0F;
+            this.volumeMeter2.Location = new System.Drawing.Point(14, 549);
+            this.volumeMeter2.MaxDb = 18F;
+            this.volumeMeter2.MinDb = -60F;
+            this.volumeMeter2.Name = "volumeMeter2";
+            this.volumeMeter2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.volumeMeter2.Size = new System.Drawing.Size(158, 17);
+            this.volumeMeter2.TabIndex = 23;
+            this.volumeMeter2.Text = "volumeMeter1";
+            // 
+            // volumeMeter1
+            // 
+            this.volumeMeter1.Amplitude = 0F;
+            this.volumeMeter1.Location = new System.Drawing.Point(14, 526);
+            this.volumeMeter1.MaxDb = 18F;
+            this.volumeMeter1.MinDb = -60F;
+            this.volumeMeter1.Name = "volumeMeter1";
+            this.volumeMeter1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.volumeMeter1.Size = new System.Drawing.Size(158, 17);
+            this.volumeMeter1.TabIndex = 23;
+            this.volumeMeter1.Text = "volumeMeter1";
+            // 
+            // volumeSlider1
+            // 
+            this.volumeSlider1.Location = new System.Drawing.Point(15, 499);
+            this.volumeSlider1.Name = "volumeSlider1";
+            this.volumeSlider1.Size = new System.Drawing.Size(157, 21);
+            this.volumeSlider1.TabIndex = 22;
+            this.volumeSlider1.VolumeChanged += new System.EventHandler(this.volumeSlider1_VolumeChanged);
+            // 
+            // panel8
+            // 
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.label52);
+            this.panel8.Controls.Add(this.lblDB);
+            this.panel8.Controls.Add(this.trkDB);
+            this.panel8.Location = new System.Drawing.Point(15, 226);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(157, 99);
+            this.panel8.TabIndex = 21;
+            // 
+            // label52
+            // 
+            this.label52.Location = new System.Drawing.Point(3, 5);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(149, 25);
+            this.label52.TabIndex = 20;
+            this.label52.Text = "Gain (dB / %)";
+            this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblDB
+            // 
+            this.lblDB.Location = new System.Drawing.Point(7, 68);
+            this.lblDB.Name = "lblDB";
+            this.lblDB.Size = new System.Drawing.Size(142, 27);
+            this.lblDB.TabIndex = 20;
+            this.lblDB.Text = "dB";
+            this.lblDB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // trkDB
+            // 
+            this.trkDB.LargeChange = 30;
+            this.trkDB.Location = new System.Drawing.Point(-1, 30);
+            this.trkDB.Maximum = 600;
+            this.trkDB.Minimum = 13;
+            this.trkDB.Name = "trkDB";
+            this.trkDB.Size = new System.Drawing.Size(157, 69);
+            this.trkDB.TabIndex = 19;
+            this.trkDB.Value = 15;
+            this.trkDB.Scroll += new System.EventHandler(this.trkDB_Scroll);
+            this.trkDB.ValueChanged += new System.EventHandler(this.trkDB_ValueChanged);
+            // 
+            // panel7
+            // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.waveRButton);
+            this.panel7.Controls.Add(this.spectrumRButton);
+            this.panel7.Location = new System.Drawing.Point(15, 118);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(157, 72);
+            this.panel7.TabIndex = 18;
+            // 
+            // waveRButton
+            // 
+            this.waveRButton.AutoSize = true;
+            this.waveRButton.Location = new System.Drawing.Point(16, 5);
+            this.waveRButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.waveRButton.Name = "waveRButton";
+            this.waveRButton.Size = new System.Drawing.Size(106, 23);
+            this.waveRButton.TabIndex = 16;
+            this.waveRButton.Text = "Waveform";
+            this.waveRButton.UseVisualStyleBackColor = true;
+            this.waveRButton.CheckedChanged += new System.EventHandler(this.waveRButton_CheckedChanged);
             // 
             // spectrumRButton
             // 
             this.spectrumRButton.AutoSize = true;
             this.spectrumRButton.Checked = true;
-            this.spectrumRButton.Location = new System.Drawing.Point(29, 382);
+            this.spectrumRButton.Location = new System.Drawing.Point(16, 38);
             this.spectrumRButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.spectrumRButton.Name = "spectrumRButton";
             this.spectrumRButton.Size = new System.Drawing.Size(101, 23);
@@ -5161,44 +5378,14 @@ namespace CryptoUtility
             this.spectrumRButton.UseVisualStyleBackColor = true;
             this.spectrumRButton.CheckedChanged += new System.EventHandler(this.spectrumRButton_CheckedChanged);
             // 
-            // waveRButton
-            // 
-            this.waveRButton.AutoSize = true;
-            this.waveRButton.Location = new System.Drawing.Point(29, 349);
-            this.waveRButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.waveRButton.Name = "waveRButton";
-            this.waveRButton.Size = new System.Drawing.Size(101, 23);
-            this.waveRButton.TabIndex = 16;
-            this.waveRButton.Text = "Raw Data";
-            this.waveRButton.UseVisualStyleBackColor = true;
-            this.waveRButton.CheckedChanged += new System.EventHandler(this.waveRButton_CheckedChanged);
-            // 
             // label51
             // 
-            this.label51.Location = new System.Drawing.Point(31, 144);
+            this.label51.Location = new System.Drawing.Point(11, 84);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(109, 25);
+            this.label51.Size = new System.Drawing.Size(65, 25);
             this.label51.TabIndex = 15;
-            this.label51.Text = "Channels";
-            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label50
-            // 
-            this.label50.Location = new System.Drawing.Point(31, 77);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(109, 25);
-            this.label50.TabIndex = 15;
-            this.label50.Text = "Bits";
-            this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label48
-            // 
-            this.label48.Location = new System.Drawing.Point(32, 17);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(109, 25);
-            this.label48.TabIndex = 15;
-            this.label48.Text = "Sample Rate";
-            this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label51.Text = "Chann";
+            this.label51.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // cmbChannels
             // 
@@ -5207,9 +5394,9 @@ namespace CryptoUtility
             this.cmbChannels.Items.AddRange(new object[] {
             "Mono",
             "Stereo"});
-            this.cmbChannels.Location = new System.Drawing.Point(29, 172);
+            this.cmbChannels.Location = new System.Drawing.Point(82, 84);
             this.cmbChannels.Name = "cmbChannels";
-            this.cmbChannels.Size = new System.Drawing.Size(112, 27);
+            this.cmbChannels.Size = new System.Drawing.Size(90, 27);
             this.cmbChannels.TabIndex = 14;
             this.cmbChannels.SelectedIndexChanged += new System.EventHandler(this.cmbChannels_SelectedIndexChanged);
             // 
@@ -5219,9 +5406,9 @@ namespace CryptoUtility
             this.cmbBits.Items.AddRange(new object[] {
             "8",
             "16"});
-            this.cmbBits.Location = new System.Drawing.Point(29, 105);
+            this.cmbBits.Location = new System.Drawing.Point(82, 51);
             this.cmbBits.Name = "cmbBits";
-            this.cmbBits.Size = new System.Drawing.Size(112, 27);
+            this.cmbBits.Size = new System.Drawing.Size(90, 27);
             this.cmbBits.TabIndex = 14;
             this.cmbBits.SelectedIndexChanged += new System.EventHandler(this.cmbBits_SelectedIndexChanged);
             this.cmbBits.TextChanged += new System.EventHandler(this.cmbBits_SelectedIndexChanged);
@@ -5236,9 +5423,9 @@ namespace CryptoUtility
             "32000",
             "44100",
             "48000"});
-            this.cmbSampleRate.Location = new System.Drawing.Point(30, 42);
+            this.cmbSampleRate.Location = new System.Drawing.Point(82, 21);
             this.cmbSampleRate.Name = "cmbSampleRate";
-            this.cmbSampleRate.Size = new System.Drawing.Size(112, 27);
+            this.cmbSampleRate.Size = new System.Drawing.Size(90, 27);
             this.cmbSampleRate.TabIndex = 14;
             this.cmbSampleRate.SelectedIndexChanged += new System.EventHandler(this.cmbSampleRate_SelectedIndexChanged);
             this.cmbSampleRate.TextChanged += new System.EventHandler(this.cmbSampleRate_SelectedIndexChanged);
@@ -5246,20 +5433,20 @@ namespace CryptoUtility
             // chkPlay
             // 
             this.chkPlay.AutoSize = true;
-            this.chkPlay.Location = new System.Drawing.Point(29, 426);
+            this.chkPlay.Location = new System.Drawing.Point(14, 195);
             this.chkPlay.Name = "chkPlay";
-            this.chkPlay.Size = new System.Drawing.Size(134, 23);
+            this.chkPlay.Size = new System.Drawing.Size(150, 23);
             this.chkPlay.TabIndex = 13;
-            this.chkPlay.Text = "Play && Record";
+            this.chkPlay.Text = "Recording  Echo";
             this.chkPlay.UseVisualStyleBackColor = true;
             this.chkPlay.CheckedChanged += new System.EventHandler(this.chkPlay_CheckedChanged);
             // 
             // stopButton
             // 
-            this.stopButton.Location = new System.Drawing.Point(30, 285);
+            this.stopButton.Location = new System.Drawing.Point(99, 336);
             this.stopButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.stopButton.Name = "stopButton";
-            this.stopButton.Size = new System.Drawing.Size(112, 36);
+            this.stopButton.Size = new System.Drawing.Size(73, 36);
             this.stopButton.TabIndex = 10;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = true;
@@ -5267,10 +5454,10 @@ namespace CryptoUtility
             // 
             // btnResetSpectrum
             // 
-            this.btnResetSpectrum.Location = new System.Drawing.Point(28, 595);
+            this.btnResetSpectrum.Location = new System.Drawing.Point(99, 616);
             this.btnResetSpectrum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnResetSpectrum.Name = "btnResetSpectrum";
-            this.btnResetSpectrum.Size = new System.Drawing.Size(112, 36);
+            this.btnResetSpectrum.Size = new System.Drawing.Size(73, 36);
             this.btnResetSpectrum.TabIndex = 9;
             this.btnResetSpectrum.Text = "Reset";
             this.btnResetSpectrum.UseVisualStyleBackColor = true;
@@ -5278,10 +5465,10 @@ namespace CryptoUtility
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(28, 549);
+            this.btnStop.Location = new System.Drawing.Point(14, 616);
             this.btnStop.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(112, 36);
+            this.btnStop.Size = new System.Drawing.Size(77, 36);
             this.btnStop.TabIndex = 9;
             this.btnStop.Text = "Stop";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -5290,12 +5477,23 @@ namespace CryptoUtility
             this.btnStop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnStop_KeyDown);
             this.btnStop.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnStop_KeyUp);
             // 
+            // btnRePlay
+            // 
+            this.btnRePlay.Location = new System.Drawing.Point(99, 576);
+            this.btnRePlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnRePlay.Name = "btnRePlay";
+            this.btnRePlay.Size = new System.Drawing.Size(73, 36);
+            this.btnRePlay.TabIndex = 9;
+            this.btnRePlay.Text = "RePlay";
+            this.btnRePlay.UseVisualStyleBackColor = true;
+            this.btnRePlay.Click += new System.EventHandler(this.btnPlay_Click);
+            // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(28, 503);
+            this.btnPlay.Location = new System.Drawing.Point(14, 576);
             this.btnPlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(112, 36);
+            this.btnPlay.Size = new System.Drawing.Size(76, 36);
             this.btnPlay.TabIndex = 9;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = true;
@@ -5303,36 +5501,86 @@ namespace CryptoUtility
             // 
             // startButton
             // 
-            this.startButton.Location = new System.Drawing.Point(30, 239);
+            this.startButton.Location = new System.Drawing.Point(15, 336);
             this.startButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(112, 36);
+            this.startButton.Size = new System.Drawing.Size(76, 36);
             this.startButton.TabIndex = 9;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
+            // label50
+            // 
+            this.label50.Location = new System.Drawing.Point(11, 51);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(65, 25);
+            this.label50.TabIndex = 15;
+            this.label50.Text = "Bits";
+            this.label50.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label48
+            // 
+            this.label48.Location = new System.Drawing.Point(11, 21);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(65, 25);
+            this.label48.TabIndex = 15;
+            this.label48.Text = "S.Rate";
+            this.label48.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // canvas
             // 
-            this.canvas.BackColor = System.Drawing.Color.White;
-            this.canvas.Location = new System.Drawing.Point(3, 0);
+            this.canvas.BackColor = System.Drawing.Color.Transparent;
+            this.canvas.Location = new System.Drawing.Point(2, 0);
             this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(1143, 663);
+            this.canvas.Size = new System.Drawing.Size(1140, 660);
             this.canvas.TabIndex = 1;
             this.canvas.TabStop = false;
             this.canvas.Click += new System.EventHandler(this.canvas_Click);
+            this.canvas.DragDrop += new System.Windows.Forms.DragEventHandler(this.canvas_DragDrop);
+            this.canvas.DragOver += new System.Windows.Forms.DragEventHandler(this.canvas_DragOver);
             this.canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.canvas_Paint);
+            // 
+            // picSpectrum
+            // 
+            this.picSpectrum.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.picSpectrum.Location = new System.Drawing.Point(2, 0);
+            this.picSpectrum.Name = "picSpectrum";
+            this.picSpectrum.Size = new System.Drawing.Size(1140, 660);
+            this.picSpectrum.TabIndex = 2;
+            this.picSpectrum.TabStop = false;
             // 
             // tabColor
             // 
+            this.tabColor.Controls.Add(this.texture3);
             this.tabColor.Controls.Add(this.texture2);
             this.tabColor.Controls.Add(this.texture);
             this.tabColor.Location = new System.Drawing.Point(4, 28);
             this.tabColor.Name = "tabColor";
             this.tabColor.Size = new System.Drawing.Size(1331, 663);
             this.tabColor.TabIndex = 10;
-            this.tabColor.Text = "Color";
+            this.tabColor.Text = "Color Spectrum";
             this.tabColor.UseVisualStyleBackColor = true;
+            // 
+            // texture3
+            // 
+            this.texture3.BackColor = System.Drawing.Color.Black;
+            this.texture3.Location = new System.Drawing.Point(679, 10);
+            this.texture3.Name = "texture3";
+            this.texture3.Size = new System.Drawing.Size(640, 515);
+            this.texture3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.texture3.TabIndex = 1;
+            this.texture3.TabStop = false;
+            // 
+            // texture2
+            // 
+            this.texture2.BackColor = System.Drawing.Color.Black;
+            this.texture2.Location = new System.Drawing.Point(679, 531);
+            this.texture2.Name = "texture2";
+            this.texture2.Size = new System.Drawing.Size(640, 119);
+            this.texture2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.texture2.TabIndex = 0;
+            this.texture2.TabStop = false;
             // 
             // texture
             // 
@@ -5387,26 +5635,30 @@ namespace CryptoUtility
             this.lblStatus.TabIndex = 8;
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // texture2
+            // btnStackTrace
             // 
-            this.texture2.BackColor = System.Drawing.Color.Black;
-            this.texture2.Location = new System.Drawing.Point(679, 10);
-            this.texture2.Name = "texture2";
-            this.texture2.Size = new System.Drawing.Size(640, 640);
-            this.texture2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.texture2.TabIndex = 0;
-            this.texture2.TabStop = false;
+            this.btnStackTrace.BackColor = System.Drawing.Color.Silver;
+            this.btnStackTrace.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnStackTrace.ForeColor = System.Drawing.Color.Black;
+            this.btnStackTrace.Location = new System.Drawing.Point(1359, 732);
+            this.btnStackTrace.Name = "btnStackTrace";
+            this.btnStackTrace.Size = new System.Drawing.Size(18, 137);
+            this.btnStackTrace.TabIndex = 9;
+            this.btnStackTrace.Text = "STACK";
+            this.btnStackTrace.UseVisualStyleBackColor = false;
+            this.btnStackTrace.Click += new System.EventHandler(this.btnStackTrace_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1959, 885);
+            this.Controls.Add(this.btnStackTrace);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.label34);
             this.Controls.Add(this.txtInfo);
             this.Controls.Add(this.lstLog);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -5417,20 +5669,7 @@ namespace CryptoUtility
             this.tabCrypto.PerformLayout();
             this.tabRSA.ResumeLayout(false);
             this.tabRSA.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabDSA.ResumeLayout(false);
-            this.tabDSA.PerformLayout();
-            this.tabCalculator.ResumeLayout(false);
-            this.tabCalculator.PerformLayout();
-            this.tabEncoding.ResumeLayout(false);
-            this.grpOptions.ResumeLayout(false);
-            this.grpOptions.PerformLayout();
-            this.panel7.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
-            this.grpSource.ResumeLayout(false);
-            this.grpEncodings.ResumeLayout(false);
-            this.grpEncodings.PerformLayout();
+            this.tabControl.ResumeLayout(false);
             this.tabQuran.ResumeLayout(false);
             this.tabQuran.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQuran)).EndInit();
@@ -5445,22 +5684,43 @@ namespace CryptoUtility
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.tabEncoding.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.grpOptions.ResumeLayout(false);
+            this.grpOptions.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.grpSource.ResumeLayout(false);
+            this.grpEncodings.ResumeLayout(false);
+            this.grpEncodings.PerformLayout();
+            this.tabCalculator.ResumeLayout(false);
+            this.tabCalculator.PerformLayout();
+            this.tabDSA.ResumeLayout(false);
+            this.tabDSA.PerformLayout();
             this.tabHexViewer.ResumeLayout(false);
             this.tabHexViewer.PerformLayout();
-            this.tabXRay.ResumeLayout(false);
-            this.tabXRay.PerformLayout();
+            this.tabTexture.ResumeLayout(false);
+            this.tabTexture.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picQuran3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picQuran2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picQuran1)).EndInit();
-            this.tabSpectrum.ResumeLayout(false);
+            this.tabAudioSpectrum.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trkDB)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSpectrum)).EndInit();
             this.tabColor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.texture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.texture3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.texture2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.texture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5502,7 +5762,7 @@ namespace CryptoUtility
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
@@ -5838,7 +6098,7 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnSendToHex;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TabPage tabXRay;
+        private System.Windows.Forms.TabPage tabTexture;
         private System.Windows.Forms.PictureBox picQuran1;
         private System.Windows.Forms.Button btnSImage;
         private System.Windows.Forms.PictureBox picQuran2;
@@ -5854,9 +6114,8 @@ namespace CryptoUtility
         private System.Windows.Forms.CheckBox chkFlipY;
         private System.Windows.Forms.CheckBox chkFlipX;
         private System.Windows.Forms.CheckBox chkINV;
-        private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Button btnSaveImage;
-        private System.Windows.Forms.TabPage tabSpectrum;
+        private System.Windows.Forms.TabPage tabAudioSpectrum;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.PictureBox canvas;
         private System.Windows.Forms.Button stopButton;
@@ -5880,6 +6139,27 @@ namespace CryptoUtility
         private System.Windows.Forms.TabPage tabColor;
         private System.Windows.Forms.PictureBox texture;
         private System.Windows.Forms.PictureBox texture2;
+        private System.Windows.Forms.PictureBox texture3;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox txtSoraSearch;
+        private System.Windows.Forms.Button btnStackTrace;
+        private System.Windows.Forms.Button btnRePlay;
+        private System.Windows.Forms.PictureBox picSpectrum;
+        private System.Windows.Forms.PictureBox picQuran3;
+        private System.Windows.Forms.CheckBox chkQR;
+        private System.Windows.Forms.TrackBar trkDB;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label lblDB;
+        private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.Panel panel8;
+        private NAudio.Gui.VolumeMeter volumeMeter2;
+        private NAudio.Gui.VolumeMeter volumeMeter1;
+        private NAudio.Gui.VolumeSlider volumeSlider1;
+        private System.Windows.Forms.Label label53;
+        private NAudio.Gui.WaveformPainter waveformPainter2;
+        private NAudio.Gui.WaveformPainter waveformPainter1;
     }
 }
 

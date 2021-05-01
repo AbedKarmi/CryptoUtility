@@ -6,6 +6,8 @@ using NAudio;
 using NAudio.Wave;
 using ILNumerics;
 using System.Threading;
+using NAudio.Wave.SampleProviders;
+using NAudio.Gui;
 
 namespace SpectrumAnalyzerLib
 {
@@ -14,45 +16,45 @@ namespace SpectrumAnalyzerLib
         Monaural,
         Stereo,
     }
-/*
-    class SavingWaveProvider : IWaveProvider, IDisposable
-    {
-        private readonly IWaveProvider sourceWaveProvider;
-        private readonly WaveFileWriter writer;
-        public bool isWriterDisposed;
-
-        public SavingWaveProvider(IWaveProvider sourceWaveProvider, string wavFilePath)
+    /*
+        class SavingWaveProvider : IWaveProvider, IDisposable
         {
-            this.sourceWaveProvider = sourceWaveProvider;
-            writer = new WaveFileWriter(wavFilePath, sourceWaveProvider.WaveFormat);
-        }
+            private readonly IWaveProvider sourceWaveProvider;
+            private readonly WaveFileWriter writer;
+            public bool isWriterDisposed;
 
-        public int Read(byte[] buffer, int offset, int count)
-        {
-            var read = sourceWaveProvider.Read(buffer, offset, count);
-            if (count > 0 && !isWriterDisposed)
+            public SavingWaveProvider(IWaveProvider sourceWaveProvider, string wavFilePath)
             {
-                writer.Write(buffer, offset, read);
+                this.sourceWaveProvider = sourceWaveProvider;
+                writer = new WaveFileWriter(wavFilePath, sourceWaveProvider.WaveFormat);
             }
-            if (count == 0)
-            {
-                Dispose(); // auto-dispose in case users forget
-            }
-            return read;
-        }
 
-        public WaveFormat WaveFormat { get { return sourceWaveProvider.WaveFormat; } }
-
-        public void Dispose()
-        {
-            if (!isWriterDisposed)
+            public int Read(byte[] buffer, int offset, int count)
             {
-                isWriterDisposed = true;
-                writer.Dispose();
+                var read = sourceWaveProvider.Read(buffer, offset, count);
+                if (count > 0 && !isWriterDisposed)
+                {
+                    writer.Write(buffer, offset, read);
+                }
+                if (count == 0)
+                {
+                    Dispose(); // auto-dispose in case users forget
+                }
+                return read;
+            }
+
+            public WaveFormat WaveFormat { get { return sourceWaveProvider.WaveFormat; } }
+
+            public void Dispose()
+            {
+                if (!isWriterDisposed)
+                {
+                    isWriterDisposed = true;
+                    writer.Dispose();
+                }
             }
         }
-    }
-*/
+    */
     public class AudioSensor : IDisposable
     {
         const int maxBufferSize = 8000 * 2 * 600;
@@ -60,8 +62,11 @@ namespace SpectrumAnalyzerLib
         private MonitoredWaveProvider monitoredgWaveProvider;
         private WaveOut player;
         private WaveFileWriter writer;
-        private int channels=0;
+        private int channels = 0;
         public AudioSensorData Data { get { return data; } }
+        public int Bits { get { return bits; } }
+        public int Channels { get { return channels; } }
+        public int SampleRate { get { return rate; } }
 
         AudioSensorData data;
         int rate, bits;
@@ -81,8 +86,9 @@ namespace SpectrumAnalyzerLib
         {
             this.rate = rate;
             this.bits = bits;
-            this.channels = audioType == AudioType.Monaural ? 1 : 2;
+            this.channels = (audioType == AudioType.Monaural ? 1 : 2);
             this.data = new AudioSensorData(channels);
+            this.data.bits = bits;
             this.action = onUpdate;
         }
 
@@ -94,15 +100,17 @@ namespace SpectrumAnalyzerLib
             Stop();
         }
 
+        private delegate ISampleProvider CreateSampleProvider(IWaveProvider waveProvider, int bits = 16);
+
         /// <summary>
         /// Start recording
         /// </summary>
         /// <param name="file">Output .wav FileName</param>
         /// <param name="play">Play while recording</param>
-        public void Start(string file, bool record=true,bool play=false)
+        public IWaveProvider Start(string file, bool record=true,bool play=false,Func<IWaveProvider,int,ISampleProvider> createSampleProvider=null)
         {
             Cleanup();
-
+            
             recorder = new WaveIn();
             recorder.WaveFormat = new WaveFormat(rate, bits, data.Channels);
             if (record) recorder.DataAvailable += OnDataAvailable;
@@ -113,16 +121,23 @@ namespace SpectrumAnalyzerLib
             {
                 bufferedWaveProvider = new BufferedWaveProvider(recorder.WaveFormat);
                 monitoredgWaveProvider = new MonitoredWaveProvider(bufferedWaveProvider);
+
                 // set up playback
                 player = new WaveOut();
-                player.Init(monitoredgWaveProvider);
+                if (createSampleProvider != null)
+                    player.Init(createSampleProvider(monitoredgWaveProvider, bits));
+                else
+                    player.Init(monitoredgWaveProvider);
 
+                ResetPosition();
                 // begin playback & record
                 player.Play();
             }
             writer = new WaveFileWriter(file, recorder.WaveFormat);
 
             recorder.StartRecording();
+
+            return play ? monitoredgWaveProvider :null;
         }
 
         public int PlayerPosition { get { return monitoredgWaveProvider.Position; } set { monitoredgWaveProvider.Position = value; } }
@@ -153,9 +168,17 @@ namespace SpectrumAnalyzerLib
                 player.Dispose();
                 player = null;
             }
+            if (bufferedWaveProvider!=null)
+            {
+                bufferedWaveProvider = null;
+            }
+            if (monitoredgWaveProvider!=null)
+            {
+                monitoredgWaveProvider = null;
+            }
         }
 
-        public void Reset()
+        public void ResetPosition()
         {
             PlayerPosition = 0;
         }
@@ -185,24 +208,29 @@ namespace SpectrumAnalyzerLib
 
             if (data.Buffer.Count <= curChannel)
                 return;
-
+            
+            int segs =(bits==16?1:2);
             for (int i = 0; i < count; i++)
             {
-                byte n = bytes[i];
-                if (lowBit)
+                for (int j = 0; j < segs; j++)
                 {
-                    data.Buffer[curChannel].Add(n);
-                    lowBit = false;
-                }
-                else
-                {
-                    short highBits = (short)(n << 8);
-                    if (data.Buffer[curChannel].Count < 1)
-                        continue;
-                    short lowBits = (short)data.Buffer[curChannel][data.Buffer[curChannel].Count - 1];
-                    data.Buffer[curChannel].Add((short)(highBits | lowBits));
-                    curChannel = (curChannel + 1) % data.Buffer.Count;
-                    lowBit = true;
+                    byte n = bytes[i];
+                    if (j == 1) n =0;
+                    if (lowBit)
+                    {
+                        data.Buffer[curChannel].Add(n);
+                        lowBit = false;
+                    }
+                    else
+                    {
+                        short highBits = (short)(n << 8);
+                        if (data.Buffer[curChannel].Count < 1)
+                            continue;
+                        short lowBits = (short)data.Buffer[curChannel][data.Buffer[curChannel].Count - 1];
+                        data.Buffer[curChannel].Add((short)(highBits | lowBits));
+                        curChannel = (curChannel + 1) % data.Buffer.Count;
+                        lowBit = true;
+                    }
                 }
             }
 

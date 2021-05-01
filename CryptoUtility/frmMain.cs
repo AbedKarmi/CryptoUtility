@@ -1,4 +1,4 @@
-#define DEBUG
+//#define _DEBUG
 
 using System;
 using System.Collections;
@@ -27,6 +27,10 @@ using NAudio.Wave;
 using System.Threading;
 using System.Net;
 using Timer = System.Windows.Forms.Timer;
+using NAudio.Wave.SampleProviders;
+using NAudio.Gui;
+using System.Windows.Resources;
+using App = System.Windows.Application;
 
 //using System.Windows.Input;
 
@@ -37,7 +41,12 @@ namespace CryptoUtility
     {
 	#region Defs
         string[][] fonts = { new [] { "KFGQPC Uthman Taha Naskh", "Uthmani.otf" }, new[] { "DQ7 Quran Koufi A", "DQ7QuranKoufiA.ttf" } };
+        string[] resources = { "bin32\\libiomp5md.dll", "bin32\\mkl_custom.dll", "bin64\\libiomp5md.dll", "bin64\\mkl_custom.dll" };
+        int currentThread = -1;
+        int lockThread = -1;
         private EncodingOptions EncodingOptions { get; set; }
+        private string stackTrace = "";
+        private string lastPlayed;
         private Type Renderer { get; set; }
         string sentSora="", encoding="";
         InputLanguage original ;
@@ -91,10 +100,35 @@ namespace CryptoUtility
         bool pressed;
         private readonly string quranBin = Application.StartupPath + "\\Quran.bin";
         private readonly string quranWav = Application.StartupPath + "\\Quran.wav";
+
+        enum RenderType
+        {
+            None,
+            Wave,
+            Spectrum,
+        }
+
+        int readCount = 8000 * 50 / 1000; // 50 ms
+        int shift = 8000 * 40 / 1000; // 40 ms
+        int readIdx = 0;
+        bool recording = false;
+
+        AudioSensor sensor;
+        List<List<double>> spectrums = new();
+
+        Pen pen = new Pen(Brushes.Black);
+        PointF[] pts = new PointF[8000];
+        float gain;
+        Bitmap spectrumBmp = new Bitmap(800, 60, PixelFormat.Format24bppRgb);
+        Bitmap spectrumBmpPrep = new Bitmap(800, 60, PixelFormat.Format24bppRgb);
+        const int chunkSize = 800;
+
+        private Action<float> setVolumeDelegate;
+
         #endregion
 
 
-    #region functions
+    #region Functions
 
         // event handler
         public void ProcessCompleted(object sender, gpuEventArgs e)
@@ -103,16 +137,29 @@ namespace CryptoUtility
         }
 		
 		
-        void logMsg(string msg)
+        void logMsg(string msg,int threadID=-1)
         {
             string[] msgs = msg.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var str in msgs)
             {
-                lstLog.Items.Add(DateTime.Now + ": " + str);
-                lstLog.SelectedIndex = lstLog.Items.Count - 1;
+                if (lstLog.InvokeRequired)
+                    lstLog.BeginInvoke(new MethodInvoker(delegate  {logMsg(msg);}) );
+                else
+                {
+                    lstLog.Items.Add(DateTime.Now + ": T["+(threadID<0?Thread.CurrentThread.ManagedThreadId.ToString():threadID.ToString())+"] " + str);
+                    lstLog.SelectedIndex = lstLog.Items.Count - 1;
+                }
             }
         }
 
+        void logMsg(Exception ex,int threadID=-1)
+        {
+            string stackTrace = ex.StackTrace;
+            this.stackTrace = stackTrace;
+            int index = stackTrace.LastIndexOf("\\") + 1;
+            stackTrace = stackTrace.Substring(index).Replace("\"","");
+            logMsg(ex.Message+" @ "+stackTrace,threadID);
+        }
 
         enum ShellOptions : Int16 
         {
@@ -240,6 +287,23 @@ namespace CryptoUtility
             return null;
         }
  
+        private void ArabicKeyboard()
+        {
+            original = InputLanguage.CurrentInputLanguage;
+            InputLanguage lang = GetArabicLanguage();
+            if (lang == null)
+            {
+                logMsg("Arabic Language Keyboard not installed.");
+            }
+
+            InputLanguage.CurrentInputLanguage = lang;
+        }
+
+        private void OriginalKeyboard()
+        {
+            // in the leave event handler:
+            InputLanguage.CurrentInputLanguage = original;
+        }
 
         private static IEnumerable<T> GetAllControls<T>(Control container)
         {
@@ -272,7 +336,7 @@ namespace CryptoUtility
                 byte[] buffer = File.ReadAllBytes(file + ".tmp");
                 File.Delete(file + ".tmp");
                 return buffer;
-            } catch (Exception ex) { logMsg(ex.Message); }
+            } catch (Exception ex) { logMsg(ex); }
             return new byte[0];
         }
 
@@ -284,44 +348,128 @@ namespace CryptoUtility
             cmb.Text = text;
         }
 
-        #endregion
+        private int FindInList(ListBox listBox, string searchString, bool caseSensitive = false)
+        {
+            int index = -1;
+            if (!string.IsNullOrEmpty(searchString))
+            for (int i = 0; i < listBox.Items.Count; i++)
+            {
+                if (listBox.Items[i].ToString().IndexOf(searchString, (caseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase)) >= 0)
+                {
+                    index = i;break;
+                }
+            }
+            return index;
+        }
+        private int FindInCombo(ComboBox comboBox, string searchString, bool caseSensitive = false,bool setIfFound=false)
+        {
+            int index = -1;
+            if (!string.IsNullOrEmpty(searchString))
+                for (int i = 0; i < comboBox.Items.Count; i++)
+                {
+                    if (comboBox.Items[i].ToString().IndexOf(searchString, (caseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase)) >= 0)
+                    {
+                        if (setIfFound) 
+                            comboBox.SelectedIndex = i;
+                        index = i;break;
+                    }
+                }
+            return index;
+        }
 
-    #region Forms
+        private void ViewImage(string photo)
+        {
+            string imageViewerAssoc = FileAssociation.GetExecFileAssociatedToExtension(".jpg", "open");
+            string imageViewer = Environment.ExpandEnvironmentVariables("%ProgramFiles(x86)%") + "\\Windows Photo Viewer\\PhotoViewer.dll";
+            Process proc;
 
-        private void DumpAssembly(string assembly)
+            if (!string.IsNullOrEmpty(imageViewerAssoc))
+                proc = Process.Start(imageViewerAssoc, photo);
+            else
+                proc = Process.Start("rundll32.exe", "\"" + imageViewer + "\", ImageView_Fullscreen " + photo);
+
+            proc.WaitForInputIdle();                        // wait for program to start
+
+            if (proc != null && proc.HasExited != true)
+            {
+                proc.WaitForExit();                         // wait for porgram to finish
+            }
+            else
+            {
+                // Process is null or have exited
+            }
+        }
+
+        /// <summary>
+        /// Load an embedded resource and write it to the disk in the startup folder
+        /// </summary>
+        /// <param name="resourceName">Full Path to Resource Name</param>
+        private void DumpResource(string resourceName)
         {
             try
             {
-                string resource = Array.Find(this.GetType().Assembly.GetManifestResourceNames(), element => element.EndsWith(assembly.Replace("\\",".")));
-                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
+                if (File.Exists(resourceName))
+                    return;
+
+                string file = Application.StartupPath + "\\" + resourceName;
+                string dir = Path.GetDirectoryName(file);
+                if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+
+                string resource = Array.Find(this.GetType().Assembly.GetManifestResourceNames(), element => element.EndsWith(resourceName.Replace("\\", ".")));
+                if (!string.IsNullOrEmpty(resource))
+                    using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
+                    {
+                        Byte[] assemblyData = new Byte[stream.Length];
+                        stream.Read(assemblyData, 0, assemblyData.Length);
+                        File.WriteAllBytes(file, assemblyData);
+                    }
+                else
                 {
-                    Byte[] assemblyData = new Byte[stream.Length];
-                    stream.Read(assemblyData, 0, assemblyData.Length);
-                    string file = Application.StartupPath + "\\" + assembly;
-                    string dir = Path.GetDirectoryName(file);
-                    if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
-                    File.WriteAllBytes(file, assemblyData);
+                    File.Copy(Application.StartupPath + "\\Lib\\" + resourceName, file);
                 }
-            } catch (Exception ) {  }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
-        public frmMain()
+        
+        private void ManageResources()
         {
+            // run this lambda function when couldn't find a DLL, it will load it from the resource :)
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
-                string resourceName = new AssemblyName(args.Name).Name + ".dll";
-                string resource = Array.Find(this.GetType().Assembly.GetManifestResourceNames(), element => element.EndsWith(resourceName));
-
-                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
+                try
                 {
-                    Byte[] assemblyData = new Byte[stream.Length];
-                    stream.Read(assemblyData, 0, assemblyData.Length);
-                    return Assembly.Load(assemblyData);
-                }
+                    string resourceName = new AssemblyName(args.Name).Name + ".dll";
+                    string resource = Array.Find(this.GetType().Assembly.GetManifestResourceNames(), element => element.EndsWith(resourceName));
+                    if (!string.IsNullOrEmpty(resource))
+                    {
+                        using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource))
+                        {
+                            Byte[] assemblyData = new Byte[stream.Length];
+                            stream.Read(assemblyData, 0, assemblyData.Length);
+                            return Assembly.Load(assemblyData);
+                        }
+                    }
+                    else
+                    if (File.Exists(Application.StartupPath + "\\LIB\\" + resourceName))
+                    {
+                        return Assembly.LoadFrom(Application.StartupPath + "\\LIB\\" + resourceName);
+                    }
+                } catch (Exception) { };
+
+                return null;
             };
-            DumpAssembly("bin32\\libiomp5md.dll");
-            DumpAssembly("bin32\\mkl_custom.dll");
-            DumpAssembly("bin64\\libiomp5md.dll");
-            DumpAssembly("bin64\\mkl_custom.dll");
+
+            foreach (var resource in resources)
+                DumpResource(resource);
+        }
+
+        #endregion
+
+    #region Forms
+        public frmMain()
+        {
+            ManageResources();
+
             InitializeComponent();
             
         }
@@ -330,6 +478,9 @@ namespace CryptoUtility
             try
             {
                 quran.CloseQuran();
+                pressed = true;
+                Thread.Sleep(500);
+                CloseSpectrum();
             }
             catch (Exception) { };
         }
@@ -352,7 +503,7 @@ namespace CryptoUtility
 
                 quran = new QuranDB(Application.StartupPath);
                 // quran = new QuranXLS(Application.StartupPath);
-
+                
                 lblCurCharset.Text = AppSettings.ReadValue("Settings", "CharsetProfile", "Common.Charset");
 
                 gpuClass.ProcessCompleted += ProcessCompleted;
@@ -389,9 +540,6 @@ namespace CryptoUtility
 
                 //Quran=ReadQuran();
 
-                tabControl1.SelectedTab = null;
-                tabControl1.SelectedTab = tabRSA;
-
                 CheckQuranFont();
 
                 txtQuranText.Font = new Font(fonts[0][0], 12);
@@ -404,13 +552,14 @@ namespace CryptoUtility
 
                 cmbBytesPerLine.Text = AppSettings.ReadValue("Settings", "BytesPerLine", "16");
                 cmbSizeMode.SelectedIndex = Int32.Parse(AppSettings.ReadValue("Settings", "SizeMode", "0"));
-                chkALLEncodings.Checked = (AppSettings.ReadValue("Settings", "AllEncodings", "Yes").ToUpper() == "YES");
+                chkALLEncodings.Checked = (AppSettings.ReadValue("Settings", "AllEncodings", "Yes").ToUpper() == "NO");
                 chkSendToBuffer.Checked = (AppSettings.ReadValue("Settings", "SendToBuffer", "Yes").ToUpper() == "YES");
                 chkJommalWord.Checked = (AppSettings.ReadValue("Settings", "JommalWORD", "Yes").ToUpper() == "YES");
                 chkFixPadding.Checked = (AppSettings.ReadValue("Settings", "Padding", "Yes").ToUpper() == "YES");
                 chkFlipX.Checked = (AppSettings.ReadValue("Settings", "FlipX", "Yes").ToUpper() == "YES");
                 chkFlipY.Checked = (AppSettings.ReadValue("Settings", "FlipY", "No").ToUpper() == "YES");
                 chkINV.Checked = (AppSettings.ReadValue("Settings", "Inversed", "No").ToUpper() == "YES");
+                lastPlayed = AppSettings.ReadValue("Settings", "LastPlayed", "");
 
                 switch (AppSettings.ReadValue("Settings", "QuranText", "rbDiacritics"))
                 {
@@ -429,35 +578,46 @@ namespace CryptoUtility
                 SelectIndex(cmbBits, AppSettings.ReadValue("Settings", "Bits", cmbBits.Items[0].ToString()));
                 SelectIndex(cmbChannels, AppSettings.ReadValue("Settings", "Channels", cmbChannels.Items[0].ToString()));
 
+                InitSpectrumScreen();
                 InitSpectrum();
+
+                tabControl.SelectedTab = null;
+                tabControl.SelectedTab = tabQuran;
+                canvas.AllowDrop = true;
+
+                trkDB.Value = 13;
 
             } catch (Exception ex) { logMsg("Error:" + ex.Message); }
         }
-	  
-	  private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void btnStackTrace_Click(object sender, EventArgs e)
+        {
+            txtInfo.Text = stackTrace;
+        }
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                if (tabControl1.SelectedTab == tabEncoding && chkRTL.Checked && !chkHexText.Checked) 
+                if (tabControl.SelectedTab == tabEncoding && chkRTL.Checked && !chkHexText.Checked) 
                     txtInfo.RightToLeft = RightToLeft.Yes;
                 else txtInfo.RightToLeft = RightToLeft.No;
-                if (tabControl1.SelectedTab == tabRSA)
+                if (tabControl.SelectedTab == tabRSA)
                 {
                     txtInfo.Text = RSAClass.Info;
                 }
-                else if (tabControl1.SelectedTab == tabDSA)
+                else if (tabControl.SelectedTab == tabDSA)
                 {
                     txtInfo.Text = DSAClass.Info;
                 }
-                else if (tabControl1.SelectedTab == tabCrypto)
+                else if (tabControl.SelectedTab == tabCrypto)
                 {
-                    txtInfo.Text = "";
+                    txtInfo.Text = "Crypto Utility\r\n\r\nDecrypt/Encrypt, Calculate hash, and Sign/Verify data using public/private keys.\r\n\r\nData can be loaded in the textbox or a file buffer.";
                 }
-                else if (tabControl1.SelectedTab == tabCalculator)
+                else if (tabControl.SelectedTab == tabCalculator)
                 {
                     cmbAccelerator_SelectedIndexChanged(sender, e);
                 }
-                else if (tabControl1.SelectedTab == tabEncoding)
+                else if (tabControl.SelectedTab == tabEncoding)
                 {
                     if (string.IsNullOrEmpty(hex))
                     txtInfo.Text = @"Quran Text
@@ -467,11 +627,12 @@ End of Aya Char Replacement : [zString]
 
 Encoding method : Arabic Common CharSet Order [ACCO]";
                 }
-                else if (tabControl1.SelectedTab == tabQuran)
+                else if (tabControl.SelectedTab == tabQuran)
                 {
                     lbSoras.Items.Clear();
                     lbSoras.Items.AddRange(quran.GetSoraNames());
                     lbSoras.SelectedIndex = 0;
+                    SelectSora();
                     txtInfo.Text = @"Crypto Utility for Quran Fidelity
 
 Quran is the greatest book ever found on earth, it was revealed to the last prophet Mohammad peace upon him. 
@@ -490,8 +651,9 @@ Text to byte conversion (code page):
 We implemented several encoding options to convert text to numbers. Hamza, is to be tested, since it was not used in the revelead text explicitly.
 
 Other possible options:
-Hex, Image, Voice, Color, and Light representations are implemented for testing binary data of Quran";
-                } else if (tabControl1.SelectedTab==tabCharset)
+Hex, Texture, Audio, Light & Color representations are implemented for testing on binary data of Quran";
+                } 
+                else if (tabControl.SelectedTab==tabCharset)
                 {
                     LoadCharset(Application.StartupPath+"\\"+ lblCurCharset.Text);
                     txtInfo.Text = @"Arabic Charsets
@@ -504,23 +666,23 @@ Blue   : Siamese Lettters
 Green  : Arabic Letters
 Red    : Diacritics";
                 }
-                else if (tabControl1.SelectedTab == tabHexViewer)
+                else if (tabControl.SelectedTab == tabHexViewer)
                 {
                     txtInfo.Text = "Simple Hex Byte Editor/Viewer";
                 }
-                else if (tabControl1.SelectedTab == tabXRay)
+                else if (tabControl.SelectedTab == tabTexture)
                 {
-                    txtInfo.Text = "X-Ray\r\n\r\nDisplay Binary Image of Text Endoding\r\n\r\nLooking for meaningful image represntation of binary data";
+                    txtInfo.Text = "Texture\r\n\r\nDisplay Binary Image of Text Endoding\r\n\r\nLooking for meaningful image represntation of binary data";
                 }
-                else if (tabControl1.SelectedTab == tabSpectrum)
+                else if (tabControl.SelectedTab == tabAudioSpectrum)
                 {
-                    txtInfo.Text = "Spectrum Analyzer\r\n\r\nConvert binary data to frequency using FFT and display in spectrum analyzer\r\nLooking for meaningful voice";
+                    txtInfo.Text = "Audio Spectrum Analyzer\r\n\r\nConvert binary data to frequency using FFT and display in spectrum analyzer\r\nLooking for meaningful voice";
                 }
-                else if (tabControl1.SelectedTab == tabColor)
+                else if (tabControl.SelectedTab == tabColor)
                 {
-                    txtInfo.Text = "Color Spectrum\r\n\r\nConvert binary data to colors using RGB and display in spectrum analyzer\r\nLooking for meaningful color";
+                    txtInfo.Text = "Light/Color Spectrum\r\n\r\nConvert binary data to colors using RGB and display in spectrum analyzer\r\nLooking for meaningful color";
                 }
-            } catch (Exception ex) { logMsg("Error :" + ex.Message);}
+            } catch (Exception ex) { logMsg("Error :" + ex.Message); }
         }
 
 
@@ -576,7 +738,7 @@ Red    : Diacritics";
                 txtE.Text = E.ToString();
                 txtN.Text = MyClass.BinaryToHexString(publicKey.Modulus);
 
-                tabControl1.SelectedIndex = 0;
+                tabControl.SelectedIndex = 0;
 
                 cmbRSAKeyLen.Text = (publicKey.Modulus.Length * 8).ToString();
             }
@@ -603,7 +765,7 @@ Red    : Diacritics";
                 txtDQ.Text = MyClass.BinaryToHexString(privateKey.DQ);
                 txtInverseQ.Text = MyClass.BinaryToHexString(privateKey.InverseQ);
 
-                tabControl1.SelectedIndex = 0;
+                tabControl.SelectedIndex = 0;
 
                 cmbRSAKeyLen.Text = (privateKey.Modulus.Length * 8).ToString();
             }
@@ -1274,7 +1436,7 @@ Red    : Diacritics";
                         break;
                 }
             } 
-            catch (Exception ex) { logMsg(ex.Message); }   
+            catch (Exception ex) { logMsg(ex); }   
             entry--;
         }
         private void ShowNumbers()
@@ -1567,7 +1729,7 @@ Red    : Diacritics";
 
 	#endregion
 	
-	#region Endoding
+	#region Encoding
 	
         /// <summary>
         /// Can we run the conversion
@@ -1665,7 +1827,7 @@ Red    : Diacritics";
 
         private void btnSImage_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabXRay;
+            tabControl.SelectedTab = tabTexture;
             DrawImage();
             CreateBarcode(rtxtData.Text,BarcodeFormat.QR_CODE);
         }
@@ -1678,29 +1840,102 @@ Red    : Diacritics";
                 fileBuffer = new byte[hexBox.ByteProvider.Length];
                 for (int i = 0; i < hexBox.ByteProvider.Length; i++) fileBuffer[i] = hexBox.ByteProvider.ReadByte(i);
                 rbFileBuffer.Checked = true;
-                tabControl1.SelectedTab = tabCrypto;
+                tabControl.SelectedTab = tabCrypto;
             }
-            catch (Exception ex) { logMsg(ex.Message); }
+            catch (Exception ex) { logMsg(ex); }
+        }
+        private void btnColor_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabColor;
+            byte[] byteArray = SafeRead(quranBin);
+            var colorArray = new Color[byteArray.Length / 3];
+            for (var i = 0; i < byteArray.Length - 3; i += 3)
+            {
+                var color = Color.FromArgb(byteArray[i + 0], byteArray[i + 1], byteArray[i + 2]);
+                colorArray[i / 3] = color;
+            }
+            int n = (int)Math.Sqrt(colorArray.Length);
+            if (n * n < colorArray.Length) n++;
+            var bmp = new Bitmap(n, n, PixelFormat.Format24bppRgb);
+            var bmp2 = new Bitmap(colorArray.Length, texture2.Height, PixelFormat.Format24bppRgb);
+            var g = Graphics.FromImage(bmp2);
+            for (int i = 0; i < colorArray.Length; i++)
+            {
+                bmp.SetPixel(i % n, i / n, colorArray[i]);
+                g.DrawLine(new Pen(colorArray[i]), i,0, i, bmp2.Height);
+                //bmp2.SetPixel(i, 0, colorArray[i]);
+            }
+
+            texture.Image = bmp;
+            texture2.Image = bmp2;
+            texture3.Image = bmp;
         }
 
+        private void NormalizeBuffer(byte[] buffer)
+        {
+            int max=buffer.Max();
+            int min = buffer.Min();
+            byte mid = (byte) ((max + min) / 2);
+            for (int i = 0; i < buffer.Length; i++)
+                buffer[i] += (byte) (128 - mid) ;
+        }
+        private void btnSpectrum_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedTab = tabAudioSpectrum;
+
+            ResetSpectrum(false);
+
+            Thread.Sleep(250); Application.DoEvents();
+
+            byte[] buffer = SafeRead(quranBin);
+            bool play = chkPlay.Checked;
+            sensor.Start(quranWav, false, play,CreateSampleProvider);
+
+            if (sensor.Bits==8) NormalizeBuffer(buffer);
+            int count = buffer.Length;
+
+            var threadSSpectrum=new Thread(o =>
+            {
+               int index = 0;
+               int chunk = chunkSize;
+               while (count > 0)
+               {
+                   if (count > chunk) count -= chunk; else { chunk = count; count = 0; }
+                   sensor.AddBytes(buffer.Skip(index).Take(chunk).ToArray(), chunk);
+                    index += chunk;
+                    if (play)
+                    while (sensor.PlayerPosition <index)
+                    {
+                        Thread.Sleep(100); Application.DoEvents();
+                    }
+               }
+            });
+
+            threadSSpectrum.Start();
+            while (threadSSpectrum.IsAlive)
+            {
+                    Thread.Sleep(100); Application.DoEvents(); 
+            }
+            sensor.Stop();
+        }
         private void btnSCalc_Click(object sender, EventArgs e)
         {
             rb16.Checked = true;
             txtPrimeP.Text = MyClass.BinaryToHexString(SafeRead(quranBin));
-            tabControl1.SelectedTab = tabCalculator;
-          }
+            tabControl.SelectedTab = tabCalculator;
+        }
 
         private void btnSCrypto_Click(object sender, EventArgs e)
         {
             rbFileBuffer.Checked = true;
             fileBuffer=SafeRead(quranBin);
-            tabControl1.SelectedTab = tabCrypto;
+            tabControl.SelectedTab = tabCrypto;
         }
 
         private void btnSHex_Click(object sender, EventArgs e)
         {
             SendToHexViewer(quranBin);
-            tabControl1.SelectedTab = tabHexViewer;
+            tabControl.SelectedTab = tabHexViewer;
         }
 
         private void btnSendToHex_Click(object sender, EventArgs e)
@@ -1709,7 +1944,7 @@ Red    : Diacritics";
             {
                 File.WriteAllBytes(Application.StartupPath+"\\Buffer.bin", fileBuffer);
                 SendToHexViewer(Application.StartupPath + "\\Buffer.bin");
-                tabControl1.SelectedTab = tabHexViewer;
+                tabControl.SelectedTab = tabHexViewer;
             }
         }
 
@@ -1765,17 +2000,17 @@ Red    : Diacritics";
         private void txtInfo_DoubleClick(object sender, EventArgs e)
         {
             Clipboard.SetText(txtInfo.Text);
-            if (tabControl1.SelectedTab == tabEncoding && txtInfo.Text.isHex())
+            if (tabControl.SelectedTab == tabEncoding && txtInfo.Text.isHex())
             {
                 rb16.Checked = true;
                 txtPrimeP.Text = txtInfo.Text;
-                tabControl1.SelectedTab = tabCalculator;
+                tabControl.SelectedTab = tabCalculator;
             }
         }
 
         private void chkHexText_CheckedChanged(object sender, EventArgs e)
         {
-            txtInfo.RightToLeft = chkRTL.Checked && !chkHexText.Checked ? RightToLeft.Yes : RightToLeft.No;
+            txtInfo.RightToLeft = ((chkRTL.Checked && !chkHexText.Checked) ? RightToLeft.Yes : RightToLeft.No);
         }
         private void SelectEncoding(string contains)
         {
@@ -1850,8 +2085,8 @@ Red    : Diacritics";
 
         private void chkRTL_CheckedChanged(object sender, EventArgs e)
         {
-            rtxtData.RightToLeft = chkRTL.Checked ? RightToLeft.Yes : RightToLeft.No;
-            txtInfo.RightToLeft = chkRTL.Checked && !chkHexText.Checked ? RightToLeft.Yes : RightToLeft.No;
+            rtxtData.RightToLeft = (chkRTL.Checked ? RightToLeft.Yes : RightToLeft.No);
+            txtInfo.RightToLeft = ((chkRTL.Checked && !chkHexText.Checked) ? RightToLeft.Yes : RightToLeft.No);
         }
        /// <summary>
         /// Handler for the run button click event
@@ -1955,7 +2190,7 @@ Red    : Diacritics";
 
                     logMsg("Written to " + sFile);
                     if (chkSendToBuffer.Checked) { rbFileBuffer.Checked = true; fileBuffer = sOut; }
-                    txtInfo.Text = chkHexText.Checked ? MyClass.BinaryToHexString(sOut) : Converter.ReadAllText(sFile, destCP);
+                    txtInfo.Text = (chkHexText.Checked ? MyClass.BinaryToHexString(sOut) : Converter.ReadAllText(sFile, destCP));
                     lblStatus.Text = sOut.Length.ToString();
                     encoding = cmbDestEnc.Text;
                 }
@@ -1964,7 +2199,7 @@ Red    : Diacritics";
             catch (Exception ex)
             {
                 //just show the error
-                logMsg(ex.Message);
+                logMsg(ex);
             }
             finally
             {
@@ -2108,20 +2343,12 @@ Red    : Diacritics";
         }
        private void txtSearch_Enter(object sender, EventArgs e)
         {
-            original = InputLanguage.CurrentInputLanguage;
-            InputLanguage lang = GetArabicLanguage();
-            if (lang == null)
-            {
-                logMsg("Arabic Language Keyboard not installed.");
-            }
-
-            InputLanguage.CurrentInputLanguage = lang;
+            ArabicKeyboard();
         }
 
         private void txtSearch_Leave(object sender, EventArgs e)
         {
-            // in the leave event handler:
-            InputLanguage.CurrentInputLanguage = original;
+            OriginalKeyboard();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -2161,7 +2388,7 @@ Red    : Diacritics";
                 }
                 catch (Exception ex)
                 {
-                   logMsg(ex.Message);
+                   logMsg(ex);
                 }
             }
         }
@@ -2175,7 +2402,7 @@ Red    : Diacritics";
         {
             
             rtxtData.Text = txtQuranText.Text;
-            tabControl1.SelectedTab = tabEncoding;
+            tabControl.SelectedTab = tabEncoding;
             cmbSourceEnc.SelectedIndex = 0;
             int i = 0; bool found = false;
             while (i < cmbSourceEnc.Items.Count && !found)
@@ -2242,10 +2469,28 @@ Red    : Diacritics";
             lblFontSize.Text = n.ToString();
         }
 
-	#endregion
-	
-	#region Charset
-	        private void btnAutoAdd_Click(object sender, EventArgs e)
+        private void txtSoraSearch_Enter(object sender, EventArgs e)
+        {
+            ArabicKeyboard();
+        }
+
+        private void txtSoraSearch_Leave(object sender, EventArgs e)
+        {
+            OriginalKeyboard();
+        }
+        private void txtSoraSearch_TextChanged(object sender, EventArgs e)
+        {
+            lbSoras.ClearSelected();
+            int index = FindInList(lbSoras, txtSoraSearch.Text);
+            if (index < 0 && lbSoras.Items.Count > 0) index = 0;
+            if (index >= 0)
+                lbSoras.SetSelected(index, true);
+        }
+
+    #endregion
+
+    #region Charset
+        private void btnAutoAdd_Click(object sender, EventArgs e)
         {
             int n;
             if (!Int32.TryParse(txtPlus.Text, out n)) n = 0;
@@ -2307,20 +2552,23 @@ Red    : Diacritics";
         }
         private void LoadCharset(string fileName)
         {
-            string ts = "";
-            TimeElapsed=0;
-            ClearChars(); ts += TimeElapsed + ",";
-            byte[] c = MyClass.HexStringToBinary(File.ReadAllText(fileName)); ts += TimeElapsed + ",";
-            AppSettings.WriteValue("Settings", "CharsetProfile", Path.GetFileName(fileName)); ts += TimeElapsed + ",";
-            for (int i=0;i<44;i++)
+            try
             {
-                  listTxtCS[i].Text = c[i].ToString();
-            }
-            ts += TimeElapsed + ",";
-            ReOrderChars(); ts += TimeElapsed + ",";
-            lblCurCharset.Text = Path.GetFileName(fileName);
-            logMsg(ts);
-            logMsg("Custom Charset Loaded");
+                string ts = "";
+                TimeElapsed = 0;
+                ClearChars(); ts += TimeElapsed + ",";
+                byte[] c = MyClass.HexStringToBinary(File.ReadAllText(fileName)); ts += TimeElapsed + ",";
+                AppSettings.WriteValue("Settings", "CharsetProfile", Path.GetFileName(fileName)); ts += TimeElapsed + ",";
+                for (int i = 0; i < 44; i++)
+                {
+                    listTxtCS[i].Text = c[i].ToString();
+                }
+                ts += TimeElapsed + ",";
+                ReOrderChars(); ts += TimeElapsed + ",";
+                lblCurCharset.Text = Path.GetFileName(fileName);
+                logMsg(ts);
+                logMsg("Custom Charset Loaded");
+            } catch (Exception ex) { logMsg(ex); }
         }
         private void btnLoadCharset_Click(object sender, EventArgs e)
         {
@@ -2337,7 +2585,7 @@ Red    : Diacritics";
                     LoadCharset(openFile.FileName);
                 }
             }
-            catch (Exception ex) { logMsg(ex.Message); }
+            catch (Exception ex) { logMsg(ex); }
         }
 
         private byte ValidChar(int b)
@@ -2394,7 +2642,7 @@ Red    : Diacritics";
                 cmbSourceEnc.Text = s1;
                 cmbDestEnc.Text = s2;
                 validateForRun();
-            } catch (Exception ex) { logMsg(ex.Message); }
+            } catch (Exception ex) { logMsg(ex); }
         }
 
         private void ClearChars()
@@ -2476,7 +2724,7 @@ Red    : Diacritics";
                 fileByteProvider.ApplyChanges();
                 logMsg("Changes Applied to Disk");
             }
-            catch (Exception ex) { logMsg(ex.Message); }
+            catch (Exception ex) { logMsg(ex); }
         }
 
         private void btnApplyChanges_Click(object sender, EventArgs e)
@@ -2493,8 +2741,8 @@ Red    : Diacritics";
                 for (int i = 0; i < hexBox.ByteProvider.Length; i++) buffer[i] = hexBox.ByteProvider.ReadByte(i);
                 rb16.Checked = true; 
                 txtPrimeP.Text = MyClass.BinaryToHexString(buffer);
-                tabControl1.SelectedTab = tabCalculator;
-            } catch (Exception ex) { logMsg(ex.Message); }
+                tabControl.SelectedTab = tabCalculator;
+            } catch (Exception ex) { logMsg(ex); }
         }
 
         private void CalcHHash()
@@ -2506,7 +2754,7 @@ Red    : Diacritics";
                 for (int i = 0; i < hexBox.ByteProvider.Length; i++) buffer[i] = hexBox.ByteProvider.ReadByte(i);
                 byte[] hash = MyClass.GetHash(buffer, cmbHHash.Text);
                 lblHash.Text = MyClass.BinaryToHexString(hash);
-            } catch (Exception ex) { logMsg(ex.Message); }
+            } catch (Exception ex) { logMsg(ex); }
         }
         private void hexBox_TextChanged(object sender, EventArgs e)
         {
@@ -2582,12 +2830,12 @@ Red    : Diacritics";
                     logMsg("File Loaded:" + openFile.FileName);
                 }
             }
-            catch (Exception ex) { logMsg(ex.Message); }
+            catch (Exception ex) { logMsg(ex); }
         }
 
 	#endregion
 	
-	#region X-Ray
+	#region Texture
 	
         private void btnSaveImage_Click(object sender, EventArgs e)
         {
@@ -2604,6 +2852,32 @@ Red    : Diacritics";
                 logMsg("Image Saved :" + dlg.FileName);
             }
         }
+        private void btnScreenShot_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+            Thread.Sleep(1000);
+            picQuran1.Image = ScreenCapture.CaptureScreen();
+            Visible = true;
+        }
+        private void chkQR_CheckedChanged(object sender, EventArgs e)
+        {
+            picQuran1.Visible = chkQR.Checked;
+            picQuran2.Visible = chkQR.Checked;
+            if (!chkQR.Checked)
+            {
+                picQuran3.Left = picQuran1.Left;
+                picQuran3.Top = picQuran1.Top;
+                picQuran3.Height = picQuran1.Height;
+                picQuran3.Width = picQuran2.Left - picQuran1.Left + picQuran2.Width;
+            }
+            else
+            {
+                picQuran3.Left = picQuran2.Left;
+                picQuran3.Top = picQuran2.Top+picQuran2.Height+6;
+                picQuran3.Height = picQuran1.Height-picQuran2.Height-6;
+                picQuran3.Width = picQuran2.Width;
+            }
+        }
 
         private void picQuran1_DoubleClick(object sender, EventArgs e)
         {
@@ -2617,36 +2891,35 @@ Red    : Diacritics";
                 // this will not return proc, will be null, since it will not start viewer directly, done via dllhost
                 //var proc=Process.Start(new ProcessStartInfo(photo) { Verb = "open" });      // you can use "edit" to edit image   
 
-                string imageViewerAssoc = FileAssociation.GetExecFileAssociatedToExtension(".jpg", "open");
-                string imageViewer = Environment.ExpandEnvironmentVariables("%ProgramFiles(x86)%") + "\\Windows Photo Viewer\\PhotoViewer.dll";
-                Process proc;
-
-                if (!string.IsNullOrEmpty(imageViewerAssoc))
-                    proc = Process.Start(imageViewerAssoc, photo);
-                else
-                    proc = Process.Start("rundll32.exe", "\"" + imageViewer + "\", ImageView_Fullscreen " + photo);
-
-                proc.WaitForInputIdle();                        // wait for program to start
-
-                if (proc != null && proc.HasExited != true)
-                {
-                    proc.WaitForExit();                         // wait for porgram to finish
-                }
-                else
-                {
-                    // Process is null or have exited
-                }
+                ViewImage(photo);
+              
 
                 File.Delete(photo);
             }
-            catch (Exception ex) { logMsg(ex.Message); }
+            catch (Exception ex) { logMsg(ex); }
 
             picQuran1.Enabled = true;
         }
-
-        private void picQuran1_Click(object sender, EventArgs e)
+        private void picQuran3_DoubleClick(object sender, EventArgs e)
         {
+            if (!picQuran3.Enabled) return;
+            picQuran3.Enabled = false;
+            try
+            {
+                string photo = Application.StartupPath + "\\~tmp3.jpg";
+                picQuran3.Image.Save(photo, System.Drawing.Imaging.ImageFormat.Jpeg);
 
+                // this will not return proc, will be null, since it will not start viewer directly, done via dllhost
+                //var proc=Process.Start(new ProcessStartInfo(photo) { Verb = "open" });      // you can use "edit" to edit image   
+
+                ViewImage(photo);
+
+
+                File.Delete(photo);
+            }
+            catch (Exception ex) { logMsg(ex); }
+
+            picQuran3.Enabled = true;
         }
 
         private void CreateBarcode(string str,BarcodeFormat format= BarcodeFormat.QR_CODE)
@@ -2719,7 +2992,7 @@ Red    : Diacritics";
         private void chkINV_CheckedChanged(object sender, EventArgs e)
         {
             AppSettings.WriteValue("Settings", "Inversed", chkINV.Checked ? "YES" : "NO");
-            backColor = chkINV.Checked ? Color.White : Color.Black;
+            backColor = (chkINV.Checked ? Color.White : Color.Black);
             DrawImage();
         }
 		     private void btnRotate_Click(object sender, EventArgs e)
@@ -2783,12 +3056,16 @@ Red    : Diacritics";
             
             //var g= picQuran.CreateGraphics();
             picQuran1.Image = new Bitmap(bpl*pointSize, bpl*pointSize);
-            var g = Graphics.FromImage(picQuran1.Image);
+            picQuran3.Image = new Bitmap(n*pointSize, picQuran3.Height);
 
-            SolidBrush brush = new SolidBrush(chkINV.Checked?Color.Black:Color.White);
-            Pen pen = new Pen(chkINV.Checked ? Color.Black : Color.White, pointSize);// float.Parse(lblScale.Text));
+            var g = Graphics.FromImage(picQuran1.Image);
+            var g2 = Graphics.FromImage(picQuran3.Image);
+
+            SolidBrush brush = new(chkINV.Checked?Color.Black:Color.White);
+            Pen pen = new(chkINV.Checked ? Color.Black : Color.White, pointSize);// float.Parse(lblScale.Text));
 
             picQuran1.BackColor = backColor;
+            picQuran3.BackColor = backColor;
 
             g.Clear(picQuran1.BackColor);picQuran1.Invalidate();
 
@@ -2797,6 +3074,7 @@ Red    : Diacritics";
                 int y = (i / bpl)+1;
                 int x = (i % bpl)+1;
                 if (i>= padding) if (bin[i- padding] == '1') drawPoint(g, brush, 1 , x   , y  );
+                if (bin[i]=='1') g2.DrawLine(pen, i*pointSize, 0, i*pointSize, picQuran3.Height);
             }
             switch ((chkFlipX.Checked ? 2 : 0) + (chkFlipY.Checked ? 1 : 0))
             {
@@ -2806,9 +3084,11 @@ Red    : Diacritics";
             }
 
             picQuran1.Invalidate();
+            picQuran3.Invalidate();
             pen.Dispose();
             brush.Dispose();
             g.Dispose();
+            g2.Dispose();
         }
          private void SetSizeMod()
         {
@@ -2824,7 +3104,7 @@ Red    : Diacritics";
             picQuran1.Width = picSpace.size1;
             picQuran1.Height = picSpace.size1;
             picQuran2.Width = picSpace.size2;
-            picQuran2.Height = picSpace.size2;
+            picQuran2.Height = (int)(picSpace.size2/1.25);
             picQuran1.Left = picSpace.x1; picQuran1.Top = picSpace.y1; 
             picQuran2.Left = picSpace.x2; picQuran2.Top = picSpace.y2;
 
@@ -2891,33 +3171,42 @@ Red    : Diacritics";
         }
         #endregion
 
-    #region Spectrum
+    #region AudioSpectrum
 
-        enum RenderType
+
+
+        private void InitSpectrumScreen()
         {
-            None,
-            Wave,
-            Spectrum,
+            Pen[] pens = new Pen[3] { new Pen(Color.LightCyan, 1.5f), new Pen(Color.LightYellow), new Pen(Color.LightCoral) };
+            picSpectrum.BackColor = Color.FromArgb(0x95, 0xCF, 0xA0);
+            int w = picSpectrum.Width;
+            int h = picSpectrum.Height;
+            var pen = new Pen(Color.LightGray);
+            var bmp = new Bitmap(w, h);
+            picSpectrum.Image = bmp;
+            Graphics g = Graphics.FromImage(bmp);
+            int wLines = w / 30;
+            int hLines = h / 20;
+            for (int i = 0, j = 0; i < w; i += wLines, j++)
+                g.DrawLine(j == 15 ? pens[0] : pen, i, 0, i, h);
+            for (int i = 0, j = 0; i < h; i += hLines, j++)
+                g.DrawLine(j == 10 ? pens[0] : j == 8 || j == 12 ? pens[1] : j == 6 || j == 14 ? pens[2] : pen, 0, i, w, i);
+
+            for (int i = 0; i < pens.Length; i++) pens[i].Dispose();
+            g.Dispose();
+
+            picSpectrum.Invalidate();
+
+            canvas.Parent = picSpectrum;
+            canvas.BackColor = Color.Transparent;
+            //canvas.BringToFront();
+            canvas.Invalidate();
         }
-
-        int readCount = 8000 * 50 / 1000; // 50 ms
-        int shift = 8000 * 40 / 1000; // 40 ms
-        int readIdx = 0;
-        bool recording = false;
-
-        AudioSensor sensor;
-        List<List<double>> spectrums = new List<List<double>>();
-
-        Pen pen = new Pen(Brushes.Black);
-        PointF[] pts = new PointF[8000];
-
-        Bitmap spectrumBmp = new Bitmap(800, 60, PixelFormat.Format24bppRgb);
 
         private void InitSpectrum(int sampleRate=8000,int bits=16,AudioType aType=AudioType.Monaural)
         {
             //sensor = new AudioSensor(8000, 16, AudioType.Monaural, OnUpdate);
             spectrums.Clear();
-            
             int readCount = sampleRate * 50 / 1000; // 50 ms
             int shift = sampleRate * 40 / 1000; // 40 ms
             pts = new PointF[sampleRate];
@@ -2935,6 +3224,13 @@ Red    : Diacritics";
             UpdateGUI();
         }
 
+        private void CloseSpectrum()
+        {
+            spectrums.Clear();
+            sensor.Dispose();
+            sensor = null;
+        }
+
         private void startButton_Click(object sender, EventArgs e)
         {
             if (sensor != null)
@@ -2947,8 +3243,10 @@ Red    : Diacritics";
                 dlg.InitialDirectory = Application.StartupPath;
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
+                    ReInitSpectrum();
                     recording = true;
-                    sensor.Start(dlg.FileName,true,chkPlay.Checked);
+                    sensor.Start(dlg.FileName,true,chkPlay.Checked,CreateSampleProvider);
+                    logMsg("Start Recording");
                 }
             }
             UpdateGUI();
@@ -2960,26 +3258,32 @@ Red    : Diacritics";
             if (sensor != null)
             {
                 sensor.Stop();
-//                audioFile.Position = 0;
-              //  WaveFileWriter.CreateWaveFile(Application.StartupPath + "\\audio.wav",new WaveFileReader( audioFile));
-//                audioFile.Close();
-//                audioFile.Dispose();
             }
             UpdateGUI();
+            logMsg("Stopped");
         }
 
         void canvas_Paint(object sender, PaintEventArgs e)
         {
             RenderType renderType = GetRenderType();
+            
             if (renderType == RenderType.Wave)
             {
+                canvas.BackColor = Color.Transparent;
                 if (sensor != null)
                     DrawWaves(e.Graphics, sensor.Data);
             }
             if (renderType == RenderType.Spectrum)
             {
+                canvas.BackColor = Color.Black;
+                // Clone to resove cross-thread inuse issue
                 if (spectrums != null)
+                {
+                 //   PredrawSpectrums(spectrums, spectrumBmp);
+                    // Bitmap bmp = (Bitmap)spectrumBmp.Clone();
                     DrawSpectrums(e.Graphics, spectrumBmp);
+                   // bmp.Dispose();
+                }
             }
         }
 
@@ -2996,20 +3300,26 @@ Red    : Diacritics";
         // Data updated
         void OnUpdate(byte[] bytes, int count)
         {
- //           audioFile.Write(bytes,0,bytes.Length);
-            if (spectrumRButton.Checked)
+            try
             {
-                // Find the spectrum and draw it on a bitmap
-                while (true)
+                //           audioFile.Write(bytes,0,bytes.Length);
+                if (spectrumRButton.Checked)
                 {
-                    bool succeed = SpectrumConverter.GetSpectrum(sensor.Data.Buffer, readIdx, readCount, spectrums);
-                    if (!succeed)
-                        break;
-                    readIdx += shift;
-                    PredrawSpectrums(spectrums, spectrumBmp);
+                    // Find the spectrum and draw it on a bitmap
+                    while (true)
+                    {
+                        bool succeed = SpectrumConverter.GetSpectrum(sensor.Data.Buffer, readIdx, readCount, spectrums,sensor.Bits);
+                        if (!succeed)
+                            break;
+                        readIdx += shift;
+                        
+                        PredrawSpectrums(spectrums,spectrumBmpPrep);
+                        spectrumBmp =(Bitmap) spectrumBmpPrep.Clone();
+                    }
                 }
+                canvas.Invalidate();
             }
-            canvas.Invalidate();
+            catch (Exception ex) { logMsg(ex,Thread.CurrentThread.ManagedThreadId); };
         }
 
 
@@ -3036,22 +3346,6 @@ Red    : Diacritics";
             }
         }
 
-        private void btnSpectrum_Click(object sender, EventArgs e)
-        {
-            tabControl1.SelectedTab = tabSpectrum;
-            byte[] buffer = SafeRead(quranBin);
-            sensor.Start(quranWav, false, true);
-            sensor.Reset();
-            sensor.AddBytes(buffer, buffer.Length);
-//            OnUpdate(buffer, buffer.Length);
-            canvas.Invalidate();
-            while (sensor.PlayerPosition<buffer.Length)
-            {
-                Thread.Sleep(100);Application.DoEvents();
-            }
-            sensor.Stop();
-        }
-
         private void canvas_Click(object sender, EventArgs e)
         {
 
@@ -3059,35 +3353,38 @@ Red    : Diacritics";
 
         void DrawWaves(Graphics g, AudioSensorData data)
         {
-            g.Clear(Color.White);
 
-            if (pts == null || pts.Length <= 1)
-                return;
-
-            if (data == null || data.Buffer == null)
-                return;
-
-            if (data.Buffer.Count <= 0)
-                return;
-
-            float ratioy = -g.ClipBounds.Height / (2f * data.Channels * short.MaxValue);
-
-            float dx = (float)g.ClipBounds.Width / pts.Length;
-            float h = g.ClipBounds.Height / data.Channels;
-
-            int i0 = Math.Max(0, data.Buffer[0].Count - pts.Length);
-
-            for (int channel = 0; channel < data.Channels; channel++)
+            // g.Clear(Color.White);
+            try
             {
-                float oy = h * channel + 0.5f * h;
-                for (int i = i0; i < data.Buffer[channel].Count; i++)
-                {
-                    pts[i - i0].X = dx * (i - i0);
-                    pts[i - i0].Y = data.Buffer[channel][i] * ratioy + oy;
-                }
+                if (pts == null || pts.Length <= 1)
+                    return;
 
-                g.DrawLines(pen, pts);
-            }
+                if (data == null || data.Buffer == null)
+                    return;
+
+                if (data.Buffer.Count <= 0)
+                    return;
+
+                float ratioy = -g.ClipBounds.Height / (2f * data.Channels * (data.bits == 16 ? short.MaxValue : byte.MaxValue));
+
+                float dx = (float)g.ClipBounds.Width / pts.Length;
+                float h = g.ClipBounds.Height / data.Channels;
+
+                int i0 = Math.Max(0, data.Buffer[0].Count - pts.Length);
+
+                for (int channel = 0; channel < data.Channels; channel++)
+                {
+                    float oy = h * channel + 0.5f * h + (data.bits == 8 ? gain * (h / 4) : gain - 1);
+                    for (int i = i0; i < data.Buffer[channel].Count; i++)
+                    {
+                        pts[i - i0].X = dx * (i - i0);
+                        pts[i - i0].Y = data.Buffer[channel][i] * gain * ratioy + oy;
+                    }
+
+                    g.DrawLines(pen, pts);
+                }
+            } catch (Exception ex) { logMsg(ex); trkDB.Value = trkDB.Minimum; }
         }
 
         unsafe void PredrawSpectrums(List<List<double>> spectrums, Bitmap spectrumBmp)
@@ -3095,11 +3392,20 @@ Red    : Diacritics";
             const int dx = 10;
             try
             {
-                if (spectrums == null || spectrums.Count <= 0)
-                    return;
+                if (currentThread != Thread.CurrentThread.ManagedThreadId)
+                {
+                    currentThread = Thread.CurrentThread.ManagedThreadId;
+                    lblStatus.BeginInvoke((Action)delegate () { lblStatus.Text +=currentThread.ToString()+" "; });
+                }
 
+                if (spectrums == null || spectrums.Count <= 0)
+                {
+                     return;
+                }
                 if (spectrumBmp == null || spectrumBmp.Width <= 0 || spectrumBmp.Height <= 0)
-                    return;
+                {
+                     return;
+                }
 
                 using (Graphics g = Graphics.FromImage(spectrumBmp))
                     g.DrawImage(spectrumBmp, -dx, 0);
@@ -3108,7 +3414,7 @@ Red    : Diacritics";
 
                 byte* data = (byte*)lck.Scan0;
                 int stride = lck.Width * 3;
-                stride = stride % 4 == 0 ? stride : (stride / 4 + 1) * 4;
+                stride = ((stride % 4) == 0 ? stride : (stride / 4 + 1) * 4);
 
                 float minIdx = 0;
                 float maxIdx = spectrums[0].Count - 1;
@@ -3140,27 +3446,37 @@ Red    : Diacritics";
 
                 spectrumBmp.UnlockBits(lck);
             }
-            catch (Exception ex) { logMsg(ex.Message); }
+            catch (Exception ex) { logMsg( ex,Thread.CurrentThread.ManagedThreadId); }
         }
 
+        private void PlayWaveFile(string file)
+        {
+            lastPlayed = file;
+            lblStatus.Text = "Threads : ";
+            AppSettings.WriteValue("Settings", "LastPlayed", lastPlayed);
+            PlayWaveFromFile(lastPlayed);
+            logMsg("File Loaded:" + lastPlayed);
+        }
         private void btnPlay_Click(object sender, EventArgs e)
         {
             try
             {
-                CheckChanges();
-                OpenFileDialog openFile = new();
-                //set up the open file dialog
-                openFile.Multiselect = false;
-                openFile.Filter = "All files (*.Wav)|*.Wav";
-                openFile.FilterIndex = 0;
-                openFile.InitialDirectory = Application.StartupPath;
-                if (openFile.ShowDialog() == DialogResult.OK)
+                if ((sender as Button).Name != "btnRePlay" || string.IsNullOrEmpty(lastPlayed))
                 {
-                    PlayWaveFromFile(openFile.FileName);
-                    logMsg("File Loaded:" + openFile.FileName);
+                    OpenFileDialog openFile = new();
+                    //set up the open file dialog
+                    openFile.Multiselect = false;
+                    openFile.Filter = "All files (*.Wav)|*.Wav";
+                    openFile.FilterIndex = 0;
+                    openFile.InitialDirectory = Application.StartupPath;
+                    if (openFile.ShowDialog() == DialogResult.OK)
+                        PlayWaveFile(openFile.FileName);
+                    else
+                        return;
                 }
+                PlayWaveFile(lastPlayed);
             }
-            catch (Exception ex) { logMsg(ex.Message); }
+            catch (Exception ex) { logMsg(ex); }
         }
 
         private void btnStop_KeyDown(object sender, KeyEventArgs e)
@@ -3177,15 +3493,6 @@ Red    : Diacritics";
         {
             pressed = true;
         }
-
-        private void btnScreenShot_Click(object sender, EventArgs e)
-        {
-            Visible = false;
-            Thread.Sleep(1000);
-            picQuran1.Image = ScreenCapture.CaptureScreen();
-            Visible = true;
-        }
-
         private void ReInitSpectrum()
         {
             try
@@ -3193,7 +3500,7 @@ Red    : Diacritics";
                 if (cmbChannels.SelectedIndex>=0 && !string.IsNullOrEmpty(cmbBits.Text) && !string.IsNullOrEmpty(cmbSampleRate.Text))
                     InitSpectrum(int.Parse(cmbSampleRate.Text), int.Parse(cmbBits.Text), (cmbChannels.SelectedIndex == 0 ? AudioType.Monaural : AudioType.Stereo));
             }
-            catch (Exception ex) { logMsg(ex.Message); }
+            catch (Exception ex) { logMsg(ex); }
         }
         private void cmbSampleRate_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -3215,47 +3522,94 @@ Red    : Diacritics";
 
         private void chkPlay_CheckedChanged(object sender, EventArgs e)
         {
-            AppSettings.WriteValue("Settings", "PlayWhileRecord", chkPlay.Checked?"YESY":"NO");
+            AppSettings.WriteValue("Settings", "PlayWhileRecord", chkPlay.Checked?"YES":"NO");
         }
 
         private void tabSpectrum_Enter(object sender, EventArgs e)
         {
-           splitContainer1.SplitterDistance=(int)(cmbSampleRate.Width*1.5);
-            
+           splitContainer1.SplitterDistance=(int)(panel7.Width*1.25);
         }
 
-        private void btnResetSpectrum_Click(object sender, EventArgs e)
+        private void ResetSpectrum(bool resetSettings=true)
         {
-
             Graphics g = Graphics.FromImage(spectrumBmp);
             g.Clear(Color.Black);
-
+            if (resetSettings)
+            {
+                FindInCombo(cmbSampleRate, "8000", false, true);
+                FindInCombo(cmbBits, "8", false, true);
+                FindInCombo(cmbChannels, "Mono", false, true);
+            }
             ReInitSpectrum();
             canvas.Invalidate();
         }
 
-        private void btnColor_Click(object sender, EventArgs e)
+        private void btnResetSpectrum_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectedTab = tabColor;
-            byte[] byteArray = SafeRead(quranBin);
-            var colorArray = new Color[byteArray.Length / 3];
-            for (var i = 0; i < byteArray.Length-3; i += 3)
-            {
-                var color = Color.FromArgb(byteArray[i + 0], byteArray[i + 1], byteArray[i + 2]);
-                colorArray[i / 3] = color;
-            }
-            int n = (int) Math.Sqrt(colorArray.Length);
-            if (n * n < colorArray.Length) n++;
-            var bmp = new Bitmap(n, n, PixelFormat.Format24bppRgb);
-            var bmp2 = new Bitmap(colorArray.Length, 1, PixelFormat.Format24bppRgb);
-            for (int i= 0;i< colorArray.Length; i++)
-            {
-                bmp.SetPixel(i % n, i / n, colorArray[i]);
-                bmp2.SetPixel(i,0, colorArray[i]);
-            }
+            ResetSpectrum();
+        }
 
-            texture.Image = bmp;
-            texture2.Image = bmp2;
+        private void trkDB_Scroll(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trkDB_ValueChanged(object sender, EventArgs e)
+        {
+            if (trkDB.Value <= 13)
+                gain = 1;
+            else
+                gain = (float)(10 * Math.Log10(trkDB.Value/10f));
+            lblDB.Text = (trkDB.Value/10f).ToString("0.0") + "/" + (gain*100).ToString("0");
+        }
+
+        private void canvas_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files != null && files.Length != 0 && Path.GetExtension(files[0]).ToUpper().Equals(".WAV"))
+            {
+                PlayWaveFile(files[0]);
+            }
+        }
+
+        private void canvas_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+        void OnPreVolumeMeter(object sender, StreamVolumeEventArgs e)
+        {
+            // we know it is stereo
+            waveformPainter1.AddMax(e.MaxSampleValues[0]);
+            waveformPainter2.AddMax(e.MaxSampleValues.Length > 1?e.MaxSampleValues[1]:0f);
+
+        }
+
+        void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e)
+        {
+            // we know it is stereo
+            volumeMeter1.Amplitude = e.MaxSampleValues[0];
+            volumeMeter2.Amplitude = e.MaxSampleValues.Length > 1?e.MaxSampleValues[1]:0f;
+        }
+
+        private ISampleProvider CreateSampleProvider(IWaveProvider waveProvider, int bits = 16)
+        {
+            var sampleChannel = new SampleChannel(waveProvider, bits == 16);
+            sampleChannel.PreVolumeMeter += OnPreVolumeMeter;
+            setVolumeDelegate = (vol) => sampleChannel.Volume = vol;
+            var postVolumeMeter = new MeteringSampleProvider(sampleChannel);
+            postVolumeMeter.StreamVolume += OnPostVolumeMeter;
+
+            return postVolumeMeter;
+        }
+        private void volumeSlider1_VolumeChanged(object sender, EventArgs e)
+        {
+            if (setVolumeDelegate != null)
+            {
+                setVolumeDelegate(volumeSlider1.Volume);
+            }
         }
 
         private void btnStop_KeyUp(object sender, MouseEventArgs e)
@@ -3265,39 +3619,72 @@ Red    : Diacritics";
 
         void DrawSpectrums(Graphics g, Bitmap bmp)
         {
-            g.DrawImage(bmp, g.ClipBounds);
+            try
+            {
+                g.DrawImage(bmp, g.ClipBounds);
+            }
+            catch (Exception ex)
+            {
+                logMsg(ex,Thread.CurrentThread.ManagedThreadId);
+            }
+
         }
 
         public void PlayWaveFromFile(string file)
         {
             try
             {
+                WaveFileReader waveFile = new WaveFileReader(file);
+                FindInCombo(cmbSampleRate, waveFile.WaveFormat.SampleRate.ToString(),false,true);
+                FindInCombo(cmbBits, waveFile.WaveFormat.BitsPerSample.ToString(), false, true);
+                FindInCombo(cmbChannels, waveFile.WaveFormat.Channels==1?"Mono":"Stereo", false, true);
+                ReInitSpectrum();
+                waveFile.Dispose();
+                waveFile.Close();
+                waveFile = null;
+           //     sensor.Stop();
+           //     sensor.Dispose();
+                
+                int sampleRate = int.Parse(cmbSampleRate.Text);
+                int bits = int.Parse(cmbBits.Text);
+                int channnels = cmbChannels.SelectedIndex + 1;
+
                 new Thread(o =>
                 {
-                    using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(new WaveFileReader(file))))
+         //           InitSpectrum(sampleRate,bits,channnels==1?AudioType.Monaural:AudioType.Stereo);
+                    lockThread = Thread.CurrentThread.ManagedThreadId;
+                    WaveFileReader waveFile = new WaveFileReader(file);
+                    using (WaveStream blockAlignedStream = new BlockAlignReductionStream(WaveFormatConversionStream.CreatePcmStream(waveFile)))
                     {
                         using (WaveOut player = new WaveOut(WaveCallbackInfo.FunctionCallback()))
                         {
-                            player.Init(new MonitoredWaveProvider(blockAlignedStream,sensor.AddBytes));
+                            IWaveProvider waveProvider = new MonitoredWaveProvider(blockAlignedStream, sensor.AddBytes);
+                            player.Init(CreateSampleProvider(waveProvider, bits));
                             btnPlay.BeginInvoke((Action)delegate () { btnPlay.Enabled = false; });
+                            btnRePlay.BeginInvoke(new MethodInvoker(delegate { btnRePlay.Enabled = false; }));
                             player.Play();
                             while (player.PlaybackState == PlaybackState.Playing)
                             {
                                 System.Threading.Thread.Sleep(100);
                                 if (pressed) player.Stop();
                             }
-                            btnPlay.BeginInvoke((Action)delegate () { btnPlay.Enabled = true; });
+                            try { 
+                                btnPlay.BeginInvoke((Action)delegate () { btnPlay.Enabled = true; });
+                                btnRePlay.BeginInvoke(new MethodInvoker(delegate { btnRePlay.Enabled = true; }));
+                            } catch (Exception) { };
                         }
                     }
+                    lockThread = -1;
                 }).Start();
-            } catch (Exception ex) { logMsg(ex.Message); }
+            } catch (Exception ex) { logMsg(ex, Thread.CurrentThread.ManagedThreadId); }
         }
-	#endregion
-	
-	#region commented
-					
-		
-		
+
+        #endregion
+
+    #region CommentedCode
+
+
+
         /*    void temp()
             {
                 Be.Windows.Forms.HexBox hb = new Be.Windows.Forms.HexBox() { ByteProvider = new Be.Windows.Forms.FileByteProvider(sourcefile),
@@ -3335,8 +3722,8 @@ Red    : Diacritics";
 
              }
         */
-		
-		        //confilcts with fody plugin
+
+        //confilcts with fody plugin
         /*
         private void RegisterChilkat()
         {
@@ -3389,6 +3776,6 @@ Red    : Diacritics";
                     return ;
                 }
         */
-	#endregion
+        #endregion
     }
 }
