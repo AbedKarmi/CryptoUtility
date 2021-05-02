@@ -454,9 +454,15 @@ namespace CryptoUtility
             this.canvas = new System.Windows.Forms.PictureBox();
             this.picSpectrum = new System.Windows.Forms.PictureBox();
             this.tabColor = new System.Windows.Forms.TabPage();
-            this.texture3 = new System.Windows.Forms.PictureBox();
-            this.texture2 = new System.Windows.Forms.PictureBox();
-            this.texture = new System.Windows.Forms.PictureBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.cmbColorSizeMode = new System.Windows.Forms.ComboBox();
+            this.lblColorPointSize = new System.Windows.Forms.Label();
+            this.btnCPSM = new System.Windows.Forms.Button();
+            this.btnCPSP = new System.Windows.Forms.Button();
+            this.label55 = new System.Windows.Forms.Label();
+            this.picColor2 = new System.Windows.Forms.PictureBox();
+            this.picColor3 = new System.Windows.Forms.PictureBox();
+            this.picColor1 = new System.Windows.Forms.PictureBox();
             this.lstLog = new System.Windows.Forms.ListBox();
             this.txtInfo = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
@@ -497,9 +503,9 @@ namespace CryptoUtility
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSpectrum)).BeginInit();
             this.tabColor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.texture3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.texture2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.texture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picColor2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picColor3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picColor1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabCrypto
@@ -5553,9 +5559,15 @@ namespace CryptoUtility
             // 
             // tabColor
             // 
-            this.tabColor.Controls.Add(this.texture3);
-            this.tabColor.Controls.Add(this.texture2);
-            this.tabColor.Controls.Add(this.texture);
+            this.tabColor.Controls.Add(this.label54);
+            this.tabColor.Controls.Add(this.cmbColorSizeMode);
+            this.tabColor.Controls.Add(this.lblColorPointSize);
+            this.tabColor.Controls.Add(this.btnCPSM);
+            this.tabColor.Controls.Add(this.btnCPSP);
+            this.tabColor.Controls.Add(this.label55);
+            this.tabColor.Controls.Add(this.picColor2);
+            this.tabColor.Controls.Add(this.picColor3);
+            this.tabColor.Controls.Add(this.picColor1);
             this.tabColor.Location = new System.Drawing.Point(4, 28);
             this.tabColor.Name = "tabColor";
             this.tabColor.Size = new System.Drawing.Size(1331, 663);
@@ -5563,35 +5575,102 @@ namespace CryptoUtility
             this.tabColor.Text = "Color Spectrum";
             this.tabColor.UseVisualStyleBackColor = true;
             // 
-            // texture3
+            // label54
             // 
-            this.texture3.BackColor = System.Drawing.Color.Black;
-            this.texture3.Location = new System.Drawing.Point(679, 10);
-            this.texture3.Name = "texture3";
-            this.texture3.Size = new System.Drawing.Size(640, 515);
-            this.texture3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.texture3.TabIndex = 1;
-            this.texture3.TabStop = false;
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(693, 628);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(91, 19);
+            this.label54.TabIndex = 18;
+            this.label54.Text = "Size Mode :";
             // 
-            // texture2
+            // cmbColorSizeMode
             // 
-            this.texture2.BackColor = System.Drawing.Color.Black;
-            this.texture2.Location = new System.Drawing.Point(679, 531);
-            this.texture2.Name = "texture2";
-            this.texture2.Size = new System.Drawing.Size(640, 119);
-            this.texture2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.texture2.TabIndex = 0;
-            this.texture2.TabStop = false;
+            this.cmbColorSizeMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbColorSizeMode.FormattingEnabled = true;
+            this.cmbColorSizeMode.Items.AddRange(new object[] {
+            "Normal",
+            "StrechImage",
+            "AutoSize",
+            "CenterImage",
+            "Zoom"});
+            this.cmbColorSizeMode.Location = new System.Drawing.Point(787, 625);
+            this.cmbColorSizeMode.Name = "cmbColorSizeMode";
+            this.cmbColorSizeMode.Size = new System.Drawing.Size(184, 27);
+            this.cmbColorSizeMode.TabIndex = 17;
+            this.cmbColorSizeMode.SelectedIndexChanged += new System.EventHandler(this.cmbColorSizeMode_SelectedIndexChanged);
             // 
-            // texture
+            // lblColorPointSize
             // 
-            this.texture.BackColor = System.Drawing.Color.Black;
-            this.texture.Location = new System.Drawing.Point(11, 10);
-            this.texture.Name = "texture";
-            this.texture.Size = new System.Drawing.Size(640, 640);
-            this.texture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.texture.TabIndex = 0;
-            this.texture.TabStop = false;
+            this.lblColorPointSize.BackColor = System.Drawing.Color.White;
+            this.lblColorPointSize.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblColorPointSize.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.lblColorPointSize.Location = new System.Drawing.Point(1196, 620);
+            this.lblColorPointSize.Name = "lblColorPointSize";
+            this.lblColorPointSize.Size = new System.Drawing.Size(58, 33);
+            this.lblColorPointSize.TabIndex = 15;
+            this.lblColorPointSize.Text = "1";
+            this.lblColorPointSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblColorPointSize.TextChanged += new System.EventHandler(this.lblColorPointSize_TextChanged);
+            // 
+            // btnCPSM
+            // 
+            this.btnCPSM.Location = new System.Drawing.Point(1160, 619);
+            this.btnCPSM.Name = "btnCPSM";
+            this.btnCPSM.Size = new System.Drawing.Size(38, 37);
+            this.btnCPSM.TabIndex = 14;
+            this.btnCPSM.Text = "-";
+            this.btnCPSM.UseVisualStyleBackColor = true;
+            this.btnCPSM.Click += new System.EventHandler(this.btnCPSM_Click);
+            // 
+            // btnCPSP
+            // 
+            this.btnCPSP.Location = new System.Drawing.Point(1253, 619);
+            this.btnCPSP.Name = "btnCPSP";
+            this.btnCPSP.Size = new System.Drawing.Size(38, 37);
+            this.btnCPSP.TabIndex = 16;
+            this.btnCPSP.Text = "+";
+            this.btnCPSP.UseVisualStyleBackColor = true;
+            this.btnCPSP.Click += new System.EventHandler(this.btnCPSP_Click);
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(1073, 628);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(84, 19);
+            this.label55.TabIndex = 13;
+            this.label55.Text = "PointSize :";
+            // 
+            // picColor2
+            // 
+            this.picColor2.BackColor = System.Drawing.Color.Black;
+            this.picColor2.Location = new System.Drawing.Point(691, 7);
+            this.picColor2.Name = "picColor2";
+            this.picColor2.Size = new System.Drawing.Size(600, 480);
+            this.picColor2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picColor2.TabIndex = 1;
+            this.picColor2.TabStop = false;
+            // 
+            // picColor3
+            // 
+            this.picColor3.BackColor = System.Drawing.Color.Black;
+            this.picColor3.Location = new System.Drawing.Point(691, 493);
+            this.picColor3.Name = "picColor3";
+            this.picColor3.Size = new System.Drawing.Size(600, 113);
+            this.picColor3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picColor3.TabIndex = 0;
+            this.picColor3.TabStop = false;
+            // 
+            // picColor1
+            // 
+            this.picColor1.BackColor = System.Drawing.Color.Black;
+            this.picColor1.Location = new System.Drawing.Point(38, 6);
+            this.picColor1.Name = "picColor1";
+            this.picColor1.Size = new System.Drawing.Size(600, 600);
+            this.picColor1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picColor1.TabIndex = 0;
+            this.picColor1.TabStop = false;
             // 
             // lstLog
             // 
@@ -5719,9 +5798,10 @@ namespace CryptoUtility
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSpectrum)).EndInit();
             this.tabColor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.texture3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.texture2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.texture)).EndInit();
+            this.tabColor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picColor2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picColor3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picColor1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -6138,9 +6218,9 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnResetSpectrum;
         private System.Windows.Forms.Button btnColor;
         private System.Windows.Forms.TabPage tabColor;
-        private System.Windows.Forms.PictureBox texture;
-        private System.Windows.Forms.PictureBox texture2;
-        private System.Windows.Forms.PictureBox texture3;
+        private System.Windows.Forms.PictureBox picColor1;
+        private System.Windows.Forms.PictureBox picColor3;
+        private System.Windows.Forms.PictureBox picColor2;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -6161,6 +6241,12 @@ namespace CryptoUtility
         private System.Windows.Forms.Label label53;
         private NAudio.Gui.WaveformPainter waveformPainter2;
         private NAudio.Gui.WaveformPainter waveformPainter1;
+        private System.Windows.Forms.Label lblColorPointSize;
+        private System.Windows.Forms.Button btnCPSM;
+        private System.Windows.Forms.Button btnCPSP;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.ComboBox cmbColorSizeMode;
     }
 }
 
