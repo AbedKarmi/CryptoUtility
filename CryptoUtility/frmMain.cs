@@ -126,6 +126,8 @@ namespace CryptoUtility
 
         private Action<float> setVolumeDelegate;
 
+        Timer blinkTimer;
+
         #endregion
 
 
@@ -1971,7 +1973,7 @@ Red    : Diacritics";
         {
             txtInfo.RightToLeft = ((chkRTL.Checked && !chkHexText.Checked) ? RightToLeft.Yes : RightToLeft.No);
         }
-        private void SelectEncoding(string contains)
+        private bool SelectEncoding(string contains)
         {
             int i = 0; bool found = false;
             while (i < cmbDestEnc.Items.Count && !found)
@@ -1979,7 +1981,7 @@ Red    : Diacritics";
                 if (!cmbDestEnc.Items[i].ToString().Contains(contains)) i++; else found = true;
             }
            if (found) cmbDestEnc.SelectedIndex = i;
-
+            return found;
         }
 
         /// <summary>
@@ -2371,20 +2373,11 @@ Red    : Diacritics";
             if (found) cmbSourceEnc.SelectedIndex = i;
 
             string s = lblCurCharset.Text.Substring(0, lblCurCharset.Text.IndexOf("."));
-            /*
-            if (lblCurCharset.Text.Contains("Hijaei"))
-            { 
-                if (rbFirstOriginal.Checked || rbFirstOriginalDots.Checked) SelectEncoding("[Hijaei]");
-                if (rbNoDiacritics.Checked) SelectEncoding("[Hijaei-Hamza]");
-            } 
-            else if (lblCurCharset.Text.Contains("Abjadi"))
-            {
-                if (rbFirstOriginal.Checked || rbFirstOriginalDots.Checked) SelectEncoding("[Abjadi]");
-                if (rbNoDiacritics.Checked) SelectEncoding("[Abjadi-Hamza]");
-            }
-           else 
-            */
-            SelectEncoding("["+s+"]");
+
+            if (rbFirstOriginal.Checked || rbFirstOriginalDots.Checked) s="Hijaei";
+            if (rbNoDiacritics.Checked) s="Hijaei-Hamza";
+
+            if (!SelectEncoding("["+s+"]")) SelectEncoding("[Common]");
             sentSora = lbSoras.Text;
             chkRTL.Checked = true;
         }
@@ -2817,6 +2810,10 @@ Red    : Diacritics";
             Thread.Sleep(1000);
             picQuran1.Image = ScreenCapture.CaptureScreen();
             Visible = true;
+            Blink(true);
+            picColor1.Invalidate();
+            ReadBarcode((Bitmap) picColor1.Image);
+            Blink(false);
         }
         private void chkQR_CheckedChanged(object sender, EventArgs e)
         {
@@ -3106,17 +3103,52 @@ Red    : Diacritics";
                 g.DrawRectangle(pen, rect);
             pen.Dispose();
         }
+
+        void BlinkTimer_Tick(object sender,EventArgs e)
+        {
+            if (lblScan.BackColor == Color.Red)
+            {
+                lblScan.BackColor = Color.ForestGreen;
+                if (blinkTimer.Tag.Equals("end"))
+                {
+                    blinkTimer.Stop();
+                    blinkTimer.Dispose();
+                    blinkTimer = null;
+                }
+            }
+            else
+            {
+                lblScan.BackColor = Color.Red;
+            }
+        }
+        void Blink(bool enable)
+        {
+            if (enable && blinkTimer==null)
+            {
+                blinkTimer = new Timer();
+                blinkTimer.Tick += BlinkTimer_Tick;
+                blinkTimer.Interval = 500;
+                blinkTimer.Tag = "run";
+                blinkTimer.Start();
+            }
+            else if (blinkTimer!=null) blinkTimer.Tag = "end";
+        }
+        void ReadBarcode(Bitmap bmp)
+        {
+            var reader = new BarcodeReader();
+            var result = reader.Decode(bmp);
+            if (result != null)
+            {
+                logMsg("Read Successfull : " + result.BarcodeFormat.ToString() + "[ " + result.Text + " ]");
+                txtInfo.Text = result.BarcodeFormat.ToString() + Environment.NewLine + result.Text;
+            }
+        }
         void webCamTimer_Tick(object sender, EventArgs e)
         {
             var bitmap = wCam.GetCurrentImage();
             if (bitmap == null)
                 return;
-            var reader = new BarcodeReader();
-            var result = reader.Decode(bitmap);
-            if (result != null)
-            {
-                txtInfo.Text = result.BarcodeFormat.ToString()+Environment.NewLine+result.Text;
-            }
+            ReadBarcode(bitmap);
         }
         private void btnScan_Click(object sender, EventArgs e)
         {
@@ -3124,15 +3156,19 @@ Red    : Diacritics";
             {
                 chkQR.Checked = true;
                 chkQR.Enabled = false;
+                btnBarcode.Enabled = false;
+                btnScreenShot.Enabled = false;
+                Blink(true);
 
                 picQuran2.Visible = false;
                 picQuran3.Visible = false;
                 picQuran1.Width = picQuran2.Left + picQuran2.Width-picQuran1.Left;
+                
                 Application.DoEvents();
 
                 wCam = new WebCam { Container = picQuran1 };
-
                 wCam.OpenConnection();
+
 
                 webCamTimer = new Timer();
                 webCamTimer.Tick += webCamTimer_Tick;
@@ -3141,6 +3177,9 @@ Red    : Diacritics";
             }
             else
             {
+                btnBarcode.Enabled = true;
+                btnScreenShot.Enabled = true;
+                Blink(false);
                 webCamTimer.Stop();
                 webCamTimer = null;
                 wCam.Dispose();
@@ -3717,6 +3756,13 @@ Red    : Diacritics";
             SetSizeMod(picColor1, picColor2);
             DrawColors();
             AppSettings.WriteValue("Settings", "ColorSizeMode", cmbColorSizeMode.SelectedIndex.ToString());
+        }
+
+        private void btnBarcode_Click(object sender, EventArgs e)
+        {
+            Blink(true);
+            ReadBarcode((Bitmap)picQuran3.Image);
+            Blink(false);
         }
 
         private void btnCPSP_Click(object sender, EventArgs e)

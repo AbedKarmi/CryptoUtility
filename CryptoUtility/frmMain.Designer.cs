@@ -404,6 +404,7 @@ namespace CryptoUtility
             this.btnSendToCalc = new System.Windows.Forms.Button();
             this.btnOpenHexFile = new System.Windows.Forms.Button();
             this.tabTexture = new System.Windows.Forms.TabPage();
+            this.lblScan = new System.Windows.Forms.Label();
             this.chkQR = new System.Windows.Forms.CheckBox();
             this.picQuran3 = new System.Windows.Forms.PictureBox();
             this.chkINV = new System.Windows.Forms.CheckBox();
@@ -416,6 +417,7 @@ namespace CryptoUtility
             this.label49 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.cmbSizeMode = new System.Windows.Forms.ComboBox();
+            this.btnBarcode = new System.Windows.Forms.Button();
             this.btnScreenShot = new System.Windows.Forms.Button();
             this.btnScan = new System.Windows.Forms.Button();
             this.btnSaveImage = new System.Windows.Forms.Button();
@@ -1277,7 +1279,7 @@ namespace CryptoUtility
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(1339, 695);
-            this.tabControl.TabIndex = 0;
+            this.tabControl.TabIndex = 2;
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabQuran
@@ -3463,7 +3465,7 @@ namespace CryptoUtility
             this.btnSCrypto.Margin = new System.Windows.Forms.Padding(4);
             this.btnSCrypto.Name = "btnSCrypto";
             this.btnSCrypto.Size = new System.Drawing.Size(90, 35);
-            this.btnSCrypto.TabIndex = 5;
+            this.btnSCrypto.TabIndex = 1;
             this.btnSCrypto.Text = "Crypto";
             this.btnSCrypto.UseVisualStyleBackColor = true;
             this.btnSCrypto.Click += new System.EventHandler(this.btnSCrypto_Click);
@@ -3474,7 +3476,7 @@ namespace CryptoUtility
             this.btnSImage.Margin = new System.Windows.Forms.Padding(4);
             this.btnSImage.Name = "btnSImage";
             this.btnSImage.Size = new System.Drawing.Size(90, 35);
-            this.btnSImage.TabIndex = 4;
+            this.btnSImage.TabIndex = 3;
             this.btnSImage.Text = "Texture";
             this.btnSImage.UseVisualStyleBackColor = true;
             this.btnSImage.Click += new System.EventHandler(this.btnSImage_Click);
@@ -3485,7 +3487,7 @@ namespace CryptoUtility
             this.btnSHex.Margin = new System.Windows.Forms.Padding(4);
             this.btnSHex.Name = "btnSHex";
             this.btnSHex.Size = new System.Drawing.Size(90, 35);
-            this.btnSHex.TabIndex = 6;
+            this.btnSHex.TabIndex = 2;
             this.btnSHex.Text = "Hex";
             this.btnSHex.UseVisualStyleBackColor = true;
             this.btnSHex.Click += new System.EventHandler(this.btnSHex_Click);
@@ -3496,7 +3498,7 @@ namespace CryptoUtility
             this.btnSCalc.Margin = new System.Windows.Forms.Padding(4);
             this.btnSCalc.Name = "btnSCalc";
             this.btnSCalc.Size = new System.Drawing.Size(90, 35);
-            this.btnSCalc.TabIndex = 4;
+            this.btnSCalc.TabIndex = 0;
             this.btnSCalc.Text = "Calc";
             this.btnSCalc.UseVisualStyleBackColor = true;
             this.btnSCalc.Click += new System.EventHandler(this.btnSCalc_Click);
@@ -3507,7 +3509,7 @@ namespace CryptoUtility
             this.btnSpectrum.Margin = new System.Windows.Forms.Padding(4);
             this.btnSpectrum.Name = "btnSpectrum";
             this.btnSpectrum.Size = new System.Drawing.Size(90, 35);
-            this.btnSpectrum.TabIndex = 6;
+            this.btnSpectrum.TabIndex = 4;
             this.btnSpectrum.Text = "Audio";
             this.btnSpectrum.UseVisualStyleBackColor = true;
             this.btnSpectrum.Click += new System.EventHandler(this.btnSpectrum_Click);
@@ -3518,7 +3520,7 @@ namespace CryptoUtility
             this.button8.Margin = new System.Windows.Forms.Padding(4);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(90, 35);
-            this.button8.TabIndex = 6;
+            this.button8.TabIndex = 7;
             this.button8.UseVisualStyleBackColor = true;
             // 
             // btnColor
@@ -3527,7 +3529,7 @@ namespace CryptoUtility
             this.btnColor.Margin = new System.Windows.Forms.Padding(4);
             this.btnColor.Name = "btnColor";
             this.btnColor.Size = new System.Drawing.Size(90, 35);
-            this.btnColor.TabIndex = 6;
+            this.btnColor.TabIndex = 5;
             this.btnColor.Text = "Color";
             this.btnColor.UseVisualStyleBackColor = true;
             this.btnColor.Click += new System.EventHandler(this.btnColor_Click);
@@ -4808,7 +4810,7 @@ namespace CryptoUtility
             this.hexBox.Name = "hexBox";
             this.hexBox.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
             this.hexBox.Size = new System.Drawing.Size(1268, 520);
-            this.hexBox.TabIndex = 59;
+            this.hexBox.TabIndex = 9;
             this.hexBox.TextChanged += new System.EventHandler(this.hexBox_TextChanged);
             this.hexBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.hexBox_DragDrop);
             this.hexBox.DragOver += new System.Windows.Forms.DragEventHandler(this.hexBox_DragOver);
@@ -4821,7 +4823,7 @@ namespace CryptoUtility
             this.lblHash.Name = "lblHash";
             this.lblHash.ReadOnly = true;
             this.lblHash.Size = new System.Drawing.Size(1269, 29);
-            this.lblHash.TabIndex = 10;
+            this.lblHash.TabIndex = 11;
             this.lblHash.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // cmbHHash
@@ -4898,7 +4900,7 @@ namespace CryptoUtility
             this.lblHexFile.Location = new System.Drawing.Point(34, 588);
             this.lblHexFile.Name = "lblHexFile";
             this.lblHexFile.Size = new System.Drawing.Size(1269, 35);
-            this.lblHexFile.TabIndex = 9;
+            this.lblHexFile.TabIndex = 10;
             this.lblHexFile.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnClearHex
@@ -4906,7 +4908,7 @@ namespace CryptoUtility
             this.btnClearHex.Location = new System.Drawing.Point(1203, 28);
             this.btnClearHex.Name = "btnClearHex";
             this.btnClearHex.Size = new System.Drawing.Size(100, 40);
-            this.btnClearHex.TabIndex = 7;
+            this.btnClearHex.TabIndex = 8;
             this.btnClearHex.Text = "Clear";
             this.btnClearHex.UseVisualStyleBackColor = true;
             this.btnClearHex.Click += new System.EventHandler(this.btnClearHex_Click);
@@ -4916,7 +4918,7 @@ namespace CryptoUtility
             this.btnApplyChanges.Location = new System.Drawing.Point(1097, 28);
             this.btnApplyChanges.Name = "btnApplyChanges";
             this.btnApplyChanges.Size = new System.Drawing.Size(100, 40);
-            this.btnApplyChanges.TabIndex = 6;
+            this.btnApplyChanges.TabIndex = 7;
             this.btnApplyChanges.Text = "Apply";
             this.btnApplyChanges.UseVisualStyleBackColor = true;
             this.btnApplyChanges.Click += new System.EventHandler(this.btnApplyChanges_Click);
@@ -4936,7 +4938,7 @@ namespace CryptoUtility
             this.btnSendToCrypto.Location = new System.Drawing.Point(885, 28);
             this.btnSendToCrypto.Name = "btnSendToCrypto";
             this.btnSendToCrypto.Size = new System.Drawing.Size(100, 40);
-            this.btnSendToCrypto.TabIndex = 4;
+            this.btnSendToCrypto.TabIndex = 5;
             this.btnSendToCrypto.Text = "> Crypto";
             this.btnSendToCrypto.UseVisualStyleBackColor = true;
             this.btnSendToCrypto.Click += new System.EventHandler(this.btnSendToCrypto_Click);
@@ -4956,7 +4958,7 @@ namespace CryptoUtility
             this.btnOpenHexFile.Location = new System.Drawing.Point(991, 28);
             this.btnOpenHexFile.Name = "btnOpenHexFile";
             this.btnOpenHexFile.Size = new System.Drawing.Size(100, 40);
-            this.btnOpenHexFile.TabIndex = 5;
+            this.btnOpenHexFile.TabIndex = 6;
             this.btnOpenHexFile.Text = "Open File";
             this.btnOpenHexFile.UseVisualStyleBackColor = true;
             this.btnOpenHexFile.Click += new System.EventHandler(this.btnOpenHexFile_Click);
@@ -4964,6 +4966,7 @@ namespace CryptoUtility
             // tabTexture
             // 
             this.tabTexture.BackColor = System.Drawing.Color.LightGray;
+            this.tabTexture.Controls.Add(this.lblScan);
             this.tabTexture.Controls.Add(this.chkQR);
             this.tabTexture.Controls.Add(this.picQuran3);
             this.tabTexture.Controls.Add(this.chkINV);
@@ -4976,6 +4979,7 @@ namespace CryptoUtility
             this.tabTexture.Controls.Add(this.label49);
             this.tabTexture.Controls.Add(this.label47);
             this.tabTexture.Controls.Add(this.cmbSizeMode);
+            this.tabTexture.Controls.Add(this.btnBarcode);
             this.tabTexture.Controls.Add(this.btnScreenShot);
             this.tabTexture.Controls.Add(this.btnScan);
             this.tabTexture.Controls.Add(this.btnSaveImage);
@@ -4990,15 +4994,24 @@ namespace CryptoUtility
             this.tabTexture.Text = "Texture";
             this.tabTexture.Click += new System.EventHandler(this.tabImage_Click);
             // 
+            // lblScan
+            // 
+            this.lblScan.BackColor = System.Drawing.Color.ForestGreen;
+            this.lblScan.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblScan.Location = new System.Drawing.Point(403, 609);
+            this.lblScan.Name = "lblScan";
+            this.lblScan.Size = new System.Drawing.Size(235, 12);
+            this.lblScan.TabIndex = 17;
+            // 
             // chkQR
             // 
             this.chkQR.AutoSize = true;
             this.chkQR.Checked = true;
             this.chkQR.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkQR.Location = new System.Drawing.Point(915, 625);
+            this.chkQR.Location = new System.Drawing.Point(923, 625);
             this.chkQR.Name = "chkQR";
             this.chkQR.Size = new System.Drawing.Size(57, 23);
-            this.chkQR.TabIndex = 16;
+            this.chkQR.TabIndex = 11;
             this.chkQR.Text = "QR";
             this.chkQR.UseVisualStyleBackColor = true;
             this.chkQR.CheckedChanged += new System.EventHandler(this.chkQR_CheckedChanged);
@@ -5017,10 +5030,10 @@ namespace CryptoUtility
             // chkINV
             // 
             this.chkINV.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkINV.Location = new System.Drawing.Point(230, 615);
+            this.chkINV.Location = new System.Drawing.Point(206, 615);
             this.chkINV.Name = "chkINV";
             this.chkINV.Size = new System.Drawing.Size(55, 40);
-            this.chkINV.TabIndex = 14;
+            this.chkINV.TabIndex = 3;
             this.chkINV.Text = "INV";
             this.chkINV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkINV.UseVisualStyleBackColor = true;
@@ -5029,10 +5042,10 @@ namespace CryptoUtility
             // chkFlipX
             // 
             this.chkFlipX.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkFlipX.Location = new System.Drawing.Point(177, 615);
+            this.chkFlipX.Location = new System.Drawing.Point(153, 615);
             this.chkFlipX.Name = "chkFlipX";
             this.chkFlipX.Size = new System.Drawing.Size(55, 40);
-            this.chkFlipX.TabIndex = 14;
+            this.chkFlipX.TabIndex = 2;
             this.chkFlipX.Text = "FlipX";
             this.chkFlipX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkFlipX.UseVisualStyleBackColor = true;
@@ -5041,10 +5054,10 @@ namespace CryptoUtility
             // chkFlipY
             // 
             this.chkFlipY.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkFlipY.Location = new System.Drawing.Point(125, 615);
+            this.chkFlipY.Location = new System.Drawing.Point(101, 615);
             this.chkFlipY.Name = "chkFlipY";
             this.chkFlipY.Size = new System.Drawing.Size(55, 40);
-            this.chkFlipY.TabIndex = 14;
+            this.chkFlipY.TabIndex = 1;
             this.chkFlipY.Text = "FlipY";
             this.chkFlipY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.chkFlipY.UseVisualStyleBackColor = true;
@@ -5053,10 +5066,10 @@ namespace CryptoUtility
             // chkFixPadding
             // 
             this.chkFixPadding.AutoSize = true;
-            this.chkFixPadding.Location = new System.Drawing.Point(976, 625);
+            this.chkFixPadding.Location = new System.Drawing.Point(984, 625);
             this.chkFixPadding.Name = "chkFixPadding";
             this.chkFixPadding.Size = new System.Drawing.Size(92, 23);
-            this.chkFixPadding.TabIndex = 13;
+            this.chkFixPadding.TabIndex = 12;
             this.chkFixPadding.Text = "Padding";
             this.chkFixPadding.UseVisualStyleBackColor = true;
             this.chkFixPadding.CheckedChanged += new System.EventHandler(this.chkFixSquare_CheckedChanged);
@@ -5069,7 +5082,7 @@ namespace CryptoUtility
             this.lblPointSize.Location = new System.Drawing.Point(1196, 618);
             this.lblPointSize.Name = "lblPointSize";
             this.lblPointSize.Size = new System.Drawing.Size(58, 33);
-            this.lblPointSize.TabIndex = 11;
+            this.lblPointSize.TabIndex = 15;
             this.lblPointSize.Text = "1";
             this.lblPointSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblPointSize.TextChanged += new System.EventHandler(this.lblScale_TextChanged);
@@ -5080,7 +5093,7 @@ namespace CryptoUtility
             this.btnSMinus.Location = new System.Drawing.Point(1160, 617);
             this.btnSMinus.Name = "btnSMinus";
             this.btnSMinus.Size = new System.Drawing.Size(38, 37);
-            this.btnSMinus.TabIndex = 10;
+            this.btnSMinus.TabIndex = 14;
             this.btnSMinus.Text = "-";
             this.btnSMinus.UseVisualStyleBackColor = true;
             this.btnSMinus.Click += new System.EventHandler(this.btnSMinus_Click);
@@ -5090,7 +5103,7 @@ namespace CryptoUtility
             this.btnSPlus.Location = new System.Drawing.Point(1253, 617);
             this.btnSPlus.Name = "btnSPlus";
             this.btnSPlus.Size = new System.Drawing.Size(38, 37);
-            this.btnSPlus.TabIndex = 12;
+            this.btnSPlus.TabIndex = 16;
             this.btnSPlus.Text = "+";
             this.btnSPlus.UseVisualStyleBackColor = true;
             this.btnSPlus.Click += new System.EventHandler(this.btnSPlus_Click);
@@ -5098,19 +5111,19 @@ namespace CryptoUtility
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(1073, 626);
+            this.label49.Location = new System.Drawing.Point(1078, 626);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(84, 19);
-            this.label49.TabIndex = 3;
-            this.label49.Text = "PointSize :";
+            this.label49.Size = new System.Drawing.Size(79, 19);
+            this.label49.TabIndex = 13;
+            this.label49.Text = "PointSize:";
             // 
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(621, 626);
+            this.label47.Location = new System.Drawing.Point(682, 626);
             this.label47.Name = "label47";
             this.label47.Size = new System.Drawing.Size(91, 19);
-            this.label47.TabIndex = 3;
+            this.label47.TabIndex = 9;
             this.label47.Text = "Size Mode :";
             // 
             // cmbSizeMode
@@ -5123,48 +5136,58 @@ namespace CryptoUtility
             "AutoSize",
             "CenterImage",
             "Zoom"});
-            this.cmbSizeMode.Location = new System.Drawing.Point(715, 623);
+            this.cmbSizeMode.Location = new System.Drawing.Point(776, 623);
             this.cmbSizeMode.Name = "cmbSizeMode";
-            this.cmbSizeMode.Size = new System.Drawing.Size(184, 27);
-            this.cmbSizeMode.TabIndex = 2;
+            this.cmbSizeMode.Size = new System.Drawing.Size(142, 27);
+            this.cmbSizeMode.TabIndex = 10;
             this.cmbSizeMode.SelectedIndexChanged += new System.EventHandler(this.cmbSizeMode_SelectedIndexChanged);
+            // 
+            // btnBarcode
+            // 
+            this.btnBarcode.Location = new System.Drawing.Point(556, 615);
+            this.btnBarcode.Name = "btnBarcode";
+            this.btnBarcode.Size = new System.Drawing.Size(82, 40);
+            this.btnBarcode.TabIndex = 8;
+            this.btnBarcode.Text = "Barcode";
+            this.btnBarcode.UseVisualStyleBackColor = true;
+            this.btnBarcode.Click += new System.EventHandler(this.btnBarcode_Click);
             // 
             // btnScreenShot
             // 
-            this.btnScreenShot.Location = new System.Drawing.Point(524, 615);
+            this.btnScreenShot.Location = new System.Drawing.Point(477, 615);
             this.btnScreenShot.Name = "btnScreenShot";
-            this.btnScreenShot.Size = new System.Drawing.Size(89, 40);
-            this.btnScreenShot.TabIndex = 1;
-            this.btnScreenShot.Text = "ScrnShot";
+            this.btnScreenShot.Size = new System.Drawing.Size(82, 40);
+            this.btnScreenShot.TabIndex = 7;
+            this.btnScreenShot.Text = "Screen";
             this.btnScreenShot.UseVisualStyleBackColor = true;
             this.btnScreenShot.Click += new System.EventHandler(this.btnScreenShot_Click);
             // 
             // btnScan
             // 
-            this.btnScan.Location = new System.Drawing.Point(445, 615);
+            this.btnScan.Location = new System.Drawing.Point(400, 615);
             this.btnScan.Name = "btnScan";
-            this.btnScan.Size = new System.Drawing.Size(80, 40);
-            this.btnScan.TabIndex = 1;
-            this.btnScan.Text = "Scan";
+            this.btnScan.Size = new System.Drawing.Size(82, 40);
+            this.btnScan.TabIndex = 6;
+            this.btnScan.Text = "Camera";
             this.btnScan.UseVisualStyleBackColor = true;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
             // btnSaveImage
             // 
-            this.btnSaveImage.Location = new System.Drawing.Point(368, 615);
+            this.btnSaveImage.Location = new System.Drawing.Point(317, 615);
             this.btnSaveImage.Name = "btnSaveImage";
             this.btnSaveImage.Size = new System.Drawing.Size(80, 40);
-            this.btnSaveImage.TabIndex = 1;
+            this.btnSaveImage.TabIndex = 5;
             this.btnSaveImage.Text = "Save";
             this.btnSaveImage.UseVisualStyleBackColor = true;
             this.btnSaveImage.Click += new System.EventHandler(this.btnSaveImage_Click);
             // 
             // btnResetImage
             // 
-            this.btnResetImage.Location = new System.Drawing.Point(291, 615);
+            this.btnResetImage.Location = new System.Drawing.Point(257, 615);
             this.btnResetImage.Name = "btnResetImage";
-            this.btnResetImage.Size = new System.Drawing.Size(80, 40);
-            this.btnResetImage.TabIndex = 1;
+            this.btnResetImage.Size = new System.Drawing.Size(65, 40);
+            this.btnResetImage.TabIndex = 4;
             this.btnResetImage.Text = "Reset";
             this.btnResetImage.UseVisualStyleBackColor = true;
             this.btnResetImage.Click += new System.EventHandler(this.btnResetImage_Click);
@@ -5173,9 +5196,9 @@ namespace CryptoUtility
             // 
             this.btnRotate.Location = new System.Drawing.Point(38, 615);
             this.btnRotate.Name = "btnRotate";
-            this.btnRotate.Size = new System.Drawing.Size(90, 40);
-            this.btnRotate.TabIndex = 1;
-            this.btnRotate.Text = "Rotate >";
+            this.btnRotate.Size = new System.Drawing.Size(67, 40);
+            this.btnRotate.TabIndex = 0;
+            this.btnRotate.Text = "Rotate";
             this.btnRotate.UseVisualStyleBackColor = true;
             this.btnRotate.Click += new System.EventHandler(this.btnRotate_Click);
             // 
@@ -5246,7 +5269,7 @@ namespace CryptoUtility
             this.splitContainer1.Panel2.Controls.Add(this.picSpectrum);
             this.splitContainer1.Size = new System.Drawing.Size(1335, 663);
             this.splitContainer1.SplitterDistance = 185;
-            this.splitContainer1.TabIndex = 1;
+            this.splitContainer1.TabIndex = 0;
             // 
             // waveformPainter2
             // 
@@ -5254,7 +5277,7 @@ namespace CryptoUtility
             this.waveformPainter2.Location = new System.Drawing.Point(14, 427);
             this.waveformPainter2.Name = "waveformPainter2";
             this.waveformPainter2.Size = new System.Drawing.Size(158, 40);
-            this.waveformPainter2.TabIndex = 24;
+            this.waveformPainter2.TabIndex = 7;
             this.waveformPainter2.Text = "waveformPainter1";
             // 
             // waveformPainter1
@@ -5263,7 +5286,7 @@ namespace CryptoUtility
             this.waveformPainter1.Location = new System.Drawing.Point(15, 381);
             this.waveformPainter1.Name = "waveformPainter1";
             this.waveformPainter1.Size = new System.Drawing.Size(158, 40);
-            this.waveformPainter1.TabIndex = 24;
+            this.waveformPainter1.TabIndex = 6;
             this.waveformPainter1.Text = "waveformPainter1";
             // 
             // label53
@@ -5284,7 +5307,7 @@ namespace CryptoUtility
             this.volumeMeter2.Name = "volumeMeter2";
             this.volumeMeter2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.volumeMeter2.Size = new System.Drawing.Size(158, 17);
-            this.volumeMeter2.TabIndex = 23;
+            this.volumeMeter2.TabIndex = 10;
             this.volumeMeter2.Text = "volumeMeter1";
             // 
             // volumeMeter1
@@ -5296,7 +5319,7 @@ namespace CryptoUtility
             this.volumeMeter1.Name = "volumeMeter1";
             this.volumeMeter1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.volumeMeter1.Size = new System.Drawing.Size(158, 17);
-            this.volumeMeter1.TabIndex = 23;
+            this.volumeMeter1.TabIndex = 9;
             this.volumeMeter1.Text = "volumeMeter1";
             // 
             // volumeSlider1
@@ -5304,7 +5327,7 @@ namespace CryptoUtility
             this.volumeSlider1.Location = new System.Drawing.Point(15, 499);
             this.volumeSlider1.Name = "volumeSlider1";
             this.volumeSlider1.Size = new System.Drawing.Size(157, 21);
-            this.volumeSlider1.TabIndex = 22;
+            this.volumeSlider1.TabIndex = 6;
             this.volumeSlider1.VolumeChanged += new System.EventHandler(this.volumeSlider1_VolumeChanged);
             // 
             // panel8
@@ -5323,7 +5346,7 @@ namespace CryptoUtility
             this.label52.Location = new System.Drawing.Point(3, 5);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(149, 25);
-            this.label52.TabIndex = 20;
+            this.label52.TabIndex = 0;
             this.label52.Text = "Gain (dB / %)";
             this.label52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -5332,7 +5355,7 @@ namespace CryptoUtility
             this.lblDB.Location = new System.Drawing.Point(7, 68);
             this.lblDB.Name = "lblDB";
             this.lblDB.Size = new System.Drawing.Size(142, 27);
-            this.lblDB.TabIndex = 20;
+            this.lblDB.TabIndex = 2;
             this.lblDB.Text = "dB";
             this.lblDB.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -5344,7 +5367,7 @@ namespace CryptoUtility
             this.trkDB.Minimum = 13;
             this.trkDB.Name = "trkDB";
             this.trkDB.Size = new System.Drawing.Size(157, 69);
-            this.trkDB.TabIndex = 19;
+            this.trkDB.TabIndex = 0;
             this.trkDB.Value = 15;
             this.trkDB.Scroll += new System.EventHandler(this.trkDB_Scroll);
             this.trkDB.ValueChanged += new System.EventHandler(this.trkDB_ValueChanged);
@@ -5357,7 +5380,7 @@ namespace CryptoUtility
             this.panel7.Location = new System.Drawing.Point(15, 118);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(157, 72);
-            this.panel7.TabIndex = 18;
+            this.panel7.TabIndex = 2;
             // 
             // waveRButton
             // 
@@ -5366,7 +5389,7 @@ namespace CryptoUtility
             this.waveRButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.waveRButton.Name = "waveRButton";
             this.waveRButton.Size = new System.Drawing.Size(106, 23);
-            this.waveRButton.TabIndex = 16;
+            this.waveRButton.TabIndex = 0;
             this.waveRButton.Text = "Waveform";
             this.waveRButton.UseVisualStyleBackColor = true;
             this.waveRButton.CheckedChanged += new System.EventHandler(this.waveRButton_CheckedChanged);
@@ -5379,7 +5402,7 @@ namespace CryptoUtility
             this.spectrumRButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.spectrumRButton.Name = "spectrumRButton";
             this.spectrumRButton.Size = new System.Drawing.Size(101, 23);
-            this.spectrumRButton.TabIndex = 17;
+            this.spectrumRButton.TabIndex = 1;
             this.spectrumRButton.TabStop = true;
             this.spectrumRButton.Text = "Spectrum";
             this.spectrumRButton.UseVisualStyleBackColor = true;
@@ -5404,7 +5427,7 @@ namespace CryptoUtility
             this.cmbChannels.Location = new System.Drawing.Point(82, 84);
             this.cmbChannels.Name = "cmbChannels";
             this.cmbChannels.Size = new System.Drawing.Size(90, 27);
-            this.cmbChannels.TabIndex = 14;
+            this.cmbChannels.TabIndex = 1;
             this.cmbChannels.SelectedIndexChanged += new System.EventHandler(this.cmbChannels_SelectedIndexChanged);
             // 
             // cmbBits
@@ -5416,7 +5439,7 @@ namespace CryptoUtility
             this.cmbBits.Location = new System.Drawing.Point(82, 51);
             this.cmbBits.Name = "cmbBits";
             this.cmbBits.Size = new System.Drawing.Size(90, 27);
-            this.cmbBits.TabIndex = 14;
+            this.cmbBits.TabIndex = 1;
             this.cmbBits.SelectedIndexChanged += new System.EventHandler(this.cmbBits_SelectedIndexChanged);
             this.cmbBits.TextChanged += new System.EventHandler(this.cmbBits_SelectedIndexChanged);
             // 
@@ -5433,7 +5456,7 @@ namespace CryptoUtility
             this.cmbSampleRate.Location = new System.Drawing.Point(82, 21);
             this.cmbSampleRate.Name = "cmbSampleRate";
             this.cmbSampleRate.Size = new System.Drawing.Size(90, 27);
-            this.cmbSampleRate.TabIndex = 14;
+            this.cmbSampleRate.TabIndex = 0;
             this.cmbSampleRate.SelectedIndexChanged += new System.EventHandler(this.cmbSampleRate_SelectedIndexChanged);
             this.cmbSampleRate.TextChanged += new System.EventHandler(this.cmbSampleRate_SelectedIndexChanged);
             // 
@@ -5443,7 +5466,7 @@ namespace CryptoUtility
             this.chkPlay.Location = new System.Drawing.Point(14, 195);
             this.chkPlay.Name = "chkPlay";
             this.chkPlay.Size = new System.Drawing.Size(150, 23);
-            this.chkPlay.TabIndex = 13;
+            this.chkPlay.TabIndex = 3;
             this.chkPlay.Text = "Recording  Echo";
             this.chkPlay.UseVisualStyleBackColor = true;
             this.chkPlay.CheckedChanged += new System.EventHandler(this.chkPlay_CheckedChanged);
@@ -5454,7 +5477,7 @@ namespace CryptoUtility
             this.stopButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.stopButton.Name = "stopButton";
             this.stopButton.Size = new System.Drawing.Size(73, 36);
-            this.stopButton.TabIndex = 10;
+            this.stopButton.TabIndex = 5;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = true;
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
@@ -5465,7 +5488,7 @@ namespace CryptoUtility
             this.btnResetSpectrum.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnResetSpectrum.Name = "btnResetSpectrum";
             this.btnResetSpectrum.Size = new System.Drawing.Size(73, 36);
-            this.btnResetSpectrum.TabIndex = 9;
+            this.btnResetSpectrum.TabIndex = 10;
             this.btnResetSpectrum.Text = "Reset";
             this.btnResetSpectrum.UseVisualStyleBackColor = true;
             this.btnResetSpectrum.Click += new System.EventHandler(this.btnResetSpectrum_Click);
@@ -5490,7 +5513,7 @@ namespace CryptoUtility
             this.btnRePlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnRePlay.Name = "btnRePlay";
             this.btnRePlay.Size = new System.Drawing.Size(73, 36);
-            this.btnRePlay.TabIndex = 9;
+            this.btnRePlay.TabIndex = 8;
             this.btnRePlay.Text = "RePlay";
             this.btnRePlay.UseVisualStyleBackColor = true;
             this.btnRePlay.Click += new System.EventHandler(this.btnPlay_Click);
@@ -5501,7 +5524,7 @@ namespace CryptoUtility
             this.btnPlay.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(76, 36);
-            this.btnPlay.TabIndex = 9;
+            this.btnPlay.TabIndex = 7;
             this.btnPlay.Text = "Play";
             this.btnPlay.UseVisualStyleBackColor = true;
             this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
@@ -5512,7 +5535,7 @@ namespace CryptoUtility
             this.startButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.startButton.Name = "startButton";
             this.startButton.Size = new System.Drawing.Size(76, 36);
-            this.startButton.TabIndex = 9;
+            this.startButton.TabIndex = 4;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
             this.startButton.Click += new System.EventHandler(this.startButton_Click);
@@ -5581,7 +5604,7 @@ namespace CryptoUtility
             this.label54.Location = new System.Drawing.Point(693, 628);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(91, 19);
-            this.label54.TabIndex = 18;
+            this.label54.TabIndex = 0;
             this.label54.Text = "Size Mode :";
             // 
             // cmbColorSizeMode
@@ -5597,7 +5620,7 @@ namespace CryptoUtility
             this.cmbColorSizeMode.Location = new System.Drawing.Point(787, 625);
             this.cmbColorSizeMode.Name = "cmbColorSizeMode";
             this.cmbColorSizeMode.Size = new System.Drawing.Size(184, 27);
-            this.cmbColorSizeMode.TabIndex = 17;
+            this.cmbColorSizeMode.TabIndex = 1;
             this.cmbColorSizeMode.SelectedIndexChanged += new System.EventHandler(this.cmbColorSizeMode_SelectedIndexChanged);
             // 
             // lblColorPointSize
@@ -5608,7 +5631,7 @@ namespace CryptoUtility
             this.lblColorPointSize.Location = new System.Drawing.Point(1196, 620);
             this.lblColorPointSize.Name = "lblColorPointSize";
             this.lblColorPointSize.Size = new System.Drawing.Size(58, 33);
-            this.lblColorPointSize.TabIndex = 15;
+            this.lblColorPointSize.TabIndex = 4;
             this.lblColorPointSize.Text = "1";
             this.lblColorPointSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblColorPointSize.TextChanged += new System.EventHandler(this.lblColorPointSize_TextChanged);
@@ -5618,7 +5641,7 @@ namespace CryptoUtility
             this.btnCPSM.Location = new System.Drawing.Point(1160, 619);
             this.btnCPSM.Name = "btnCPSM";
             this.btnCPSM.Size = new System.Drawing.Size(38, 37);
-            this.btnCPSM.TabIndex = 14;
+            this.btnCPSM.TabIndex = 3;
             this.btnCPSM.Text = "-";
             this.btnCPSM.UseVisualStyleBackColor = true;
             this.btnCPSM.Click += new System.EventHandler(this.btnCPSM_Click);
@@ -5628,7 +5651,7 @@ namespace CryptoUtility
             this.btnCPSP.Location = new System.Drawing.Point(1253, 619);
             this.btnCPSP.Name = "btnCPSP";
             this.btnCPSP.Size = new System.Drawing.Size(38, 37);
-            this.btnCPSP.TabIndex = 16;
+            this.btnCPSP.TabIndex = 5;
             this.btnCPSP.Text = "+";
             this.btnCPSP.UseVisualStyleBackColor = true;
             this.btnCPSP.Click += new System.EventHandler(this.btnCPSP_Click);
@@ -5639,7 +5662,7 @@ namespace CryptoUtility
             this.label55.Location = new System.Drawing.Point(1073, 628);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(84, 19);
-            this.label55.TabIndex = 13;
+            this.label55.TabIndex = 2;
             this.label55.Text = "PointSize :";
             // 
             // picColor2
@@ -6247,6 +6270,8 @@ namespace CryptoUtility
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.Label label54;
         private System.Windows.Forms.ComboBox cmbColorSizeMode;
+        private System.Windows.Forms.Button btnBarcode;
+        private System.Windows.Forms.Label lblScan;
     }
 }
 

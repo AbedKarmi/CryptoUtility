@@ -12,3 +12,16 @@ D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\bin32\libiomp5md
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\bin32\mkl_custom.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\bin64\libiomp5md.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\bin64\mkl_custom.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\Microsoft.Win32.Registry.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\NAudio.Asio.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\NAudio.Core.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\NAudio.Midi.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\NAudio.Wasapi.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\NAudio.WinForms.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\NAudio.WinMM.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\System.Security.AccessControl.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\System.Security.Principal.Windows.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\Microsoft.Win32.Registry.xml
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\System.Security.AccessControl.xml
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\System.Security.Principal.Windows.xml
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.csprojAssemblyReference.cache
