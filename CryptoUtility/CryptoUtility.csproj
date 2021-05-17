@@ -103,6 +103,12 @@
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>private.key.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Be.Windows.Forms.HexBox">
       <HintPath>Lib\Be.Windows.Forms.HexBox.dll</HintPath>
@@ -363,6 +369,7 @@
     <Compile Include="IQuran.cs" />
     <Compile Include="ISettings.cs" />
     <Compile Include="MyClass.cs" />
+    <Compile Include="MyWeb.cs" />
     <Compile Include="PdfSupport.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -388,6 +395,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.manifest" />
+    <None Include="private.key.pfx" />
+    <None Include="private.pfx" />
     <None Include="XLS\ACCO.xlsx" />
     <EmbeddedResource Include="Fonts\DQ7QuranKoufiA.ttf" />
     <None Include="XLS\Quran.xlsx" />
@@ -408,26 +417,66 @@
     <EmbeddedResource Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Lib\BouncyCastle.Crypto.dll" />
-    <None Include="Lib\ILGPU.Algorithms.dll" />
-    <None Include="Lib\ILGPU.dll" />
-    <None Include="Lib\ILGPU.Lightning.dll" />
-    <None Include="Lib\System.Buffers.dll" />
-    <None Include="Lib\System.Collections.Immutable.dll" />
-    <None Include="Lib\System.Diagnostics.DiagnosticSource.dll" />
-    <None Include="Lib\System.Memory.dll" />
-    <None Include="Lib\System.Numerics.Vectors.dll" />
-    <None Include="Lib\System.Reflection.Metadata.dll" />
-    <None Include="Lib\System.Runtime.CompilerServices.Unsafe.dll" />
-    <None Include="Lib\Be.Windows.Forms.HexBox.dll" />
-    <None Include="Lib\ILGPU.Lightning.Native.dll" />
-    <None Include="Lib\ILNumerics.dll" />
-    <None Include="Lib\NAudio.dll" />
-    <None Include="Lib\PdfSharp.dll" />
-    <None Include="Lib\WindowsBase.dll" />
-    <None Include="Lib\zxing.dll" />
-    <None Include="Lib\zxing.presentation.dll" />
-    <None Include="Lib\SpectrumAnalyzerLib.dll" />
+    <None Include="Lib\BouncyCastle.Crypto.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\ILGPU.Algorithms.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\ILGPU.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\ILGPU.Lightning.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\System.Buffers.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\System.Collections.Immutable.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\System.Diagnostics.DiagnosticSource.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\System.Memory.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\System.Numerics.Vectors.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\System.Reflection.Metadata.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\System.Runtime.CompilerServices.Unsafe.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\Be.Windows.Forms.HexBox.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\ILGPU.Lightning.Native.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\ILNumerics.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\NAudio.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\PdfSharp.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\WindowsBase.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\zxing.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\zxing.presentation.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Lib\SpectrumAnalyzerLib.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Quran.accdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -62,11 +62,11 @@ namespace CryptoUtility
         {
             if (data.Length == 0) return new BigInteger(data);
             int n = data.Length;
-            if (data[data.Length - 1] == 0 && n>1) n--; // Remove Left Zero Before Reverse, otherwise will be to the right !
+            while (data[n - 1] == 0 && n>1) n--; // Remove Left Zero Before Reverse, otherwise will be to the right !
             byte[] inArr = new byte[n];
             Array.Copy(data, inArr, n);
             //byte[] inArr = (byte[])data.Clone();
-            int m = forcePositive?inArr[n - 1] >> 7:0;  // Force positive
+            int m = (forcePositive?1:0);  // Force positive
             Array.Reverse(inArr);                       // Reverse the byte order
             byte[] final = new byte[inArr.Length +m];   // Add an empty byte at the end, to simulate unsigned BigInteger (no negatives!)
             Array.Copy(inArr, final, inArr.Length);
@@ -532,5 +532,39 @@ namespace CryptoUtility
 
             return true;
         }
+
+        public static BigInteger modinv(this BigInteger u, BigInteger v)
+        {
+            BigInteger inv, u1, u3, v1, v3, t1, t3, q;
+            BigInteger iter;
+            /* Step X1. Initialise */
+            u1 = 1;
+            u3 = u;
+            v1 = 0;
+            v3 = v;
+            /* Remember odd/even iterations */
+            iter = 1;
+            /* Step X2. Loop while v3 != 0 */
+            while (v3 != 0)
+            {
+                /* Step X3. Divide and "Subtract" */
+                q = u3 / v3;
+                t3 = u3 % v3;
+                t1 = u1 + q * v1;
+                /* Swap */
+                u1 = v1; v1 = t1; u3 = v3; v3 = t3;
+                iter = -iter;
+            }
+            /* Make sure u3 = gcd(u,v) == 1 */
+            if (u3 != 1)
+                return 0;   /* Error: No inverse exists */
+            /* Ensure a positive result */
+            if (iter < 0)
+                inv = v - u1;
+            else
+                inv = u1;
+            return inv;
+        }
+
     }
 }

@@ -156,7 +156,11 @@ namespace CryptoUtility
         {
             byte[] bin = new byte[data.Length];
             for (int i = 0; i < data.Length; i++)
-                bin[i] = destIndex>0?fromACCO[baseToACCO[data[i]]-1]: baseToACCO[data[i]];
+                try
+                {
+                    bin[i] = destIndex > 0 ? fromACCO[baseToACCO[data[i]] - 1] : baseToACCO[data[i]];
+                }
+                catch (Exception) {if (data[i].In<byte>(10,13)) bin[i] = data[i]; }
             return bin;
         }
         public static byte[] ToACCO(string data)

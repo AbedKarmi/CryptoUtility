@@ -39,7 +39,27 @@ namespace CryptoUtility
 {
     public partial class frmMain : Form
     {
-	#region Defs
+    #region Defs
+        const string factorDbURL = "http://www.factordb.com/index.php?query=";
+        enum WebMethod { HTTPClient = 0, WebClient, HttpWebRequest, WindowsDefault }
+        struct FactorData 
+        {
+            public string number;
+            public string code; 
+            public string digits;
+            public int factors; 
+            public List<string> factorList;
+
+            public FactorData(bool init)
+            {
+                factorList = new();
+                code = "";
+                digits = "";
+                factors = 0;
+                number = "";
+            }
+        }
+
         string[][] fonts = { new [] { "KFGQPC Uthman Taha Naskh", "Uthmani.otf" }, new[] { "DQ7 Quran Koufi A", "DQ7QuranKoufiA.ttf" } };
         string[] resources = { }; //{ "bin32\\libiomp5md.dll", "bin32\\mkl_custom.dll", "bin64\\libiomp5md.dll", "bin64\\mkl_custom.dll" };
         int currentThread = -1;
@@ -101,7 +121,7 @@ namespace CryptoUtility
         bool pressed;
         private readonly string quranBin = Application.StartupPath + "\\Quran.bin";
         private readonly string quranWav = Application.StartupPath + "\\Quran.wav";
-
+        private readonly string htmlFile = Application.StartupPath + "\\Quran.html";
         enum RenderType
         {
             None,
@@ -130,24 +150,30 @@ namespace CryptoUtility
 
         #endregion
 
-
     #region Functions
 
         // event handler
         public void ProcessCompleted(object sender, gpuEventArgs e)
         {
-            logMsg("Operation Completed with : "+e.accelerator);
+            LogMsg("Operation Completed with : "+e.accelerator);
         }
 		
-		
-        void logMsg(string msg,int threadID=-1)
+		void OutputMsg(string msg)
+        {
+            txtOut.Text += msg + Environment.NewLine;
+            txtOut.SelectionStart = txtOut.Text.Length;
+            txtOut.ScrollToCaret();
+            txtOut.Refresh();
+            tabControl2.SelectedTab = tabOutput;
+        }
+        void LogMsg(string msg,int threadID=-1)
         {
             if (string.IsNullOrEmpty(stackTrace)) stackTrace = Environment.StackTrace;
             string[] msgs = msg.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
             foreach (var str in msgs)
             {
                 if (lstLog.InvokeRequired)
-                    lstLog.BeginInvoke(new MethodInvoker(delegate  {logMsg(msg);}) );
+                    lstLog.BeginInvoke(new MethodInvoker(delegate  {LogMsg(msg);}) );
                 else
                 {
                     lstLog.Items.Add(DateTime.Now + ": T["+(threadID<0?Thread.CurrentThread.ManagedThreadId.ToString():threadID.ToString())+"] " + str);
@@ -155,14 +181,23 @@ namespace CryptoUtility
                 }
             }
         }
-
+        RotateFlipType RFType(bool fx, bool fy)
+        {
+            if (fx && fy)
+                return RotateFlipType.RotateNoneFlipXY;
+            else if (fx)
+                return RotateFlipType.RotateNoneFlipX;
+            else if (fy)
+                return RotateFlipType.RotateNoneFlipY;
+            return RotateFlipType.RotateNoneFlipNone;
+        }
         void logMsg(Exception ex,int threadID=-1)
         {
             string stackTrace = ex.StackTrace;
             this.stackTrace = stackTrace;
             int index = stackTrace.LastIndexOf("\\") + 1;
             stackTrace = stackTrace.Substring(index).Replace("\"","");
-            logMsg(ex.Message+" @ "+stackTrace,threadID);
+            LogMsg(ex.Message+" @ "+stackTrace,threadID);
         }
 
         enum ShellOptions : Int16 
@@ -298,7 +333,7 @@ namespace CryptoUtility
             InputLanguage lang = GetArabicLanguage();
             if (lang == null)
             {
-                logMsg("Arabic Language Keyboard not installed.");
+                LogMsg("Arabic Language Keyboard not installed.");
             }
 
             InputLanguage.CurrentInputLanguage = lang;
@@ -573,6 +608,8 @@ namespace CryptoUtility
                 chkFlipY.Checked = (AppSettings.ReadValue("Settings", "FlipY", "No").ToUpper() == "YES");
                 chkINV.Checked = (AppSettings.ReadValue("Settings", "Inversed", "No").ToUpper() == "YES");
                 lastPlayed = AppSettings.ReadValue("Settings", "LastPlayed", "");
+                chkColorScaled.Checked = (AppSettings.ReadValue("Settings", "ColorScaled", "YES").ToUpper() == "YES");
+                chkMultiLine.Checked = (AppSettings.ReadValue("Settings", "MultiLine", "NO").ToUpper() == "YES");
 
                 switch (AppSettings.ReadValue("Settings", "QuranText", "rbDiacritics"))
                 {
@@ -590,50 +627,53 @@ namespace CryptoUtility
                 SelectIndex(cmbSampleRate, AppSettings.ReadValue("Settings", "SampleRate", cmbSampleRate.Items[0].ToString()));
                 SelectIndex(cmbBits, AppSettings.ReadValue("Settings", "Bits", cmbBits.Items[0].ToString()));
                 SelectIndex(cmbChannels, AppSettings.ReadValue("Settings", "Channels", cmbChannels.Items[0].ToString()));
+                SelectIndex(cmbWebClient, AppSettings.ReadValue("Settings", "WebClient", cmbWebClient.Items[0].ToString()));
 
                 InitSpectrumScreen();
                 InitSpectrum();
 
-                tabControl.SelectedTab = null;
-                tabControl.SelectedTab = tabQuran;
+                tabControl1.SelectedTab = null;
+                tabControl1.SelectedTab = tabQuran;
                 canvas.AllowDrop = true;
 
                 trkDB.Value = 13;
+                
+                LoadCharset(lblCurCharset.Text);
 
                 //Adjust Width
-                this.Width =(int) (txtInfo.Left + txtInfo.Width + tabControl.Left*2.5); 
+                this.Width =(int) (txtInfo.Left + txtInfo.Width + tabControl1.Left*2.5); 
 
-            } catch (Exception ex) { logMsg("Error:" + ex.Message); }
+            } catch (Exception ex) { LogMsg("Error:" + ex.Message); }
         }
 
         private void btnStackTrace_Click(object sender, EventArgs e)
         {
-            txtInfo.Text = stackTrace;
+            OutputMsg(stackTrace);
         }
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                if (tabControl.SelectedTab == tabEncoding && chkRTL.Checked && !chkHexText.Checked) 
+                if (tabControl1.SelectedTab == tabEncoding && chkRTL.Checked && !chkHexText.Checked) 
                     txtInfo.RightToLeft = RightToLeft.Yes;
                 else txtInfo.RightToLeft = RightToLeft.No;
-                if (tabControl.SelectedTab == tabRSA)
+                if (tabControl1.SelectedTab == tabRSA)
                 {
                     txtInfo.Text = RSAClass.Info;
                 }
-                else if (tabControl.SelectedTab == tabDSA)
+                else if (tabControl1.SelectedTab == tabDSA)
                 {
                     txtInfo.Text = DSAClass.Info;
                 }
-                else if (tabControl.SelectedTab == tabCrypto)
+                else if (tabControl1.SelectedTab == tabCrypto)
                 {
                     txtInfo.Text = "Crypto Utility\r\n\r\nDecrypt/Encrypt, Calculate hash, and Sign/Verify data using public/private keys.\r\n\r\nData can be loaded in the textbox or a file buffer.";
                 }
-                else if (tabControl.SelectedTab == tabCalculator)
+                else if (tabControl1.SelectedTab == tabCalculator)
                 {
                     cmbAccelerator_SelectedIndexChanged(sender, e);
                 }
-                else if (tabControl.SelectedTab == tabEncoding)
+                else if (tabControl1.SelectedTab == tabEncoding)
                 {
                     if (string.IsNullOrEmpty(hex))
                     txtInfo.Text = @"Quran Text
@@ -643,7 +683,7 @@ End of Aya Char Replacement : [zString]
 
 Encoding method : Arabic Common CharSet Order [ACCO]";
                 }
-                else if (tabControl.SelectedTab == tabQuran)
+                else if (tabControl1.SelectedTab == tabQuran)
                 {
                     lbSoras.Items.Clear();
                     lbSoras.Items.AddRange(quran.GetSoraNames());
@@ -669,7 +709,7 @@ We implemented several encoding options to convert text to numbers. Hamza, is to
 Other possible options:
 Hex, Texture, Audio, Light & Color representations are implemented for testing on binary data of Quran";
                 } 
-                else if (tabControl.SelectedTab==tabCharset)
+                else if (tabControl1.SelectedTab==tabCharset)
                 {
                     LoadCharset(Application.StartupPath+"\\"+ lblCurCharset.Text);
                     txtInfo.Text = @"Arabic Charsets
@@ -682,23 +722,23 @@ Blue   : Siamese Lettters
 Green  : Arabic Letters
 Red    : Diacritics";
                 }
-                else if (tabControl.SelectedTab == tabHexViewer)
+                else if (tabControl1.SelectedTab == tabHexViewer)
                 {
                     txtInfo.Text = "Simple Hex Byte Editor/Viewer";
                 }
-                else if (tabControl.SelectedTab == tabTexture)
+                else if (tabControl1.SelectedTab == tabTexture)
                 {
                     txtInfo.Text = "Texture\r\n\r\nDisplay Binary Image of Text Endoding\r\n\r\nLooking for meaningful image represntation of binary data";
                 }
-                else if (tabControl.SelectedTab == tabAudioSpectrum)
+                else if (tabControl1.SelectedTab == tabAudioSpectrum)
                 {
                     txtInfo.Text = "Audio Spectrum Analyzer\r\n\r\nConvert binary data to frequency using FFT and display in spectrum analyzer\r\nLooking for meaningful voice";
                 }
-                else if (tabControl.SelectedTab == tabColor)
+                else if (tabControl1.SelectedTab == tabColor)
                 {
                     txtInfo.Text = "Light/Color Spectrum\r\n\r\nConvert binary data to colors using RGB and display in spectrum analyzer\r\nLooking for meaningful color";
                 }
-            } catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            } catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
 
@@ -712,16 +752,41 @@ Red    : Diacritics";
                 rsaClass.CreateKey(Int32.Parse(cmbRSAKeyLen.Text));
                 privateKey = rsaClass.GetKey(true);
                 publicKey = rsaClass.GetKey(false);
-
+               /*
+                txtPrimeP.Text = MyClass.BinaryToHexString(privateKey.P);
+                txtPrimeQ.Text = MyClass.BinaryToHexString(privateKey.Q);
+                txtModulN.Text = MyClass.BinaryToHexString( privateKey.Modulus);
+               */
                 txtPEMPublicKey.Text = PEMClass.ExportPublicKey(publicKey, true);
                 txtPEMPrivateKey.Text = PEMClass.ExportPrivateKey(privateKey, true);
 
-                logMsg("Keys Generated");
+                LogMsg("Keys Generated");
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
-         
-    	 private void btnUsePublicKey_Click(object sender, EventArgs e)
+        private void btnCalcD_Click(object sender, EventArgs e)
+        {
+            BigInteger P = BigIntegerHelper.GetBig(txtP.Text);
+            BigInteger Q = BigIntegerHelper.GetBig(txtQ.Text);
+            BigInteger E = BigIntegerHelper.GetBig(txtE.Text);
+
+            BigInteger phi = (P - 1) * (Q - 1);
+            BigInteger d = E.modinv(phi);
+            txtN.Text = Hex(P * Q);
+            txtD.Text = Hex(d);
+            txtDP.Text = Hex(d % (P - 1));
+            txtDQ.Text = Hex(d % (Q - 1));
+            txtInverseQ.Text = Hex(Q.modinv(P));
+        }
+        private void btnRSAtoCALC_Click(object sender, EventArgs e)
+        {
+            txtPrimeP.Text = txtP.Text;
+            txtPrimeQ.Text = txtQ.Text;
+            txtModulN.Text = txtN.Text;
+            tabControl1.SelectedTab = tabCalculator;
+        }
+
+        private void btnUsePublicKey_Click(object sender, EventArgs e)
         {
             txtPublicKey.Text = txtPEMPublicKey.Text;
         }
@@ -751,14 +816,14 @@ Red    : Diacritics";
                 int E = 0;
                 for (int i = 0; i < publicKey.Exponent.Length; i++) E += publicKey.Exponent[i] << (i * 8);
 
-                txtE.Text = E.ToString();
+                txtE.Text = E.ToString("X");
                 txtN.Text = MyClass.BinaryToHexString(publicKey.Modulus);
 
-                tabControl.SelectedIndex = 0;
+               // tabControl.SelectedIndex = 0;
 
                 cmbRSAKeyLen.Text = (publicKey.Modulus.Length * 8).ToString();
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void btnImportPrivateKey_Click(object sender, EventArgs e)
@@ -771,7 +836,7 @@ Red    : Diacritics";
                 int E = 0;
                 for (int i = 0; i < privateKey.Exponent.Length; i++) E += privateKey.Exponent[i] << (i * 8);
 
-                txtE.Text = E.ToString();
+                txtE.Text = E.ToString("X");
                 txtN.Text = MyClass.BinaryToHexString(privateKey.Modulus);
 
                 txtP.Text = MyClass.BinaryToHexString(privateKey.P);
@@ -781,11 +846,11 @@ Red    : Diacritics";
                 txtDQ.Text = MyClass.BinaryToHexString(privateKey.DQ);
                 txtInverseQ.Text = MyClass.BinaryToHexString(privateKey.InverseQ);
 
-                tabControl.SelectedIndex = 0;
+               // tabControl.SelectedIndex = 0;
 
                 cmbRSAKeyLen.Text = (privateKey.Modulus.Length * 8).ToString();
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 		
 		      private void btnExportPublic_Click(object sender, EventArgs e)
@@ -794,7 +859,7 @@ Red    : Diacritics";
             RSAParameters rsaParams = new();
             try
             {
-                int E = Int32.Parse(txtE.Text);
+                int E = Int32.Parse(txtE.Text, System.Globalization.NumberStyles.HexNumber); // or use  Convert.ToInt32(txtE.Text, 16);
                 int i = 0;
                 while (E > 0)
                 {
@@ -810,7 +875,7 @@ Red    : Diacritics";
 
                 // csp.ImportParameters(rsaParams);
                 txtPEMPublicKey.Text = PEMClass.ExportPublicKey(rsaParams, true);
-            } catch (Exception ex) { logMsg( "Error : "+ ex.Message); }
+            } catch (Exception ex) { LogMsg( "Error : "+ ex.Message); }
         }
 
         private void btnExportPrivate_Click(object sender, EventArgs e)
@@ -818,7 +883,7 @@ Red    : Diacritics";
             RSAParameters rsaParams = new();
             try
             {
-                int E = Int32.Parse(txtE.Text);
+                int E = Int32.Parse(txtE.Text, System.Globalization.NumberStyles.HexNumber);
                 int i = 0;
                 while (E > 0)
                 {
@@ -838,7 +903,7 @@ Red    : Diacritics";
 
                 txtPEMPrivateKey.Text = PEMClass.ExportPrivateKey(rsaParams, true);
             }
-            catch (Exception ex) { logMsg("Error : " + ex.Message); }
+            catch (Exception ex) { LogMsg("Error : " + ex.Message); }
         }
 
 	#endregion
@@ -856,7 +921,7 @@ Red    : Diacritics";
 
                 txtDSAPEMPublic.Text = PEMClass.ExportDSAPublicKey(dsaKey);
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void btnGenDSAKeys_Click(object sender, EventArgs e)
@@ -870,9 +935,9 @@ Red    : Diacritics";
                 txtDSAPEMPublic.Text = PEMClass.ExportDSAPublicKey(dsaPublicKey);
                 txtDSAPEMPrivate.Text = PEMClass.ExportDSAPrivateKey(dsaPrivateKey);
 
-                logMsg("DSA Keys Generated");
+                LogMsg("DSA Keys Generated");
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void btnDSAImportPublic_Click(object sender, EventArgs e)
@@ -884,7 +949,7 @@ Red    : Diacritics";
                 cmbDSAKeyLen.Text = (dsaKey.Y.Length * 8).ToString();
                 ShowKeys(dsaKey, false);
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void txtDSAPEM_DragOver(object sender, DragEventArgs e)
@@ -909,7 +974,7 @@ Red    : Diacritics";
                 cmbDSAKeyLen.Text = (dsaKey.Y.Length * 8).ToString();
                 ShowKeys(dsaKey, true);
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void btnExportDSA_Click(object sender, EventArgs e)
@@ -929,7 +994,7 @@ Red    : Diacritics";
                 }
                 else
                     txtDSAPEMPublic.Text = PEMClass.ExportDSAPublicKey(dsaKey);
-            }  catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            }  catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void ShowKeys(DSAParameters dsaKey,bool priv)
@@ -1009,9 +1074,9 @@ Red    : Diacritics";
             {
                 File.WriteAllText(Application.StartupPath + "\\PublicKey."+cmbCryptoAlgorithm.Text+".pem", txtPublicKey.Text);
                 File.WriteAllText(Application.StartupPath + "\\PrivateKey."+cmbCryptoAlgorithm.Text +".pem", txtPrivateKey.Text);
-                logMsg("Keys Saved");
+                LogMsg("Keys Saved");
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void btnLoadKeys_Click(object sender, EventArgs e)
@@ -1020,9 +1085,9 @@ Red    : Diacritics";
             {
                 txtPublicKey.Text=File.ReadAllText(Application.StartupPath + "\\PublicKey." + cmbCryptoAlgorithm.Text + ".pem");
                 txtPrivateKey.Text=File.ReadAllText(Application.StartupPath + "\\PrivateKey." + cmbCryptoAlgorithm.Text + ".pem");
-                logMsg("Keys Loaded");
+                LogMsg("Keys Loaded");
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 		
         private void btnLoadFile_Click(object sender, EventArgs e)
@@ -1040,11 +1105,11 @@ Red    : Diacritics";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     fileBuffer = File.ReadAllBytes(dlg.FileName);
-                    logMsg("File Loaded (" + dlg.FileName + ") Size is " +fileBuffer.Length.ToString());
+                    LogMsg("File Loaded (" + dlg.FileName + ") Size is " +fileBuffer.Length.ToString());
                 }
                 rbFileBuffer.Checked = true;
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
 
             btnLoadFile.Enabled = true;
         }
@@ -1100,17 +1165,17 @@ Red    : Diacritics";
 
                         txtOutput.Text = Convert.ToBase64String(rsaClass.Encrypt(GetData(), cmbEncryptionKey.SelectedIndex == 1,chkPadding.Checked));
 
-                        logMsg("Encrypted");
+                        LogMsg("Encrypted");
                         break;
                     case 1:
-                        logMsg("Algorithm not supported");
+                        LogMsg("Algorithm not supported");
                         break;
                     default:
-                        logMsg("Algorithm not implemented");
+                        LogMsg("Algorithm not implemented");
                         break;
                 }
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
 
         }
 
@@ -1128,17 +1193,17 @@ Red    : Diacritics";
 
                         txtData.Text = SetData(rsaClass.Decrypt(Convert.FromBase64String(txtOutput.Text), cmbEncryptionKey.SelectedIndex == 0, chkPadding.Checked));
 
-                        logMsg("Decrypted");
+                        LogMsg("Decrypted");
                         break;
                     case 1:
-                        logMsg("Algorithm not supported");
+                        LogMsg("Algorithm not supported");
                         break;
                     default:
-                        logMsg("Algorithm not implemented");
+                        LogMsg("Algorithm not implemented");
                         break;
                 }
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void btnVerify_Click(object sender, EventArgs e)
@@ -1155,7 +1220,7 @@ Red    : Diacritics";
                         rsaClass.SetKey(PEMClass.ImportPublicKey(txtPublicKey.Text), false);
                         rsaClass.SetKey(PEMClass.ImportPrivateKey(txtPrivateKey.Text), true);
 
-                        logMsg(rsaClass.VerifySignature(hash, Convert.FromBase64String(txtOutput.Text), cmbHash.Text, Int32.Parse(cmbKeyLength.Text)) ? "Verification Successful" : "Verification Failed");
+                        LogMsg(rsaClass.VerifySignature(hash, Convert.FromBase64String(txtOutput.Text), cmbHash.Text, Int32.Parse(cmbKeyLength.Text)) ? "Verification Successful" : "Verification Failed");
                         break;
                     case 1:
                         hash = MyClass.GetHash(GetData(), cmbHash.Text);
@@ -1164,14 +1229,14 @@ Red    : Diacritics";
                         dsaClass.SetKey(PEMClass.ImportDSAPublicKey(txtPublicKey.Text), false);
                         dsaClass.SetKey(PEMClass.ImportDSAPrivateKey(txtPrivateKey.Text), true);
 
-                        logMsg(dsaClass.VerifySignature(hash, Convert.FromBase64String(txtOutput.Text), cmbHash.Text) ? "Verification Successful" : "Verification Failed");
+                        LogMsg(dsaClass.VerifySignature(hash, Convert.FromBase64String(txtOutput.Text), cmbHash.Text) ? "Verification Successful" : "Verification Failed");
                         break;
                     default:
-                        logMsg("Algorithm not implemented");
+                        LogMsg("Algorithm not implemented");
                         break;
                 }
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 		
 		        private void btnSign_Click(object sender, EventArgs e)
@@ -1190,7 +1255,7 @@ Red    : Diacritics";
 
                         txtOutput.Text = Convert.ToBase64String(rsaClass.SignData(hash, cmbHash.Text, Int32.Parse(cmbKeyLength.Text)));
 
-                        logMsg("Signed");
+                        LogMsg("Signed");
                         break;
                     case 1:
                         hash = MyClass.GetHash(GetData(), cmbHash.Text);
@@ -1201,14 +1266,14 @@ Red    : Diacritics";
 
                         txtOutput.Text = Convert.ToBase64String(dsaClass.SignData(hash, cmbHash.Text));
 
-                        logMsg("Signed");
+                        LogMsg("Signed");
                         break;
                     default:
-                        logMsg("Algorithm not implemented");
+                        LogMsg("Algorithm not implemented");
                         break;
                 }
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void cmbData_SelectedIndexChanged(object sender, EventArgs e)
@@ -1219,33 +1284,105 @@ Red    : Diacritics";
 	#endregion
 	
 	#region Calculator
-	       private void button2_Click(object sender, EventArgs e)
+
+        string FactorMessage(string code)
         {
-            rb10.Checked = true;
-            Process.Start("http://www.factordb.com/index.php?query=" + txtPrimeQ.Text);
+            string msg = "";
+            switch (code)
+            {
+                case "C": msg = " Composite, no factors known"; break;
+                case "CF": msg = "Composite, factors known"; break;
+                case "FF": msg = "Composite, fully factored"; break;
+                case "P": msg = "Definitely prime"; break;
+                case "PRP":
+                case "Prp": msg = "Probably prime"; break;
+                case "U": msg = "Unknown"; break;
+                case "Unit": msg = "Just for \"1\""; break;
+                case "N": msg = "This number is not in database(and was not added due to your settings)"; break;
+                case "*": msg = "Added to database during this request"; break;
+            }
+            return msg;
         }
 
-        private void btnFactorDB_Click(object sender, EventArgs e)
+        FactorData ExtractFactorData(string data)
         {
-            rb10.Checked = true;
-            Process.Start("http://www.factordb.com/index.php?query=" + txtPrimeP.Text);
+            FactorData factorData = new(true);
+
+            int p = 0;
+            try
+            {
+                p = data.FindString("<table ", p);
+                p = data.FindString("<tr>", p+1, 3);
+                p = data.FindString("<td>", p+1);
+                factorData.code = data.ExtractData("<",ref p,4);
+                p = data.FindString("<td>", p+1);
+                factorData.digits = data.ExtractData("<", ref p, 4);
+                p = data.FindString("<td>", p+1);
+                p = data.FindString("> = <", p + 1);
+                factorData.factors = 0;
+                if (p > 0) p += 3;
+                while (p > 0 && !data.Substring(p + 1, 5).Equals("</td>"))
+                {
+                    p = data.FindString(">", p + 1, 2);
+                    p++;
+                    string str = data.ExtractData("<", ref p, 0).Trim();
+                    factorData.factorList.Add(str);
+                    int n = str.IndexOf("^"); if (n > 0) factorData.factors += int.Parse(str.Substring(n + 1)); else factorData.factors++;
+
+                    p = data.FindString(">", p + 1, 2);
+                    if (data.Substring(p + 1, 5).Equals("<sub>"))
+                    {
+                        p = data.FindString("</sub>", p);
+                        p += 5;
+                        //factorData.factors += 100;
+                    }
+                } ;
+
+            } catch (Exception ex) { logMsg(ex); }
+
+            return factorData;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
+        private FactorData FactorDB(string prime, WebMethod methodIndex)
+        {
+            string data = "";
+            string url = factorDbURL + prime;
+            string userAgent = "CryptoUtility";
+            FactorData factorData;
+            
+            switch ((int) methodIndex)
+            {
+                case 0: _ = MyWeb.HTTPReadPageAsync(url, userAgent, result => data = result); break;
+                case 1: data = MyWeb.WebClientReadPage(url, userAgent); break;
+                case 2: data = MyWeb.WebRequestReadPage(url, userAgent); break;
+                case 3: Process.Start(url); break;
+            }
+            File.WriteAllText(htmlFile, data);
+            factorData = ExtractFactorData(data);
+            factorData.number = prime;
+
+            return factorData;
         }
 
+        void DisplayFactors(FactorData factorData)
+        {
+            OutputMsg(Environment.NewLine+
+                      "Number= " + factorData.number + Environment.NewLine +
+                      "Code= " + factorData.code + " , [" + FactorMessage(factorData.code) + "]" + Environment.NewLine +
+                      "Digits= " + factorData.digits + Environment.NewLine +
+                      "Factors (" + factorData.factors + ") = " + string.Join(",", factorData.factorList) + Environment.NewLine +
+                      "Charset = " + GetCharset());
+        }
         private void btnFactorDbP_Click(object sender, EventArgs e)
         {
             rb10.Checked = true;
-            Process.Start("http://www.factordb.com/index.php?query=" + txtPrimeP.Text);
+            DisplayFactors(FactorDB(txtPrimeP.Text,(WebMethod)  cmbWebClient.SelectedIndex));
         }
-
-        private void btnFactorDbQ_Click(object sender, EventArgs e)
+        private  void btnFactorDbQ_Click(object sender, EventArgs e)
         {
             rb10.Checked = true;
-            Process.Start("http://www.factordb.com/index.php?query=" + txtPrimeQ.Text);
+            DisplayFactors(FactorDB(txtPrimeQ.Text,(WebMethod) cmbWebClient.SelectedIndex));
         }
 
         private void btnFactorizeP_Click(object sender, EventArgs e)
@@ -1268,6 +1405,11 @@ Red    : Diacritics";
             {
                 txtResultR.Text += factor.ToString() + Environment.NewLine;
             }
+        }
+
+        private void cmbWebClient_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            AppSettings.WriteValue("Settings", "WebClient", cmbWebClient.Text);
         }
 
         private void txtPrimeP_DoubleClick(object sender, EventArgs e)
@@ -1318,8 +1460,7 @@ Red    : Diacritics";
             }
         }
 
-
-       private void txtPrimeP_TextChanged(object sender, EventArgs e)
+        private void txtPrimeP_TextChanged(object sender, EventArgs e)
         {
             GetNumbers();
             int n = P.GetActualBitwidth();
@@ -1400,7 +1541,7 @@ Red    : Diacritics";
             ShowNumbers();
         }
 		
-		      private void btnIsPrime_Click(object sender, EventArgs e)
+	    private void btnIsPrime_Click(object sender, EventArgs e)
         {
             GetNumbers();
             txtResultR.Text= "P is " + (BigIntegerHelper.IsProbablePrime(P,100) ? "Prime" : "NOT Prime") + Environment.NewLine +
@@ -1433,10 +1574,10 @@ Red    : Diacritics";
                         R = BigIntegerHelper.NewBigInteger2(txtResultR.Text);
                         break;
                     case 1:
-                        if (!BigInteger.TryParse(txtPrimeP.Text, out P)) P = 0;
-                        if (!BigInteger.TryParse(txtPrimeQ.Text, out Q)) Q = 0;
-                        if (!BigInteger.TryParse(txtModulN.Text, out N)) N = 0;
-                        if (!BigInteger.TryParse(txtResultR.Text, out R)) R = 0;
+                        if (!BigInteger.TryParse( txtPrimeP.Text, out P)) P = 0;
+                        if (!BigInteger.TryParse( txtPrimeQ.Text, out Q)) Q = 0;
+                        if (!BigInteger.TryParse( txtModulN.Text, out N)) N = 0;
+                        if (!BigInteger.TryParse( txtResultR.Text, out R)) R = 0;
                         break;
                     case 2:
                         P = BigIntegerHelper.GetBig(txtPrimeP.Text,chkPositives.Checked);
@@ -1532,11 +1673,11 @@ Red    : Diacritics";
             try
             {
                 if (cmbAccelerator.SelectedIndex > 0)
-                    txtInfo.Text = gpuClass.AcceleratorInfo(cmbAccelerator.SelectedIndex - 1);
+                    txtInfo.Text=gpuClass.AcceleratorInfo(cmbAccelerator.SelectedIndex - 1);
                 else
-                    txtInfo.Text = " Direct Calculation";
+                    txtInfo.Text=" Direct Calculation";
             }
-            catch (Exception ex) { logMsg("Error:" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error:" + ex.Message); }
         }
 		
 		       private void btnADD_Click(object sender, EventArgs e)
@@ -1550,7 +1691,7 @@ Red    : Diacritics";
                     R = gpuClass.Calc(cmbAccelerator.Text, P, Q, '+');
 
                 ShowResult();
-            } catch (Exception ex) { logMsg("Error:" + ex.Message); }
+            } catch (Exception ex) { LogMsg("Error:" + ex.Message); }
         }
 
         private void btnSUB_Click(object sender, EventArgs e)
@@ -1568,7 +1709,7 @@ Red    : Diacritics";
             }
             catch (Exception ex)
             {
-                logMsg("Error:" + ex.Message);
+                LogMsg("Error:" + ex.Message);
             }
 }
 
@@ -1588,7 +1729,7 @@ Red    : Diacritics";
 
                 ShowResult();
             }
-            catch (Exception ex) { logMsg("Error:" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error:" + ex.Message); }
         }
 
         private void btnDIV_Click(object sender, EventArgs e)
@@ -1604,7 +1745,7 @@ Red    : Diacritics";
 
                 ShowResult();
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void btnMOD_Click(object sender, EventArgs e)
@@ -1620,7 +1761,7 @@ Red    : Diacritics";
 
                 ShowResult();
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void btnPOW_Click(object sender, EventArgs e)
@@ -1656,7 +1797,7 @@ Red    : Diacritics";
 
                 ShowResult();
             }
-            catch (Exception ex) { logMsg("Error:" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error:" + ex.Message); }
         }
 
         private void btnPWM_Click(object sender, EventArgs e)
@@ -1669,7 +1810,7 @@ Red    : Diacritics";
 
                 ShowResult();
             }
-            catch (Exception ex) { logMsg("Error :" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error :" + ex.Message); }
         }
 
         private void btnRTP_Click(object sender, EventArgs e)
@@ -1688,7 +1829,7 @@ Red    : Diacritics";
 
                 ShowResult();
             }
-            catch (Exception ex) { logMsg("Error:" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error:" + ex.Message); }
         }
 
         private void btnLCM_Click(object sender, EventArgs e)
@@ -1701,7 +1842,7 @@ Red    : Diacritics";
 
                 ShowResult();
             }
-            catch (Exception ex) { logMsg("Error:" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error:" + ex.Message); }
         }
 
         private void txtPrimeP_DragDrop(object sender, DragEventArgs e)
@@ -1783,14 +1924,14 @@ Red    : Diacritics";
                     {
                         //john church 05/10/2008 use directory separator char instead of backslash for linux support
                         destDir = _sourceFiles[0].Substring(0, _sourceFiles[0].LastIndexOf(System.IO.Path.DirectorySeparatorChar) + 1) + cmbDestEnc.SelectedItem.ToString() + System.IO.Path.DirectorySeparatorChar;
-                        logMsg("Converted files will be output to:"
+                        LogMsg("Converted files will be output to:"
                                     + System.Environment.NewLine + destDir
                                     + System.Environment.NewLine + _sourceFiles.Length
                                     + " file(s) selected for conversion" + System.Environment.NewLine);
                     }
                 }
             }
-            catch (Exception ex) { logMsg("Error:" + ex.Message); }
+            catch (Exception ex) { LogMsg("Error:" + ex.Message); }
         }
 
         /// <summary>
@@ -1841,9 +1982,14 @@ Red    : Diacritics";
             hexBox.Refresh();
         }
 
+        private void chkMultiLine_CheckedChanged(object sender, EventArgs e)
+        {
+            AppSettings.WriteValue("Settings", "MultiLine", chkMultiLine.Checked ? "Yes" : "No");
+        }
+
         private void btnSImage_Click(object sender, EventArgs e)
         {
-            tabControl.SelectedTab = tabTexture;
+            tabControl1.SelectedTab = tabTexture;
             DrawImage();
             CreateBarcode(rtxtData.Text,BarcodeFormat.QR_CODE);
         }
@@ -1856,13 +2002,13 @@ Red    : Diacritics";
                 fileBuffer = new byte[hexBox.ByteProvider.Length];
                 for (int i = 0; i < hexBox.ByteProvider.Length; i++) fileBuffer[i] = hexBox.ByteProvider.ReadByte(i);
                 rbFileBuffer.Checked = true;
-                tabControl.SelectedTab = tabCrypto;
+                tabControl1.SelectedTab = tabCrypto;
             }
             catch (Exception ex) { logMsg(ex); }
         }
         private void btnColor_Click(object sender, EventArgs e)
         {
-            tabControl.SelectedTab = tabColor;
+            tabControl1.SelectedTab = tabColor;
             DrawColors();
         }
 
@@ -1876,27 +2022,27 @@ Red    : Diacritics";
         }
         private void btnSpectrum_Click(object sender, EventArgs e)
         {
-            tabControl.SelectedTab = tabAudioSpectrum;
+            tabControl1.SelectedTab = tabAudioSpectrum;
             InjectAudio();
         }
         private void btnSCalc_Click(object sender, EventArgs e)
         {
             rb16.Checked = true;
             txtPrimeP.Text = MyClass.BinaryToHexString(SafeRead(quranBin));
-            tabControl.SelectedTab = tabCalculator;
+            tabControl1.SelectedTab = tabCalculator;
         }
 
         private void btnSCrypto_Click(object sender, EventArgs e)
         {
             rbFileBuffer.Checked = true;
             fileBuffer=SafeRead(quranBin);
-            tabControl.SelectedTab = tabCrypto;
+            tabControl1.SelectedTab = tabCrypto;
         }
 
         private void btnSHex_Click(object sender, EventArgs e)
         {
             SendToHexViewer(quranBin);
-            tabControl.SelectedTab = tabHexViewer;
+            tabControl1.SelectedTab = tabHexViewer;
         }
 
         private void btnSendToHex_Click(object sender, EventArgs e)
@@ -1905,7 +2051,7 @@ Red    : Diacritics";
             {
                 File.WriteAllBytes(Application.StartupPath+"\\Buffer.bin", fileBuffer);
                 SendToHexViewer(Application.StartupPath + "\\Buffer.bin");
-                tabControl.SelectedTab = tabHexViewer;
+                tabControl1.SelectedTab = tabHexViewer;
             }
         }
 
@@ -1948,7 +2094,7 @@ Red    : Diacritics";
                 s = Converter.FilterData(s, 65001, chkDiscardChars.Checked, chkDiacritics.Checked, chkzStrings.Checked);
                 byte[] b = MyClass.GetBytes(s);
                 File.WriteAllBytes(quranBin, b);
-                txtInfo.Text = MyClass.BinaryToHexString(b);
+                OutputMsg( MyClass.BinaryToHexString(b));
             }
         }
 
@@ -1961,11 +2107,11 @@ Red    : Diacritics";
         private void txtInfo_DoubleClick(object sender, EventArgs e)
         {
             Clipboard.SetText(txtInfo.Text);
-            if (tabControl.SelectedTab == tabEncoding && txtInfo.Text.isHex())
+            if (tabControl1.SelectedTab == tabEncoding && txtInfo.Text.isHex())
             {
                 rb16.Checked = true;
                 txtPrimeP.Text = txtInfo.Text;
-                tabControl.SelectedTab = tabCalculator;
+                tabControl1.SelectedTab = tabCalculator;
             }
         }
 
@@ -2049,12 +2195,9 @@ Red    : Diacritics";
             rtxtData.RightToLeft = (chkRTL.Checked ? RightToLeft.Yes : RightToLeft.No);
             txtInfo.RightToLeft = ((chkRTL.Checked && !chkHexText.Checked) ? RightToLeft.Yes : RightToLeft.No);
         }
-       /// <summary>
-        /// Handler for the run button click event
-        /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">EventArgs</param>
-        private void btnRun_Click(object sender, EventArgs e)
+
+
+        private void Encode() 
         {
             string sourceCP, destCP;
             string s;
@@ -2091,17 +2234,17 @@ Red    : Diacritics";
                         //display some information about the file
                         lsSource.Items[i] = lsSource.Items[i].ToString().Replace(char.ConvertFromUtf32(9745) + " ", "").Replace(char.ConvertFromUtf32(9746) + " ", "");
                         s = lsSource.Items[i].ToString();
-                        logMsg("Converting " + (i + 1).ToString() + " of " + _sourceFiles.Length + System.Environment.NewLine);
+                        LogMsg("Converting " + (i + 1).ToString() + " of " + _sourceFiles.Length + System.Environment.NewLine);
 
-                        
+
                         //do the conversion
-                        if ((sFile = Converter.ConvertFile( _sourceFiles[i], destDir,
-                                                            sourceCP, destCP, specialType, chkMeta.Checked, chkDiscardChars.Checked, 
+                        if ((sFile = Converter.ConvertFile(_sourceFiles[i], destDir,
+                                                            sourceCP, destCP, specialType, chkMeta.Checked, chkDiscardChars.Checked,
                                                             chkDiacritics.Checked, chkzStrings.Checked)) != "")
                         {
                             //success
                             res = char.ConvertFromUtf32(9745);
-                            if (Jommal) toJommal(sFile);
+                            if (Jommal) File.WriteAllBytes(sFile, toJommal(File.ReadAllBytes(sFile)));
 
                             if (chkOutText.Checked)
                             {
@@ -2135,27 +2278,45 @@ Red    : Diacritics";
                         progFiles.Value = (int)((double)(i + 1) / (double)_sourceFiles.Length * 100);
                     }
                     //display the final message
-                    logMsg(iSuccess.ToString() + " file(s) converted successfully and output to:" +
+                    LogMsg(iSuccess.ToString() + " file(s) converted successfully and output to:" +
                                                       System.Environment.NewLine + destDir + System.Environment.NewLine);
                 }
                 else
                 if (rtxtData.Text.Length > 0 && rbText.Checked)
                 {
-                    logMsg("Converting From TextBox");
+                    LogMsg("Converting From TextBox");
                     sFile = quranBin;
-                    byte[] sOut = Converter.ConvertText(rtxtData.Text, sourceCP, destCP, specialType,
-                                                        chkMeta.Checked, chkDiscardChars.Checked, chkDiacritics.Checked, chkzStrings.Checked);
-                    File.WriteAllBytes(sFile, sOut);
+                    byte[] sOut = { };
+                    if (chkMultiLine.Checked)
+                    {
+                        string[] lines = rtxtData.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        File.Delete(sFile);
+                        foreach (var str in lines)
+                        {
+                            sOut = Converter.ConvertText(str, sourceCP, destCP, specialType, chkMeta.Checked, chkDiscardChars.Checked, chkDiacritics.Checked, chkzStrings.Checked);
+                            if (Jommal) sOut = toJommal(sOut);
+                            MyClass.AppendAllBytes(sFile, sOut);
+                            txtInfo.Text=(chkHexText.Checked ? MyClass.BinaryToHexString(sOut) : Converter.ReadAllText(str, destCP)) + Environment.NewLine;
+                        }
+                    }
+                    else
+                    {
+                        sOut = Converter.ConvertText(rtxtData.Text, sourceCP, destCP, specialType, chkMeta.Checked, chkDiscardChars.Checked, chkDiacritics.Checked, chkzStrings.Checked);
+                        if (Jommal) sOut = toJommal(sOut);
+                        File.WriteAllBytes(sFile, sOut);
+                    }
 
-                    if (Jommal) { toJommal(sFile); sOut = File.ReadAllBytes(sFile); }
+                    //if (Jommal) File.WriteAllBytes(sFile,toJommal(File.ReadAllBytes(sFile))); 
 
-                    logMsg("Written to " + sFile);
+                    sOut = File.ReadAllBytes(sFile);
+
+                    LogMsg("Written to " + sFile);
                     if (chkSendToBuffer.Checked) { rbFileBuffer.Checked = true; fileBuffer = sOut; }
-                    txtInfo.Text = (chkHexText.Checked ? MyClass.BinaryToHexString(sOut) : Converter.ReadAllText(sFile, destCP));
+                    if (!chkMultiLine.Checked) txtInfo.Text=(chkHexText.Checked ? MyClass.BinaryToHexString(sOut) : Converter.ReadAllText(sFile, destCP));
                     lblStatus.Text = sOut.Length.ToString();
                     encoding = cmbDestEnc.Text;
                 }
-                else logMsg("Nothing to encode");
+                else LogMsg("Nothing to encode");
             }
             catch (Exception ex)
             {
@@ -2169,6 +2330,15 @@ Red    : Diacritics";
                 this.Cursor = System.Windows.Forms.Cursors.Default;
                 if (chkHexText.Checked) hex = txtInfo.Text;
             }
+        }
+       /// <summary>
+        /// Handler for the run button click event
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">EventArgs</param>
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            Encode();
         }
 		
 		
@@ -2199,7 +2369,7 @@ Red    : Diacritics";
             }
             if (_sourceFiles.Length > 0) rbFiles.Checked = true;
             //display the message
-            logMsg (_sourceFiles.Length + " file(s) selected for conversion" + System.Environment.NewLine);
+            LogMsg (_sourceFiles.Length + " file(s) selected for conversion" + System.Environment.NewLine);
             //validate the run button
             validateForRun();
         }
@@ -2224,13 +2394,16 @@ Red    : Diacritics";
         {
             validateForRun();
             buildEncodingInfo(cmbDestEnc.SelectedItem.ToString(), txtDestEnc);
+
+            string charSetFile = Converter.GetCharsetFile(cmbDestEnc.Text);
+            LoadCharset(charSetFile + ".Charset");
+            btnFindKey.Enabled = !cmbDestEnc.Text.Contains("Auto");
         }
 
 
-        private void toJommal(string sFile)
+        private byte[] toJommal(byte[] buffer)
         {
             List<byte> jBuffer = new();
-            byte[] buffer = File.ReadAllBytes(sFile);
             for (int i=0;i<buffer.Length;i++)
             {
                 byte h = (byte) (jommalCharset[buffer[i]-1] >> 8);
@@ -2238,7 +2411,7 @@ Red    : Diacritics";
                 if (h > 0 || chkJommalWord.Checked) jBuffer.Add(h);
                 jBuffer.Add(l);
             }
-            File.WriteAllBytes(sFile,jBuffer.ToArray());
+            return jBuffer.ToArray();
         }
 
        //filenames to convert
@@ -2265,10 +2438,57 @@ Red    : Diacritics";
             CalcHHash();
         }
 
-	#endregion
-	
-	#region Quran
-	       private void rbTextType_CheckedChanged(object sender, EventArgs e)
+        private void btnFindKey_Click(object sender, EventArgs e)
+        {
+            bool done = false;
+            FactorData factorData;
+
+            btnFindKey.Enabled = false;
+
+            if (string.IsNullOrEmpty(rtxtData.Text)) return;
+            lsSource.Items.Clear();
+
+            
+            txtPlus.Text = "1";
+
+            string charSetFile = Converter.GetCharsetFile(cmbDestEnc.Text);
+            if (string.IsNullOrEmpty(charSetFile)) { LogMsg("No Charset File!"); return; }
+
+            LoadCharset(charSetFile + ".Charset");
+            if (charSetFile.IndexOf("-Auto") < 0) charSetFile += "-Auto";
+            SaveCharset(charSetFile + ".Charset");
+            FindInCombo(cmbDestEnc, "Arabic [" + charSetFile + "] - 65537", false, true);
+            int i = 0;
+            do
+            {
+                Encode();
+                rb16.Checked = true;
+                txtPrimeP.Text = MyClass.BinaryToHexString(SafeRead(quranBin));
+                rb10.Checked = true;
+                GetNumbers();
+                if (!P.IsEven)
+                {
+                    factorData = FactorDB(txtPrimeP.Text, (WebMethod)cmbWebClient.SelectedIndex);
+                    if (factorData.factors <= 2)
+                    {
+                        DisplayFactors(factorData);
+                    }
+                    
+                }
+
+                done = !IncCharset(1);
+                SaveCharset(charSetFile + ".Charset");
+                lblStatus.Text = i++.ToString();Application.DoEvents();
+            } while (!done);
+
+            LogMsg("Finished finding key");
+            btnFindKey.Enabled = true;
+        }
+
+    #endregion
+
+    #region Quran
+        private void rbTextType_CheckedChanged(object sender, EventArgs e)
         {
             if ((sender as RadioButton).Checked)
             {
@@ -2363,7 +2583,7 @@ Red    : Diacritics";
         {
             
             rtxtData.Text = txtQuranText.Text;
-            tabControl.SelectedTab = tabEncoding;
+            tabControl1.SelectedTab = tabEncoding;
             cmbSourceEnc.SelectedIndex = 0;
             int i = 0; bool found = false;
             while (i < cmbSourceEnc.Items.Count && !found)
@@ -2377,7 +2597,8 @@ Red    : Diacritics";
             if (rbFirstOriginal.Checked || rbFirstOriginalDots.Checked) s="Hijaei";
             if (rbNoDiacritics.Checked) s="Hijaei-Hamza";
 
-            if (!SelectEncoding("["+s+"]")) SelectEncoding("[Common]");
+            //if (!SelectEncoding("["+s+"]")) 
+                SelectEncoding("[Common]");
             sentSora = lbSoras.Text;
             chkRTL.Checked = true;
         }
@@ -2442,6 +2663,44 @@ Red    : Diacritics";
     #endregion
 
     #region Charset
+
+        int Max(TextBox[] list)
+        {
+            int max = Convert.ToInt32(list[0].Text);
+            for (int i=1;i<list.Length;i++)
+            {
+                int n = Convert.ToInt32(list[i].Text);
+                if (n > max) max = n;
+            }
+            return max;
+        }
+        int Min(TextBox[] list)
+        {
+            int min = Convert.ToInt32(list[0].Text);
+            for (int i = 1; i < list.Length; i++)
+            {
+                int n = Convert.ToInt32(list[i].Text);
+                if (n < min) min = n;
+            }
+            return min;
+        }
+        private bool IncCharset(int n)
+        {
+            int max = Max(listTxtCS);
+            int min = Min(listTxtCS);
+
+            if ((max + n) > 255 || (min + n) < 0) return false;
+
+            for (int i = 0; i < 44; i++)
+            {
+                int v = ValueOf(listTxtCS[i].Text);
+                if (v != 0) listTxtCS[i].Text = ValidChar(v + n).ToString();
+            }
+            return true;
+        }
+
+
+
         private void btnAutoAdd_Click(object sender, EventArgs e)
         {
             int n;
@@ -2449,11 +2708,7 @@ Red    : Diacritics";
 
             if (sender is Button b) if (b.Name.Contains("Sub")) n = -n;
 
-            for (int i=0;i<44;i++)
-            {
-                   int v = ValueOf(listTxtCS[i].Text);
-                   if (v!=0) listTxtCS[i].Text = ValidChar(v + n).ToString();
-            }
+            IncCharset(n);
         }
 
           private void btnReset_Click(object sender, EventArgs e)
@@ -2518,8 +2773,8 @@ Red    : Diacritics";
                 ts += TimeElapsed + ",";
                 ReOrderChars(); ts += TimeElapsed + ",";
                 lblCurCharset.Text = Path.GetFileName(fileName);
-                logMsg(ts);
-                logMsg("Custom Charset Loaded");
+                LogMsg(ts);
+                LogMsg("Custom Charset Loaded");
             } catch (Exception ex) { logMsg(ex); }
         }
         private void btnLoadCharset_Click(object sender, EventArgs e)
@@ -2555,7 +2810,7 @@ Red    : Diacritics";
         {
             if (string.IsNullOrEmpty(txtCS1.Text.Trim()))
             {
-                logMsg("Fill the first Charset Value first");
+                LogMsg("Fill the first Charset Value first");
                 return;
             }
 
@@ -2565,35 +2820,51 @@ Red    : Diacritics";
             }
         }
 
+        private string GetCharset()
+        {
+            byte[] c = new byte[44];
+            for (int i = 0; i < 44; i++)
+            {
+                c[i] = ValidChar(Int32.Parse(listTxtCS[i].Text));
+            }
+            return MyClass.BinaryToHexString(c);
+        }
+        private void SaveCharset(string fileName)
+        {
+
+            File.WriteAllText(fileName, GetCharset()); ;
+            lblCurCharset.Text = Path.GetFileName(fileName);
+            AppSettings.WriteValue("Settings", "CharsetProfile", lblCurCharset.Text);
+            string s1 = cmbSourceEnc.Text;
+            string s2 = cmbDestEnc.Text;
+            loadEncodings();
+            cmbSourceEnc.Text = s1;
+            cmbDestEnc.Text = s2;
+            validateForRun();
+        }
         private void btnSaveCharset_Click(object sender, EventArgs e)
         {
             try
             {
-                SaveFileDialog dlg = new SaveFileDialog();
-                dlg.Title = "Save Charset File";
-                dlg.DefaultExt = "Charset";
-                dlg.Filter = "Charset File|*.Charset";
-                dlg.InitialDirectory = Application.StartupPath;
-                dlg.FileName = lblCurCharset.Text;
-
-                if (dlg.ShowDialog() == DialogResult.OK)
+                string fileName = Application.StartupPath+"\\"+ lblCurCharset.Text;
+                if ((sender as Button).Name != "btnSave")
                 {
-                    byte[] c = new byte[44];
-                    for  (int i=0;i<44;i++)
-                    {
-                            c[i] = ValidChar(Int32.Parse(listTxtCS[i].Text));
-                    }
-                    File.WriteAllText(dlg.FileName, MyClass.BinaryToHexString(c));
-                    lblCurCharset.Text = Path.GetFileName(dlg.FileName);
-                    AppSettings.WriteValue("Settings", "CharsetProfile", lblCurCharset.Text);
-                    logMsg("Custom Charset Saved");
+                    SaveFileDialog dlg = new SaveFileDialog();
+                    dlg.Title = "Save Charset File";
+                    dlg.DefaultExt = "Charset";
+                    dlg.Filter = "Charset File|*.Charset";
+                    dlg.InitialDirectory = Application.StartupPath;
+                    dlg.FileName = lblCurCharset.Text;
+                    if (dlg.ShowDialog() == DialogResult.OK)
+                        fileName = dlg.FileName;
+                    else fileName = "";
                 }
-                string s1 = cmbSourceEnc.Text;
-                string s2 = cmbDestEnc.Text;
-                loadEncodings();
-                cmbSourceEnc.Text = s1;
-                cmbDestEnc.Text = s2;
-                validateForRun();
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    SaveCharset(fileName);
+                    LogMsg("Custom Charset Saved");
+                }
+
             } catch (Exception ex) { logMsg(ex); }
         }
 
@@ -2674,7 +2945,7 @@ Red    : Diacritics";
             {
                 FileByteProvider fileByteProvider = hexBox.ByteProvider as FileByteProvider;
                 fileByteProvider.ApplyChanges();
-                logMsg("Changes Applied to Disk");
+                LogMsg("Changes Applied to Disk");
             }
             catch (Exception ex) { logMsg(ex); }
         }
@@ -2693,7 +2964,7 @@ Red    : Diacritics";
                 for (int i = 0; i < hexBox.ByteProvider.Length; i++) buffer[i] = hexBox.ByteProvider.ReadByte(i);
                 rb16.Checked = true; 
                 txtPrimeP.Text = MyClass.BinaryToHexString(buffer);
-                tabControl.SelectedTab = tabCalculator;
+                tabControl1.SelectedTab = tabCalculator;
             } catch (Exception ex) { logMsg(ex); }
         }
 
@@ -2746,7 +3017,7 @@ Red    : Diacritics";
             hexBox.ByteProvider = null;
             lblHexFile.Text = "";
             hexBox.Refresh();
-            logMsg("HexView Cleared");
+            LogMsg("HexView Cleared");
         }
         private void CheckChanges()
         {
@@ -2779,16 +3050,23 @@ Red    : Diacritics";
                     hexBox.ByteProvider =new FileByteProvider( openFile.FileName );
                     lblHexFile.Text = openFile.FileName;
                     hexBox.Refresh();
-                    logMsg("File Loaded:" + openFile.FileName);
+                    LogMsg("File Loaded:" + openFile.FileName);
                 }
             }
             catch (Exception ex) { logMsg(ex); }
         }
 
-	#endregion
-	
-	#region Texture
-	
+        #endregion
+
+    #region Texture
+        private void btnBarcode_Click(object sender, EventArgs e)
+        {
+            Blink(true);
+            //picQuran1.Image = picQuran3.Image;
+            ReadBarcode((Bitmap)picQuran3.Image);
+            Blink(false);
+        }
+
         private void btnSaveImage_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
@@ -2801,7 +3079,7 @@ Red    : Diacritics";
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 picQuran1.Image.Save(dlg.FileName);
-                logMsg("Image Saved :" + dlg.FileName);
+                LogMsg("Image Saved :" + dlg.FileName);
             }
         }
         private void btnScreenShot_Click(object sender, EventArgs e)
@@ -2898,7 +3176,7 @@ Red    : Diacritics";
             }
             catch (Exception exc)
             {
-               logMsg(exc.Message);
+               LogMsg(exc.Message);
             }
         }
         private void lblScale_TextChanged(object sender, EventArgs e)
@@ -2921,11 +3199,14 @@ Red    : Diacritics";
         private void btnResetImage_Click(object sender, EventArgs e)
         {
             picQuran1.Image = null;
-            picQuran2.Image=null;
+            picQuran2.Image = null;
+            picQuran3.Image = null; 
             picQuran1.BackColor = Color.Black;
             picQuran2.BackColor = Color.Black;
+            picQuran3.BackColor = Color.Black;
             picQuran1.Invalidate();
             picQuran2.Invalidate();
+            picQuran3.Invalidate();
             Application.DoEvents();
         }
 
@@ -2939,12 +3220,15 @@ Red    : Diacritics";
         {
             AppSettings.WriteValue("Settings", "FlipY", chkFlipY.Checked ? "YES" : "NO");
             DrawImage();
+            picQuran3.Image.RotateFlip(RFType(chkFlipX.Checked,chkFlipY.Checked));
         }
 
         private void chkFlipX_CheckedChanged(object sender, EventArgs e)
         {
             AppSettings.WriteValue("Settings", "FlipX", chkFlipX.Checked ? "YES" : "NO");
-            DrawImage();        }
+            DrawImage();
+            picQuran3.Image.RotateFlip(RFType(chkFlipX.Checked,chkFlipY.Checked));
+        }
 
         private void chkINV_CheckedChanged(object sender, EventArgs e)
         {
@@ -3139,8 +3423,8 @@ Red    : Diacritics";
             var result = reader.Decode(bmp);
             if (result != null)
             {
-                logMsg("Read Successfull : " + result.BarcodeFormat.ToString() + "[ " + result.Text + " ]");
-                txtInfo.Text = result.BarcodeFormat.ToString() + Environment.NewLine + result.Text;
+                LogMsg("Read Successfull : " + result.BarcodeFormat.ToString() + "[ " + result.Text + " ]");
+                OutputMsg(result.BarcodeFormat.ToString() + Environment.NewLine + result.Text);
             }
         }
         void webCamTimer_Tick(object sender, EventArgs e)
@@ -3308,7 +3592,7 @@ Red    : Diacritics";
                     ReInitSpectrum();
                     recording = true;
                     sensor.Start(dlg.FileName,true,chkPlay.Checked,CreateSampleProvider);
-                    logMsg("Start Recording");
+                    LogMsg("Start Recording");
                 }
             }
             UpdateGUI();
@@ -3322,7 +3606,7 @@ Red    : Diacritics";
                 sensor.Stop();
             }
             UpdateGUI();
-            logMsg("Stopped");
+            LogMsg("Stopped");
         }
 
         void canvas_Paint(object sender, PaintEventArgs e)
@@ -3517,7 +3801,7 @@ Red    : Diacritics";
             lblStatus.Text = "Threads : ";
             AppSettings.WriteValue("Settings", "LastPlayed", lastPlayed);
             PlayWaveFromFile(lastPlayed);
-            logMsg("File Loaded:" + lastPlayed);
+            LogMsg("File Loaded:" + lastPlayed);
         }
         private void btnPlay_Click(object sender, EventArgs e)
         {
@@ -3757,12 +4041,9 @@ Red    : Diacritics";
             DrawColors();
             AppSettings.WriteValue("Settings", "ColorSizeMode", cmbColorSizeMode.SelectedIndex.ToString());
         }
-
-        private void btnBarcode_Click(object sender, EventArgs e)
+        private void chkColorScaled_CheckedChanged(object sender, EventArgs e)
         {
-            Blink(true);
-            ReadBarcode((Bitmap)picQuran3.Image);
-            Blink(false);
+            AppSettings.WriteValue("Settings", "ColorScaled", chkColorScaled.Checked?"YES":"NO");
         }
 
         private void btnCPSP_Click(object sender, EventArgs e)
@@ -3772,21 +4053,54 @@ Red    : Diacritics";
             lblColorPointSize.Text = n.ToString();
             DrawColors();
         }
+
+        private void tabPage1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabControl2_Click(object sender, EventArgs e)
+        {
+            if (tabControl2.SelectedTab == tabWebBrowser)
+            {
+                string data = File.ReadAllText(htmlFile);
+                int p = data.FindString("value=",0);
+                if (p>0) 
+                {
+                    string number = data.ExtractData("\"",ref p, 7);
+                    webBrowser.Navigate(factorDbURL + number);
+                }
+                //webBrowser.Navigate(htmlFile);
+            }
+        }
+
+
         private void lblColorPointSize_TextChanged(object sender, EventArgs e)
         {
             AppSettings.WriteValue("Settings", "ColorScale", lblColorPointSize.Text);
         }
 
+        int ColorValue(int n,int min,int max)
+        {
+            if (chkColorScaled.Checked && max>min)
+            {
+                return (n - min) * 255 / (max - min)  ;
+            }
+            else return n;
+        }
         private void DrawColors()
         {
             int pointSize;
             if (!int.TryParse(lblColorPointSize.Text, out pointSize)) pointSize = 1;
             byte[] byteArray = SafeRead(quranBin);
 
+            int min = byteArray.Min();
+            int max = byteArray.Max();
+
             var colorArray = new Color[byteArray.Length / 3];
             for (var i = 0; i < byteArray.Length - 3; i += 3)
             {
-                var color = Color.FromArgb(byteArray[i + 0], byteArray[i + 1], byteArray[i + 2]);
+                var color = Color.FromArgb(ColorValue(byteArray[i + 0],min,max), ColorValue(byteArray[i + 1],min,max), ColorValue(byteArray[i + 2],min,max));
                 colorArray[i / 3] = color;
             }
 
@@ -3802,7 +4116,7 @@ Red    : Diacritics";
             {
                 //bmp.SetPixel(i % n, i / n, colorArray[i]);
 
-                DrawPoint(g1, pointSize, 1, (i % n) , (i / n) , colorArray[i]);
+                DrawPoint(g1, pointSize, 1, (i % n)+1 , (i / n)+1 , colorArray[i]);
 
                 g2.DrawLine(new Pen(colorArray[i]), i, 0, i, bmp2.Height);
                 //bmp2.SetPixel(i, 0, colorArray[i]);
@@ -3821,7 +4135,7 @@ Red    : Diacritics";
         }
         #endregion
 
-        #region CommentedCode
+    #region CommentedCode
 
 
 

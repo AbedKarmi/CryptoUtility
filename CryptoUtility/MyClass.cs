@@ -48,7 +48,15 @@ namespace CryptoUtility
             return titles;
         }
 
+        public static void AppendAllBytes(string path, byte[] bytes)
+        {
+            //argument-checking here.
 
+            using (var stream = new FileStream(path, FileMode.Append))
+            {
+                stream.Write(bytes, 0, bytes.Length);
+            }
+        }
         public static bool isHex(this string hex)
         {
             return hex.ContainsOnly("0123456789abcdefABCDEFxX");
@@ -155,8 +163,9 @@ namespace CryptoUtility
             {
                 result.AppendFormat("{0:X2}", binary[i]);
             }
-
-            return result.ToString();
+            string s = result.ToString();
+            while (s.Length > 1 && s[0] == '0') s = s.Substring(1);
+            return s;
         }
         public static byte[] HexStringToBinary(String s)
         {
@@ -460,6 +469,28 @@ namespace CryptoUtility
             return all;
         }
 
-   
+
+        public static int  FindString(this string data, string str, int startIndex, int occurence = 1)
+        {
+            int p = startIndex;
+            for (int i = 0; i < occurence && p >= 0; i++)
+            {
+                p = data.IndexOf(str, startIndex);
+                startIndex = p + 1;
+            }
+            return p;
+        }
+
+        public static string ExtractData(this string data, string str, ref int startIndex, int skip)
+        {
+            string s = "";
+            int n = FindString(data, str, startIndex + skip);
+            if (n > 0)
+            {
+                s = data.Substring(startIndex + skip, n - startIndex - skip).Trim();
+                startIndex = n + skip;
+            }
+            return s;
+        }
     }
 }

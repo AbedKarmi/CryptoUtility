@@ -135,6 +135,7 @@ Verifying:
             using (var rsa = new RSACryptoServiceProvider(keySize))
             {
                 rsa.PersistKeyInCsp = false;
+                
                 publicKey = rsa.ExportParameters(false);
                 privateKey = rsa.ExportParameters(true);
 
