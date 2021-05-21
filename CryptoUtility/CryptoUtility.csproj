@@ -378,6 +378,7 @@
     <Compile Include="RSAClass.cs" />
     <Compile Include="PEMClass.cs" />
     <Compile Include="FileAssociation.cs" />
+    <Compile Include="PEM.cs" />
     <Compile Include="ScreenCapture.cs" />
     <Compile Include="WebCam.cs" />
     <EmbeddedResource Include="frmMain.resx">

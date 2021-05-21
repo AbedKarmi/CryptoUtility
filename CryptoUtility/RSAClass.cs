@@ -10,23 +10,452 @@ using System.Xml.Serialization;
 
 namespace CryptoUtility
 {        
-        public class RSAKey
-        {
-            public String P { get; set; }
-            public String Q { get; set; }
-            public String D { get; set; }
-            public String DP { get; set; }
-            public String DQ { get; set; }
-            public String InverseQ { get; set; }
-            public String Exponent { get; set; }
-            public String Modulus { get; set; }
-        }
+    public struct RSAKey
+    {
+        public string P { get; set; }
+        public string Q { get; set; }
+        public string D { get; set; }
+        public string DP { get; set; }
+        public string DQ { get; set; }
+        public string InverseQ { get; set; }
+        public string Exponent { get; set; }
+        public string Modulus { get; set; }
+    }
     public class RSAClass
     {
+		private const int UTF8 = 65001;
 
-        public static string Info
+		private RSACryptoServiceProvider rsa;
+
+		/// <summary>
+		/// The lowest RSACryptoServiceProvider object
+		/// </summary>
+		public RSACryptoServiceProvider RSAObject
+		{
+			get { return rsa; }
+			set
+			{
+				rsa = value;
+				publicKey = rsa.ExportParameters(false);
+				privateKey = rsa.ExportParameters(true);
+			}
+		}
+		
+
+		/// <summary>
+		/// Key bits
+		/// </summary>
+		public int KeySize { get { return rsa.KeySize; } }
+
+		/// <summary>
+		/// Whether to include the private key
+		/// </summary>
+		public bool HasPrivate { get { return !rsa.PublicOnly; } }
+
+
+		private RSAParameters publicKey;
+        private RSAParameters privateKey;
+
+        public RSAKey RSAToKey64(RSAParameters key)
         {
-            get { return @"RSA
+            RSAKey key64 = new RSAKey(); //{ Section = section, Key = key, Value = value };
+            if (key.P != null) key64.P = Convert.ToBase64String(key.P);
+            if (key.Q != null) key64.Q = Convert.ToBase64String(key.Q);
+            if (key.D != null) key64.D = Convert.ToBase64String(key.D);
+            if (key.DP != null) key64.DP = Convert.ToBase64String(key.DP);
+            if (key.DQ != null) key64.DQ = Convert.ToBase64String(key.DQ);
+            if (key.InverseQ != null) key64.InverseQ = Convert.ToBase64String(key.InverseQ);
+            if (key.Exponent != null) key64.Exponent = Convert.ToBase64String(key.Exponent);
+            if (key.Modulus != null) key64.Modulus = Convert.ToBase64String(key.Modulus);
+            return key64;
+        }
+
+        public RSAParameters Key64ToRSA(RSAKey key64)
+        {
+            RSAParameters key = new RSAParameters();
+
+            if (!string.IsNullOrEmpty(key64.P)) key.P = Convert.FromBase64String(key64.P);
+            if (!string.IsNullOrEmpty(key64.Q)) key.Q = Convert.FromBase64String(key64.Q);
+            if (!string.IsNullOrEmpty(key64.D)) key.D = Convert.FromBase64String(key64.D);
+            if (!string.IsNullOrEmpty(key64.DP)) key.DP = Convert.FromBase64String(key64.DP);
+            if (!string.IsNullOrEmpty(key64.DQ)) key.DQ = Convert.FromBase64String(key64.DQ);
+            if (!string.IsNullOrEmpty(key64.InverseQ)) key.InverseQ = Convert.FromBase64String(key64.InverseQ);
+            if (!string.IsNullOrEmpty(key64.Exponent)) key.Exponent = Convert.FromBase64String(key64.Exponent);
+            if (!string.IsNullOrEmpty(key64.Modulus)) key.Modulus = Convert.FromBase64String(key64.Modulus);
+            return key;
+        }
+        public void XMLWrite(RSAParameters key, string file)
+        {
+            RSAKey key64 = RSAToKey64(key);
+
+            XmlSerializer mySerializer = new XmlSerializer(typeof(RSAKey));
+            StreamWriter myWriter = new StreamWriter(file);
+            mySerializer.Serialize(myWriter, key64);
+            myWriter.Close();
+        }
+
+        public RSAParameters XMLRead(string file)
+        {
+			XmlSerializer mySerializer = new XmlSerializer(typeof(RSAKey));
+			FileStream myFileStream = new FileStream(file, FileMode.Open);
+
+			var key64 = (RSAKey)mySerializer.Deserialize(myFileStream);
+			myFileStream.Close();
+
+            return Key64ToRSA(key64);
+        }
+
+        public void SetKey(RSAParameters RSAParameters_0, bool isPrivateKey)
+        {
+            if (isPrivateKey) 
+				privateKey = RSAParameters_0; 
+			else 
+				publicKey = RSAParameters_0;
+        }
+
+        public RSAParameters GetKey(bool isPrivateKey)
+        {
+            return (isPrivateKey ? privateKey : publicKey);
+        }
+        public RSAParameters CreateKey(int keySize=2048)
+        {
+			if (rsa!=null) 
+				rsa.Dispose();
+
+			rsa = new RSACryptoServiceProvider(keySize);
+            {
+                rsa.PersistKeyInCsp = false;
+                
+                publicKey = rsa.ExportParameters(false);
+                privateKey = rsa.ExportParameters(true);
+
+                return privateKey;
+            }
+        }
+
+        public void SetPublicKey(byte[] publicKEY,byte[] exponent)
+        {
+            publicKey.Modulus = publicKEY;
+            publicKey.Exponent = exponent;
+			rsa.ImportParameters(publicKey);
+        }
+        public void SetKey(byte[] privateKEY,byte[] publicKEY, byte[] exponent)
+        {
+            privateKey.D = privateKEY;
+            privateKey.Modulus = publicKEY;
+            privateKey.Exponent = exponent;
+			rsa.ImportParameters(privateKey);
+		}
+        public void SetKey(RSAParameters privateKEY)
+        {
+            privateKey = privateKEY;
+			rsa.ImportParameters(privateKey);
+        }
+
+		/// <summary>
+		/// Export the key pair in XML format, if convertToPublic RSA with private key will only return public key, RSA with only public key will not be affected
+		/// </summary>
+		public string ToXML(bool convertToPublic = false)
+		{
+			return rsa.ToXmlString(!rsa.PublicOnly && !convertToPublic);
+		}
+
+		/// <summary>
+		/// Export the key pair into a PEM object, if convertToPublic RSA with private key will only return public key, RSA with only public key will not be affected
+		/// </summary>
+		public PEM ToPEM(bool convertToPublic = false)
+		{
+			return new PEM(rsa, convertToPublic);
+		}
+		public string PEMPKCS1(bool convertToPlublic=false)
+        {
+			return ToPEM(convertToPlublic).ToPEM_PKCS1();
+        }
+		public string PEMPKCS8(bool convertToPlublic = false)
+		{
+			return ToPEM(convertToPlublic).ToPEM_PKCS8();
+		}
+
+		/// <summary>
+		/// Encrypted string (utf-8), an error is thrown
+		/// </summary>
+		public string Encrypt(string str,int codePage=UTF8, bool usePadding = false)
+		{
+			Encoding encoding = Encoding.GetEncoding(codePage);
+			return Convert.ToBase64String(Encrypt(encoding.GetBytes(str), usePadding));
+		}
+
+		/// <summary>
+		/// Encrypted data, error throws an exception
+		/// </summary>
+		public byte[] Encrypt(byte[] data,Func<byte [],bool,byte[]> DoEncrypt, bool usePadding = false)
+		{
+			int blockLen = rsa.KeySize / 8 - 11;
+			if (data.Length <= blockLen)
+			{
+				return DoEncrypt(data, false);
+			}
+
+			using (var dataStream = new MemoryStream(data))
+			using (var enStream = new MemoryStream())
+			{
+				byte[] buffer = new byte[blockLen];
+				int len = dataStream.Read(buffer, 0, blockLen);
+
+				while (len > 0)
+				{
+					byte[] block = new byte[len];
+					Array.Copy(buffer, 0, block, 0, len);
+
+					byte[] enBlock = DoEncrypt(block, usePadding);
+					enStream.Write(enBlock, 0, enBlock.Length);
+
+					len = dataStream.Read(buffer, 0, blockLen);
+				}
+
+				return enStream.ToArray();
+			}
+		}
+
+		public byte[] Encrypt(byte[] data, bool usePadding = false)
+        {
+			return Encrypt(data, rsa.Encrypt, usePadding);
+        }
+		public byte[] Encrypt(byte[] data,bool usePrivate, bool usePadding = false)
+		{
+			if (usePrivate)
+				return EncryptWithPrivate(data, usePadding);
+			else
+				return Encrypt(data, usePadding);
+		}
+		public byte[] EncryptWithPrivate(byte[] data, bool usePadding = false)
+		{
+			using RSACryptoServiceProvider csp = new();
+
+			csp.ImportParameters(privateKey);
+			return Encrypt(data, csp.PrivateEncryption, usePadding);
+		}
+
+		/// <summary>
+		/// Decrypt the string (utf-8), return null if decryption is abnormal
+		/// </summary>
+		public string Decrypt(string str,int codePage=UTF8, bool usePadding = false)
+		{
+			if (string.IsNullOrEmpty(str))
+			{
+				return null;
+			}
+			byte[] byts = null;
+			try { byts = Convert.FromBase64String(str); } catch { }
+			if (byts == null)
+			{
+				return null;
+			}
+			var val = Decrypt(byts, usePadding);
+			if (val == null)
+			{
+				return null;
+			}
+			var encoding = Encoding.GetEncoding(codePage);
+			return encoding.GetString(val);
+		}
+
+		/// <summary>
+		/// Decrypt the data, return null if decryption is abnormal
+		/// </summary>
+		public byte[] Decrypt(byte[] data, Func<byte[], bool, byte[]> DoDecrypt, bool usePadding = false)
+		{
+			try
+			{
+				int blockLen = rsa.KeySize / 8;
+				if (data.Length <= blockLen)
+				{
+					return DoDecrypt(data, usePadding);
+				}
+
+				using (var dataStream = new MemoryStream(data))
+				using (var deStream = new MemoryStream())
+				{
+					byte[] buffer = new byte[blockLen];
+					int len = dataStream.Read(buffer, 0, blockLen);
+
+					while (len > 0)
+					{
+						byte[] block = new byte[len];
+						Array.Copy(buffer, 0, block, 0, len);
+
+						byte[] deBlock = DoDecrypt(block, usePadding);
+						deStream.Write(deBlock, 0, deBlock.Length);
+
+						len = dataStream.Read(buffer, 0, blockLen);
+					}
+
+					return deStream.ToArray();
+				}
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
+		public byte[] Decrypt(byte[] data, bool usePadding = false)
+        {
+			return Decrypt(data, rsa.Decrypt, usePadding);
+        }
+
+		public byte[] Decrypt(byte[] data,bool usePrivate, bool usePadding = false)
+		{
+			if (usePrivate)
+				return Decrypt(data, usePadding);
+			else 
+				return DecryptWithPublic(data, usePadding);
+		}
+		public byte[] DecryptWithPublic(byte[] data, bool usePadding = false)
+		{
+			using RSACryptoServiceProvider csp = new();
+
+			csp.ImportParameters(publicKey);
+			return Decrypt(data,csp.PublicDecryption , usePadding);
+		}
+
+		/// <summary>
+		/// Sign str and specify the hash algorithm (such as SHA256)
+		/// </summary>
+		public string Sign(string str, string hashAlgorithm= "SHA256", int codePage=UTF8)
+		{
+			var encoding = Encoding.GetEncoding(codePage);
+			return Convert.ToBase64String(Sign(encoding.GetBytes(str), hashAlgorithm));
+		}
+
+		/// <summary>
+		/// Sign the data and specify the hash algorithm (such as SHA256)
+		/// </summary>
+		public byte[] Sign(byte[] data, string hashAlgorithm)
+		{
+			return rsa.SignData(data, hashAlgorithm);
+		}
+
+		public byte[] SignWithFormatter(byte[] hashOfDataToSign, string hashAlgorithm = "SHA256")
+		{
+			using (var rsa = new RSACryptoServiceProvider())
+			{
+				rsa.PersistKeyInCsp = false;
+				rsa.ImportParameters(privateKey);
+
+				var rsaFormatter = new RSAPKCS1SignatureFormatter(rsa);
+				rsaFormatter.SetHashAlgorithm(hashAlgorithm);
+
+				return rsaFormatter.CreateSignature(hashOfDataToSign);
+			}
+		}
+
+		public bool VerifyWithFormatter(byte[] hashOfDataToSign, byte[] signature, string hashAlgorithm = "SHA256")
+		{
+			using (var rsa = new RSACryptoServiceProvider())
+			{
+				rsa.ImportParameters(publicKey);
+
+				var rsaDeformatter = new RSAPKCS1SignatureDeformatter(rsa);
+				rsaDeformatter.SetHashAlgorithm(hashAlgorithm);
+
+				return rsaDeformatter.VerifySignature(hashOfDataToSign, signature);
+			}
+		}
+
+		/// <summary>
+		/// Verify whether the signature of the string str is sgin, and specify the hash algorithm (such as SHA256)
+		/// </summary>
+		public bool Verify(string str, string signature, string hashAlgorithm= "SHA256", int codePage=UTF8)
+		{
+			byte[] byts = null;
+			var encoding = Encoding.GetEncoding(codePage);
+
+			try { byts = Convert.FromBase64String(signature); } catch { }
+			if (byts == null)
+			{
+				return false;
+			}
+			return Verify(encoding.GetBytes(str), byts, hashAlgorithm);
+		}
+
+		/// <summary>
+		/// Verify that the signature of data is sgin, and specify the hash algorithm (such as SHA256)
+		/// </summary>
+		public bool Verify(byte[] data, byte[] signature, string hashAlgorithm= "SHA256")
+		{
+			try
+			{
+				return rsa.VerifyData(data, hashAlgorithm, signature);
+			}
+			catch
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Create a new RSA with the specified key size, an error is thrown
+		/// </summary>
+		public RSAClass(int keySize=2048)
+		{
+			var rsaParams = new CspParameters();
+			rsaParams.Flags = CspProviderFlags.UseMachineKeyStore;
+			RSAObject = new RSACryptoServiceProvider(keySize, rsaParams);
+		}
+
+		/// <summary>
+		/// Create an RSA with the specified key. The xml can contain only one public key or private key, or both, and an error will be thrown.
+		/// </summary>
+		public RSAClass(string xml)
+		{
+			var rsaParams = new CspParameters();
+			rsaParams.Flags = CspProviderFlags.UseMachineKeyStore;
+			RSAObject = new RSACryptoServiceProvider(rsaParams);
+			rsa.FromXmlString(xml);
+		}
+
+		/// <summary>
+		/// Create RSA from a pem file, pem is a public key or private key, and an error is thrown
+		/// </summary>
+		public RSAClass(string pemString, bool noop)
+		{
+			RSAObject = PEM.FromPEM(pemString).GetRSA();
+		}
+
+		/// <summary>
+		/// Create RSA through a pem object, pem is a public key or private key, and an error is thrown
+		/// </summary>
+		public RSAClass(PEM pem)
+		{
+			RSAObject = pem.GetRSA();
+		}
+
+		/// <summary>
+		/// This method will first generate RSA_PEM and then create RSA: construct a PEM from the public key exponent and private key exponent, and calculate P and Q in reverse, but they may be the same as those of the original generated key.
+		/// Note: If the first byte of all parameters is 0, you must remove it first
+		/// Error will throw an exception
+		/// </summary>
+		/// <param name="modulus">must provide modulus</param>
+		/// <param name="exponent">Public key exponent must be provided</param>
+		/// <param name="dOrNull">The private key index may not be provided, and the exported PEM only contains the public key</param>
+		public RSAClass(byte[] modulus, byte[] exponent, byte[] dOrNull)
+		{
+			RSAObject = new PEM(modulus, exponent, dOrNull).GetRSA();
+		}
+
+		/// <summary>
+		/// This method will first generate RSA_PEM and then create RSA: construct a PEM from the full amount of PEM field data, except that modulus and public key exponent must be provided, all other private key exponent information is either provided or not provided ( The exported PEM only contains the public key)
+		/// Note: If the first byte of all parameters is 0, you must remove it first
+		/// </summary>
+		public RSAClass(byte[] modulus, byte[] exponent, byte[] d, byte[] p, byte[] q, byte[] dp, byte[] dq, byte[] inverseQ)
+		{
+			RSAObject = new PEM(modulus, exponent, d, p, q, dp, dq, inverseQ).GetRSA();
+		}
+
+		public static string Info
+		{
+			get { return @"RSA
 ---
 1. Choose two distinct prime numbers p, q-1
 2. Compute n=p * q , modulus , its length is the key length
@@ -62,166 +491,13 @@ Verifying:
 2. Compute v=s^e mod n
 3. Compare v and h, if equal verified
 "; }
-        }
-        private RSAParameters publicKey;
-        private RSAParameters privateKey;
+		}
 
-        public RSAKey RSAToXML(RSAParameters key)
-        {
-            RSAKey xml = new RSAKey(); //{ Section = section, Key = key, Value = value };
-            if (key.P != null) xml.P = Convert.ToBase64String(key.P);
-            if (key.Q != null) xml.Q = Convert.ToBase64String(key.Q);
-            if (key.D != null) xml.D = Convert.ToBase64String(key.D);
-            if (key.DP != null) xml.DP = Convert.ToBase64String(key.DP);
-            if (key.DQ != null) xml.DQ = Convert.ToBase64String(key.DQ);
-            if (key.InverseQ != null) xml.InverseQ = Convert.ToBase64String(key.InverseQ);
-            if (key.Exponent != null) xml.Exponent = Convert.ToBase64String(key.Exponent);
-            if (key.Modulus != null) xml.Modulus = Convert.ToBase64String(key.Modulus);
-            return xml;
-        }
-
-        public RSAParameters XMLToRSA(RSAKey xml)
-        {
-            RSAParameters key = new RSAParameters();
-
-            if (!String.IsNullOrEmpty(xml.P)) key.P = Convert.FromBase64String(xml.P);
-            if (!String.IsNullOrEmpty(xml.Q)) key.Q = Convert.FromBase64String(xml.Q);
-            if (!String.IsNullOrEmpty(xml.D)) key.D = Convert.FromBase64String(xml.D);
-            if (!String.IsNullOrEmpty(xml.DP)) key.DP = Convert.FromBase64String(xml.DP);
-            if (!String.IsNullOrEmpty(xml.DQ)) key.DQ = Convert.FromBase64String(xml.DQ);
-            if (!String.IsNullOrEmpty(xml.InverseQ)) key.InverseQ = Convert.FromBase64String(xml.InverseQ);
-            if (!String.IsNullOrEmpty(xml.Exponent)) key.Exponent = Convert.FromBase64String(xml.Exponent);
-            if (!String.IsNullOrEmpty(xml.Modulus)) key.Modulus = Convert.FromBase64String(xml.Modulus);
-            return key;
-        }
-        public void XMLWrite(RSAParameters key, string file)
-        {
-            RSAKey xml = RSAToXML(key);
-
-            XmlSerializer mySerializer = new XmlSerializer(typeof(RSAKey));
-            StreamWriter myWriter = new StreamWriter(file);
-            mySerializer.Serialize(myWriter, xml);
-            myWriter.Close();
-        }
-
-
-        public RSAParameters XMLRead(string file)
-        {
-            RSAKey xml = new RSAKey();
-            RSAParameters key;
-
-            XmlSerializer mySerializer = new XmlSerializer(typeof(RSAKey));
-            FileStream myFileStream = new FileStream(file, FileMode.Open);
-
-            xml = (RSAKey)mySerializer.Deserialize(myFileStream);
-            myFileStream.Close();
-
-            key = XMLToRSA(xml);
-
-            return key;
-        }
-
-        public void SetKey(RSAParameters RSAParameters_0, bool isPrivateKey)
-        {
-            if (isPrivateKey) privateKey = RSAParameters_0; else publicKey = RSAParameters_0;
-        }
-
-        public RSAParameters GetKey(bool isPrivateKey)
-        {
-            return (isPrivateKey ? privateKey : publicKey);
-        }
-        public RSAParameters CreateKey(int keySize=2048)
-        {
-            using (var rsa = new RSACryptoServiceProvider(keySize))
-            {
-                rsa.PersistKeyInCsp = false;
-                
-                publicKey = rsa.ExportParameters(false);
-                privateKey = rsa.ExportParameters(true);
-
-                return privateKey;
-            }
-        }
-
-        public byte[] SignData(byte[] hashOfDataToSign,String hashAlgorithm="SHA256",int keySize=2048)
-        {
-            using (var rsa = new RSACryptoServiceProvider(keySize))
-            {
-                rsa.PersistKeyInCsp = false;
-                rsa.ImportParameters(privateKey);
-
-                var rsaFormatter = new RSAPKCS1SignatureFormatter(rsa);
-                rsaFormatter.SetHashAlgorithm(hashAlgorithm);
-
-                return rsaFormatter.CreateSignature(hashOfDataToSign);
-            }
-        }
-
-        public bool VerifySignature(byte[] hashOfDataToSign, byte[] signature, String hashAlgorithm = "SHA256", int keySize=2048)
-        {
-            using (var rsa = new RSACryptoServiceProvider(keySize))
-            {
-                rsa.ImportParameters(publicKey);
-
-                var rsaDeformatter = new RSAPKCS1SignatureDeformatter(rsa);
-                rsaDeformatter.SetHashAlgorithm(hashAlgorithm);
-
-                return rsaDeformatter.VerifySignature(hashOfDataToSign, signature);
-            }
-        }
-
-        public void SetPublicKey(byte[] publicKEY,byte[] exponent)
-        {
-            publicKey.Modulus = publicKEY;
-            publicKey.Exponent = exponent;
-        }
-        public void SetKey(byte[] privateKEY,byte[] publicKEY, byte[] exponent)
-        {
-            privateKey.D = privateKEY;
-            privateKey.Modulus = publicKEY;
-            privateKey.Exponent = exponent;
-        }
-        public void SetKey(RSAParameters privateKEY)
-        {
-            privateKey = privateKEY;
-        }
-
-        public byte[] Encrypt(byte[] data,bool usePrivateKey=true,bool usePadding=false)
-        {
-            using RSACryptoServiceProvider csp = new ();
-            if (usePrivateKey)
-            {
-                csp.ImportParameters(privateKey);
-                return csp.PrivareEncryption(data,usePadding);
-            }
-            else
-            {
-                csp.ImportParameters(publicKey);
-                return csp.Encrypt(data, usePadding);
-            }
-        }
-
-        public byte[] Decrypt(byte[] data, bool usePrivateKey = true,bool usePadding=false)
-        {
-            using RSACryptoServiceProvider csp = new();
-
-            if (usePrivateKey)
-            {
-                csp.ImportParameters(privateKey);
-                return csp.Decrypt(data, usePadding);
-                
-            }
-            else
-            {
-                csp.ImportParameters(publicKey);
-                return csp.PublicDecryption(data,usePadding);
-            }
-        }
-    }
+	}
 
     public static class RSAExtenstions
     {
-        public static byte[] PrivareEncryption(this RSACryptoServiceProvider rsa, byte[] data,bool usePadding=false)
+        public static byte[] PrivateEncryption(this RSACryptoServiceProvider rsa, byte[] data,bool usePadding=false)
         {
             if (data == null)
                 throw new ArgumentNullException("data");
@@ -287,5 +563,7 @@ Verifying:
             Array.Copy(data, results, results.Length);
             return results;
         }
+
+
     }
 }

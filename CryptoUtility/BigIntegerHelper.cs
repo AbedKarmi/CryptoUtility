@@ -10,6 +10,7 @@ namespace CryptoUtility
 {
     static class BigIntegerHelper
     {
+        public enum NumberFormat { Binary = 0, Decimal, Hexadecimal, Base64 };
 
         private static readonly BigInteger Ten = new BigInteger(10);
         public static BigInteger ToBigInteger(this ulong ul)
@@ -564,6 +565,36 @@ namespace CryptoUtility
             else
                 inv = u1;
             return inv;
+        }
+        public static string Hex(BigInteger n)
+        {
+            string s = n.ToString("X");
+            while (s.Length > 1 && s.Substring(0, 1) == "0") s = s.Substring(1); if (s.Length == 1) s = "0" + s;
+            return s;
+        }
+        public static BigInteger ConvertFrom(this string number, NumberFormat format, bool positiveOnly = true)
+        {
+            number = number.Replace(":", "").Replace(" ", "").Trim();
+            switch (format)
+            {
+                case NumberFormat.Binary: return BigIntegerHelper.NewBigInteger2(number);
+                case NumberFormat.Decimal: BigInteger B; if (!BigInteger.TryParse(number, out B)) B = 0; return B;
+                case NumberFormat.Hexadecimal: return BigIntegerHelper.GetBig(number, positiveOnly);
+                case NumberFormat.Base64: return BigIntegerHelper.GetBig(Convert.FromBase64String(number), positiveOnly);
+            }
+
+            return 0;
+        }
+        public static string ConvertTo(this BigInteger number, NumberFormat format)
+        {
+            switch (format)
+            {
+                case NumberFormat.Binary: return ToBinaryString(number);
+                case NumberFormat.Decimal: return number.ToString();
+                case NumberFormat.Hexadecimal: return Hex(number);
+                case NumberFormat.Base64: return Convert.ToBase64String(number.ToByteArray());
+            }
+            return "0";
         }
 
     }

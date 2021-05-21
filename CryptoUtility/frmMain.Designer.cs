@@ -89,6 +89,7 @@ namespace CryptoUtility
             this.btnUsePrivateKey = new System.Windows.Forms.Button();
             this.btnExportPrivate = new System.Windows.Forms.Button();
             this.btnUsePublicKey = new System.Windows.Forms.Button();
+            this.label57 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.btnExportPublic = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
@@ -170,8 +171,8 @@ namespace CryptoUtility
             this.lblCSS3 = new System.Windows.Forms.Label();
             this.lblCSS2 = new System.Windows.Forms.Label();
             this.lblCSS1 = new System.Windows.Forms.Label();
-            this.txtPlus = new System.Windows.Forms.TextBox();
             this.lblCurCharset = new System.Windows.Forms.Label();
+            this.txtPlus = new System.Windows.Forms.TextBox();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnClearCS = new System.Windows.Forms.Button();
             this.btnAutoSub = new System.Windows.Forms.Button();
@@ -179,6 +180,7 @@ namespace CryptoUtility
             this.btnAutoCharset = new System.Windows.Forms.Button();
             this.btnLoadCharset = new System.Windows.Forms.Button();
             this.btnOrder = new System.Windows.Forms.Button();
+            this.btnLoadFromClipboard = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnSaveCharset = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -287,6 +289,7 @@ namespace CryptoUtility
             this.chkRTL = new System.Windows.Forms.CheckBox();
             this.chkOutText = new System.Windows.Forms.CheckBox();
             this.chkALLEncodings = new System.Windows.Forms.CheckBox();
+            this.chkAllFactors = new System.Windows.Forms.CheckBox();
             this.chkMultiLine = new System.Windows.Forms.CheckBox();
             this.chkJommalWord = new System.Windows.Forms.CheckBox();
             this.chkSendToBuffer = new System.Windows.Forms.CheckBox();
@@ -352,7 +355,7 @@ namespace CryptoUtility
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.btn = new System.Windows.Forms.Button();
+            this.btnToRSA = new System.Windows.Forms.Button();
             this.btnSqrt = new System.Windows.Forms.Button();
             this.btnFactorizeQ = new System.Windows.Forms.Button();
             this.btnFactorizeP = new System.Windows.Forms.Button();
@@ -483,7 +486,7 @@ namespace CryptoUtility
             this.txtOut = new System.Windows.Forms.TextBox();
             this.tabWebBrowser = new System.Windows.Forms.TabPage();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
-            this.label57 = new System.Windows.Forms.Label();
+            this.lblProgress = new System.Windows.Forms.Label();
             this.tabCrypto.SuspendLayout();
             this.tabRSA.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -939,8 +942,8 @@ namespace CryptoUtility
             this.txtPrivateKey.Name = "txtPrivateKey";
             this.txtPrivateKey.Size = new System.Drawing.Size(560, 123);
             this.txtPrivateKey.TabIndex = 6;
-            this.txtPrivateKey.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtPrivateKey_DragDrop);
-            this.txtPrivateKey.DragOver += new System.Windows.Forms.DragEventHandler(this.txtPrivateKey_DragOver);
+            this.txtPrivateKey.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DragDrop);
+            this.txtPrivateKey.DragOver += new System.Windows.Forms.DragEventHandler(this.TextBox_DragOver);
             // 
             // txtPublicKey
             // 
@@ -950,8 +953,8 @@ namespace CryptoUtility
             this.txtPublicKey.Name = "txtPublicKey";
             this.txtPublicKey.Size = new System.Drawing.Size(560, 123);
             this.txtPublicKey.TabIndex = 5;
-            this.txtPublicKey.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtPublicKey_DragDrop);
-            this.txtPublicKey.DragOver += new System.Windows.Forms.DragEventHandler(this.txtPublicKey_DragOver);
+            this.txtPublicKey.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DragDrop);
+            this.txtPublicKey.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_DragOver);
             // 
             // tabRSA
             // 
@@ -1193,6 +1196,15 @@ namespace CryptoUtility
             this.btnUsePublicKey.Text = "Use";
             this.btnUsePublicKey.UseVisualStyleBackColor = true;
             this.btnUsePublicKey.Click += new System.EventHandler(this.btnUsePublicKey_Click);
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(23, 560);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(100, 19);
+            this.label57.TabIndex = 14;
+            this.label57.Text = "(Coefficient )";
             // 
             // label18
             // 
@@ -1586,7 +1598,6 @@ namespace CryptoUtility
             this.tabCharset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tabCharset.Controls.Add(this.panel6);
             this.tabCharset.Controls.Add(this.txtPlus);
-            this.tabCharset.Controls.Add(this.lblCurCharset);
             this.tabCharset.Controls.Add(this.btnReset);
             this.tabCharset.Controls.Add(this.btnClearCS);
             this.tabCharset.Controls.Add(this.btnAutoSub);
@@ -1594,6 +1605,7 @@ namespace CryptoUtility
             this.tabCharset.Controls.Add(this.btnAutoCharset);
             this.tabCharset.Controls.Add(this.btnLoadCharset);
             this.tabCharset.Controls.Add(this.btnOrder);
+            this.tabCharset.Controls.Add(this.btnLoadFromClipboard);
             this.tabCharset.Controls.Add(this.btnSave);
             this.tabCharset.Controls.Add(this.btnSaveCharset);
             this.tabCharset.Controls.Add(this.panel4);
@@ -1653,6 +1665,7 @@ namespace CryptoUtility
             this.panel6.Controls.Add(this.lblCSS3);
             this.panel6.Controls.Add(this.lblCSS2);
             this.panel6.Controls.Add(this.lblCSS1);
+            this.panel6.Controls.Add(this.lblCurCharset);
             this.panel6.Location = new System.Drawing.Point(52, 523);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1225, 93);
@@ -1664,7 +1677,7 @@ namespace CryptoUtility
             this.lblCSS44.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS44.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS44.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS44.Location = new System.Drawing.Point(309, 49);
+            this.lblCSS44.Location = new System.Drawing.Point(596, 49);
             this.lblCSS44.Name = "lblCSS44";
             this.lblCSS44.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS44.Size = new System.Drawing.Size(35, 40);
@@ -1677,7 +1690,7 @@ namespace CryptoUtility
             this.lblCSS43.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS43.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS43.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS43.Location = new System.Drawing.Point(350, 49);
+            this.lblCSS43.Location = new System.Drawing.Point(637, 49);
             this.lblCSS43.Name = "lblCSS43";
             this.lblCSS43.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS43.Size = new System.Drawing.Size(35, 40);
@@ -1690,7 +1703,7 @@ namespace CryptoUtility
             this.lblCSS42.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS42.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS42.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS42.Location = new System.Drawing.Point(391, 49);
+            this.lblCSS42.Location = new System.Drawing.Point(678, 49);
             this.lblCSS42.Name = "lblCSS42";
             this.lblCSS42.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS42.Size = new System.Drawing.Size(35, 40);
@@ -1703,7 +1716,7 @@ namespace CryptoUtility
             this.lblCSS41.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS41.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS41.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS41.Location = new System.Drawing.Point(432, 49);
+            this.lblCSS41.Location = new System.Drawing.Point(719, 49);
             this.lblCSS41.Name = "lblCSS41";
             this.lblCSS41.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS41.Size = new System.Drawing.Size(35, 40);
@@ -1716,7 +1729,7 @@ namespace CryptoUtility
             this.lblCSS40.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS40.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS40.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS40.Location = new System.Drawing.Point(473, 49);
+            this.lblCSS40.Location = new System.Drawing.Point(760, 49);
             this.lblCSS40.Name = "lblCSS40";
             this.lblCSS40.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS40.Size = new System.Drawing.Size(35, 40);
@@ -1729,7 +1742,7 @@ namespace CryptoUtility
             this.lblCSS39.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS39.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS39.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS39.Location = new System.Drawing.Point(514, 49);
+            this.lblCSS39.Location = new System.Drawing.Point(801, 49);
             this.lblCSS39.Name = "lblCSS39";
             this.lblCSS39.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS39.Size = new System.Drawing.Size(35, 40);
@@ -1742,7 +1755,7 @@ namespace CryptoUtility
             this.lblCSS38.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS38.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS38.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS38.Location = new System.Drawing.Point(555, 49);
+            this.lblCSS38.Location = new System.Drawing.Point(842, 49);
             this.lblCSS38.Name = "lblCSS38";
             this.lblCSS38.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS38.Size = new System.Drawing.Size(35, 40);
@@ -1755,7 +1768,7 @@ namespace CryptoUtility
             this.lblCSS37.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS37.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS37.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS37.Location = new System.Drawing.Point(596, 49);
+            this.lblCSS37.Location = new System.Drawing.Point(883, 49);
             this.lblCSS37.Name = "lblCSS37";
             this.lblCSS37.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS37.Size = new System.Drawing.Size(35, 40);
@@ -1768,7 +1781,7 @@ namespace CryptoUtility
             this.lblCSS36.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS36.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS36.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS36.Location = new System.Drawing.Point(637, 49);
+            this.lblCSS36.Location = new System.Drawing.Point(924, 49);
             this.lblCSS36.Name = "lblCSS36";
             this.lblCSS36.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS36.Size = new System.Drawing.Size(35, 40);
@@ -1781,7 +1794,7 @@ namespace CryptoUtility
             this.lblCSS35.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS35.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS35.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS35.Location = new System.Drawing.Point(678, 49);
+            this.lblCSS35.Location = new System.Drawing.Point(965, 49);
             this.lblCSS35.Name = "lblCSS35";
             this.lblCSS35.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS35.Size = new System.Drawing.Size(35, 40);
@@ -1794,7 +1807,7 @@ namespace CryptoUtility
             this.lblCSS34.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS34.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS34.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS34.Location = new System.Drawing.Point(719, 49);
+            this.lblCSS34.Location = new System.Drawing.Point(1006, 49);
             this.lblCSS34.Name = "lblCSS34";
             this.lblCSS34.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS34.Size = new System.Drawing.Size(35, 40);
@@ -1807,7 +1820,7 @@ namespace CryptoUtility
             this.lblCSS33.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS33.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS33.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS33.Location = new System.Drawing.Point(760, 49);
+            this.lblCSS33.Location = new System.Drawing.Point(1047, 49);
             this.lblCSS33.Name = "lblCSS33";
             this.lblCSS33.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS33.Size = new System.Drawing.Size(35, 40);
@@ -1820,7 +1833,7 @@ namespace CryptoUtility
             this.lblCSS32.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS32.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS32.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS32.Location = new System.Drawing.Point(801, 49);
+            this.lblCSS32.Location = new System.Drawing.Point(1088, 49);
             this.lblCSS32.Name = "lblCSS32";
             this.lblCSS32.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS32.Size = new System.Drawing.Size(35, 40);
@@ -1833,7 +1846,7 @@ namespace CryptoUtility
             this.lblCSS31.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS31.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS31.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS31.Location = new System.Drawing.Point(842, 49);
+            this.lblCSS31.Location = new System.Drawing.Point(1129, 49);
             this.lblCSS31.Name = "lblCSS31";
             this.lblCSS31.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS31.Size = new System.Drawing.Size(35, 40);
@@ -1846,7 +1859,7 @@ namespace CryptoUtility
             this.lblCSS30.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblCSS30.Font = new System.Drawing.Font("Calibri", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCSS30.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblCSS30.Location = new System.Drawing.Point(883, 49);
+            this.lblCSS30.Location = new System.Drawing.Point(1170, 49);
             this.lblCSS30.Name = "lblCSS30";
             this.lblCSS30.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblCSS30.Size = new System.Drawing.Size(35, 40);
@@ -2230,6 +2243,20 @@ namespace CryptoUtility
             this.lblCSS1.TabIndex = 102;
             this.lblCSS1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblCurCharset
+            // 
+            this.lblCurCharset.AllowDrop = true;
+            this.lblCurCharset.BackColor = System.Drawing.SystemColors.Info;
+            this.lblCurCharset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCurCharset.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurCharset.Location = new System.Drawing.Point(22, 51);
+            this.lblCurCharset.Name = "lblCurCharset";
+            this.lblCurCharset.Size = new System.Drawing.Size(568, 40);
+            this.lblCurCharset.TabIndex = 55;
+            this.lblCurCharset.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCurCharset.DragDrop += new System.Windows.Forms.DragEventHandler(this.lblCurCharset_DragDrop);
+            this.lblCurCharset.DragEnter += new System.Windows.Forms.DragEventHandler(this.lblCurCharset_DragEnter);
+            // 
             // txtPlus
             // 
             this.txtPlus.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2239,17 +2266,6 @@ namespace CryptoUtility
             this.txtPlus.TabIndex = 48;
             this.txtPlus.Text = "1";
             this.txtPlus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lblCurCharset
-            // 
-            this.lblCurCharset.BackColor = System.Drawing.SystemColors.Info;
-            this.lblCurCharset.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCurCharset.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCurCharset.Location = new System.Drawing.Point(835, 618);
-            this.lblCurCharset.Name = "lblCurCharset";
-            this.lblCurCharset.Size = new System.Drawing.Size(442, 40);
-            this.lblCurCharset.TabIndex = 55;
-            this.lblCurCharset.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnReset
             // 
@@ -2263,7 +2279,7 @@ namespace CryptoUtility
             // 
             // btnClearCS
             // 
-            this.btnClearCS.Location = new System.Drawing.Point(469, 619);
+            this.btnClearCS.Location = new System.Drawing.Point(841, 619);
             this.btnClearCS.Name = "btnClearCS";
             this.btnClearCS.Size = new System.Drawing.Size(90, 40);
             this.btnClearCS.TabIndex = 59;
@@ -2303,7 +2319,7 @@ namespace CryptoUtility
             // 
             // btnLoadCharset
             // 
-            this.btnLoadCharset.Location = new System.Drawing.Point(560, 619);
+            this.btnLoadCharset.Location = new System.Drawing.Point(1014, 619);
             this.btnLoadCharset.Name = "btnLoadCharset";
             this.btnLoadCharset.Size = new System.Drawing.Size(90, 40);
             this.btnLoadCharset.TabIndex = 50;
@@ -2321,9 +2337,19 @@ namespace CryptoUtility
             this.btnOrder.UseVisualStyleBackColor = true;
             this.btnOrder.Click += new System.EventHandler(this.btnOrder_Click);
             // 
+            // btnLoadFromClipboard
+            // 
+            this.btnLoadFromClipboard.Location = new System.Drawing.Point(928, 619);
+            this.btnLoadFromClipboard.Name = "btnLoadFromClipboard";
+            this.btnLoadFromClipboard.Size = new System.Drawing.Size(90, 40);
+            this.btnLoadFromClipboard.TabIndex = 51;
+            this.btnLoadFromClipboard.Text = "Clipboard";
+            this.btnLoadFromClipboard.UseVisualStyleBackColor = true;
+            this.btnLoadFromClipboard.Click += new System.EventHandler(this.btnLoadFromClipboard_Click);
+            // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(739, 619);
+            this.btnSave.Location = new System.Drawing.Point(1099, 619);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(90, 40);
             this.btnSave.TabIndex = 51;
@@ -2333,7 +2359,7 @@ namespace CryptoUtility
             // 
             // btnSaveCharset
             // 
-            this.btnSaveCharset.Location = new System.Drawing.Point(650, 619);
+            this.btnSaveCharset.Location = new System.Drawing.Point(1187, 619);
             this.btnSaveCharset.Name = "btnSaveCharset";
             this.btnSaveCharset.Size = new System.Drawing.Size(90, 40);
             this.btnSaveCharset.TabIndex = 51;
@@ -3603,6 +3629,7 @@ namespace CryptoUtility
             this.grpOptions.Controls.Add(this.chkRTL);
             this.grpOptions.Controls.Add(this.chkOutText);
             this.grpOptions.Controls.Add(this.chkALLEncodings);
+            this.grpOptions.Controls.Add(this.chkAllFactors);
             this.grpOptions.Controls.Add(this.chkMultiLine);
             this.grpOptions.Controls.Add(this.chkJommalWord);
             this.grpOptions.Controls.Add(this.chkSendToBuffer);
@@ -3657,6 +3684,19 @@ namespace CryptoUtility
             this.chkALLEncodings.Text = "List ALL Encodings";
             this.chkALLEncodings.UseVisualStyleBackColor = true;
             this.chkALLEncodings.CheckedChanged += new System.EventHandler(this.chkALLEncodings_CheckedChanged);
+            // 
+            // chkAllFactors
+            // 
+            this.chkAllFactors.AutoSize = true;
+            this.chkAllFactors.Cursor = System.Windows.Forms.Cursors.Default;
+            this.chkAllFactors.Location = new System.Drawing.Point(25, 180);
+            this.chkAllFactors.Margin = new System.Windows.Forms.Padding(4);
+            this.chkAllFactors.Name = "chkAllFactors";
+            this.chkAllFactors.Size = new System.Drawing.Size(138, 23);
+            this.chkAllFactors.TabIndex = 8;
+            this.chkAllFactors.Text = "List All Factors";
+            this.chkAllFactors.UseVisualStyleBackColor = true;
+            this.chkAllFactors.CheckedChanged += new System.EventHandler(this.chkMultiLine_CheckedChanged);
             // 
             // chkMultiLine
             // 
@@ -4025,7 +4065,7 @@ namespace CryptoUtility
             this.tabCalculator.Controls.Add(this.button5);
             this.tabCalculator.Controls.Add(this.button4);
             this.tabCalculator.Controls.Add(this.button2);
-            this.tabCalculator.Controls.Add(this.btn);
+            this.tabCalculator.Controls.Add(this.btnToRSA);
             this.tabCalculator.Controls.Add(this.btnSqrt);
             this.tabCalculator.Controls.Add(this.btnFactorizeQ);
             this.tabCalculator.Controls.Add(this.btnFactorizeP);
@@ -4442,13 +4482,15 @@ namespace CryptoUtility
             this.button2.TabIndex = 39;
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // btn
+            // btnToRSA
             // 
-            this.btn.Location = new System.Drawing.Point(727, 617);
-            this.btn.Name = "btn";
-            this.btn.Size = new System.Drawing.Size(110, 40);
-            this.btn.TabIndex = 38;
-            this.btn.UseVisualStyleBackColor = true;
+            this.btnToRSA.Location = new System.Drawing.Point(727, 617);
+            this.btnToRSA.Name = "btnToRSA";
+            this.btnToRSA.Size = new System.Drawing.Size(110, 40);
+            this.btnToRSA.TabIndex = 38;
+            this.btnToRSA.Text = "RSA";
+            this.btnToRSA.UseVisualStyleBackColor = true;
+            this.btnToRSA.Click += new System.EventHandler(this.btnToRSA_Click);
             // 
             // btnSqrt
             // 
@@ -4588,6 +4630,7 @@ namespace CryptoUtility
             // 
             // txtResultR
             // 
+            this.txtResultR.AllowDrop = true;
             this.txtResultR.BackColor = System.Drawing.SystemColors.MenuText;
             this.txtResultR.ForeColor = System.Drawing.SystemColors.Window;
             this.txtResultR.Location = new System.Drawing.Point(143, 404);
@@ -4596,7 +4639,11 @@ namespace CryptoUtility
             this.txtResultR.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtResultR.Size = new System.Drawing.Size(1158, 121);
             this.txtResultR.TabIndex = 12;
+            this.txtResultR.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DragDrop);
+            this.txtResultR.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_DragEnter);
+            this.txtResultR.DragOver += new System.Windows.Forms.DragEventHandler(this.TextBox_DragOver);
             this.txtResultR.DoubleClick += new System.EventHandler(this.txtResultR_DoubleClick);
+            this.txtResultR.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextBox_MouseDown);
             // 
             // txtModulN
             // 
@@ -4610,9 +4657,11 @@ namespace CryptoUtility
             this.txtModulN.Size = new System.Drawing.Size(1158, 121);
             this.txtModulN.TabIndex = 11;
             this.txtModulN.TextChanged += new System.EventHandler(this.txtModulN_TextChanged);
-            this.txtModulN.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtModulN_DragDrop);
-            this.txtModulN.DragOver += new System.Windows.Forms.DragEventHandler(this.txtModulN_DragOver);
+            this.txtModulN.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DragDrop);
+            this.txtModulN.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_DragEnter);
+            this.txtModulN.DragOver += new System.Windows.Forms.DragEventHandler(this.TextBox_DragOver);
             this.txtModulN.DoubleClick += new System.EventHandler(this.txtModulN_DoubleClick);
+            this.txtModulN.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextBox_MouseDown);
             // 
             // txtPrimeQ
             // 
@@ -4625,9 +4674,11 @@ namespace CryptoUtility
             this.txtPrimeQ.Size = new System.Drawing.Size(757, 121);
             this.txtPrimeQ.TabIndex = 1;
             this.txtPrimeQ.TextChanged += new System.EventHandler(this.txtPrimeQ_TextChanged);
-            this.txtPrimeQ.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtPrimeQ_DragDrop);
-            this.txtPrimeQ.DragOver += new System.Windows.Forms.DragEventHandler(this.txtPrimeQ_DragOver);
+            this.txtPrimeQ.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DragDrop);
+            this.txtPrimeQ.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_DragEnter);
+            this.txtPrimeQ.DragOver += new System.Windows.Forms.DragEventHandler(this.TextBox_DragOver);
             this.txtPrimeQ.DoubleClick += new System.EventHandler(this.txtPrimeQ_DoubleClick);
+            this.txtPrimeQ.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextBox_MouseDown);
             // 
             // txtPrimeP
             // 
@@ -4640,9 +4691,11 @@ namespace CryptoUtility
             this.txtPrimeP.Size = new System.Drawing.Size(757, 121);
             this.txtPrimeP.TabIndex = 0;
             this.txtPrimeP.TextChanged += new System.EventHandler(this.txtPrimeP_TextChanged);
-            this.txtPrimeP.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtPrimeP_DragDrop);
-            this.txtPrimeP.DragOver += new System.Windows.Forms.DragEventHandler(this.txtPrimeP_DragOver);
+            this.txtPrimeP.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DragDrop);
+            this.txtPrimeP.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_DragEnter);
+            this.txtPrimeP.DragOver += new System.Windows.Forms.DragEventHandler(this.TextBox_DragOver);
             this.txtPrimeP.DoubleClick += new System.EventHandler(this.txtPrimeP_DoubleClick);
+            this.txtPrimeP.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TextBox_MouseDown);
             // 
             // tabDSA
             // 
@@ -5843,7 +5896,7 @@ namespace CryptoUtility
             this.lblStatus.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblStatus.Location = new System.Drawing.Point(1377, 892);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(561, 32);
+            this.lblStatus.Size = new System.Drawing.Size(465, 32);
             this.lblStatus.TabIndex = 8;
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -5905,6 +5958,7 @@ namespace CryptoUtility
             this.txtOut.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtOut.Size = new System.Drawing.Size(1329, 158);
             this.txtOut.TabIndex = 0;
+            this.txtOut.DoubleClick += new System.EventHandler(this.txtOut_DoubleClick);
             // 
             // tabWebBrowser
             // 
@@ -5916,7 +5970,6 @@ namespace CryptoUtility
             this.tabWebBrowser.TabIndex = 2;
             this.tabWebBrowser.Text = "WebBrowser";
             this.tabWebBrowser.UseVisualStyleBackColor = true;
-            this.tabWebBrowser.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
             // webBrowser
             // 
@@ -5927,14 +5980,15 @@ namespace CryptoUtility
             this.webBrowser.Size = new System.Drawing.Size(1327, 158);
             this.webBrowser.TabIndex = 0;
             // 
-            // label57
+            // lblProgress
             // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(23, 560);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(100, 19);
-            this.label57.TabIndex = 14;
-            this.label57.Text = "(Coefficient )";
+            this.lblProgress.BackColor = System.Drawing.Color.FloralWhite;
+            this.lblProgress.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblProgress.Location = new System.Drawing.Point(1848, 892);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(90, 32);
+            this.lblProgress.TabIndex = 8;
+            this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmMain
             // 
@@ -5943,6 +5997,7 @@ namespace CryptoUtility
             this.ClientSize = new System.Drawing.Size(1959, 932);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.btnStackTrace);
+            this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.label34);
             this.Controls.Add(this.txtInfo);
@@ -6303,7 +6358,6 @@ namespace CryptoUtility
         private System.Windows.Forms.RadioButton rb64b;
         private System.Windows.Forms.RadioButton rb16;
         private System.Windows.Forms.RadioButton rb10;
-        private System.Windows.Forms.Label lblCurCharset;
         private System.Windows.Forms.CheckBox chkALLEncodings;
         private System.Windows.Forms.Button btnFactorizeQ;
         private System.Windows.Forms.Button btnFactorDbQ;
@@ -6368,7 +6422,7 @@ namespace CryptoUtility
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btn;
+        private System.Windows.Forms.Button btnToRSA;
         private System.Windows.Forms.TabPage tabHexViewer;
         private System.Windows.Forms.Button btnClearHex;
         private System.Windows.Forms.Button btnOpenHexFile;
@@ -6476,6 +6530,10 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnCalcD;
         private System.Windows.Forms.Button btnRSAtoCALC;
         private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label lblCurCharset;
+        private System.Windows.Forms.Button btnLoadFromClipboard;
+        private System.Windows.Forms.CheckBox chkAllFactors;
+        private System.Windows.Forms.Label lblProgress;
     }
 }
 

@@ -164,7 +164,7 @@ namespace CryptoUtility
                 result.AppendFormat("{0:X2}", binary[i]);
             }
             string s = result.ToString();
-            while (s.Length > 1 && s[0] == '0') s = s.Substring(1);
+            while (s.Length > 1 && s[0] == '0') s = s.Substring(1);if (s.Length == 1) s = "0" + s;
             return s;
         }
         public static byte[] HexStringToBinary(String s)
