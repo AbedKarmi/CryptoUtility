@@ -15,7 +15,6 @@ D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\NAudio.WinForms.
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\NAudio.WinMM.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\System.Security.AccessControl.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\System.Security.Principal.Windows.dll
-D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\ILNumerics.xml
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\Microsoft.Win32.Registry.xml
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\NAudio.xml
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\System.Security.AccessControl.xml
@@ -24,4 +23,3 @@ D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzer
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.csproj.CopyComplete
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.pdb
-D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.csprojAssemblyReference.cache

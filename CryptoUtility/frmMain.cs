@@ -1398,20 +1398,29 @@ Red    : Diacritics";
             return factorData;
         }
 
-        private FactorData FactorDB(string prime, WebMethod methodIndex)
+        private  FactorData FactorDB(string prime, WebMethod methodIndex)
         {
             string data = "";
             string url = factorDbURL + prime;
             string userAgent = "CryptoUtility";
+            const int timeOut = 50; // 5 seconds
+
             FactorData factorData;
             
             switch ((int) methodIndex)
             {
-                case 0: _ = MyWeb.HTTPReadPageAsync(url, userAgent, result => data = result); break;
+                case 0: _ =  MyWeb.HTTPReadPageAsync(url, userAgent, result => data = result);
+                        int i = 0;
+                        while (data.Equals("") && i<timeOut)
+                        { 
+                            Thread.Sleep(100);Application.DoEvents(); i++;
+                        }
+                        break;
                 case 1: data = MyWeb.WebClientReadPage(url, userAgent); break;
                 case 2: data = MyWeb.WebRequestReadPage(url, userAgent); break;
                 case 3: Process.Start(url); break;
             }
+            
             File.WriteAllText(htmlFile, data);
             factorData = ExtractFactorData(data);
             factorData.number = prime;
