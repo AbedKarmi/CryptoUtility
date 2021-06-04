@@ -222,5 +222,28 @@ namespace CryptoUtility
             }
             return dt;
         }
+
+        public DataTable GetSorasTable(IList<int> soras)
+        {
+            DataTable dt = new DataTable();
+
+            string list = "";
+            foreach (var s in soras) { list += (s + 1).ToString() + ","; };
+            list = list.Substring(0, list.Length - 1);
+
+            //In following sample 'szFilePath' is the variable for filePath
+            //szConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source = '" + startupPath +\\Quran.XLS"';Extended Properties=\"Excel 8.0;HDR=YES;\"";
+            // if the File extension is .XLSX using below connection string
+            string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source='" + startupPath + "\\Quran.xlsx';Extended Properties='Excel 12.0;HDR=YES;'";
+            string queryString = "SELECT * FROM [Quran$] WHERE [Sora] in (" + list +")";
+
+            using (OleDbConnection connection = new(connectionString))
+            using (OleDbCommand command = new(queryString, connection))
+            using (OleDbDataAdapter da = new(command))
+            {
+                da.Fill(dt);
+            }
+            return dt;
+        }
     }
 }

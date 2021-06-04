@@ -1091,8 +1091,26 @@ Red    : Diacritics";
             }
         }
 
-     
-       private void btnSaveKeys_Click(object sender, EventArgs e)
+        private void HashAll()
+        {
+            foreach (var h in cmbHash.Items)
+            {
+                string hashText = cmbHash.GetItemText(h);
+                byte[] hash = MyClass.GetHash(GetData(), hashText);
+                OutputMsg(string.Format("{0,-6} -> {1}", hashText, MyClass.BinaryToHexString(hash)));
+            }
+        }
+        private void btnHashAll_Click(object sender, EventArgs e)
+        {
+            HashAll();
+        }
+
+        private void txtData_TextChanged(object sender, EventArgs e)
+        {
+            rbTextBox.Checked = true;
+        }
+
+        private void btnSaveKeys_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1141,6 +1159,9 @@ Red    : Diacritics";
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearControls(this);
+            LoadCharset(lblCurCharset.Text);
+            lbSoras.SelectedIndex = -1;
+            lbSoras.SelectedIndex = 0;
         }
 
         private void btnHash_Click(object sender, EventArgs e)
@@ -1151,16 +1172,19 @@ Red    : Diacritics";
 
       private byte[] GetData()
         {
-            byte[] data;
-            
-            if (rbFileBuffer.Checked) return fileBuffer;
-
-            switch (cmbData.SelectedIndex)
+            var data=new byte[] { };
+            try
             {
-                case 0: data = Convert.FromBase64String(txtData.Text); break;
-                case 2: data = MyClass.HexStringToBinary(txtData.Text); break;
-                default: data = Encoding.ASCII.GetBytes(txtData.Text); break;
+                if (rbFileBuffer.Checked) return fileBuffer;
+
+                switch (cmbData.SelectedIndex)
+                {
+                    case 0: data = Convert.FromBase64String(txtData.Text); break;
+                    case 2: data = MyClass.HexStringToBinary(txtData.Text); break;
+                    default: data = Encoding.ASCII.GetBytes(txtData.Text); break;
+                }
             }
+            catch (Exception ex) { LogMsg(ex); }
             return data;
         }
 
@@ -2050,7 +2074,21 @@ Red    : Diacritics";
             
         }
 
-    
+        private void btnCLR_Click(object sender, EventArgs e)
+        {
+            if (tabControl2.SelectedTab == tabLog)
+                lstLog.Items.Clear();
+            else if (tabControl2.SelectedTab == tabOutput)
+                txtOut.Text = "";
+            else webBrowser.GoHome();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            rtxtData.Text = lbSoras.Text.Substring(6);
+            tabControl1.SelectedTab = tabEncoding;
+        }
+
         private void btnToHex_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(rtxtData.Text))
@@ -2232,7 +2270,14 @@ Red    : Diacritics";
                             }
 
                             iSuccess++;
-                            if (chkSendToBuffer.Checked) { rbFileBuffer.Checked = true; fileBuffer = File.ReadAllBytes(sFile); }
+                            OutputMsg("[" + cmbDestEnc.Text + "]");
+                            if (chkSendToBuffer.Checked) 
+                            {
+                                    rbFileBuffer.Checked = true; 
+                                    fileBuffer = File.ReadAllBytes(sFile);
+                                    LogMsg("Buffered");
+                                    HashAll();
+                            }
                             encoding = cmbDestEnc.Text;
                         }
                         else
@@ -2265,7 +2310,9 @@ Red    : Diacritics";
                             sOut = Converter.ConvertText(str, sourceCP, destCP, specialType, chkMeta.Checked, chkDiscardChars.Checked, chkDiacritics.Checked, chkzStrings.Checked);
                             if (Jommal) sOut = toJommal(sOut);
                             MyClass.AppendAllBytes(sFile, sOut);
-                            txtInfo.Text=(chkHexText.Checked ? MyClass.BinaryToHexString(sOut) : Converter.ReadAllText(str, destCP)) + Environment.NewLine;
+                            string sText=(chkHexText.Checked ? MyClass.BinaryToHexString(sOut) : Converter.ReadAllText(str, destCP)) + Environment.NewLine;
+                            OutputMsg(sText);
+                            if (sText.Length <= 4096 || !chkHexText.Checked) txtInfo.Text = sText;
                         }
                     }
                     else
@@ -2279,9 +2326,22 @@ Red    : Diacritics";
 
                     sOut = File.ReadAllBytes(sFile);
 
+                    if (!chkMultiLine.Checked)
+                    {
+                        string sText = (chkHexText.Checked ? MyClass.BinaryToHexString(sOut) : Converter.ReadAllText(sFile, destCP));
+                        OutputMsg(sText);
+                        if (sText.Length <= 4096 || !chkHexText.Checked) txtInfo.Text = sText;
+                    }
+                    OutputMsg("[" + cmbDestEnc.Text + "]");
+
                     LogMsg("Written to " + sFile);
-                    if (chkSendToBuffer.Checked) { rbFileBuffer.Checked = true; fileBuffer = sOut; }
-                    if (!chkMultiLine.Checked) txtInfo.Text=(chkHexText.Checked ? MyClass.BinaryToHexString(sOut) : Converter.ReadAllText(sFile, destCP));
+                    if (chkSendToBuffer.Checked)
+                    {
+                        rbFileBuffer.Checked = true;
+                        fileBuffer = sOut;
+                        LogMsg("Buffered");
+                        HashAll();
+                    }
                     lblStatus.Text = sOut.Length.ToString();
                     encoding = cmbDestEnc.Text;
                 }
@@ -2552,8 +2612,20 @@ Red    : Diacritics";
  
 		private void btnSendToEncoding_Click(object sender, EventArgs e)
         {
+            this.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            btnSendToEncoding.Enabled = false;
             
-            rtxtData.Text = txtQuranText.Text;
+            string text = ReadSoras(lbSoras.SelectedIndices.Cast<int>().ToList());
+/*
+ *          string text = "";
+            foreach (int sora in lbSoras.SelectedIndices)
+            {
+                text += ReadSora(sora+1);
+            }
+*/
+            rtxtData.Text = text;
+            txtQuranText.Text = ReadSora(lbSoras.SelectedIndices[0]+1);
+
             tabControl1.SelectedTab = tabEncoding;
             cmbSourceEnc.SelectedIndex = 0;
             int i = 0; bool found = false;
@@ -2563,37 +2635,53 @@ Red    : Diacritics";
             }
             if (found) cmbSourceEnc.SelectedIndex = i;
 
-            string s = lblCurCharset.Text.Substring(0, lblCurCharset.Text.IndexOf("."));
-
+            //string s = lblCurCharset.Text.Substring(0, lblCurCharset.Text.IndexOf("."));
+            string s = "Abjadi";
+            if (rbDiacritics.Checked) s = "Common";
             if (rbFirstOriginal.Checked || rbFirstOriginalDots.Checked) s="Hijaei";
             if (rbNoDiacritics.Checked) s="Hijaei-Hamza";
 
             //if (!SelectEncoding("["+s+"]")) 
-                SelectEncoding("[Common]");
-            sentSora = lbSoras.Text;
+            SelectEncoding("["+s+"]");
+
+            sentSora =string.Join(",",lbSoras.SelectedItems.Cast<string>().ToList());
+            OutputMsg("Sent:"+sentSora);
             chkRTL.Checked = true;
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            btnSendToEncoding.Enabled = true;
         }
 
+        private DataTable SoraTable(int SoraNo)
+        {
+            return quran.GetSoraTable(SoraNo - 1);
+        }
+        private string ReadSora(int SoraNo)
+        {
+            return ReadSora(SoraTable(SoraNo));
+        }
+        private string ReadSoras(IList<int> soras)
+        {
+            return ReadSora(quran.GetSorasTable(soras));
+        }
+        private string ReadSora(DataTable sora)
+        {
+            int n = quran.CurQuranTextIndex();
+            string text = "";
+            foreach (DataRow row in sora.Rows)
+            {
+
+                text += row[n].ToString() + Environment.NewLine;
+            }
+            return text;
+        }
         private void SelectSora()
         {
-
-            DataTable sora = quran.GetSoraTable(lbSoras.SelectedIndex);
-            txtQuranText.Text = "";
+            var sora = SoraTable(lbSoras.SelectedIndex + 1);
             dgvQuran.Columns.Clear();
             dgvQuran.DataSource = sora;
             dgvQuran.Refresh();
-            string s = "";
-            int n = quran.CurQuranTextIndex();
-           // foreach (DataColumn col in sora.Columns)
-           //     Console.WriteLine(col.ColumnName);
-            foreach (DataRow row in sora.Rows)
-            {
-                
-                s += row[n].ToString() + Environment.NewLine;
-            }
-            txtQuranText.Text = s;
-            s=s.Replace(" ", "").Replace("\r","").Replace("\n","");
-            lblStatus.Text = s.Length.ToString();
+            txtQuranText.Text = ReadSora(sora);
+            lblStatus.Text = txtQuranText.Text.Replace(" ", "").Replace("\r", "").Replace("\n", "").Length.ToString();
         }
 
         private void lbSoras_SelectedIndexChanged(object sender, EventArgs e)
@@ -4052,10 +4140,7 @@ Red    : Diacritics";
             DrawColors();
         }
 
-        private void txtInfo_TextChanged(object sender, EventArgs e)
-        {
 
-        }
         private void lblColorPointSize_TextChanged(object sender, EventArgs e)
         {
             AppSettings.WriteValue("Settings", "ColorScale", lblColorPointSize.Text);

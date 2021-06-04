@@ -32,6 +32,7 @@ namespace CryptoUtility
         public List<Aya> GetSora(int index);
         public List<string> GetSoraText(int index);
         public DataTable GetSoraTable(int index);
+        public DataTable GetSorasTable(IList<int> soras);
         public bool OpenQuran();
         public bool CloseQuran();
 

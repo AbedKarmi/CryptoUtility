@@ -147,6 +147,22 @@ namespace CryptoUtility
             return dt;
         }
 
+        public DataTable GetSorasTable(IList<int> soras)
+        {
+            DataTable dt = new DataTable();
+            
+            string list = "";
+            foreach (var s in soras) { list +=(s+1).ToString() + ","; };
+            list = list.Substring(0, list.Length - 1);
+
+            string queryString = "SELECT * FROM [Quran] WHERE [Sora] in (" +list+")";
+            using (OleDbCommand command = new OleDbCommand(queryString, connection))
+            using (OleDbDataAdapter da = new OleDbDataAdapter(command))
+            {
+                da.Fill(dt);
+            }
+            return dt;
+        }
         public List<string> GetSoraText(int index)
         {
             List<string> sora = new();

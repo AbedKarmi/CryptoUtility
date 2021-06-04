@@ -23,3 +23,4 @@ D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzer
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.csproj.CopyComplete
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.pdb
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.csproj.AssemblyReference.cache

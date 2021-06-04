@@ -53,7 +53,7 @@ namespace CryptoUtility
             this.btnVerify = new System.Windows.Forms.Button();
             this.btnDecrypt = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnHashAll = new System.Windows.Forms.Button();
             this.btnSendToHex = new System.Windows.Forms.Button();
             this.btnEncrypt = new System.Windows.Forms.Button();
             this.btnSign = new System.Windows.Forms.Button();
@@ -487,6 +487,8 @@ namespace CryptoUtility
             this.tabWebBrowser = new System.Windows.Forms.TabPage();
             this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.lblProgress = new System.Windows.Forms.Label();
+            this.btnCLR = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabCrypto.SuspendLayout();
             this.tabRSA.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -556,7 +558,7 @@ namespace CryptoUtility
             this.tabCrypto.Controls.Add(this.btnVerify);
             this.tabCrypto.Controls.Add(this.btnDecrypt);
             this.tabCrypto.Controls.Add(this.button6);
-            this.tabCrypto.Controls.Add(this.button3);
+            this.tabCrypto.Controls.Add(this.btnHashAll);
             this.tabCrypto.Controls.Add(this.btnSendToHex);
             this.tabCrypto.Controls.Add(this.btnEncrypt);
             this.tabCrypto.Controls.Add(this.btnSign);
@@ -828,13 +830,15 @@ namespace CryptoUtility
             this.button6.TabIndex = 21;
             this.button6.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnHashAll
             // 
-            this.button3.Location = new System.Drawing.Point(325, 604);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(155, 50);
-            this.button3.TabIndex = 20;
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnHashAll.Location = new System.Drawing.Point(325, 604);
+            this.btnHashAll.Name = "btnHashAll";
+            this.btnHashAll.Size = new System.Drawing.Size(155, 50);
+            this.btnHashAll.TabIndex = 20;
+            this.btnHashAll.Text = "Hash (ALL)";
+            this.btnHashAll.UseVisualStyleBackColor = true;
+            this.btnHashAll.Click += new System.EventHandler(this.btnHashAll_Click);
             // 
             // btnSendToHex
             // 
@@ -934,6 +938,7 @@ namespace CryptoUtility
             this.txtData.Name = "txtData";
             this.txtData.Size = new System.Drawing.Size(1136, 123);
             this.txtData.TabIndex = 7;
+            this.txtData.TextChanged += new System.EventHandler(this.txtData_TextChanged);
             // 
             // txtPrivateKey
             // 
@@ -1350,6 +1355,7 @@ namespace CryptoUtility
             this.tabQuran.Controls.Add(this.btnPlus);
             this.tabQuran.Controls.Add(this.lbSoras);
             this.tabQuran.Controls.Add(this.btnSearch);
+            this.tabQuran.Controls.Add(this.button1);
             this.tabQuran.Controls.Add(this.btnSendToEncoding);
             this.tabQuran.Controls.Add(this.txtQuranText);
             this.tabQuran.Controls.Add(this.label38);
@@ -1425,7 +1431,7 @@ namespace CryptoUtility
             this.txtSearch.Location = new System.Drawing.Point(217, 615);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.txtSearch.Size = new System.Drawing.Size(611, 34);
+            this.txtSearch.Size = new System.Drawing.Size(588, 34);
             this.txtSearch.TabIndex = 10;
             this.txtSearch.Enter += new System.EventHandler(this.txtSearch_Enter);
             this.txtSearch.Leave += new System.EventHandler(this.txtSearch_Leave);
@@ -1536,13 +1542,14 @@ namespace CryptoUtility
             this.lbSoras.Location = new System.Drawing.Point(1095, 50);
             this.lbSoras.Name = "lbSoras";
             this.lbSoras.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lbSoras.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbSoras.Size = new System.Drawing.Size(209, 555);
             this.lbSoras.TabIndex = 6;
             this.lbSoras.SelectedIndexChanged += new System.EventHandler(this.lbSoras_SelectedIndexChanged);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(834, 615);
+            this.btnSearch.Location = new System.Drawing.Point(796, 615);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(83, 34);
             this.btnSearch.TabIndex = 11;
@@ -1552,11 +1559,11 @@ namespace CryptoUtility
             // 
             // btnSendToEncoding
             // 
-            this.btnSendToEncoding.Location = new System.Drawing.Point(923, 615);
+            this.btnSendToEncoding.Location = new System.Drawing.Point(989, 615);
             this.btnSendToEncoding.Name = "btnSendToEncoding";
-            this.btnSendToEncoding.Size = new System.Drawing.Size(169, 34);
+            this.btnSendToEncoding.Size = new System.Drawing.Size(103, 34);
             this.btnSendToEncoding.TabIndex = 12;
-            this.btnSendToEncoding.Text = "Send to Encoding";
+            this.btnSendToEncoding.Text = "Send Text";
             this.btnSendToEncoding.UseVisualStyleBackColor = true;
             this.btnSendToEncoding.Click += new System.EventHandler(this.btnSendToEncoding_Click);
             // 
@@ -5875,7 +5882,6 @@ namespace CryptoUtility
             this.txtInfo.ReadOnly = true;
             this.txtInfo.Size = new System.Drawing.Size(561, 830);
             this.txtInfo.TabIndex = 1;
-            this.txtInfo.TextChanged += new System.EventHandler(this.txtInfo_TextChanged);
             this.txtInfo.DoubleClick += new System.EventHandler(this.txtInfo_DoubleClick);
             // 
             // label34
@@ -5907,7 +5913,7 @@ namespace CryptoUtility
             this.btnStackTrace.ForeColor = System.Drawing.Color.Black;
             this.btnStackTrace.Location = new System.Drawing.Point(1356, 732);
             this.btnStackTrace.Name = "btnStackTrace";
-            this.btnStackTrace.Size = new System.Drawing.Size(18, 164);
+            this.btnStackTrace.Size = new System.Drawing.Size(18, 108);
             this.btnStackTrace.TabIndex = 9;
             this.btnStackTrace.Text = "STACK";
             this.btnStackTrace.UseVisualStyleBackColor = false;
@@ -5990,18 +5996,43 @@ namespace CryptoUtility
             this.lblProgress.TabIndex = 8;
             this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnCLR
+            // 
+            this.btnCLR.BackColor = System.Drawing.Color.Silver;
+            this.btnCLR.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnCLR.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCLR.ForeColor = System.Drawing.Color.Black;
+            this.btnCLR.Location = new System.Drawing.Point(1357, 835);
+            this.btnCLR.Name = "btnCLR";
+            this.btnCLR.Size = new System.Drawing.Size(18, 61);
+            this.btnCLR.TabIndex = 9;
+            this.btnCLR.Text = "CLR";
+            this.btnCLR.UseVisualStyleBackColor = false;
+            this.btnCLR.Click += new System.EventHandler(this.btnCLR_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(885, 615);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(106, 34);
+            this.button1.TabIndex = 12;
+            this.button1.Text = "Send Name";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1959, 932);
-            this.Controls.Add(this.tabControl2);
+            this.Controls.Add(this.btnCLR);
             this.Controls.Add(this.btnStackTrace);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.label34);
             this.Controls.Add(this.txtInfo);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabControl2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -6445,7 +6476,7 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnSCalc;
         private System.Windows.Forms.Button btnSendToHex;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnHashAll;
         private System.Windows.Forms.TabPage tabTexture;
         private System.Windows.Forms.PictureBox picQuran1;
         private System.Windows.Forms.Button btnSImage;
@@ -6534,6 +6565,8 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnLoadFromClipboard;
         private System.Windows.Forms.CheckBox chkAllFactors;
         private System.Windows.Forms.Label lblProgress;
+        private System.Windows.Forms.Button btnCLR;
+        private System.Windows.Forms.Button button1;
     }
 }
 
