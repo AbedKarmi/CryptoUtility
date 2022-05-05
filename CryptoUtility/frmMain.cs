@@ -172,9 +172,9 @@ public partial class FrmMain : Form
     //private readonly BarcodeReader barcodeReader;
     //        MemoryStream audioFile;
     private bool pressed;
-    private readonly string quranBin = Application.StartupPath + "\\Quran.bin";
-    private readonly string quranWav = Application.StartupPath + "\\Quran.wav";
-    private readonly string htmlFile = Application.StartupPath + "\\Quran.html";
+    private readonly string quranBin = Application.StartupPath + "Quran.bin";
+    private readonly string quranWav = Application.StartupPath + "Quran.wav";
+    private readonly string htmlFile = Application.StartupPath + "Quran.html";
 
     private enum RenderType
     {
@@ -306,7 +306,7 @@ public partial class FrmMain : Form
         this.stackTrace = stackTrace;
         var index = stackTrace.LastIndexOf("\\") + 1;
         stackTrace = stackTrace[index..].Replace("\"", "");
-        LogMsg(ex.Message + " @ " + stackTrace, threadID);
+        LogMsg("Error:"+ex.Message + " @ " + stackTrace, threadID);
     }
 
     private enum ShellOptions : short
@@ -330,18 +330,18 @@ public partial class FrmMain : Form
         MessageBox.Show("Installing required font (" + fontFile + ")");
 
         needRestart = true;
-        File.WriteAllBytes(Application.StartupPath + "\\" + fontFile,  MyClass.ResourceReadAllBytes("Fonts\\" + fontFile));
+        File.WriteAllBytes(Application.StartupPath + fontFile,  MyClass.ResourceReadAllBytes("Fonts\\" + fontFile));
 
-        MyClass.RegisterFont(Application.StartupPath + "\\" + fontFile);
+        MyClass.RegisterFont(Application.StartupPath  + fontFile);
 /*
         Shell shell = new();
         var fontFolder = shell.NameSpace(0x14); // 0x14:  Destination FonFolder
         // Window Copy File From CopyHere.(Source) to .NameSpace(Destination)
-        fontFolder.CopyHere(Application.StartupPath + "\\" + fontFile,
+        fontFolder.CopyHere(Application.StartupPath +  fontFile,
                             ShellOptions.Do_not_display_a_progress_dialog_box |
                             ShellOptions.Click_Yes_to_All_in_any_dialog_box_displayed);
 */
-        File.Delete(Application.StartupPath + "\\" + fontFile);
+        File.Delete(Application.StartupPath + fontFile);
     }
 
     private void CheckQuranFont()
@@ -552,7 +552,7 @@ public partial class FrmMain : Form
             if (File.Exists(resourceName))
                 return;
 
-            var file = Application.StartupPath + "\\" + resourceName;
+            var file = Application.StartupPath +  resourceName;
             var dir = Path.GetDirectoryName(file);
             if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
 
@@ -566,7 +566,7 @@ public partial class FrmMain : Form
                     File.WriteAllBytes(file, assemblyData);
                 }
             else
-                File.Copy(Application.StartupPath + "\\Lib\\" + resourceName, file);
+                File.Copy(Application.StartupPath + "Lib\\" + resourceName, file);
         }
         catch (Exception ex)
         {
@@ -592,8 +592,8 @@ public partial class FrmMain : Form
                         return Assembly.Load(assemblyData);
                     }
 
-                if (File.Exists(Application.StartupPath + "\\LIB\\" + resourceName))
-                    return Assembly.LoadFrom(Application.StartupPath + "\\LIB\\" + resourceName);
+                if (File.Exists(Application.StartupPath + "LIB\\" + resourceName))
+                    return Assembly.LoadFrom(Application.StartupPath + "LIB\\" + resourceName);
             }
             catch (Exception)
             {
@@ -656,8 +656,8 @@ public partial class FrmMain : Form
 
     private void TxtOut_DoubleClick(object sender, EventArgs e)
     {
-        File.WriteAllText(Application.StartupPath + "\\tmp.txt", txtOut.Text);
-        Process.Start(Application.StartupPath + "\\tmp.txt");
+        File.WriteAllText(Application.StartupPath + "tmp.txt", txtOut.Text);
+        Process.Start(Application.StartupPath + "tmp.txt");
     }
 
     public FrmMain()
@@ -951,7 +951,7 @@ Hex, Texture, Audio, Light & Color representations are implemented for testing o
             }
             else if (tabControl1.SelectedTab == tabCharset)
             {
-                LoadCharset(Application.StartupPath + "\\" + lblCurCharset.Text);
+                LoadCharset(Application.StartupPath + lblCurCharset.Text);
                 txtInfo.Text = @"Arabic Charsets
 
 Define the byte conversion of Arabic alphbet, this will be used in the encode/decode process.
@@ -1354,9 +1354,9 @@ Red    : Diacritics";
     {
         try
         {
-            File.WriteAllText(Application.StartupPath + "\\PublicKey." + cmbCryptoAlgorithm.Text + ".pem",
+            File.WriteAllText(Application.StartupPath + "PublicKey." + cmbCryptoAlgorithm.Text + ".pem",
                 txtPublicKey.Text);
-            File.WriteAllText(Application.StartupPath + "\\PrivateKey." + cmbCryptoAlgorithm.Text + ".pem",
+            File.WriteAllText(Application.StartupPath + "PrivateKey." + cmbCryptoAlgorithm.Text + ".pem",
                 txtPrivateKey.Text);
             LogMsg("Keys Saved");
         }
@@ -1371,9 +1371,9 @@ Red    : Diacritics";
         try
         {
             txtPublicKey.Text =
-                File.ReadAllText(Application.StartupPath + "\\PublicKey." + cmbCryptoAlgorithm.Text + ".pem");
+                File.ReadAllText(Application.StartupPath + "PublicKey." + cmbCryptoAlgorithm.Text + ".pem");
             txtPrivateKey.Text =
-                File.ReadAllText(Application.StartupPath + "\\PrivateKey." + cmbCryptoAlgorithm.Text + ".pem");
+                File.ReadAllText(Application.StartupPath + "PrivateKey." + cmbCryptoAlgorithm.Text + ".pem");
             LogMsg("Keys Loaded");
         }
         catch (Exception ex)
@@ -1865,14 +1865,14 @@ Red    : Diacritics";
 
     private void TxtPrimeP_DoubleClick(object sender, EventArgs e)
     {
-        File.WriteAllText(Application.StartupPath + "\\tmp.txt", txtPrimeP.Text);
-        Process.Start(Application.StartupPath + "\\tmp.txt");
+        File.WriteAllText(Application.StartupPath + "tmp.txt", txtPrimeP.Text);
+        Process.Start(Application.StartupPath + "tmp.txt");
     }
 
     private void TxtPrimeQ_DoubleClick(object sender, EventArgs e)
     {
-        File.WriteAllText(Application.StartupPath + "\\tmp.txt", txtPrimeQ.Text);
-        Process.Start(Application.StartupPath + "\\tmp.txt");
+        File.WriteAllText(Application.StartupPath + "tmp.txt", txtPrimeQ.Text);
+        Process.Start(Application.StartupPath + "tmp.txt");
     }
 
     private void TxtModulN_TextChanged(object sender, EventArgs e)
@@ -1881,14 +1881,14 @@ Red    : Diacritics";
 
     private void TxtModulN_DoubleClick(object sender, EventArgs e)
     {
-        File.WriteAllText(Application.StartupPath + "\\tmp.txt", txtModulN.Text);
-        Process.Start(Application.StartupPath + "\\tmp.txt");
+        File.WriteAllText(Application.StartupPath + "tmp.txt", txtModulN.Text);
+        Process.Start(Application.StartupPath + "tmp.txt");
     }
 
     private void TxtResultR_DoubleClick(object sender, EventArgs e)
     {
-        File.WriteAllText(Application.StartupPath + "\\tmp.txt", txtResultR.Text);
-        Process.Start(Application.StartupPath + "\\tmp.txt");
+        File.WriteAllText(Application.StartupPath + "tmp.txt", txtResultR.Text);
+        Process.Start(Application.StartupPath + "tmp.txt");
     }
 
     private int GetNumIndex()
@@ -2153,7 +2153,7 @@ Red    : Diacritics";
                  if (byteProvider != null) byteProvider.Dispose();
                  hexBox.ByteProvider = null;
                 */
-                string localFile = Application.StartupPath + "\\tmp.bin";
+                string localFile = Application.StartupPath + "tmp.bin";
                 tabControl1.SelectedTab = tabHexViewer;
                 File.WriteAllBytes(localFile, MyClass.HexStringToByteArray(txtPrimeP.Text));
                 SendToHexViewer(localFile);
@@ -2578,8 +2578,8 @@ Red    : Diacritics";
     {
         if (Clipboard.ContainsText())
         {
-            File.WriteAllText(Application.StartupPath + "\\NewCharset.Charset", Clipboard.GetText());
-            LoadCharset(Application.StartupPath + "\\NewCharset.Charset");
+            File.WriteAllText(Application.StartupPath + "NewCharset.Charset", Clipboard.GetText());
+            LoadCharset(Application.StartupPath + "NewCharset.Charset");
         }
     }
 
@@ -2644,8 +2644,8 @@ Red    : Diacritics";
     {
         if (rbFileBuffer.Checked)
         {
-            File.WriteAllBytes(Application.StartupPath + "\\Buffer.bin", fileBuffer);
-            SendToHexViewer(Application.StartupPath + "\\Buffer.bin");
+            File.WriteAllBytes(Application.StartupPath + "Buffer.bin", fileBuffer);
+            SendToHexViewer(Application.StartupPath + "Buffer.bin");
             tabControl1.SelectedTab = tabHexViewer;
         }
     }
@@ -2710,8 +2710,8 @@ Red    : Diacritics";
 
     private void RtxtData_DoubleClick(object sender, EventArgs e)
     {
-        File.WriteAllText(Application.StartupPath + "\\tb.txt", rtxtData.Text);
-        Process.Start(Application.StartupPath + "\\tb.txt");
+        File.WriteAllText(Application.StartupPath + "tb.txt", rtxtData.Text);
+        Process.Start(Application.StartupPath + "tb.txt");
     }
 
     private void Button1_Click(object sender, EventArgs e)
@@ -2859,7 +2859,7 @@ Red    : Diacritics";
     }
     private void BtnCSV_Click(object sender, EventArgs e)
     {
-        Process.Start(Application.StartupPath + "\\QuranTable.csv", "");
+        Process.Start(Application.StartupPath + "QuranTable.csv", "");
     }
 
     private void Encode()
@@ -3173,7 +3173,7 @@ Red    : Diacritics";
                         string sCrcList = crc.CurParam.Names[0]+" : ";// @params.ToString()+" : ";
                         for (int i = 0; i < crcList.Length; i++) sCrcList += crcList[i].ToString("X2") + " ";
                         LogMsg(sCrcList);
-                        var fName = Application.StartupPath + "\\QuranTable.csv";
+                        var fName = Application.StartupPath + "QuranTable.csv";
                         File.WriteAllText(fName, tableList);
                         //txtInfo.Text = tableList;
                         LogMsg("Saved to " + fName);
@@ -3368,7 +3368,7 @@ Red    : Diacritics";
     /// </summary>
     private void SendToHexViewer(string sFile)
     {
-        string localFile = Application.StartupPath + "\\hex.bin";
+        string localFile = Application.StartupPath + "hex.bin";
 
         // Close current file
         if (hexBox.ByteProvider is IDisposable byteProvider) byteProvider.Dispose();
@@ -3542,8 +3542,7 @@ Red    : Diacritics";
 
     private void BtnSearch_Click(object sender, EventArgs e)
     {
-        var connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Application.StartupPath +
-                               "\\Quran.accdb;User Id=;Password=;";
+        var connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Application.StartupPath +  "Quran.accdb;User Id=;Password=;";
         var queryString = "SELECT * FROM Quran where AyaTextSearch LIKE '%" + txtSearch.Text + "%'";
         DataTable dt = new();
         using OleDbConnection connection = new(connectionString);
@@ -3763,9 +3762,9 @@ Red    : Diacritics";
     {
         if (e.Data.GetDataPresent(DataFormats.Text))
         {
-            File.WriteAllText(Application.StartupPath + "\\NewCharset.Charset",
+            File.WriteAllText(Application.StartupPath + "NewCharset.Charset",
                 (string)e.Data.GetData(DataFormats.Text));
-            LoadCharset(Application.StartupPath + "\\NewCharset.Charset");
+            LoadCharset(Application.StartupPath + "NewCharset.Charset");
         }
         else if (e.Data.GetDataPresent(DataFormats.FileDrop))
         {
@@ -3996,14 +3995,17 @@ Red    : Diacritics";
 
     private void BtnCSHelp_Click(object sender, EventArgs e)
     {
-        MyClass.OpenDocument(Application.StartupPath+"\\ALNR.pdf");
+        try
+        {
+            MyClass.OpenDocument(Application.StartupPath + "DOC\\ALNR.pdf");
+        } catch (Exception ex) { LogMsg(ex); }
     }
 
     private void BtnSaveCharset_Click(object sender, EventArgs e)
     {
         try
         {
-            var fileName = Application.StartupPath + "\\" + lblCurCharset.Text;
+            var fileName = Application.StartupPath + lblCurCharset.Text;
             if ((sender as Button).Name != "btnSave")
             {
                 SaveFileDialog dlg = new();
@@ -4053,9 +4055,9 @@ Red    : Diacritics";
     private void ResetCharsets(bool overwite = false)
     {
         for (var i = 0; i < charsets.Length; i++)
-            if (!File.Exists(Application.StartupPath + "\\" + charsets[i].Name) || overwite)
+            if (!File.Exists(Application.StartupPath + charsets[i].Name) || overwite)
             {
-                File.WriteAllText(Application.StartupPath + "\\" + charsets[i].Name, charsets[i].Description+NewLineSep+MyClass.ByteArrayToHexString(charsets[i].Data, true));
+                File.WriteAllText(Application.StartupPath +  charsets[i].Name, charsets[i].Description+NewLineSep+MyClass.ByteArrayToHexString(charsets[i].Data, true));
             }
     }
 
@@ -4412,8 +4414,8 @@ Red    : Diacritics";
         chkALLEncodings.Checked = true;
         SelectEncoding("1252", cmbSourceEnc);
 
-        File.WriteAllBytes(Application.StartupPath + "\\num.tmp", new byte[] { 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39 });
-        SendToHexViewer(Application.StartupPath + "\\num.tmp");
+        File.WriteAllBytes(Application.StartupPath + "num.tmp", new byte[] { 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39 });
+        SendToHexViewer(Application.StartupPath + "num.tmp");
         BtnCalcCRC_Click(sender, e);
         if (BigInteger.Parse("0" + lblHash.Text, NumberStyles.AllowHexSpecifier) != BigInteger.Parse("0" + TxtCRC.Text, NumberStyles.AllowHexSpecifier))
         {
@@ -4750,7 +4752,7 @@ Red    : Diacritics";
         picQuran1.Enabled = false;
         try
         {
-            var photo = Application.StartupPath + "\\~tmp.jpg";
+            var photo = Application.StartupPath + "~tmp.jpg";
             picQuran1.Image.Save(photo, ImageFormat.Jpeg);
 
             // this will not return proc, will be null, since it will not start viewer directly, done via dllhost
@@ -4775,7 +4777,7 @@ Red    : Diacritics";
         picQuran3.Enabled = false;
         try
         {
-            var photo = Application.StartupPath + "\\~tmp3.jpg";
+            var photo = Application.StartupPath + "~tmp3.jpg";
             picQuran3.Image.Save(photo, ImageFormat.Jpeg);
 
             // this will not return proc, will be null, since it will not start viewer directly, done via dllhost
