@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Drawing;
 
-namespace CryptoUtility
+namespace CryptoUtility;
+
+internal static class ScreenCapture
 {
-    internal static class ScreenCapture
+    public static Image CaptureScreen()
     {
-        public static Image CaptureScreen()
+        var scrSize = MyClass.PhysicalScreenSize();
+
+        var bitmap = new Bitmap(scrSize.Width, scrSize.Height);
+
+        using (var g = Graphics.FromImage(bitmap))
         {
-            var bounds = Screen.GetBounds(Point.Empty);
-            var bitmap = new Bitmap(bounds.Width, bounds.Height);
-
-            using (Graphics g = Graphics.FromImage(bitmap))
-            {
-                g.CopyFromScreen(Point.Empty, Point.Empty, bounds.Size);
-            }
-
-            return bitmap;
+            g.CopyFromScreen(Point.Empty, Point.Empty, bitmap.Size);
         }
+
+        return bitmap;
     }
 }

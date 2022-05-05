@@ -7,7 +7,7 @@ namespace SpectrumAnalyzerLib
 {
     public class AudioSensorData
     {
-        List<List<short>> buffer = new List<List<short>>();
+        readonly List<List<short>> buffer = new();
         public List<List<short>> Buffer { get { return buffer; } }
         public int Channels { get { return (buffer == null ? 0 : buffer.Count); } }
         public int bits;

@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rabin Cryptosystem Application", "Rabin Cryptosystem Application\Rabin Cryptosystem Application.csproj", "{FC60FE78-B8EF-4E60-BC2B-C1BC546FF308}"
+	ProjectSection(ProjectDependencies) = postProject
+		{823B1CE6-7F47-45E2-B477-167310D7B47B} = {823B1CE6-7F47-45E2-B477-167310D7B47B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabinEncryptionDecryption", "RabinEncryptionDecryption\RabinEncryptionDecryption.csproj", "{823B1CE6-7F47-45E2-B477-167310D7B47B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC60FE78-B8EF-4E60-BC2B-C1BC546FF308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC60FE78-B8EF-4E60-BC2B-C1BC546FF308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC60FE78-B8EF-4E60-BC2B-C1BC546FF308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC60FE78-B8EF-4E60-BC2B-C1BC546FF308}.Release|Any CPU.Build.0 = Release|Any CPU
+		{823B1CE6-7F47-45E2-B477-167310D7B47B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{823B1CE6-7F47-45E2-B477-167310D7B47B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{823B1CE6-7F47-45E2-B477-167310D7B47B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{823B1CE6-7F47-45E2-B477-167310D7B47B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

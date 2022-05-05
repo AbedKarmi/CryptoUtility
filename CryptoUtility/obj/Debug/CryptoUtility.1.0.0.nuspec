@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>CryptoUtility</id>
+    <version>1.0.0</version>
+    <authors>CryptoUtility</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework="net6.0-windows7.0">
+        <dependency id="SpectrumAnalyzerLib" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="BeForms.HexBox" version="1.0.0" exclude="Build,Analyzers" />
+        <dependency id="ILGPU" version="1.1.0" exclude="Build,Analyzers" />
+        <dependency id="ILGPU.Algorithms" version="1.1.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.CSharp" version="4.7.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.NETCore.Platforms" version="6.0.3" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Win32.Primitives" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Win32.Registry" version="5.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Windows.Compatibility" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="NETStandard.Library" version="2.0.3" exclude="Build,Analyzers" />
+        <dependency id="System.AppContext" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Console" version="4.3.1" exclude="Build,Analyzers" />
+        <dependency id="System.Data.DataSetExtensions" version="4.5.0" exclude="Build,Analyzers" />
+        <dependency id="System.Diagnostics.DiagnosticSource" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.IO.Compression.ZipFile" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Linq.Expressions" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Primitives" version="4.3.1" exclude="Build,Analyzers" />
+        <dependency id="System.Net.Sockets" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.Extensions" version="4.3.1" exclude="Build,Analyzers" />
+        <dependency id="System.Runtime.InteropServices.RuntimeInformation" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Security.Cryptography.Algorithms" version="4.3.1" exclude="Build,Analyzers" />
+        <dependency id="System.Security.Cryptography.X509Certificates" version="4.3.2" exclude="Build,Analyzers" />
+        <dependency id="System.Text.RegularExpressions" version="4.3.1" exclude="Build,Analyzers" />
+        <dependency id="System.Threading.Timer" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="System.Xml.ReaderWriter" version="4.3.1" exclude="Build,Analyzers" />
+        <dependency id="System.Xml.XDocument" version="4.3.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net6.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App" />
+      </group>
+    </frameworkReferences>
+    <contentFiles>
+      <files include="any/net6.0-windows7.0/Quran.accdb" buildAction="Content" />
+      <files include="any/net6.0-windows7.0/Quran.ico" buildAction="Content" />
+      <files include="any/net6.0-windows7.0/Quran2.ico" buildAction="Content" />
+      <files include="any/net6.0-windows7.0/Tools/cudafycl.exe" buildAction="Content" />
+      <files include="any/net6.0-windows7.0/Tools/CudafyViewer.exe" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+  <files>
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\net6.0-windows\CryptoUtility.runtimeconfig.json" target="lib\net6.0-windows7.0\CryptoUtility.runtimeconfig.json" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\bin\Debug\net6.0-windows\CryptoUtility.dll" target="lib\net6.0-windows7.0\CryptoUtility.dll" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\Quran.accdb" target="content\Quran.accdb" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\Quran.accdb" target="contentFiles\any\net6.0-windows7.0\Quran.accdb" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\Quran.ico" target="content\Quran.ico" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\Quran.ico" target="contentFiles\any\net6.0-windows7.0\Quran.ico" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\Quran2.ico" target="content\Quran2.ico" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\Quran2.ico" target="contentFiles\any\net6.0-windows7.0\Quran2.ico" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\Tools\cudafycl.exe" target="content\Tools\cudafycl.exe" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\Tools\cudafycl.exe" target="contentFiles\any\net6.0-windows7.0\Tools\cudafycl.exe" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\Tools\CudafyViewer.exe" target="content\Tools\CudafyViewer.exe" />
+    <file src="D:\.Development\CSharp\Crypto\CryptoUtility\Tools\CudafyViewer.exe" target="contentFiles\any\net6.0-windows7.0\Tools\CudafyViewer.exe" />
+  </files>
+</package>

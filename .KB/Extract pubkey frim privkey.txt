@@ -1,0 +1,20 @@
+Openssl Extracting Public key from Private key
+RSA
+Generate 2048 bit RSA Private/Public key
+openssl genrsa -out mykey.pem 2048
+To just output the public part of a private key:
+openssl rsa -in mykey.pem -pubout -out pubkey.pem
+
+DSA
+Generate DSA Paramaters
+openssl dsaparam -out dsaparam.pem 2048
+From the given Parameter Key Generate the DSA keys
+openssl gendsa -out privkey.pem dsaparam.pem
+To just output the public part of a private key:
+openssl dsa -in privkey.pem -pubout -out pubkey.pem
+
+EC
+openssl ecparam -name secp256k1 -out secp256k1.pem
+openssl ecparam -in secp256k1.pem -genkey -noout -out privkey.pem
+To just output the public part of a private key:
+openssl ec -in privkey.pem -pubout -out ecpubkey.pem

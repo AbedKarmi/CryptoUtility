@@ -62,18 +62,19 @@ namespace SpectrumAnalyzerLib
         private MonitoredWaveProvider monitoredgWaveProvider;
         private WaveOut player;
         private WaveFileWriter writer;
-        private int channels = 0;
+        private readonly int channels = 0;
         public AudioSensorData Data { get { return data; } }
         public int Bits { get { return bits; } }
         public int Channels { get { return channels; } }
         public int SampleRate { get { return rate; } }
 
-        AudioSensorData data;
-        int rate, bits;
+        readonly AudioSensorData data;
+        private readonly int rate;
+        private readonly int bits;
         WaveIn recorder = null;
         int curChannel = 0;
         bool lowBit = true;
-        Action<byte[], int> action;
+        readonly Action<byte[], int> action;
 
         /// <summary>
         /// constructor
@@ -87,8 +88,10 @@ namespace SpectrumAnalyzerLib
             this.rate = rate;
             this.bits = bits;
             this.channels = (audioType == AudioType.Monaural ? 1 : 2);
-            this.data = new AudioSensorData(channels);
-            this.data.bits = bits;
+            this.data = new AudioSensorData(channels)
+            {
+                bits = bits
+            };
             this.action = onUpdate;
         }
 
@@ -110,9 +113,11 @@ namespace SpectrumAnalyzerLib
         public IWaveProvider Start(string file, bool record=true,bool play=false,Func<IWaveProvider,int,ISampleProvider> createSampleProvider=null)
         {
             Cleanup();
-            
-            recorder = new WaveIn();
-            recorder.WaveFormat = new WaveFormat(rate, bits, data.Channels);
+
+            recorder = new WaveIn
+            {
+                WaveFormat = new WaveFormat(rate, bits, data.Channels)
+            };
             if (record) recorder.DataAvailable += OnDataAvailable;
             recorder.RecordingStopped += OnRecordingStopped;
             // set up our signal chain
@@ -245,8 +250,7 @@ namespace SpectrumAnalyzerLib
                 bufferedWaveProvider.AddSamples(bytes, 0, count);
             if (writer != null)
                 writer.Write(bytes, 0, count);
-            if (action != null)
-                action(bytes, count);
+            action?.Invoke(bytes, count);
         }
     }
 }

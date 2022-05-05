@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = SpectrumAnalyzerLib
+build_property.ProjectDir = D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\

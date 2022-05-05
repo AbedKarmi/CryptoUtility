@@ -2,6 +2,7 @@ D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\bin32\libiomp5md
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\bin32\mkl_custom.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\bin64\libiomp5md.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\bin64\mkl_custom.dll
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\SpectrumAnalyzerLib.dll.config
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\SpectrumAnalyzerLib.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\SpectrumAnalyzerLib.pdb
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\ILNumerics.dll
@@ -19,8 +20,8 @@ D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\Microsoft.Win32.
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\NAudio.xml
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\System.Security.AccessControl.xml
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\bin\x64\Debug\System.Security.Principal.Windows.xml
+D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.csproj.AssemblyReference.cache
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.csproj.CoreCompileInputs.cache
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.csproj.CopyComplete
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.dll
 D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.pdb
-D:\.Development\CSharp\Crypto\SpectrumAnalyzerLib\obj\x64\Debug\SpectrumAnalyzerLib.csproj.AssemblyReference.cache
