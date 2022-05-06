@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_8F92456DFB4548CDA97B49DBEE5A004C"
+        "MsmKey" = "8:_C77775F1D0764EDFBCA6F601573BD06B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -39,7 +39,7 @@
         "DisplayName" = "8:Debug"
         "IsDebugOnly" = "11:TRUE"
         "IsReleaseOnly" = "11:FALSE"
-        "OutputFilename" = "8:Debug\\Setup.msi"
+        "OutputFilename" = "8:..\\Release\\CryptoUtilitySetup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -86,7 +86,7 @@
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\CryptoUtilitySetup.msi"
+        "OutputFilename" = "8:..\\Release\\CryptoUtilitySetup.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
@@ -156,7 +156,7 @@
                 {
                 "Name" = "8:.NET"
                 "Message" = "8:[VSDNETCOREMSG]"
-                "FrameworkVersion" = "8:6.0.4     "
+                "FrameworkVersion" = "8:6.0.4       "
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:https://dotnet.microsoft.com/download/dotnet-core/[NetCoreVerMajorDotMinor]"
                 "IsNETCore" = "11:TRUE"
@@ -167,9 +167,9 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8F92456DFB4548CDA97B49DBEE5A004C"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C77775F1D0764EDFBCA6F601573BD06B"
             {
-            "SourcePath" = "8:..\\CryptoUtility\\bin\\Debug\\net6.0-windows\\CryptoUtility.deps.json"
+            "SourcePath" = "8:..\\Release\\net6.0-windows\\CryptoUtility.deps.json"
             "TargetName" = "8:CryptoUtility.deps.json"
             "Tag" = "8:"
             "Folder" = "8:_CEF2E53EDD294491ADEEBD173EEC241A"
@@ -297,7 +297,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:CryptoUtility"
         "ProductCode" = "8:{B289FE4F-37D5-4628-8763-948203503B11}"
-        "PackageCode" = "8:{C15B7659-DBBE-41D1-9AE7-FB7CD213684E}"
+        "PackageCode" = "8:{22EFD4FE-537B-4C1F-8A9A-521420A7C7A8}"
         "UpgradeCode" = "8:{E24C6F68-0A00-49E8-AE70-69B8196D51DB}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"

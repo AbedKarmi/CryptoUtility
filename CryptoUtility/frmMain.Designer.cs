@@ -127,6 +127,7 @@ namespace CryptoUtility
             this.label38 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.tabCharset = new System.Windows.Forms.TabPage();
+            this.BtnCSHelp = new System.Windows.Forms.Button();
             this.chkDescLang = new System.Windows.Forms.CheckBox();
             this.chkCharSetDesc = new System.Windows.Forms.CheckBox();
             this.chkHex = new System.Windows.Forms.CheckBox();
@@ -549,7 +550,6 @@ namespace CryptoUtility
             this.BtnToP = new System.Windows.Forms.Button();
             this.label66 = new System.Windows.Forms.Label();
             this.BtnSHex = new System.Windows.Forms.Button();
-            this.BtnCSHelp = new System.Windows.Forms.Button();
             this.tabCrypto.SuspendLayout();
             this.tabRSA.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -1494,13 +1494,11 @@ namespace CryptoUtility
             // rbDiacritics
             // 
             this.rbDiacritics.AutoSize = true;
-            this.rbDiacritics.Checked = true;
             this.rbDiacritics.Location = new System.Drawing.Point(600, 20);
             this.rbDiacritics.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbDiacritics.Name = "rbDiacritics";
             this.rbDiacritics.Size = new System.Drawing.Size(187, 29);
             this.rbDiacritics.TabIndex = 3;
-            this.rbDiacritics.TabStop = true;
             this.rbDiacritics.Text = "New with-Diacritics";
             this.rbDiacritics.UseVisualStyleBackColor = true;
             this.rbDiacritics.CheckedChanged += new System.EventHandler(this.RbTextType_CheckedChanged);
@@ -1520,11 +1518,13 @@ namespace CryptoUtility
             // rbFirstOriginalDots
             // 
             this.rbFirstOriginalDots.AutoSize = true;
+            this.rbFirstOriginalDots.Checked = true;
             this.rbFirstOriginalDots.Location = new System.Drawing.Point(51, 20);
             this.rbFirstOriginalDots.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbFirstOriginalDots.Name = "rbFirstOriginalDots";
             this.rbFirstOriginalDots.Size = new System.Drawing.Size(180, 29);
             this.rbFirstOriginalDots.TabIndex = 0;
+            this.rbFirstOriginalDots.TabStop = true;
             this.rbFirstOriginalDots.Text = "First Origianl Dots";
             this.rbFirstOriginalDots.UseVisualStyleBackColor = true;
             this.rbFirstOriginalDots.CheckedChanged += new System.EventHandler(this.RbTextType_CheckedChanged);
@@ -1765,6 +1765,17 @@ namespace CryptoUtility
             this.tabCharset.Size = new System.Drawing.Size(1480, 876);
             this.tabCharset.TabIndex = 6;
             this.tabCharset.Text = "CharSet";
+            // 
+            // BtnCSHelp
+            // 
+            this.BtnCSHelp.BackColor = System.Drawing.Color.Gainsboro;
+            this.BtnCSHelp.Location = new System.Drawing.Point(1434, 12);
+            this.BtnCSHelp.Name = "BtnCSHelp";
+            this.BtnCSHelp.Size = new System.Drawing.Size(28, 34);
+            this.BtnCSHelp.TabIndex = 63;
+            this.BtnCSHelp.Text = "?";
+            this.BtnCSHelp.UseVisualStyleBackColor = false;
+            this.BtnCSHelp.Click += new System.EventHandler(this.BtnCSHelp_Click);
             // 
             // chkDescLang
             // 
@@ -2447,6 +2458,7 @@ namespace CryptoUtility
             this.lblCSS1.Size = new System.Drawing.Size(39, 53);
             this.lblCSS1.TabIndex = 102;
             this.lblCSS1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblCSS1.Click += new System.EventHandler(this.lblCSS1_Click);
             // 
             // lblCurCharset
             // 
@@ -4269,6 +4281,7 @@ namespace CryptoUtility
             this.chkDiscardChars.TabIndex = 3;
             this.chkDiscardChars.Text = "Discard Extra Chars";
             this.chkDiscardChars.UseVisualStyleBackColor = true;
+            this.chkDiscardChars.CheckedChanged += new System.EventHandler(this.chkDiscardChars_CheckedChanged);
             // 
             // chkHexText
             // 
@@ -7076,17 +7089,6 @@ namespace CryptoUtility
             this.BtnSHex.Text = "Hex";
             this.BtnSHex.UseVisualStyleBackColor = true;
             this.BtnSHex.Click += new System.EventHandler(this.BtnSHex_Click);
-            // 
-            // BtnCSHelp
-            // 
-            this.BtnCSHelp.BackColor = System.Drawing.Color.Gainsboro;
-            this.BtnCSHelp.Location = new System.Drawing.Point(1434, 12);
-            this.BtnCSHelp.Name = "BtnCSHelp";
-            this.BtnCSHelp.Size = new System.Drawing.Size(28, 34);
-            this.BtnCSHelp.TabIndex = 63;
-            this.BtnCSHelp.Text = "?";
-            this.BtnCSHelp.UseVisualStyleBackColor = false;
-            this.BtnCSHelp.Click += new System.EventHandler(this.BtnCSHelp_Click);
             // 
             // FrmMain
             // 

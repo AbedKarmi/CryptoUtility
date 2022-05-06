@@ -1,5 +1,3 @@
-//#define _DEBUG
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -211,7 +209,7 @@ public partial class FrmMain : Form
 
     Thread threadPoly;
     private string lastEncUsed;
-    private const string NewLineSep = "{NL}";
+   
 
     Thread gpuThread;
     bool gpuStarted = false;
@@ -802,7 +800,7 @@ public partial class FrmMain : Form
             cmbCoding.SelectedIndex = int.Parse(AppSettings.ReadValue("Settings", "CharCoding", "0"));
             cmbCRC.SelectedIndex = int.Parse(AppSettings.ReadValue("Settings", "CRC8", "0"));
             cmbColorSizeMode.SelectedIndex = int.Parse(AppSettings.ReadValue("Settings", "ColorSizeMode", "1"));
-            chkALLEncodings.Checked = AppSettings.ReadValue("Settings", "AllEncodings", "Yes").ToUpper() == "NO";
+            chkALLEncodings.Checked = AppSettings.ReadValue("Settings", "AllEncodings", "NO").ToUpper() == "YES";
             chkSendToBuffer.Checked = AppSettings.ReadValue("Settings", "SendToBuffer", "Yes").ToUpper() == "YES";
             chkJommalWord.Checked = AppSettings.ReadValue("Settings", "JommalWORD", "Yes").ToUpper() == "YES";
             chkFixPadding.Checked = AppSettings.ReadValue("Settings", "Padding", "No").ToUpper() == "YES";
@@ -823,7 +821,7 @@ public partial class FrmMain : Form
             
             ChkPreserveSpace_CheckedChanged(this, EventArgs.Empty);
 
-            switch (AppSettings.ReadValue("Settings", "QuranText", "rbDiacritics"))
+            switch (AppSettings.ReadValue("Settings", "QuranText", "rbFirstOriginalDots"))
             {
                 case "rbDiacritics":
                     rbDiacritics.Checked = true;
@@ -840,8 +838,7 @@ public partial class FrmMain : Form
             }
 
             chkPlay.Checked = AppSettings.ReadValue("Settings", "PlayWhileRecord", "No").ToUpper() == "YES";
-            SelectIndex(cmbSampleRate,
-                AppSettings.ReadValue("Settings", "SampleRate", cmbSampleRate.Items[0].ToString()));
+            SelectIndex(cmbSampleRate, AppSettings.ReadValue("Settings", "SampleRate", cmbSampleRate.Items[0].ToString()));
             SelectIndex(cmbBits, AppSettings.ReadValue("Settings", "Bits", cmbBits.Items[0].ToString()));
             SelectIndex(cmbChannels, AppSettings.ReadValue("Settings", "Channels", cmbChannels.Items[0].ToString()));
             SelectIndex(cmbWebClient, AppSettings.ReadValue("Settings", "WebClient", cmbWebClient.Items[0].ToString()));
@@ -2578,7 +2575,7 @@ Red    : Diacritics";
     {
         if (Clipboard.ContainsText())
         {
-            File.WriteAllText(Application.StartupPath + "NewCharset.Charset", Clipboard.GetText());
+            File.WriteAllText(Application.StartupPath + "NewCharset.Charset", ""+ ISettings.NewLineSep+Clipboard.GetText());
             LoadCharset(Application.StartupPath + "NewCharset.Charset");
         }
     }
@@ -3003,8 +3000,7 @@ Red    : Diacritics";
                 }
                 else
                 {
-                    sOut = Converter.ConvertText(text, sourceCP, destCP, specialType, chkMeta.Checked,
-                        chkDiscardChars.Checked, chkDiacritics.Checked, chkzStrings.Checked);
+                    sOut = Converter.ConvertText(text, sourceCP, destCP, specialType, chkMeta.Checked, chkDiscardChars.Checked, chkDiacritics.Checked, chkzStrings.Checked);
                     if (Jommal) sOut = ToJommal(sOut);
                     File.WriteAllBytes(sFile, sOut);
                 }
@@ -3201,30 +3197,26 @@ Red    : Diacritics";
     }
 
 
+    private void LstLog_Click(object sender, EventArgs e)
+    {
+        toolTip1.SetToolTip(lstLog, lstLog.SelectedItem.ToString());
+    }
+
     private void Btn1TO9_8_Click(object sender, EventArgs e)
     {
         CmbCRCViewer.SelectedIndex = 0;
-        rtxtData.Text = "123456789";
         chkALLEncodings.Checked = true;
-        Encode();
+        File.WriteAllBytes(quranBin, new byte[] { 0x31, 0x32, 0x33, 0x34, 0x35, 0x36,  0x37, 0x38, 0x39 });
         BtnSHex_Click(sender, e);
         TxtPolyWidth.Text = "8";
         TxtCRC.Text = "BC";
         if (ChkUseGPU.Checked) BtnSendHexToCalc_Click(sender, e);
     }
-
-
-    private void LstLog_Click(object sender, EventArgs e)
-    {
-        toolTip1.SetToolTip(lstLog,lstLog.SelectedItem.ToString());
-    }
-
     private void Btn1To9_16_Click(object sender, EventArgs e)
     {
         CmbCRCViewer.SelectedIndex = 0;
-        rtxtData.Text = "123456789";
         chkALLEncodings.Checked = true;
-        Encode();
+        File.WriteAllBytes(quranBin, new byte[] { 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39 });
         BtnSHex_Click(sender, e);
         TxtPolyWidth.Text = "16";
         TxtCRC.Text = "FEE8";
@@ -3234,9 +3226,8 @@ Red    : Diacritics";
     private void Btn1To9_32_Click(object sender, EventArgs e)
     {
         CmbCRCViewer.SelectedIndex = 0;
-        rtxtData.Text = "123456789";
         chkALLEncodings.Checked = true;
-        Encode();
+        File.WriteAllBytes(quranBin, new byte[] { 0x31, 0x32, 0x33, 0x34, 0x35, 0x36,  0x37, 0x38, 0x39 });
         BtnSHex_Click(sender, e);
         TxtPolyWidth.Text = "32";
         TxtCRC.Text = "3010BF7F";
@@ -3246,9 +3237,7 @@ Red    : Diacritics";
     private void Btn1To9_64_Click(object sender, EventArgs e)
     {
         CmbCRCViewer.SelectedIndex = 0;
-        rtxtData.Text = "123456789";
-        chkALLEncodings.Checked = true;
-        Encode();
+        File.WriteAllBytes(quranBin, new byte[] { 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39 });
         BtnSHex_Click(sender, e);
         TxtPolyWidth.Text = "64";
         TxtCRC.Text = "6C40DF5F0B497347";
@@ -3612,7 +3601,7 @@ Red    : Diacritics";
 
         //string s = lblCurCharset.Text.Substring(0, lblCurCharset.Text.IndexOf("."));
         var s = "[Abjadi]";
-        if (cmbDestEnc.SelectedIndex < 0)
+    //    if (cmbDestEnc.SelectedIndex < 0)
         {
             if (String.IsNullOrEmpty(lastEncUsed))
             {
@@ -3762,8 +3751,7 @@ Red    : Diacritics";
     {
         if (e.Data.GetDataPresent(DataFormats.Text))
         {
-            File.WriteAllText(Application.StartupPath + "NewCharset.Charset",
-                (string)e.Data.GetData(DataFormats.Text));
+            File.WriteAllText(Application.StartupPath + "NewCharset.Charset",""+ ISettings.NewLineSep+(string)e.Data.GetData(DataFormats.Text));
             LoadCharset(Application.StartupPath + "NewCharset.Charset");
         }
         else if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -3881,7 +3869,7 @@ Red    : Diacritics";
             TimeElapsed = 0;
             ClearChars();
             ts += TimeElapsed + ",";
-            var data = File.ReadAllText(fileName).Split(NewLineSep);
+            var data = File.ReadAllText(fileName).Split(ISettings.NewLineSep);
             var c = MyClass.HexStringToByteArray(data[1]);
             ts += TimeElapsed + ",";
             AppSettings.WriteValue("Settings", "CharsetProfile", Path.GetFileName(fileName));
@@ -3918,6 +3906,12 @@ Red    : Diacritics";
         {
             LogMsg(ex);
         }
+    }
+
+    private void lblCSS1_Click(object sender, EventArgs e)
+    {
+        // var t = sender as Label;
+        // MessageBox.Show(chkFlipY.TextAlign.ToString());
     }
 
     private void BtnLoadCharset_Click(object sender, EventArgs e)
@@ -3982,7 +3976,7 @@ Red    : Diacritics";
 
     private void SaveCharset(string fileName)
     {
-        File.WriteAllText(fileName, txtDescription.Text+NewLineSep+ GetCharset());
+        File.WriteAllText(fileName, txtDescription.Text+ ISettings.NewLineSep + GetCharset());
         lblCurCharset.Text = Path.GetFileName(fileName);
         AppSettings.WriteValue("Settings", "CharsetProfile", lblCurCharset.Text);
         var s1 = cmbSourceEnc.Text;
@@ -4034,9 +4028,13 @@ Red    : Diacritics";
     private void ClearChars()
     {
         foreach (var t in listTxtCS)
+        {
             t.Text = "";
+        }
         foreach (var t in listLblCSS)
+        {
             t.Text = "";
+        }
         lblCurCharset.Text = "New.Charset";
     }
 
@@ -4057,7 +4055,7 @@ Red    : Diacritics";
         for (var i = 0; i < charsets.Length; i++)
             if (!File.Exists(Application.StartupPath + charsets[i].Name) || overwite)
             {
-                File.WriteAllText(Application.StartupPath +  charsets[i].Name, charsets[i].Description+NewLineSep+MyClass.ByteArrayToHexString(charsets[i].Data, true));
+                File.WriteAllText(Application.StartupPath +  charsets[i].Name, charsets[i].Description+ ISettings.NewLineSep + MyClass.ByteArrayToHexString(charsets[i].Data, true));
             }
     }
 
@@ -4091,12 +4089,20 @@ Red    : Diacritics";
                 listTxtCS[int.Parse(t.Name[5..]) - 1] = t;
                 t.MouseMove += TxtCS_MouseMove;
                 t.MouseLeave += TxtCS_MouseLeave;
+                t.TextAlign = HorizontalAlignment.Center;
             }
 
         foreach (var t in lblCSI)
             if (t.Name.StartsWith("lblCSS"))
+            {
                 listLblCSS[int.Parse(t.Name[6..]) - 1] = t;
-            else if (t.Name.StartsWith("lblCS")) listLblCS[int.Parse(t.Name[5..]) - 1] = t;
+                listLblCSS[int.Parse(t.Name[6..]) - 1].TextAlign = ContentAlignment.MiddleCenter;
+            }
+            else if (t.Name.StartsWith("lblCS"))
+            {
+                listLblCS[int.Parse(t.Name[5..]) - 1] = t;
+                listLblCS[int.Parse(t.Name[5..]) - 1].TextAlign = ContentAlignment.MiddleCenter;
+            }
     }
 
     #endregion
@@ -5845,7 +5851,11 @@ Red    : Diacritics";
         toolTip1.SetToolTip(lstLog, "");
     }
 
-  
+    private void chkDiscardChars_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
     private void BtnCPSP_Click(object sender, EventArgs e)
     {
         var n = int.Parse(lblColorPointSize.Text);

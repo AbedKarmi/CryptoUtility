@@ -204,8 +204,8 @@ public class Converter
             try
             {
                 var startupPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                var s = File.ReadAllText(startupPath + "\\" + charset + ".Charset");
-                if (s.Length == 88) ACCO[CustomCharset] = s;
+                var s = File.ReadAllText(startupPath + "\\" + charset + ".Charset").Split(ISettings.NewLineSep); 
+                if (s[1].Length == 88) ACCO[CustomCharset] = s[1];
             }
             catch (Exception)
             {
