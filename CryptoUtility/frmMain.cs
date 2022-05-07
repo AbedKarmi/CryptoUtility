@@ -928,23 +928,17 @@ Encoding method : Arabic Common CharSet Order [ACCO]";
             {
                 txtInfo.Text = @"Crypto Utility for Quran Fidelity
 
-Quran is the greatest book ever found on earth, it was revealed to the last prophet Mohammad peace upon him. 
+Quran was revealed to the last prophet Mohammad peace upon him. 
 
-Nowadays, almost all sensitive data being stored or transferred via any media are protected against loss and change.
+Nowadays, almost all important data is being verified againest modification or corruption.
 
-Every piece of data must be protected and highly trusted, otherwise no confidence is granted.
+Quran, is protected against change, as God stated in the Quran. We believe that, Quran must have a way thant allows verification of its content.
 
-Quran, is the utmost book that requires such fidelity, we believe that, Quran must have a proof that is aligned with nowadays modern technologies, since God is the most knowledgeable and the most expert.
+Text to byte conversion:
+We implemented several encoding options to convert Arabic text of the Quran to numeric stream of data. 
 
-Findings:
-The Key:
-The first Sora of Quran is named ALFATEHA, which means 'the Opener'. We beleive it contains the public KEY for verifying the content of the quran.
-
-Text to byte conversion (code page):
-We implemented several encoding options to convert text to numbers. Hamza, is to be tested, since it was not used in the revelead text explicitly.
-
-Other possible options:
-Hex, Texture, Audio, Light & Color representations are implemented for testing on binary data of Quran";
+This utility can represnt the data in several ways:
+Hex, Texture, Audio, Light & Color representations";
             }
             else if (tabControl1.SelectedTab == tabCharset)
             {
