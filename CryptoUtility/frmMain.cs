@@ -820,7 +820,7 @@ public partial class FrmMain : Form
             lastEncUsed = AppSettings.ReadValue("Settings", "LastEncodingUsed");
             
             ChkPreserveSpace_CheckedChanged(this, EventArgs.Empty);
-
+            rbFirstOriginalDots.Checked = false;
             switch (AppSettings.ReadValue("Settings", "QuranText", "rbFirstOriginalDots"))
             {
                 case "rbDiacritics":
