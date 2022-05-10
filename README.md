@@ -1,4 +1,4 @@
-# CryptoUtility
+# QuranView Utility
 QuranView Utility for Quran Fidelity
 
 Quran was revealed to the last prophet Mohammad peace upon him. 
