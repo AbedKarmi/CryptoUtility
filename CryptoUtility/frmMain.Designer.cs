@@ -550,6 +550,7 @@ namespace CryptoUtility
             this.BtnToP = new System.Windows.Forms.Button();
             this.label66 = new System.Windows.Forms.Label();
             this.BtnSHex = new System.Windows.Forms.Button();
+            this.BtnCalcJommal = new System.Windows.Forms.Button();
             this.tabCrypto.SuspendLayout();
             this.tabRSA.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -3778,6 +3779,7 @@ namespace CryptoUtility
             // tabEncoding
             // 
             this.tabEncoding.BackColor = System.Drawing.Color.LightGray;
+            this.tabEncoding.Controls.Add(this.BtnCalcJommal);
             this.tabEncoding.Controls.Add(this.btnUnicodes);
             this.tabEncoding.Controls.Add(this.ChkUseGPU);
             this.tabEncoding.Controls.Add(this.Btn1To9_64);
@@ -3800,7 +3802,7 @@ namespace CryptoUtility
             // 
             // btnUnicodes
             // 
-            this.btnUnicodes.Location = new System.Drawing.Point(573, 819);
+            this.btnUnicodes.Location = new System.Drawing.Point(44, 818);
             this.btnUnicodes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUnicodes.Name = "btnUnicodes";
             this.btnUnicodes.Size = new System.Drawing.Size(165, 46);
@@ -7090,6 +7092,18 @@ namespace CryptoUtility
             this.BtnSHex.UseVisualStyleBackColor = true;
             this.BtnSHex.Click += new System.EventHandler(this.BtnSHex_Click);
             // 
+            // BtnCalcJommal
+            // 
+            this.BtnCalcJommal.Enabled = false;
+            this.BtnCalcJommal.Location = new System.Drawing.Point(222, 818);
+            this.BtnCalcJommal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BtnCalcJommal.Name = "BtnCalcJommal";
+            this.BtnCalcJommal.Size = new System.Drawing.Size(131, 46);
+            this.BtnCalcJommal.TabIndex = 26;
+            this.BtnCalcJommal.Text = "Calc Jommal";
+            this.BtnCalcJommal.UseVisualStyleBackColor = true;
+            this.BtnCalcJommal.Click += new System.EventHandler(this.BtnCalcJommal_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 25F);
@@ -7709,6 +7723,7 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnUnicodes;
         private Be.Windows.Forms.HexBox hexBox;
         private System.Windows.Forms.Button BtnCSHelp;
+        private System.Windows.Forms.Button BtnCalcJommal;
     }
 }
 

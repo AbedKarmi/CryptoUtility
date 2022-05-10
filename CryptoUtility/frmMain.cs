@@ -693,7 +693,7 @@ public partial class FrmMain : Form
 
             CurTab = tabControl1.SelectedTab;
 
-            Text = "Crypto Utility for Quran Fidelity, Version " + typeof(FrmMain).Assembly.GetName().Version;
+            Text = "QuranView Utility for Quran Fidelity, Version " + typeof(FrmMain).Assembly.GetName().Version;
 
             //  InitHexBox();
 
@@ -908,7 +908,7 @@ public partial class FrmMain : Form
             else if (tabControl1.SelectedTab == tabCrypto)
             {
                 txtInfo.Text =
-                    "Crypto Utility\r\n\r\nDecrypt/Encrypt, Calculate hash, and Sign/Verify data using public/private keys.\r\n\r\nData can be loaded in the textbox or a file buffer.";
+                    "QuranView Utility\r\n\r\nDecrypt/Encrypt, Calculate hash, and Sign/Verify data using public/private keys.\r\n\r\nData can be loaded in the textbox or a file buffer.";
             }
             else if (tabControl1.SelectedTab == tabCalculator)
             {
@@ -926,7 +926,7 @@ Encoding method : Arabic Common CharSet Order [ACCO]";
             }
             else if (tabControl1.SelectedTab == tabQuran)
             {
-                txtInfo.Text = @"Crypto Utility for Quran Fidelity
+                txtInfo.Text = @"QuranView Utility for Quran Fidelity
 
 Quran was revealed to the last prophet Mohammad peace upon him. 
 
@@ -1723,7 +1723,7 @@ Red    : Diacritics";
     {
         var data = "";
         var url = factorDbURL + prime;
-        var userAgent = "CryptoUtility";
+        var userAgent = "QuranViewUtility";
         const int timeOut = 50; // 5 seconds
 
         FactorData factorData;
@@ -3238,6 +3238,10 @@ Red    : Diacritics";
         if (ChkUseGPU.Checked) BtnSendHexToCalc_Click(sender, e);
     }
 
+    private void BtnCalcJommal_Click(object sender, EventArgs e)
+    {
+
+    }
 
     /// <summary>
     ///     Handler for the run button click event
@@ -5850,6 +5854,7 @@ Red    : Diacritics";
 
     }
 
+ 
     private void BtnCPSP_Click(object sender, EventArgs e)
     {
         var n = int.Parse(lblColorPointSize.Text);

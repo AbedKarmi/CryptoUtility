@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Xpz+y7S+wl0ZUawGb9gl1p9VcN8ZzQQ6NWdlwRbTymYpkAyqtjZXTdZw+hAXUvuDkEW3dkZVYmxxKigFThvFUg==",
+  "dgSpecHash": "LzqT/yt3Yie6mk2LB0q9qwnEpNYlLkPoNokE2pWYh5wah026n6nQAyWvzTh40o6zlsAPGCqzOt98z5hqMDtQmA==",
   "success": true,
-  "projectFilePath": "D:\\.Development\\CSharp\\Crypto\\CryptoUtility\\CryptoUtility.csproj",
+  "projectFilePath": "D:\\.Development\\CSharp\\Crypto\\CryptoUtility\\QuranView.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\karmi\\.nuget\\packages\\be.windows.forms.hexbox\\1.7.0\\be.windows.forms.hexbox.1.7.0.nupkg.sha512",
     "C:\\Users\\karmi\\.nuget\\packages\\ilgpu\\1.1.0\\ilgpu.1.1.0.nupkg.sha512",

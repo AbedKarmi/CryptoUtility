@@ -7534,9 +7534,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\.Development\\CSharp\\Crypto\\CryptoUtility\\CryptoUtility.csproj",
-      "projectName": "CryptoUtility",
-      "projectPath": "D:\\.Development\\CSharp\\Crypto\\CryptoUtility\\CryptoUtility.csproj",
+      "projectUniqueName": "D:\\.Development\\CSharp\\Crypto\\CryptoUtility\\QuranView.csproj",
+      "projectName": "QuranView",
+      "projectPath": "D:\\.Development\\CSharp\\Crypto\\CryptoUtility\\QuranView.csproj",
       "packagesPath": "C:\\Users\\karmi\\.nuget\\packages\\",
       "outputPath": "D:\\.Development\\CSharp\\Crypto\\CryptoUtility\\obj\\",
       "projectStyle": "PackageReference",
