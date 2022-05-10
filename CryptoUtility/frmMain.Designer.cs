@@ -282,6 +282,7 @@ namespace CryptoUtility
             this.lblCS2 = new System.Windows.Forms.Label();
             this.lblCS1 = new System.Windows.Forms.Label();
             this.tabEncoding = new System.Windows.Forms.TabPage();
+            this.BtnCalcJommal = new System.Windows.Forms.Button();
             this.btnUnicodes = new System.Windows.Forms.Button();
             this.ChkUseGPU = new System.Windows.Forms.CheckBox();
             this.Btn1To9_64 = new System.Windows.Forms.Button();
@@ -550,7 +551,6 @@ namespace CryptoUtility
             this.BtnToP = new System.Windows.Forms.Button();
             this.label66 = new System.Windows.Forms.Label();
             this.BtnSHex = new System.Windows.Forms.Button();
-            this.BtnCalcJommal = new System.Windows.Forms.Button();
             this.tabCrypto.SuspendLayout();
             this.tabRSA.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -3799,6 +3799,18 @@ namespace CryptoUtility
             this.tabEncoding.Text = "Encoding";
             this.tabEncoding.Enter += new System.EventHandler(this.TabEncoding_Enter);
             this.tabEncoding.Leave += new System.EventHandler(this.TabEncoding_Leave);
+            // 
+            // BtnCalcJommal
+            // 
+            this.BtnCalcJommal.Enabled = false;
+            this.BtnCalcJommal.Location = new System.Drawing.Point(222, 818);
+            this.BtnCalcJommal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BtnCalcJommal.Name = "BtnCalcJommal";
+            this.BtnCalcJommal.Size = new System.Drawing.Size(131, 46);
+            this.BtnCalcJommal.TabIndex = 26;
+            this.BtnCalcJommal.Text = "Calc Jommal";
+            this.BtnCalcJommal.UseVisualStyleBackColor = true;
+            this.BtnCalcJommal.Click += new System.EventHandler(this.BtnCalcJommal_Click);
             // 
             // btnUnicodes
             // 
@@ -7091,18 +7103,6 @@ namespace CryptoUtility
             this.BtnSHex.Text = "Hex";
             this.BtnSHex.UseVisualStyleBackColor = true;
             this.BtnSHex.Click += new System.EventHandler(this.BtnSHex_Click);
-            // 
-            // BtnCalcJommal
-            // 
-            this.BtnCalcJommal.Enabled = false;
-            this.BtnCalcJommal.Location = new System.Drawing.Point(222, 818);
-            this.BtnCalcJommal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.BtnCalcJommal.Name = "BtnCalcJommal";
-            this.BtnCalcJommal.Size = new System.Drawing.Size(131, 46);
-            this.BtnCalcJommal.TabIndex = 26;
-            this.BtnCalcJommal.Text = "Calc Jommal";
-            this.BtnCalcJommal.UseVisualStyleBackColor = true;
-            this.BtnCalcJommal.Click += new System.EventHandler(this.BtnCalcJommal_Click);
             // 
             // FrmMain
             // 

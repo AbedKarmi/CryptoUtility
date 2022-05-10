@@ -2427,6 +2427,7 @@ Red    : Diacritics";
                              && cmbDestEnc.SelectedIndex >= 0
                              && cmbSourceEnc.Text != cmbDestEnc.Text &&
                              !cmbSourceEnc.Text.Contains("Jommal");
+            BtnCalcJommal.Enabled = btnRun.Enabled;
             //&& !(Converter.IsACCO(Converter.GetEncodingEx(cmbSourceEnc.Text)) && Converter.IsACCO(Converter.GetEncodingEx(cmbDestEnc.Text)));
             if (btnRun.Enabled)
             {
@@ -3240,7 +3241,15 @@ Red    : Diacritics";
 
     private void BtnCalcJommal_Click(object sender, EventArgs e)
     {
-
+        SelectEncoding("[Common]");
+        Encode();
+        byte[] data=File.ReadAllBytes(quranBin);
+        int jommal = 0;
+        for (int i = 0; i < data.Length; i++)
+            if (data[i] > 0)
+            jommal += jommalCharset[data[i]-1];
+        OutputMsg("Jommal = " + jommal.ToString() + " ,  " + jommal.ToString("X"));
+        txtInfo.Text = jommal.ToString("X");
     }
 
     /// <summary>
