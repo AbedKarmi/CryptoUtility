@@ -233,7 +233,7 @@ public class Converter
         return FromACCO(MyClass.GetBytes(bin));
     }
 
-    public static byte[] ToACCO(byte[] data)
+    public static byte[] ToACCO(byte[] data,bool zStrings=false)
     {
         var j = 0;
         byte c;
@@ -241,14 +241,18 @@ public class Converter
         for (var i = 0; i < data.Length; i++)
             try
             {
-                c = destIndex > 0 ? fromACCO[baseToACCO[data[i]] - 1] : baseToACCO[data[i]];
-                if (c > 0) bin[j++] = c;
+                if (zStrings && data[i] == 0) bin[j++] = 0;
+                else
+                {
+                    c = destIndex > 0 ? fromACCO[baseToACCO[data[i]] - 1] : baseToACCO[data[i]];
+                    if (c > 0) bin[j++] = c;
+                }
             }
             catch (Exception)
             {
                 if (data[i].In<byte>(10, 13, 32)) bin[j++] = SpaceChar;
             } // data[i]; }
-        if (bin[j - 1] == SpaceChar) j--;
+        if (bin[j - 1] == SpaceChar && !zStrings) j--;
         Array.Resize(ref bin, j);
         return bin;
     }
@@ -531,7 +535,7 @@ public class Converter
                 else
                 {
                     InitACCO(destSCP);
-                    bDest = ToACCO(Encoding.Convert(sourceEnc, Encoding.GetEncoding(WIN1256CP), bSource));
+                    bDest = ToACCO(Encoding.Convert(sourceEnc, Encoding.GetEncoding(WIN1256CP), bSource),zStrings);
                 }
             }
             else

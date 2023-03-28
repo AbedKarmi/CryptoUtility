@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "/zhLI7zNXUdhDqVYaPS95WTrIz+8m5wPIjcBAzudOHqs7vmm4XhAaL7if/sc9VGXknEOfCVlkBybLdhYcXMwBA==",
+  "dgSpecHash": "SCiJIOtDURmaDrzBgfLSLDB1Eu8UT7yOiQbuba9R4/NtY6VcjWhXj8WRy0qT6q+0bVltHV8O22MBt+7e43ZgPw==",
   "success": true,
   "projectFilePath": "D:\\.Development\\CSharp\\Crypto\\SpectrumAnalyzerLib\\SpectrumAnalyzerLib.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\karmi\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
-    "C:\\Users\\karmi\\.nuget\\packages\\microsoft.dotnet.upgradeassistant.extensions.default.analyzers\\0.3.310801\\microsoft.dotnet.upgradeassistant.extensions.default.analyzers.0.3.310801.nupkg.sha512",
+    "C:\\Users\\karmi\\.nuget\\packages\\microsoft.dotnet.upgradeassistant.extensions.default.analyzers\\0.3.326103\\microsoft.dotnet.upgradeassistant.extensions.default.analyzers.0.3.326103.nupkg.sha512",
     "C:\\Users\\karmi\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.1\\microsoft.netcore.platforms.1.1.1.nupkg.sha512",
     "C:\\Users\\karmi\\.nuget\\packages\\microsoft.netcore.targets\\1.1.3\\microsoft.netcore.targets.1.1.3.nupkg.sha512",
     "C:\\Users\\karmi\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",

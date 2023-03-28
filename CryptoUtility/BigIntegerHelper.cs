@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Org.BouncyCastle.Crypto.Prng;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
-
-namespace CryptoUtility;
 
 internal static class BigIntegerHelper
 {
@@ -69,24 +68,35 @@ internal static class BigIntegerHelper
     public static BigInteger GetBig(string hexNum, bool forcePositive = true)
     {
         //return GetBig(MyClass.HexStringToBinary(hexNum));
+        if (hexNum.StartsWith("0x")) hexNum = hexNum.Substring(2);
         return GetBig(HexToByteArray(hexNum), forcePositive);
     }
 
+    private static byte[] Reverse(byte[] arr)
+    {
+        var rvArr=new byte[arr.Length];
+        Array.Copy(arr, 0, rvArr, 0, arr.Length);
+        Array.Reverse(rvArr);
+        return rvArr;
+    }
     public static BigInteger GetBig(byte[] data, bool forcePositive = true)
     {
-        if (data.Length == 0) return new BigInteger(data);
+       if (data.Length == 0)
+            return new BigInteger(data);
+
         var n = data.Length;
-        while (data[n - 1] == 0 && n > 1) n--; // Remove Left Zero Before Reverse, otherwise will be to the right !
+        //while (data[n - 1] == 0 && n > 1) n--; // Remove Left Zero Before Reverse, otherwise will be to the right !
+
         var inArr = new byte[n];
         Array.Copy(data, inArr, n);
         //byte[] inArr = (byte[])data.Clone();
-        var m = forcePositive ? 1 : 0; // Force positive
+        var m = (forcePositive && inArr[0]!=0 ? 1 : 0); // Force positive
         Array.Reverse(inArr); // Reverse the byte order
-        var final = new byte[inArr.Length +
-                             m]; // Add an empty byte at the end, to simulate unsigned BigInteger (no negatives!)
+        var final = new byte[inArr.Length + m]; // Add an empty byte at the end, to simulate unsigned BigInteger (no negatives!)
         Array.Copy(inArr, final, inArr.Length);
 
         return new BigInteger(final);
+   
     }
 
     public static BigInteger KaratsubaMultiply(BigInteger x, BigInteger y)
@@ -720,6 +730,43 @@ public static List<Factors> Factorize(BigInteger n)
         return inv;
     }
 
+
+    /// <summary>
+    /// Calculates the modular multiplicative inverse of <paramref name="a"/> modulo <paramref name="m"/>
+    /// using the extended Euclidean algorithm.
+    /// </summary>
+    /// <remarks>
+    /// This implementation comes from the pseudocode defining the inverse(a, n) function at
+    /// https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm
+    /// </remarks>
+    public static BigInteger ModInverse(this BigInteger a, BigInteger n)
+    {
+        BigInteger t = 0, nt = 1, r = n, nr = a;
+
+        if (n < 0)
+        {
+            n = -n;
+        }
+
+        if (a < 0)
+        {
+            a = n - (-a % n);
+        }
+
+        while (nr != 0)
+        {
+            var quot = r / nr;
+
+            var tmp = nt; nt = t - quot * nt; t = tmp;
+            tmp = nr; nr = r - quot * nr; r = tmp;
+        }
+
+        if (r > 1) throw new ArgumentException(nameof(a) + " is not convertible.");
+        if (t < 0) t = t + n;
+        return t;
+    }
+
+
     public static string Hex(BigInteger n)
     {
         var s = n.ToString("X");
@@ -752,9 +799,67 @@ public static List<Factors> Factorize(BigInteger n)
             case NumberFormat.Binary: return ToBinaryString(number);
             case NumberFormat.Decimal: return number.ToString();
             case NumberFormat.Hexadecimal: return Hex(number);
-            case NumberFormat.Base64: return Convert.ToBase64String(number.ToByteArray());
+            case NumberFormat.Base64: return Convert.ToBase64String(number.BigToArray());
         }
 
         return "0";
+    }
+
+    /// <summary>
+    /// Converts a non-negative integer to an octet string of a specified length.
+    /// </summary>
+    /// <param name="x">The integer to convert.</param>
+    /// <param name="xLen">Length of output octets.</param>
+    /// <param name="makeLittleEndian">If True little-endian converntion is followed, big-endian otherwise.</param>
+    /// <returns></returns>
+    public static byte[] ToByteArray(BigInteger x, int xLen, bool makeLittleEndian)
+    {
+        byte[] result = new byte[xLen];
+        int index = 0;
+        while ((x > 0) && (index < result.Length))
+        {
+            result[index++] = (byte)(x % 256);
+            x >>= 8;
+        }
+        if (!makeLittleEndian)
+            Array.Reverse(result);
+        return result;
+    }
+
+    /// <summary>
+    /// Converts a byte array to a non-negative integer.
+    /// </summary>
+    /// <param name="data">The number in the form of a byte array.</param>
+    /// <param name="isLittleEndian">Endianness of the byte array.</param>
+    /// <returns>An non-negative integer from the byte array of the specified endianness.</returns>
+    public static BigInteger ToPositiveBigInteger(byte[] data, bool isLittleEndian)
+    {
+        BigInteger bi = 0,p=1;
+        if (isLittleEndian)
+        {
+            for (int i = 0; i < data.Length; i++)
+            {
+                bi += p * data[i];
+                p <<= 8;
+            }
+        }
+        else
+        {
+            for (int i = 1; i <= data.Length; i++)
+            {
+                bi += p * data[data.Length - i];
+                p <<= 8;
+            }
+        }
+        return bi;
+    }
+
+    public static byte[] BigToArray(this BigInteger n)
+    {
+        byte[] data = n.ToByteArray();
+        byte[] reversed = new byte[data.Length];
+        Array.Copy(data, 0, reversed, 0, data.Length);
+        Array.Reverse(reversed);
+        return reversed;
     }
 }

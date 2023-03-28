@@ -14,7 +14,7 @@ internal static class Program
     private static void Main()
     {
     /*    if (!File.Exists(Application.ExecutablePath + ".config"))
-        {
+        {0312
             File.WriteAllBytes(Application.ExecutablePath + ".config", MyClass.ResourceReadAllBytes("App.config"));
             Process.Start(Application.ExecutablePath);
             return;

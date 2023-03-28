@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Text;
 using Be.Windows.Forms;
 
-namespace CryptoUtility;
 
 public abstract class BInit<T>
 {

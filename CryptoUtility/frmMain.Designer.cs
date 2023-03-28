@@ -29,9 +29,17 @@ namespace CryptoUtility
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.tabCrypto = new System.Windows.Forms.TabPage();
-            this.chkPadding = new System.Windows.Forms.CheckBox();
+            this.chkReversed = new System.Windows.Forms.CheckBox();
+            this.BtnVerifyHash = new System.Windows.Forms.Button();
+            this.BtnSignHash = new System.Windows.Forms.Button();
+            this.chkAutoHash = new System.Windows.Forms.CheckBox();
+            this.chkNewLine = new System.Windows.Forms.CheckBox();
+            this.label69 = new System.Windows.Forms.Label();
+            this.cmbPadding = new System.Windows.Forms.ComboBox();
+            this.label68 = new System.Windows.Forms.Label();
+            this.txtOutputHex = new System.Windows.Forms.TextBox();
+            this.txtHex = new System.Windows.Forms.TextBox();
             this.rbFileBuffer = new System.Windows.Forms.RadioButton();
             this.rbTextBox = new System.Windows.Forms.RadioButton();
             this.label15 = new System.Windows.Forms.Label();
@@ -52,7 +60,7 @@ namespace CryptoUtility
             this.btnUseKeys = new System.Windows.Forms.Button();
             this.btnVerify = new System.Windows.Forms.Button();
             this.btnDecrypt = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btnVerifyALL = new System.Windows.Forms.Button();
             this.btnHashAll = new System.Windows.Forms.Button();
             this.btnSendToHex = new System.Windows.Forms.Button();
             this.btnEncrypt = new System.Windows.Forms.Button();
@@ -68,6 +76,7 @@ namespace CryptoUtility
             this.txtPrivateKey = new System.Windows.Forms.TextBox();
             this.txtPublicKey = new System.Windows.Forms.TextBox();
             this.tabRSA = new System.Windows.Forms.TabPage();
+            this.btnRSAClear = new System.Windows.Forms.Button();
             this.label32 = new System.Windows.Forms.Label();
             this.cmbRSAKeyLen = new System.Windows.Forms.ComboBox();
             this.btnImportPrivateKey = new System.Windows.Forms.Button();
@@ -104,6 +113,10 @@ namespace CryptoUtility
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabQuran = new System.Windows.Forms.TabPage();
+            this.lblQDiacritics = new System.Windows.Forms.Label();
+            this.lblQLetters = new System.Windows.Forms.Label();
+            this.lblQWords = new System.Windows.Forms.Label();
+            this.lblQAyat = new System.Windows.Forms.Label();
             this.txtSoraSearch = new System.Windows.Forms.TextBox();
             this.rbDiacritics = new System.Windows.Forms.RadioButton();
             this.rbNoDiacritics = new System.Windows.Forms.RadioButton();
@@ -282,21 +295,26 @@ namespace CryptoUtility
             this.lblCS2 = new System.Windows.Forms.Label();
             this.lblCS1 = new System.Windows.Forms.Label();
             this.tabEncoding = new System.Windows.Forms.TabPage();
-            this.BtnCalcJommal = new System.Windows.Forms.Button();
-            this.btnUnicodes = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ChkJNible = new System.Windows.Forms.CheckBox();
+            this.rbALL = new System.Windows.Forms.RadioButton();
+            this.rbLines = new System.Windows.Forms.RadioButton();
+            this.rbWords = new System.Windows.Forms.RadioButton();
             this.ChkUseGPU = new System.Windows.Forms.CheckBox();
             this.Btn1To9_64 = new System.Windows.Forms.Button();
             this.Btn1To9_32 = new System.Windows.Forms.Button();
+            this.btnOpenFile = new System.Windows.Forms.Button();
             this.Btn1To9_16 = new System.Windows.Forms.Button();
+            this.btnClearFiles = new System.Windows.Forms.Button();
             this.Btn1TO9_8 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnToHex = new System.Windows.Forms.Button();
+            this.btnUnicodes = new System.Windows.Forms.Button();
             this.btnRun = new System.Windows.Forms.Button();
             this.btnFindKey = new System.Windows.Forms.Button();
+            this.BtnCalcJommal = new System.Windows.Forms.Button();
             this.BrnClearTxtInfo = new System.Windows.Forms.Button();
             this.btnAnalyzeText = new System.Windows.Forms.Button();
-            this.btnOpenFile = new System.Windows.Forms.Button();
-            this.btnClearFiles = new System.Windows.Forms.Button();
             this.grpOptions = new System.Windows.Forms.GroupBox();
             this.label59 = new System.Windows.Forms.Label();
             this.cmbCRC = new System.Windows.Forms.ComboBox();
@@ -329,6 +347,9 @@ namespace CryptoUtility
             this.grpSource = new System.Windows.Forms.GroupBox();
             this.lsSource = new System.Windows.Forms.ListBox();
             this.grpEncodings = new System.Windows.Forms.GroupBox();
+            this.lblLines = new System.Windows.Forms.Label();
+            this.lblWords = new System.Windows.Forms.Label();
+            this.lblLetters = new System.Windows.Forms.Label();
             this.rtxtData = new System.Windows.Forms.TextBox();
             this.txtDestEnc = new System.Windows.Forms.TextBox();
             this.txtSourceEnc = new System.Windows.Forms.TextBox();
@@ -399,6 +420,7 @@ namespace CryptoUtility
             this.txtPrimeQ = new System.Windows.Forms.TextBox();
             this.txtPrimeP = new System.Windows.Forms.TextBox();
             this.tabDSA = new System.Windows.Forms.TabPage();
+            this.btnClearDSA = new System.Windows.Forms.Button();
             this.cmbDSAKeyLen = new System.Windows.Forms.ComboBox();
             this.btnDSAImportPrivate = new System.Windows.Forms.Button();
             this.btnDSAImportPublic = new System.Windows.Forms.Button();
@@ -421,6 +443,7 @@ namespace CryptoUtility
             this.txtDSAPEMPrivate = new System.Windows.Forms.TextBox();
             this.txtDSAPEMPublic = new System.Windows.Forms.TextBox();
             this.tabHexViewer = new System.Windows.Forms.TabPage();
+            this.ChkFromFile = new System.Windows.Forms.CheckBox();
             this.hexBox = new Be.Windows.Forms.HexBox();
             this.lblTest = new System.Windows.Forms.Label();
             this.btnTestCRC = new System.Windows.Forms.Button();
@@ -488,12 +511,7 @@ namespace CryptoUtility
             this.chkQR = new System.Windows.Forms.CheckBox();
             this.tabAudioSpectrum = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.waveformPainter2 = new NAudio.Gui.WaveformPainter();
-            this.waveformPainter1 = new NAudio.Gui.WaveformPainter();
             this.label53 = new System.Windows.Forms.Label();
-            this.volumeMeter2 = new NAudio.Gui.VolumeMeter();
-            this.volumeMeter1 = new NAudio.Gui.VolumeMeter();
-            this.volumeSlider1 = new NAudio.Gui.VolumeSlider();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label52 = new System.Windows.Forms.Label();
             this.lblDB = new System.Windows.Forms.Label();
@@ -563,6 +581,7 @@ namespace CryptoUtility
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tabEncoding.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpOptions.SuspendLayout();
             this.grpSource.SuspendLayout();
@@ -597,7 +616,16 @@ namespace CryptoUtility
             // tabCrypto
             // 
             this.tabCrypto.BackColor = System.Drawing.Color.LightGray;
-            this.tabCrypto.Controls.Add(this.chkPadding);
+            this.tabCrypto.Controls.Add(this.chkReversed);
+            this.tabCrypto.Controls.Add(this.BtnVerifyHash);
+            this.tabCrypto.Controls.Add(this.BtnSignHash);
+            this.tabCrypto.Controls.Add(this.chkAutoHash);
+            this.tabCrypto.Controls.Add(this.chkNewLine);
+            this.tabCrypto.Controls.Add(this.label69);
+            this.tabCrypto.Controls.Add(this.cmbPadding);
+            this.tabCrypto.Controls.Add(this.label68);
+            this.tabCrypto.Controls.Add(this.txtOutputHex);
+            this.tabCrypto.Controls.Add(this.txtHex);
             this.tabCrypto.Controls.Add(this.rbFileBuffer);
             this.tabCrypto.Controls.Add(this.rbTextBox);
             this.tabCrypto.Controls.Add(this.label15);
@@ -618,7 +646,7 @@ namespace CryptoUtility
             this.tabCrypto.Controls.Add(this.btnUseKeys);
             this.tabCrypto.Controls.Add(this.btnVerify);
             this.tabCrypto.Controls.Add(this.btnDecrypt);
-            this.tabCrypto.Controls.Add(this.button6);
+            this.tabCrypto.Controls.Add(this.btnVerifyALL);
             this.tabCrypto.Controls.Add(this.btnHashAll);
             this.tabCrypto.Controls.Add(this.btnSendToHex);
             this.tabCrypto.Controls.Add(this.btnEncrypt);
@@ -641,21 +669,123 @@ namespace CryptoUtility
             this.tabCrypto.TabIndex = 1;
             this.tabCrypto.Text = "Crypto";
             // 
-            // chkPadding
+            // chkReversed
             // 
-            this.chkPadding.AutoSize = true;
-            this.chkPadding.Location = new System.Drawing.Point(926, 691);
-            this.chkPadding.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.chkPadding.Name = "chkPadding";
-            this.chkPadding.Size = new System.Drawing.Size(137, 29);
-            this.chkPadding.TabIndex = 10;
-            this.chkPadding.Text = "Use Padding";
-            this.chkPadding.UseVisualStyleBackColor = true;
+            this.chkReversed.AutoSize = true;
+            this.chkReversed.Location = new System.Drawing.Point(1377, 833);
+            this.chkReversed.Name = "chkReversed";
+            this.chkReversed.Size = new System.Drawing.Size(98, 29);
+            this.chkReversed.TabIndex = 37;
+            this.chkReversed.Text = "Reverse";
+            this.chkReversed.UseVisualStyleBackColor = true;
+            this.chkReversed.CheckedChanged += new System.EventHandler(this.chkReversed_CheckedChanged);
+            // 
+            // BtnVerifyHash
+            // 
+            this.BtnVerifyHash.Location = new System.Drawing.Point(724, 764);
+            this.BtnVerifyHash.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BtnVerifyHash.Name = "BtnVerifyHash";
+            this.BtnVerifyHash.Size = new System.Drawing.Size(167, 30);
+            this.BtnVerifyHash.TabIndex = 36;
+            this.BtnVerifyHash.Text = "Verify Hah";
+            this.BtnVerifyHash.UseVisualStyleBackColor = true;
+            this.BtnVerifyHash.Click += new System.EventHandler(this.BtnVerifyHash_Click);
+            // 
+            // BtnSignHash
+            // 
+            this.BtnSignHash.Location = new System.Drawing.Point(540, 764);
+            this.BtnSignHash.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BtnSignHash.Name = "BtnSignHash";
+            this.BtnSignHash.Size = new System.Drawing.Size(172, 30);
+            this.BtnSignHash.TabIndex = 35;
+            this.BtnSignHash.Text = "Sign Hash";
+            this.BtnSignHash.UseVisualStyleBackColor = true;
+            this.BtnSignHash.Click += new System.EventHandler(this.BtnSignHash_Click);
+            // 
+            // chkAutoHash
+            // 
+            this.chkAutoHash.AutoSize = true;
+            this.chkAutoHash.Checked = true;
+            this.chkAutoHash.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAutoHash.Location = new System.Drawing.Point(1255, 833);
+            this.chkAutoHash.Name = "chkAutoHash";
+            this.chkAutoHash.Size = new System.Drawing.Size(122, 29);
+            this.chkAutoHash.TabIndex = 34;
+            this.chkAutoHash.Text = "Auto Hash";
+            this.chkAutoHash.UseVisualStyleBackColor = true;
+            this.chkAutoHash.CheckedChanged += new System.EventHandler(this.chkAutoHash_CheckedChanged);
+            // 
+            // chkNewLine
+            // 
+            this.chkNewLine.AutoSize = true;
+            this.chkNewLine.Location = new System.Drawing.Point(1255, 802);
+            this.chkNewLine.Name = "chkNewLine";
+            this.chkNewLine.Size = new System.Drawing.Size(190, 29);
+            this.chkNewLine.TabIndex = 33;
+            this.chkNewLine.Text = "NewLine (Linux/OS)";
+            this.chkNewLine.UseVisualStyleBackColor = true;
+            this.chkNewLine.CheckedChanged += new System.EventHandler(this.chkNewLine_CheckedChanged);
+            // 
+            // label69
+            // 
+            this.label69.BackColor = System.Drawing.SystemColors.Info;
+            this.label69.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label69.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label69.Location = new System.Drawing.Point(1038, 30);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(208, 40);
+            this.label69.TabIndex = 32;
+            this.label69.Text = "Padding";
+            this.label69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cmbPadding
+            // 
+            this.cmbPadding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPadding.FormattingEnabled = true;
+            this.cmbPadding.Items.AddRange(new object[] {
+            "None",
+            "PSS",
+            "PKCS1"});
+            this.cmbPadding.Location = new System.Drawing.Point(1038, 78);
+            this.cmbPadding.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cmbPadding.Name = "cmbPadding";
+            this.cmbPadding.Size = new System.Drawing.Size(208, 33);
+            this.cmbPadding.TabIndex = 31;
+            this.cmbPadding.SelectedIndexChanged += new System.EventHandler(this.cmbPadding_SelectedIndexChanged);
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(26, 645);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(114, 25);
+            this.label68.TabIndex = 28;
+            this.label68.Text = "Output (Hex)";
+            // 
+            // txtOutputHex
+            // 
+            this.txtOutputHex.Location = new System.Drawing.Point(180, 637);
+            this.txtOutputHex.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtOutputHex.Multiline = true;
+            this.txtOutputHex.Name = "txtOutputHex";
+            this.txtOutputHex.Size = new System.Drawing.Size(1262, 89);
+            this.txtOutputHex.TabIndex = 27;
+            this.txtOutputHex.TextChanged += new System.EventHandler(this.txtOutputHex_TextChanged);
+            // 
+            // txtHex
+            // 
+            this.txtHex.Location = new System.Drawing.Point(822, 293);
+            this.txtHex.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtHex.Multiline = true;
+            this.txtHex.Name = "txtHex";
+            this.txtHex.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtHex.Size = new System.Drawing.Size(622, 161);
+            this.txtHex.TabIndex = 26;
             // 
             // rbFileBuffer
             // 
             this.rbFileBuffer.AutoSize = true;
-            this.rbFileBuffer.Location = new System.Drawing.Point(1293, 688);
+            this.rbFileBuffer.Location = new System.Drawing.Point(1255, 734);
             this.rbFileBuffer.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbFileBuffer.Name = "rbFileBuffer";
             this.rbFileBuffer.Size = new System.Drawing.Size(149, 29);
@@ -667,7 +797,7 @@ namespace CryptoUtility
             // 
             this.rbTextBox.AutoSize = true;
             this.rbTextBox.Checked = true;
-            this.rbTextBox.Location = new System.Drawing.Point(1136, 689);
+            this.rbTextBox.Location = new System.Drawing.Point(1255, 765);
             this.rbTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rbTextBox.Name = "rbTextBox";
             this.rbTextBox.Size = new System.Drawing.Size(130, 29);
@@ -681,9 +811,9 @@ namespace CryptoUtility
             this.label15.BackColor = System.Drawing.SystemColors.Info;
             this.label15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label15.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label15.Location = new System.Drawing.Point(1136, 30);
+            this.label15.Location = new System.Drawing.Point(1252, 30);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(309, 43);
+            this.label15.Size = new System.Drawing.Size(190, 40);
             this.label15.TabIndex = 6;
             this.label15.Text = "Encryption Key";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -695,7 +825,7 @@ namespace CryptoUtility
             this.label14.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label14.Location = new System.Drawing.Point(822, 30);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(306, 43);
+            this.label14.Size = new System.Drawing.Size(210, 40);
             this.label14.TabIndex = 6;
             this.label14.Text = "Hash Algorithm";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -705,9 +835,9 @@ namespace CryptoUtility
             this.label13.BackColor = System.Drawing.SystemColors.Info;
             this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label13.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(587, 30);
+            this.label13.Location = new System.Drawing.Point(614, 30);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(218, 43);
+            this.label13.Size = new System.Drawing.Size(190, 40);
             this.label13.TabIndex = 6;
             this.label13.Text = "Data Format";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -719,7 +849,7 @@ namespace CryptoUtility
             this.label31.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label31.Location = new System.Drawing.Point(182, 30);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(192, 43);
+            this.label31.Size = new System.Drawing.Size(230, 40);
             this.label31.TabIndex = 6;
             this.label31.Text = "Crypto Algorithm";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -735,10 +865,10 @@ namespace CryptoUtility
             "edDSA",
             "ECC",
             "QuDSA"});
-            this.cmbCryptoAlgorithm.Location = new System.Drawing.Point(182, 78);
+            this.cmbCryptoAlgorithm.Location = new System.Drawing.Point(180, 78);
             this.cmbCryptoAlgorithm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbCryptoAlgorithm.Name = "cmbCryptoAlgorithm";
-            this.cmbCryptoAlgorithm.Size = new System.Drawing.Size(192, 33);
+            this.cmbCryptoAlgorithm.Size = new System.Drawing.Size(232, 33);
             this.cmbCryptoAlgorithm.TabIndex = 0;
             // 
             // label5
@@ -746,9 +876,9 @@ namespace CryptoUtility
             this.label5.BackColor = System.Drawing.SystemColors.Info;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label5.Font = new System.Drawing.Font("Tahoma", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(381, 30);
+            this.label5.Location = new System.Drawing.Point(418, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(199, 43);
+            this.label5.Size = new System.Drawing.Size(190, 40);
             this.label5.TabIndex = 6;
             this.label5.Text = "Key Length";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -762,10 +892,10 @@ namespace CryptoUtility
             "1024",
             "2048",
             "4096"});
-            this.cmbKeyLength.Location = new System.Drawing.Point(381, 78);
+            this.cmbKeyLength.Location = new System.Drawing.Point(418, 78);
             this.cmbKeyLength.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbKeyLength.Name = "cmbKeyLength";
-            this.cmbKeyLength.Size = new System.Drawing.Size(198, 33);
+            this.cmbKeyLength.Size = new System.Drawing.Size(190, 33);
             this.cmbKeyLength.TabIndex = 1;
             // 
             // cmbData
@@ -776,10 +906,10 @@ namespace CryptoUtility
             "Base64",
             "Text",
             "Hex"});
-            this.cmbData.Location = new System.Drawing.Point(587, 78);
+            this.cmbData.Location = new System.Drawing.Point(614, 78);
             this.cmbData.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbData.Name = "cmbData";
-            this.cmbData.Size = new System.Drawing.Size(217, 33);
+            this.cmbData.Size = new System.Drawing.Size(190, 33);
             this.cmbData.TabIndex = 2;
             this.cmbData.SelectedIndexChanged += new System.EventHandler(this.CmbData_SelectedIndexChanged);
             // 
@@ -790,11 +920,12 @@ namespace CryptoUtility
             this.cmbEncryptionKey.Items.AddRange(new object[] {
             "Public Key",
             "Private Key"});
-            this.cmbEncryptionKey.Location = new System.Drawing.Point(1136, 78);
+            this.cmbEncryptionKey.Location = new System.Drawing.Point(1252, 78);
             this.cmbEncryptionKey.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbEncryptionKey.Name = "cmbEncryptionKey";
-            this.cmbEncryptionKey.Size = new System.Drawing.Size(308, 33);
+            this.cmbEncryptionKey.Size = new System.Drawing.Size(190, 33);
             this.cmbEncryptionKey.TabIndex = 4;
+            this.cmbEncryptionKey.SelectedIndexChanged += new System.EventHandler(this.cmbEncryptionKey_SelectedIndexChanged);
             // 
             // cmbHash
             // 
@@ -806,29 +937,31 @@ namespace CryptoUtility
             "SHA384",
             "SHA512",
             "MD5"});
-            this.cmbHash.Location = new System.Drawing.Point(821, 78);
+            this.cmbHash.Location = new System.Drawing.Point(822, 78);
             this.cmbHash.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cmbHash.Name = "cmbHash";
-            this.cmbHash.Size = new System.Drawing.Size(307, 33);
+            this.cmbHash.Size = new System.Drawing.Size(210, 33);
             this.cmbHash.TabIndex = 3;
+            this.cmbHash.SelectedIndexChanged += new System.EventHandler(this.cmbHash_SelectedIndexChanged);
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(1272, 728);
+            this.btnClear.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnClear.Location = new System.Drawing.Point(18, 802);
             this.btnClear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(172, 133);
+            this.btnClear.Size = new System.Drawing.Size(154, 60);
             this.btnClear.TabIndex = 25;
             this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // btnHash
             // 
-            this.btnHash.Location = new System.Drawing.Point(898, 728);
+            this.btnHash.Location = new System.Drawing.Point(898, 734);
             this.btnHash.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnHash.Name = "btnHash";
-            this.btnHash.Size = new System.Drawing.Size(172, 66);
+            this.btnHash.Size = new System.Drawing.Size(172, 60);
             this.btnHash.TabIndex = 17;
             this.btnHash.Text = "Hash";
             this.btnHash.UseVisualStyleBackColor = true;
@@ -836,10 +969,10 @@ namespace CryptoUtility
             // 
             // btnSaveKeys
             // 
-            this.btnSaveKeys.Location = new System.Drawing.Point(1077, 795);
+            this.btnSaveKeys.Location = new System.Drawing.Point(1077, 802);
             this.btnSaveKeys.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSaveKeys.Name = "btnSaveKeys";
-            this.btnSaveKeys.Size = new System.Drawing.Size(172, 66);
+            this.btnSaveKeys.Size = new System.Drawing.Size(172, 60);
             this.btnSaveKeys.TabIndex = 24;
             this.btnSaveKeys.Text = "Save Keys";
             this.btnSaveKeys.UseVisualStyleBackColor = true;
@@ -847,10 +980,10 @@ namespace CryptoUtility
             // 
             // btnLoadKeys
             // 
-            this.btnLoadKeys.Location = new System.Drawing.Point(898, 795);
+            this.btnLoadKeys.Location = new System.Drawing.Point(898, 802);
             this.btnLoadKeys.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLoadKeys.Name = "btnLoadKeys";
-            this.btnLoadKeys.Size = new System.Drawing.Size(172, 66);
+            this.btnLoadKeys.Size = new System.Drawing.Size(172, 60);
             this.btnLoadKeys.TabIndex = 23;
             this.btnLoadKeys.Text = "Load Keys";
             this.btnLoadKeys.UseVisualStyleBackColor = true;
@@ -858,10 +991,10 @@ namespace CryptoUtility
             // 
             // btnLoadFile
             // 
-            this.btnLoadFile.Location = new System.Drawing.Point(1077, 728);
+            this.btnLoadFile.Location = new System.Drawing.Point(1077, 734);
             this.btnLoadFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLoadFile.Name = "btnLoadFile";
-            this.btnLoadFile.Size = new System.Drawing.Size(172, 66);
+            this.btnLoadFile.Size = new System.Drawing.Size(172, 60);
             this.btnLoadFile.TabIndex = 18;
             this.btnLoadFile.Text = "Load File";
             this.btnLoadFile.UseVisualStyleBackColor = true;
@@ -869,10 +1002,10 @@ namespace CryptoUtility
             // 
             // btnUseKeys
             // 
-            this.btnUseKeys.Location = new System.Drawing.Point(719, 795);
+            this.btnUseKeys.Location = new System.Drawing.Point(719, 802);
             this.btnUseKeys.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnUseKeys.Name = "btnUseKeys";
-            this.btnUseKeys.Size = new System.Drawing.Size(172, 66);
+            this.btnUseKeys.Size = new System.Drawing.Size(172, 60);
             this.btnUseKeys.TabIndex = 22;
             this.btnUseKeys.Text = "Use Keys";
             this.btnUseKeys.UseVisualStyleBackColor = true;
@@ -880,41 +1013,43 @@ namespace CryptoUtility
             // 
             // btnVerify
             // 
-            this.btnVerify.Location = new System.Drawing.Point(719, 728);
+            this.btnVerify.Location = new System.Drawing.Point(724, 734);
             this.btnVerify.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnVerify.Name = "btnVerify";
-            this.btnVerify.Size = new System.Drawing.Size(172, 66);
+            this.btnVerify.Size = new System.Drawing.Size(167, 30);
             this.btnVerify.TabIndex = 16;
-            this.btnVerify.Text = "Verify";
+            this.btnVerify.Text = "Verify Data";
             this.btnVerify.UseVisualStyleBackColor = true;
             this.btnVerify.Click += new System.EventHandler(this.BtnVerify_Click);
             // 
             // btnDecrypt
             // 
-            this.btnDecrypt.Location = new System.Drawing.Point(361, 728);
+            this.btnDecrypt.Location = new System.Drawing.Point(361, 734);
             this.btnDecrypt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDecrypt.Name = "btnDecrypt";
-            this.btnDecrypt.Size = new System.Drawing.Size(172, 66);
+            this.btnDecrypt.Size = new System.Drawing.Size(172, 60);
             this.btnDecrypt.TabIndex = 14;
             this.btnDecrypt.Text = "Decrypt";
             this.btnDecrypt.UseVisualStyleBackColor = true;
             this.btnDecrypt.Click += new System.EventHandler(this.BtnDecrypt_Click);
             // 
-            // button6
+            // btnVerifyALL
             // 
-            this.button6.Location = new System.Drawing.Point(540, 795);
-            this.button6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(172, 66);
-            this.button6.TabIndex = 21;
-            this.button6.UseVisualStyleBackColor = true;
+            this.btnVerifyALL.Location = new System.Drawing.Point(540, 802);
+            this.btnVerifyALL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnVerifyALL.Name = "btnVerifyALL";
+            this.btnVerifyALL.Size = new System.Drawing.Size(172, 60);
+            this.btnVerifyALL.TabIndex = 21;
+            this.btnVerifyALL.Text = "Verify ALL";
+            this.btnVerifyALL.UseVisualStyleBackColor = true;
+            this.btnVerifyALL.Click += new System.EventHandler(this.btnVerifyALL_Click);
             // 
             // btnHashAll
             // 
-            this.btnHashAll.Location = new System.Drawing.Point(361, 795);
+            this.btnHashAll.Location = new System.Drawing.Point(361, 802);
             this.btnHashAll.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnHashAll.Name = "btnHashAll";
-            this.btnHashAll.Size = new System.Drawing.Size(172, 66);
+            this.btnHashAll.Size = new System.Drawing.Size(172, 60);
             this.btnHashAll.TabIndex = 20;
             this.btnHashAll.Text = "Hash (ALL)";
             this.btnHashAll.UseVisualStyleBackColor = true;
@@ -922,10 +1057,10 @@ namespace CryptoUtility
             // 
             // btnSendToHex
             // 
-            this.btnSendToHex.Location = new System.Drawing.Point(182, 795);
+            this.btnSendToHex.Location = new System.Drawing.Point(182, 802);
             this.btnSendToHex.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSendToHex.Name = "btnSendToHex";
-            this.btnSendToHex.Size = new System.Drawing.Size(172, 66);
+            this.btnSendToHex.Size = new System.Drawing.Size(172, 60);
             this.btnSendToHex.TabIndex = 19;
             this.btnSendToHex.Text = "Bufffer > Hex";
             this.btnSendToHex.UseVisualStyleBackColor = true;
@@ -933,10 +1068,10 @@ namespace CryptoUtility
             // 
             // btnEncrypt
             // 
-            this.btnEncrypt.Location = new System.Drawing.Point(182, 728);
+            this.btnEncrypt.Location = new System.Drawing.Point(182, 734);
             this.btnEncrypt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEncrypt.Name = "btnEncrypt";
-            this.btnEncrypt.Size = new System.Drawing.Size(172, 66);
+            this.btnEncrypt.Size = new System.Drawing.Size(172, 60);
             this.btnEncrypt.TabIndex = 13;
             this.btnEncrypt.Text = "Encrypt";
             this.btnEncrypt.UseVisualStyleBackColor = true;
@@ -944,12 +1079,12 @@ namespace CryptoUtility
             // 
             // btnSign
             // 
-            this.btnSign.Location = new System.Drawing.Point(540, 728);
+            this.btnSign.Location = new System.Drawing.Point(540, 734);
             this.btnSign.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSign.Name = "btnSign";
-            this.btnSign.Size = new System.Drawing.Size(172, 66);
+            this.btnSign.Size = new System.Drawing.Size(172, 30);
             this.btnSign.TabIndex = 15;
-            this.btnSign.Text = "Sign";
+            this.btnSign.Text = "Sign Data";
             this.btnSign.UseVisualStyleBackColor = true;
             this.btnSign.Click += new System.EventHandler(this.BtnSign_Click);
             // 
@@ -965,7 +1100,7 @@ namespace CryptoUtility
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(26, 483);
+            this.label6.Location = new System.Drawing.Point(26, 467);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(94, 25);
             this.label6.TabIndex = 1;
@@ -1000,12 +1135,13 @@ namespace CryptoUtility
             // 
             // txtOutput
             // 
-            this.txtOutput.Location = new System.Drawing.Point(182, 534);
+            this.txtOutput.Location = new System.Drawing.Point(180, 540);
             this.txtOutput.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
-            this.txtOutput.Size = new System.Drawing.Size(1262, 146);
+            this.txtOutput.Size = new System.Drawing.Size(1262, 89);
             this.txtOutput.TabIndex = 9;
+            this.txtOutput.TextChanged += new System.EventHandler(this.txtOutput_TextChanged);
             // 
             // txtHash
             // 
@@ -1013,7 +1149,7 @@ namespace CryptoUtility
             this.txtHash.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtHash.Multiline = true;
             this.txtHash.Name = "txtHash";
-            this.txtHash.Size = new System.Drawing.Size(1262, 61);
+            this.txtHash.Size = new System.Drawing.Size(1262, 68);
             this.txtHash.TabIndex = 8;
             // 
             // txtData
@@ -1022,7 +1158,8 @@ namespace CryptoUtility
             this.txtData.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtData.Multiline = true;
             this.txtData.Name = "txtData";
-            this.txtData.Size = new System.Drawing.Size(1262, 161);
+            this.txtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtData.Size = new System.Drawing.Size(622, 161);
             this.txtData.TabIndex = 7;
             this.txtData.TextChanged += new System.EventHandler(this.TxtData_TextChanged);
             // 
@@ -1032,8 +1169,10 @@ namespace CryptoUtility
             this.txtPrivateKey.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPrivateKey.Multiline = true;
             this.txtPrivateKey.Name = "txtPrivateKey";
+            this.txtPrivateKey.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPrivateKey.Size = new System.Drawing.Size(622, 161);
             this.txtPrivateKey.TabIndex = 6;
+            this.txtPrivateKey.TextChanged += new System.EventHandler(this.txtPrivateKey_TextChanged);
             this.txtPrivateKey.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DragDrop);
             this.txtPrivateKey.DragOver += new System.Windows.Forms.DragEventHandler(this.TextBox_DragOver);
             // 
@@ -1044,14 +1183,17 @@ namespace CryptoUtility
             this.txtPublicKey.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPublicKey.Multiline = true;
             this.txtPublicKey.Name = "txtPublicKey";
+            this.txtPublicKey.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtPublicKey.Size = new System.Drawing.Size(622, 161);
             this.txtPublicKey.TabIndex = 5;
+            this.txtPublicKey.TextChanged += new System.EventHandler(this.txtPublicKey_TextChanged);
             this.txtPublicKey.DragDrop += new System.Windows.Forms.DragEventHandler(this.TextBox_DragDrop);
             this.txtPublicKey.DragEnter += new System.Windows.Forms.DragEventHandler(this.TextBox_DragOver);
             // 
             // tabRSA
             // 
             this.tabRSA.BackColor = System.Drawing.Color.LightGray;
+            this.tabRSA.Controls.Add(this.btnRSAClear);
             this.tabRSA.Controls.Add(this.label32);
             this.tabRSA.Controls.Add(this.cmbRSAKeyLen);
             this.tabRSA.Controls.Add(this.btnImportPrivateKey);
@@ -1093,6 +1235,18 @@ namespace CryptoUtility
             this.tabRSA.Size = new System.Drawing.Size(1480, 876);
             this.tabRSA.TabIndex = 0;
             this.tabRSA.Text = "RSA Keys";
+            // 
+            // btnRSAClear
+            // 
+            this.btnRSAClear.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnRSAClear.Location = new System.Drawing.Point(26, 780);
+            this.btnRSAClear.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnRSAClear.Name = "btnRSAClear";
+            this.btnRSAClear.Size = new System.Drawing.Size(136, 66);
+            this.btnRSAClear.TabIndex = 19;
+            this.btnRSAClear.Text = "Clear";
+            this.btnRSAClear.UseVisualStyleBackColor = false;
+            this.btnRSAClear.Click += new System.EventHandler(this.btnRSAClear_Click);
             // 
             // label32
             // 
@@ -1162,7 +1316,7 @@ namespace CryptoUtility
             this.btnCalcD.Name = "btnCalcD";
             this.btnCalcD.Size = new System.Drawing.Size(90, 66);
             this.btnCalcD.TabIndex = 12;
-            this.btnCalcD.Text = "Calc D";
+            this.btnCalcD.Text = "Calc *";
             this.btnCalcD.UseVisualStyleBackColor = true;
             this.btnCalcD.Click += new System.EventHandler(this.BtnCalcD_Click);
             // 
@@ -1190,7 +1344,7 @@ namespace CryptoUtility
             // 
             // txtInverseQ
             // 
-            this.txtInverseQ.Location = new System.Drawing.Point(168, 705);
+            this.txtInverseQ.Location = new System.Drawing.Point(168, 716);
             this.txtInverseQ.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtInverseQ.Multiline = true;
             this.txtInverseQ.Name = "txtInverseQ";
@@ -1199,7 +1353,7 @@ namespace CryptoUtility
             // 
             // txtDQ
             // 
-            this.txtDQ.Location = new System.Drawing.Point(168, 639);
+            this.txtDQ.Location = new System.Drawing.Point(168, 649);
             this.txtDQ.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDQ.Multiline = true;
             this.txtDQ.Name = "txtDQ";
@@ -1208,16 +1362,16 @@ namespace CryptoUtility
             // 
             // txtDP
             // 
-            this.txtDP.Location = new System.Drawing.Point(168, 574);
+            this.txtDP.Location = new System.Drawing.Point(168, 585);
             this.txtDP.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDP.Multiline = true;
             this.txtDP.Name = "txtDP";
-            this.txtDP.Size = new System.Drawing.Size(1266, 58);
+            this.txtDP.Size = new System.Drawing.Size(1266, 56);
             this.txtDP.TabIndex = 9;
             // 
             // txtQ
             // 
-            this.txtQ.Location = new System.Drawing.Point(168, 508);
+            this.txtQ.Location = new System.Drawing.Point(168, 521);
             this.txtQ.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtQ.Multiline = true;
             this.txtQ.Name = "txtQ";
@@ -1226,7 +1380,7 @@ namespace CryptoUtility
             // 
             // txtP
             // 
-            this.txtP.Location = new System.Drawing.Point(168, 442);
+            this.txtP.Location = new System.Drawing.Point(168, 457);
             this.txtP.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtP.Multiline = true;
             this.txtP.Name = "txtP";
@@ -1235,7 +1389,7 @@ namespace CryptoUtility
             // 
             // txtN
             // 
-            this.txtN.Location = new System.Drawing.Point(168, 343);
+            this.txtN.Location = new System.Drawing.Point(168, 361);
             this.txtN.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtN.Multiline = true;
             this.txtN.Name = "txtN";
@@ -1248,7 +1402,7 @@ namespace CryptoUtility
             this.txtD.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtD.Multiline = true;
             this.txtD.Name = "txtD";
-            this.txtD.Size = new System.Drawing.Size(1265, 61);
+            this.txtD.Size = new System.Drawing.Size(1265, 81);
             this.txtD.TabIndex = 5;
             // 
             // txtE
@@ -1388,7 +1542,7 @@ namespace CryptoUtility
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(29, 347);
+            this.label2.Location = new System.Drawing.Point(29, 366);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 25);
             this.label2.TabIndex = 2;
@@ -1454,6 +1608,10 @@ namespace CryptoUtility
             // tabQuran
             // 
             this.tabQuran.BackColor = System.Drawing.Color.LightGray;
+            this.tabQuran.Controls.Add(this.lblQDiacritics);
+            this.tabQuran.Controls.Add(this.lblQLetters);
+            this.tabQuran.Controls.Add(this.lblQWords);
+            this.tabQuran.Controls.Add(this.lblQAyat);
             this.tabQuran.Controls.Add(this.txtSoraSearch);
             this.tabQuran.Controls.Add(this.rbDiacritics);
             this.tabQuran.Controls.Add(this.rbNoDiacritics);
@@ -1478,6 +1636,51 @@ namespace CryptoUtility
             this.tabQuran.Size = new System.Drawing.Size(1480, 876);
             this.tabQuran.TabIndex = 5;
             this.tabQuran.Text = "Quran Text";
+            this.tabQuran.Click += new System.EventHandler(this.tabQuran_Click);
+            // 
+            // lblQDiacritics
+            // 
+            this.lblQDiacritics.BackColor = System.Drawing.Color.FloralWhite;
+            this.lblQDiacritics.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblQDiacritics.Location = new System.Drawing.Point(939, 361);
+            this.lblQDiacritics.Name = "lblQDiacritics";
+            this.lblQDiacritics.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblQDiacritics.Size = new System.Drawing.Size(275, 31);
+            this.lblQDiacritics.TabIndex = 17;
+            this.lblQDiacritics.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblQLetters
+            // 
+            this.lblQLetters.BackColor = System.Drawing.Color.FloralWhite;
+            this.lblQLetters.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblQLetters.Location = new System.Drawing.Point(593, 361);
+            this.lblQLetters.Name = "lblQLetters";
+            this.lblQLetters.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblQLetters.Size = new System.Drawing.Size(346, 31);
+            this.lblQLetters.TabIndex = 16;
+            this.lblQLetters.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblQWords
+            // 
+            this.lblQWords.BackColor = System.Drawing.Color.FloralWhite;
+            this.lblQWords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblQWords.Location = new System.Drawing.Point(320, 361);
+            this.lblQWords.Name = "lblQWords";
+            this.lblQWords.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblQWords.Size = new System.Drawing.Size(275, 31);
+            this.lblQWords.TabIndex = 15;
+            this.lblQWords.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblQAyat
+            // 
+            this.lblQAyat.BackColor = System.Drawing.Color.FloralWhite;
+            this.lblQAyat.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblQAyat.Location = new System.Drawing.Point(45, 361);
+            this.lblQAyat.Name = "lblQAyat";
+            this.lblQAyat.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblQAyat.Size = new System.Drawing.Size(275, 31);
+            this.lblQAyat.TabIndex = 14;
+            this.lblQAyat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtSoraSearch
             // 
@@ -1579,6 +1782,7 @@ namespace CryptoUtility
             this.dgvQuran.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvQuran.Size = new System.Drawing.Size(1166, 424);
             this.dgvQuran.TabIndex = 5;
+            this.dgvQuran.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQuran_CellContentClick);
             this.dgvQuran.Click += new System.EventHandler(this.DgvQuran_Click);
             // 
             // Serial
@@ -1712,8 +1916,9 @@ namespace CryptoUtility
             this.txtQuranText.ReadOnly = true;
             this.txtQuranText.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.txtQuranText.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtQuranText.Size = new System.Drawing.Size(1166, 321);
+            this.txtQuranText.Size = new System.Drawing.Size(1166, 297);
             this.txtQuranText.TabIndex = 4;
+            this.txtQuranText.TextChanged += new System.EventHandler(this.TxtQuranText_TextChanged);
             // 
             // label38
             // 
@@ -2459,7 +2664,7 @@ namespace CryptoUtility
             this.lblCSS1.Size = new System.Drawing.Size(39, 53);
             this.lblCSS1.TabIndex = 102;
             this.lblCSS1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblCSS1.Click += new System.EventHandler(this.lblCSS1_Click);
+            this.lblCSS1.Click += new System.EventHandler(this.LblCSS1_Click);
             // 
             // lblCurCharset
             // 
@@ -3779,12 +3984,13 @@ namespace CryptoUtility
             // tabEncoding
             // 
             this.tabEncoding.BackColor = System.Drawing.Color.LightGray;
-            this.tabEncoding.Controls.Add(this.BtnCalcJommal);
-            this.tabEncoding.Controls.Add(this.btnUnicodes);
+            this.tabEncoding.Controls.Add(this.groupBox2);
             this.tabEncoding.Controls.Add(this.ChkUseGPU);
             this.tabEncoding.Controls.Add(this.Btn1To9_64);
             this.tabEncoding.Controls.Add(this.Btn1To9_32);
+            this.tabEncoding.Controls.Add(this.btnOpenFile);
             this.tabEncoding.Controls.Add(this.Btn1To9_16);
+            this.tabEncoding.Controls.Add(this.btnClearFiles);
             this.tabEncoding.Controls.Add(this.Btn1TO9_8);
             this.tabEncoding.Controls.Add(this.groupBox1);
             this.tabEncoding.Controls.Add(this.grpOptions);
@@ -3800,28 +4006,70 @@ namespace CryptoUtility
             this.tabEncoding.Enter += new System.EventHandler(this.TabEncoding_Enter);
             this.tabEncoding.Leave += new System.EventHandler(this.TabEncoding_Leave);
             // 
-            // BtnCalcJommal
+            // groupBox2
             // 
-            this.BtnCalcJommal.Enabled = false;
-            this.BtnCalcJommal.Location = new System.Drawing.Point(222, 818);
-            this.BtnCalcJommal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.BtnCalcJommal.Name = "BtnCalcJommal";
-            this.BtnCalcJommal.Size = new System.Drawing.Size(131, 46);
-            this.BtnCalcJommal.TabIndex = 26;
-            this.BtnCalcJommal.Text = "Calc Jommal";
-            this.BtnCalcJommal.UseVisualStyleBackColor = true;
-            this.BtnCalcJommal.Click += new System.EventHandler(this.BtnCalcJommal_Click);
+            this.groupBox2.Controls.Add(this.ChkJNible);
+            this.groupBox2.Controls.Add(this.rbALL);
+            this.groupBox2.Controls.Add(this.rbLines);
+            this.groupBox2.Controls.Add(this.rbWords);
+            this.groupBox2.Location = new System.Drawing.Point(424, 808);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(321, 57);
+            this.groupBox2.TabIndex = 27;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Jommal";
             // 
-            // btnUnicodes
+            // ChkJNible
             // 
-            this.btnUnicodes.Location = new System.Drawing.Point(44, 818);
-            this.btnUnicodes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnUnicodes.Name = "btnUnicodes";
-            this.btnUnicodes.Size = new System.Drawing.Size(165, 46);
-            this.btnUnicodes.TabIndex = 18;
-            this.btnUnicodes.Text = "Get Unicodes";
-            this.btnUnicodes.UseVisualStyleBackColor = true;
-            this.btnUnicodes.Click += new System.EventHandler(this.BtnUnicodes_Click);
+            this.ChkJNible.AutoSize = true;
+            this.ChkJNible.Checked = true;
+            this.ChkJNible.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ChkJNible.Location = new System.Drawing.Point(232, 24);
+            this.ChkJNible.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ChkJNible.Name = "ChkJNible";
+            this.ChkJNible.Size = new System.Drawing.Size(79, 29);
+            this.ChkJNible.TabIndex = 31;
+            this.ChkJNible.Text = "Nible";
+            this.ChkJNible.UseVisualStyleBackColor = true;
+            this.ChkJNible.CheckedChanged += new System.EventHandler(this.ChkJNible_CheckedChanged);
+            // 
+            // rbALL
+            // 
+            this.rbALL.AutoSize = true;
+            this.rbALL.Checked = true;
+            this.rbALL.Location = new System.Drawing.Point(172, 24);
+            this.rbALL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.rbALL.Name = "rbALL";
+            this.rbALL.Size = new System.Drawing.Size(57, 29);
+            this.rbALL.TabIndex = 30;
+            this.rbALL.TabStop = true;
+            this.rbALL.Text = "All";
+            this.rbALL.UseVisualStyleBackColor = true;
+            this.rbALL.CheckedChanged += new System.EventHandler(this.RbJommal_CheckedChanged);
+            // 
+            // rbLines
+            // 
+            this.rbLines.AutoSize = true;
+            this.rbLines.Location = new System.Drawing.Point(95, 24);
+            this.rbLines.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.rbLines.Name = "rbLines";
+            this.rbLines.Size = new System.Drawing.Size(76, 29);
+            this.rbLines.TabIndex = 29;
+            this.rbLines.Text = "Lines";
+            this.rbLines.UseVisualStyleBackColor = true;
+            this.rbLines.CheckedChanged += new System.EventHandler(this.RbJommal_CheckedChanged);
+            // 
+            // rbWords
+            // 
+            this.rbWords.AutoSize = true;
+            this.rbWords.Location = new System.Drawing.Point(6, 24);
+            this.rbWords.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.rbWords.Name = "rbWords";
+            this.rbWords.Size = new System.Drawing.Size(89, 29);
+            this.rbWords.TabIndex = 28;
+            this.rbWords.Text = "Words";
+            this.rbWords.UseVisualStyleBackColor = true;
+            this.rbWords.CheckedChanged += new System.EventHandler(this.RbJommal_CheckedChanged);
             // 
             // ChkUseGPU
             // 
@@ -3857,6 +4105,17 @@ namespace CryptoUtility
             this.Btn1To9_32.UseVisualStyleBackColor = true;
             this.Btn1To9_32.Click += new System.EventHandler(this.Btn1To9_32_Click);
             // 
+            // btnOpenFile
+            // 
+            this.btnOpenFile.Location = new System.Drawing.Point(44, 815);
+            this.btnOpenFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnOpenFile.Name = "btnOpenFile";
+            this.btnOpenFile.Size = new System.Drawing.Size(100, 46);
+            this.btnOpenFile.TabIndex = 0;
+            this.btnOpenFile.Text = "Open";
+            this.btnOpenFile.UseVisualStyleBackColor = true;
+            this.btnOpenFile.Click += new System.EventHandler(this.BtnOpenFile_Click);
+            // 
             // Btn1To9_16
             // 
             this.Btn1To9_16.Location = new System.Drawing.Point(612, 764);
@@ -3867,6 +4126,17 @@ namespace CryptoUtility
             this.Btn1To9_16.Text = "16";
             this.Btn1To9_16.UseVisualStyleBackColor = true;
             this.Btn1To9_16.Click += new System.EventHandler(this.Btn1To9_16_Click);
+            // 
+            // btnClearFiles
+            // 
+            this.btnClearFiles.Location = new System.Drawing.Point(143, 815);
+            this.btnClearFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnClearFiles.Name = "btnClearFiles";
+            this.btnClearFiles.Size = new System.Drawing.Size(100, 46);
+            this.btnClearFiles.TabIndex = 1;
+            this.btnClearFiles.Text = "Clear Files";
+            this.btnClearFiles.UseVisualStyleBackColor = true;
+            this.btnClearFiles.Click += new System.EventHandler(this.BtnClearFiles_Click);
             // 
             // Btn1TO9_8
             // 
@@ -3882,12 +4152,12 @@ namespace CryptoUtility
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnToHex);
+            this.groupBox1.Controls.Add(this.btnUnicodes);
             this.groupBox1.Controls.Add(this.btnRun);
             this.groupBox1.Controls.Add(this.btnFindKey);
+            this.groupBox1.Controls.Add(this.BtnCalcJommal);
             this.groupBox1.Controls.Add(this.BrnClearTxtInfo);
             this.groupBox1.Controls.Add(this.btnAnalyzeText);
-            this.groupBox1.Controls.Add(this.btnOpenFile);
-            this.groupBox1.Controls.Add(this.btnClearFiles);
             this.groupBox1.Location = new System.Drawing.Point(746, 790);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
@@ -3907,6 +4177,17 @@ namespace CryptoUtility
             this.btnToHex.Text = "UTF>Hex";
             this.btnToHex.UseVisualStyleBackColor = true;
             this.btnToHex.Click += new System.EventHandler(this.BtnToHex_Click);
+            // 
+            // btnUnicodes
+            // 
+            this.btnUnicodes.Location = new System.Drawing.Point(395, 28);
+            this.btnUnicodes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnUnicodes.Name = "btnUnicodes";
+            this.btnUnicodes.Size = new System.Drawing.Size(100, 46);
+            this.btnUnicodes.TabIndex = 18;
+            this.btnUnicodes.Text = "Unicodes";
+            this.btnUnicodes.UseVisualStyleBackColor = true;
+            this.btnUnicodes.Click += new System.EventHandler(this.BtnUnicodes_Click);
             // 
             // btnRun
             // 
@@ -3931,6 +4212,18 @@ namespace CryptoUtility
             this.btnFindKey.UseVisualStyleBackColor = true;
             this.btnFindKey.Click += new System.EventHandler(this.BtnFindKey_Click);
             // 
+            // BtnCalcJommal
+            // 
+            this.BtnCalcJommal.Enabled = false;
+            this.BtnCalcJommal.Location = new System.Drawing.Point(493, 28);
+            this.BtnCalcJommal.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.BtnCalcJommal.Name = "BtnCalcJommal";
+            this.BtnCalcJommal.Size = new System.Drawing.Size(100, 46);
+            this.BtnCalcJommal.TabIndex = 27;
+            this.BtnCalcJommal.Text = "Jommal";
+            this.BtnCalcJommal.UseVisualStyleBackColor = true;
+            this.BtnCalcJommal.Click += new System.EventHandler(this.BtnCalcJommal_Click);
+            // 
             // BrnClearTxtInfo
             // 
             this.BrnClearTxtInfo.Location = new System.Drawing.Point(587, 28);
@@ -3952,28 +4245,6 @@ namespace CryptoUtility
             this.btnAnalyzeText.Text = "Analyze";
             this.btnAnalyzeText.UseVisualStyleBackColor = true;
             this.btnAnalyzeText.Click += new System.EventHandler(this.BtnAnalyzeText_Click);
-            // 
-            // btnOpenFile
-            // 
-            this.btnOpenFile.Location = new System.Drawing.Point(394, 28);
-            this.btnOpenFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnOpenFile.Name = "btnOpenFile";
-            this.btnOpenFile.Size = new System.Drawing.Size(100, 46);
-            this.btnOpenFile.TabIndex = 0;
-            this.btnOpenFile.Text = "Open";
-            this.btnOpenFile.UseVisualStyleBackColor = true;
-            this.btnOpenFile.Click += new System.EventHandler(this.BtnOpenFile_Click);
-            // 
-            // btnClearFiles
-            // 
-            this.btnClearFiles.Location = new System.Drawing.Point(491, 28);
-            this.btnClearFiles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnClearFiles.Name = "btnClearFiles";
-            this.btnClearFiles.Size = new System.Drawing.Size(100, 46);
-            this.btnClearFiles.TabIndex = 1;
-            this.btnClearFiles.Text = "Clear Files";
-            this.btnClearFiles.UseVisualStyleBackColor = true;
-            this.btnClearFiles.Click += new System.EventHandler(this.BtnClearFiles_Click);
             // 
             // grpOptions
             // 
@@ -4273,6 +4544,7 @@ namespace CryptoUtility
             this.chkDiacritics.TabIndex = 7;
             this.chkDiacritics.Text = "Discard Diacritics";
             this.chkDiacritics.UseVisualStyleBackColor = true;
+            this.chkDiacritics.CheckedChanged += new System.EventHandler(this.chkDiacritics_CheckedChanged);
             // 
             // chkzStrings
             // 
@@ -4295,7 +4567,6 @@ namespace CryptoUtility
             this.chkDiscardChars.TabIndex = 3;
             this.chkDiscardChars.Text = "Discard Extra Chars";
             this.chkDiscardChars.UseVisualStyleBackColor = true;
-            this.chkDiscardChars.CheckedChanged += new System.EventHandler(this.chkDiscardChars_CheckedChanged);
             // 
             // chkHexText
             // 
@@ -4365,6 +4636,9 @@ namespace CryptoUtility
             // grpEncodings
             // 
             this.grpEncodings.BackColor = System.Drawing.Color.LightGray;
+            this.grpEncodings.Controls.Add(this.lblLines);
+            this.grpEncodings.Controls.Add(this.lblWords);
+            this.grpEncodings.Controls.Add(this.lblLetters);
             this.grpEncodings.Controls.Add(this.rtxtData);
             this.grpEncodings.Controls.Add(this.txtDestEnc);
             this.grpEncodings.Controls.Add(this.txtSourceEnc);
@@ -4382,15 +4656,48 @@ namespace CryptoUtility
             this.grpEncodings.TabStop = false;
             this.grpEncodings.Text = "Encodings";
             // 
+            // lblLines
+            // 
+            this.lblLines.BackColor = System.Drawing.Color.FloralWhite;
+            this.lblLines.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblLines.Location = new System.Drawing.Point(453, 714);
+            this.lblLines.Name = "lblLines";
+            this.lblLines.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblLines.Size = new System.Drawing.Size(215, 42);
+            this.lblLines.TabIndex = 11;
+            this.lblLines.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblWords
+            // 
+            this.lblWords.BackColor = System.Drawing.Color.FloralWhite;
+            this.lblWords.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblWords.Location = new System.Drawing.Point(238, 714);
+            this.lblWords.Name = "lblWords";
+            this.lblWords.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblWords.Size = new System.Drawing.Size(215, 42);
+            this.lblWords.TabIndex = 10;
+            this.lblWords.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblLetters
+            // 
+            this.lblLetters.BackColor = System.Drawing.Color.FloralWhite;
+            this.lblLetters.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblLetters.Location = new System.Drawing.Point(24, 714);
+            this.lblLetters.Name = "lblLetters";
+            this.lblLetters.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lblLetters.Size = new System.Drawing.Size(215, 42);
+            this.lblLetters.TabIndex = 9;
+            this.lblLetters.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // rtxtData
             // 
             this.rtxtData.AllowDrop = true;
-            this.rtxtData.Location = new System.Drawing.Point(24, 436);
+            this.rtxtData.Location = new System.Drawing.Point(24, 302);
             this.rtxtData.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.rtxtData.Multiline = true;
             this.rtxtData.Name = "rtxtData";
             this.rtxtData.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.rtxtData.Size = new System.Drawing.Size(641, 321);
+            this.rtxtData.Size = new System.Drawing.Size(644, 415);
             this.rtxtData.TabIndex = 2;
             this.rtxtData.TextChanged += new System.EventHandler(this.RtxtData_TextChanged);
             this.rtxtData.DragDrop += new System.Windows.Forms.DragEventHandler(this.RtxtData_DragDrop);
@@ -4403,40 +4710,39 @@ namespace CryptoUtility
             // 
             this.txtDestEnc.BackColor = System.Drawing.Color.LightGray;
             this.txtDestEnc.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtDestEnc.Location = new System.Drawing.Point(39, 288);
+            this.txtDestEnc.Location = new System.Drawing.Point(133, 210);
             this.txtDestEnc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtDestEnc.Multiline = true;
             this.txtDestEnc.Name = "txtDestEnc";
             this.txtDestEnc.ReadOnly = true;
-            this.txtDestEnc.Size = new System.Drawing.Size(627, 116);
+            this.txtDestEnc.Size = new System.Drawing.Size(533, 79);
             this.txtDestEnc.TabIndex = 5;
             // 
             // txtSourceEnc
             // 
             this.txtSourceEnc.BackColor = System.Drawing.Color.LightGray;
             this.txtSourceEnc.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtSourceEnc.Location = new System.Drawing.Point(39, 116);
+            this.txtSourceEnc.Location = new System.Drawing.Point(133, 73);
             this.txtSourceEnc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSourceEnc.Multiline = true;
             this.txtSourceEnc.Name = "txtSourceEnc";
             this.txtSourceEnc.ReadOnly = true;
-            this.txtSourceEnc.Size = new System.Drawing.Size(626, 116);
+            this.txtSourceEnc.Size = new System.Drawing.Size(533, 79);
             this.txtSourceEnc.TabIndex = 4;
             // 
             // label35
             // 
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(21, 403);
+            this.label35.Location = new System.Drawing.Point(21, 292);
             this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(101, 25);
+            this.label35.Size = new System.Drawing.Size(0, 25);
             this.label35.TabIndex = 3;
-            this.label35.Text = "Source Text";
             // 
             // labDestEnc
             // 
             this.labDestEnc.AutoSize = true;
-            this.labDestEnc.Location = new System.Drawing.Point(20, 246);
+            this.labDestEnc.Location = new System.Drawing.Point(20, 172);
             this.labDestEnc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labDestEnc.Name = "labDestEnc";
             this.labDestEnc.Size = new System.Drawing.Size(102, 25);
@@ -4447,7 +4753,7 @@ namespace CryptoUtility
             // 
             this.cmbDestEnc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDestEnc.FormattingEnabled = true;
-            this.cmbDestEnc.Location = new System.Drawing.Point(133, 242);
+            this.cmbDestEnc.Location = new System.Drawing.Point(133, 168);
             this.cmbDestEnc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbDestEnc.Name = "cmbDestEnc";
             this.cmbDestEnc.Size = new System.Drawing.Size(532, 33);
@@ -4458,7 +4764,7 @@ namespace CryptoUtility
             // 
             this.cmbSourceEnc.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSourceEnc.FormattingEnabled = true;
-            this.cmbSourceEnc.Location = new System.Drawing.Point(133, 63);
+            this.cmbSourceEnc.Location = new System.Drawing.Point(133, 31);
             this.cmbSourceEnc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbSourceEnc.Name = "cmbSourceEnc";
             this.cmbSourceEnc.Size = new System.Drawing.Size(532, 33);
@@ -4468,7 +4774,7 @@ namespace CryptoUtility
             // labSourceEnc
             // 
             this.labSourceEnc.AutoSize = true;
-            this.labSourceEnc.Location = new System.Drawing.Point(21, 67);
+            this.labSourceEnc.Location = new System.Drawing.Point(21, 35);
             this.labSourceEnc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labSourceEnc.Name = "labSourceEnc";
             this.labSourceEnc.Size = new System.Drawing.Size(66, 25);
@@ -5262,6 +5568,7 @@ namespace CryptoUtility
             // tabDSA
             // 
             this.tabDSA.BackColor = System.Drawing.Color.LightGray;
+            this.tabDSA.Controls.Add(this.btnClearDSA);
             this.tabDSA.Controls.Add(this.cmbDSAKeyLen);
             this.tabDSA.Controls.Add(this.btnDSAImportPrivate);
             this.tabDSA.Controls.Add(this.btnDSAImportPublic);
@@ -5289,6 +5596,18 @@ namespace CryptoUtility
             this.tabDSA.Size = new System.Drawing.Size(1480, 876);
             this.tabDSA.TabIndex = 3;
             this.tabDSA.Text = "DSA Keys";
+            // 
+            // btnClearDSA
+            // 
+            this.btnClearDSA.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnClearDSA.Location = new System.Drawing.Point(17, 784);
+            this.btnClearDSA.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnClearDSA.Name = "btnClearDSA";
+            this.btnClearDSA.Size = new System.Drawing.Size(148, 74);
+            this.btnClearDSA.TabIndex = 20;
+            this.btnClearDSA.Text = "Clear";
+            this.btnClearDSA.UseVisualStyleBackColor = false;
+            this.btnClearDSA.Click += new System.EventHandler(this.btnClearDSA_Click);
             // 
             // cmbDSAKeyLen
             // 
@@ -5506,6 +5825,7 @@ namespace CryptoUtility
             this.tabHexViewer.AllowDrop = true;
             this.tabHexViewer.BackColor = System.Drawing.Color.LightGray;
             this.tabHexViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabHexViewer.Controls.Add(this.ChkFromFile);
             this.tabHexViewer.Controls.Add(this.hexBox);
             this.tabHexViewer.Controls.Add(this.lblTest);
             this.tabHexViewer.Controls.Add(this.btnTestCRC);
@@ -5554,6 +5874,17 @@ namespace CryptoUtility
             this.tabHexViewer.DragDrop += new System.Windows.Forms.DragEventHandler(this.TabHexViewer_DragDrop);
             this.tabHexViewer.DragOver += new System.Windows.Forms.DragEventHandler(this.TabHexViewer_DragOver);
             // 
+            // ChkFromFile
+            // 
+            this.ChkFromFile.AutoSize = true;
+            this.ChkFromFile.Location = new System.Drawing.Point(456, 88);
+            this.ChkFromFile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ChkFromFile.Name = "ChkFromFile";
+            this.ChkFromFile.Size = new System.Drawing.Size(106, 29);
+            this.ChkFromFile.TabIndex = 87;
+            this.ChkFromFile.Text = "FromFile";
+            this.ChkFromFile.UseVisualStyleBackColor = true;
+            // 
             // hexBox
             // 
             this.hexBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -5562,6 +5893,8 @@ namespace CryptoUtility
             this.hexBox.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(60)))), ((int)(((byte)(188)))), ((int)(((byte)(255)))));
             this.hexBox.Size = new System.Drawing.Size(1408, 605);
             this.hexBox.TabIndex = 86;
+            this.hexBox.VScrollBarVisible = true;
+            this.hexBox.CharSizeChanged += new System.EventHandler(this.hexBox_CharSizeChanged);
             // 
             // lblTest
             // 
@@ -6337,12 +6670,7 @@ namespace CryptoUtility
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.Color.LightGray;
-            this.splitContainer1.Panel1.Controls.Add(this.waveformPainter2);
-            this.splitContainer1.Panel1.Controls.Add(this.waveformPainter1);
             this.splitContainer1.Panel1.Controls.Add(this.label53);
-            this.splitContainer1.Panel1.Controls.Add(this.volumeMeter2);
-            this.splitContainer1.Panel1.Controls.Add(this.volumeMeter1);
-            this.splitContainer1.Panel1.Controls.Add(this.volumeSlider1);
             this.splitContainer1.Panel1.Controls.Add(this.panel8);
             this.splitContainer1.Panel1.Controls.Add(this.panel7);
             this.splitContainer1.Panel1.Controls.Add(this.label51);
@@ -6367,26 +6695,6 @@ namespace CryptoUtility
             this.splitContainer1.SplitterDistance = 205;
             this.splitContainer1.TabIndex = 0;
             // 
-            // waveformPainter2
-            // 
-            this.waveformPainter2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.waveformPainter2.Location = new System.Drawing.Point(16, 562);
-            this.waveformPainter2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.waveformPainter2.Name = "waveformPainter2";
-            this.waveformPainter2.Size = new System.Drawing.Size(176, 53);
-            this.waveformPainter2.TabIndex = 7;
-            this.waveformPainter2.Text = "waveformPainter1";
-            // 
-            // waveformPainter1
-            // 
-            this.waveformPainter1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.waveformPainter1.Location = new System.Drawing.Point(17, 501);
-            this.waveformPainter1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.waveformPainter1.Name = "waveformPainter1";
-            this.waveformPainter1.Size = new System.Drawing.Size(176, 53);
-            this.waveformPainter1.TabIndex = 6;
-            this.waveformPainter1.Text = "waveformPainter1";
-            // 
             // label53
             // 
             this.label53.Location = new System.Drawing.Point(21, 620);
@@ -6395,41 +6703,6 @@ namespace CryptoUtility
             this.label53.TabIndex = 20;
             this.label53.Text = "Volume";
             this.label53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // volumeMeter2
-            // 
-            this.volumeMeter2.Amplitude = 0F;
-            this.volumeMeter2.Location = new System.Drawing.Point(16, 722);
-            this.volumeMeter2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.volumeMeter2.MaxDb = 18F;
-            this.volumeMeter2.MinDb = -60F;
-            this.volumeMeter2.Name = "volumeMeter2";
-            this.volumeMeter2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter2.Size = new System.Drawing.Size(176, 22);
-            this.volumeMeter2.TabIndex = 10;
-            this.volumeMeter2.Text = "volumeMeter1";
-            // 
-            // volumeMeter1
-            // 
-            this.volumeMeter1.Amplitude = 0F;
-            this.volumeMeter1.Location = new System.Drawing.Point(16, 692);
-            this.volumeMeter1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.volumeMeter1.MaxDb = 18F;
-            this.volumeMeter1.MinDb = -60F;
-            this.volumeMeter1.Name = "volumeMeter1";
-            this.volumeMeter1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter1.Size = new System.Drawing.Size(176, 22);
-            this.volumeMeter1.TabIndex = 9;
-            this.volumeMeter1.Text = "volumeMeter1";
-            // 
-            // volumeSlider1
-            // 
-            this.volumeSlider1.Location = new System.Drawing.Point(17, 657);
-            this.volumeSlider1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.volumeSlider1.Name = "volumeSlider1";
-            this.volumeSlider1.Size = new System.Drawing.Size(174, 28);
-            this.volumeSlider1.TabIndex = 6;
-            this.volumeSlider1.VolumeChanged += new System.EventHandler(this.VolumeSlider1_VolumeChanged);
             // 
             // panel8
             // 
@@ -6892,6 +7165,7 @@ namespace CryptoUtility
             this.lstLog.Size = new System.Drawing.Size(1477, 204);
             this.lstLog.TabIndex = 0;
             this.lstLog.Click += new System.EventHandler(this.LstLog_Click);
+            this.lstLog.SelectedIndexChanged += new System.EventHandler(this.lstLog_SelectedIndexChanged);
             this.lstLog.Leave += new System.EventHandler(this.LstLog_Leave);
             // 
             // txtInfo
@@ -6905,6 +7179,7 @@ namespace CryptoUtility
             this.txtInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtInfo.Size = new System.Drawing.Size(623, 1091);
             this.txtInfo.TabIndex = 1;
+            this.txtInfo.TextChanged += new System.EventHandler(this.txtInfo_TextChanged);
             this.txtInfo.DoubleClick += new System.EventHandler(this.TxtInfo_DoubleClick);
             // 
             // label34
@@ -6992,6 +7267,7 @@ namespace CryptoUtility
             this.txtOut.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtOut.Size = new System.Drawing.Size(1476, 207);
             this.txtOut.TabIndex = 0;
+            this.txtOut.TextChanged += new System.EventHandler(this.txtOut_TextChanged);
             this.txtOut.DoubleClick += new System.EventHandler(this.TxtOut_DoubleClick);
             // 
             // tabWebBrowser
@@ -7129,7 +7405,6 @@ namespace CryptoUtility
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.tabControl2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "FrmMain";
@@ -7156,6 +7431,8 @@ namespace CryptoUtility
             this.panel1.PerformLayout();
             this.tabEncoding.ResumeLayout(false);
             this.tabEncoding.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.grpOptions.ResumeLayout(false);
             this.grpOptions.PerformLayout();
@@ -7308,7 +7585,6 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnExportDSAPublic;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.ComboBox cmbRSAKeyLen;
-        private System.Windows.Forms.CheckBox chkPadding;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox txtInfo;
@@ -7566,7 +7842,7 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnSendToCrypto;
         private System.Windows.Forms.Button btnSCrypto;
         private System.Windows.Forms.Button btnSendToHex;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btnVerifyALL;
         private System.Windows.Forms.Button btnHashAll;
         private System.Windows.Forms.TabPage tabTexture;
         private System.Windows.Forms.PictureBox picQuran1;
@@ -7723,7 +7999,32 @@ namespace CryptoUtility
         private System.Windows.Forms.Button btnUnicodes;
         private Be.Windows.Forms.HexBox hexBox;
         private System.Windows.Forms.Button BtnCSHelp;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rbALL;
+        private System.Windows.Forms.RadioButton rbLines;
+        private System.Windows.Forms.RadioButton rbWords;
         private System.Windows.Forms.Button BtnCalcJommal;
+        private System.Windows.Forms.CheckBox ChkJNible;
+        private System.Windows.Forms.Label lblLines;
+        private System.Windows.Forms.Label lblWords;
+        private System.Windows.Forms.Label lblLetters;
+        private System.Windows.Forms.Label lblQLetters;
+        private System.Windows.Forms.Label lblQWords;
+        private System.Windows.Forms.Label lblQAyat;
+        private System.Windows.Forms.Label lblQDiacritics;
+        private System.Windows.Forms.CheckBox ChkFromFile;
+        private System.Windows.Forms.Button btnRSAClear;
+        private System.Windows.Forms.Button btnClearDSA;
+        private System.Windows.Forms.TextBox txtHex;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.TextBox txtOutputHex;
+        private System.Windows.Forms.Label label69;
+        private System.Windows.Forms.ComboBox cmbPadding;
+        private System.Windows.Forms.CheckBox chkNewLine;
+        private System.Windows.Forms.CheckBox chkAutoHash;
+        private System.Windows.Forms.Button BtnVerifyHash;
+        private System.Windows.Forms.Button BtnSignHash;
+        private System.Windows.Forms.CheckBox chkReversed;
     }
 }
 

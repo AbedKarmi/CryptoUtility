@@ -376,7 +376,7 @@ internal class GPUClass
 
     public unsafe ulong[] GPUFindAllPoly(string accelName,byte[] data,int width, ulong crc,int maxThreads,int maxResults)
     {
-        ulong maxValue = width == 64 ? ulong.MaxValue : ((ulong)1 << width);
+        ulong maxValue = (width == 64 ? ulong.MaxValue : ((ulong)1 << width));
         if ((ulong)maxThreads > maxValue) maxThreads = (int) maxValue;
         ulong maxSegment = maxValue / (ulong)maxThreads;
         if ((ulong)maxSegment * (ulong)maxThreads != maxValue) maxSegment++;
@@ -462,7 +462,7 @@ internal class GPUClass
 
     public ulong[] CudaFindAllPolyMonitored(string accelName, byte[] data, int width, ulong crc, int maxThreads, int maxResults)
     {
-        ulong maxValue = width == 64 ? ulong.MaxValue : ((ulong)1 << width);
+        ulong maxValue = (width == 64 ? ulong.MaxValue : ((ulong)1 << width));
         if ((ulong)maxThreads > maxValue) maxThreads = (int)maxValue;
         ulong maxSegment = maxValue / (ulong)maxThreads;
         if ((ulong)maxSegment * (ulong)maxThreads != maxValue) maxSegment++;
@@ -544,7 +544,7 @@ internal class GPUClass
     }
     public ulong[] OpenCLFindAllPolyMonitored(string accelName, byte[] data, int width, ulong crc, int maxThreads, int maxResults)
     {
-        ulong maxValue = width == 64 ? ulong.MaxValue : ((ulong)1 << width);
+        ulong maxValue = (width == 64 ? ulong.MaxValue : ((ulong)1 << width));
         if ((ulong)maxThreads > maxValue) maxThreads = (int)maxValue;
         ulong maxSegment = maxValue / (ulong)maxThreads;
         if ((ulong)maxSegment * (ulong)maxThreads != maxValue) maxSegment++;

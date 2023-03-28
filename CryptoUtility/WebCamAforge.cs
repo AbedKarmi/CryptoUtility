@@ -5,8 +5,6 @@ using System.Windows.Forms;
 using AForge.Video;
 using AForge.Video.DirectShow;
 
-namespace CryptoUtility;
-
 internal class WebCamAforge : IWebCam
 {
     private FilterInfoCollection filterinfocollection;

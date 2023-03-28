@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ILGPU.Runtime.OpenCL;
 
-namespace CryptoUtility
-{
     internal unsafe class MyCLAPI
     {
         public enum MapFlags : long
@@ -45,4 +43,3 @@ namespace CryptoUtility
         IntPtr* event_wait_list,
         IntPtr* @event);
     }
-}

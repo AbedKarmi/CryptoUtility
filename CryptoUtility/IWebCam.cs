@@ -1,7 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace CryptoUtility;
 
 public interface IWebCam
 {

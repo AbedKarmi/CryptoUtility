@@ -10,7 +10,7 @@
       "SpectrumAnalyzerLib/1.0.0": {
         "dependencies": {
           "Microsoft.CSharp": "4.7.0",
-          "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers": "0.3.310801",
+          "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers": "0.3.326103",
           "Microsoft.Win32.Registry": "5.0.0",
           "System.Data.DataSetExtensions": "4.5.0",
           "System.Diagnostics.DiagnosticSource": "6.0.0",
@@ -32,7 +32,7 @@
           }
         }
       },
-      "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers/0.3.310801": {},
+      "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers/0.3.326103": {},
       "Microsoft.NETCore.Platforms/1.1.1": {},
       "Microsoft.NETCore.Targets/1.1.3": {},
       "Microsoft.Win32.Registry/5.0.0": {
@@ -177,12 +177,12 @@
       "path": "microsoft.csharp/4.7.0",
       "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
     },
-    "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers/0.3.310801": {
+    "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers/0.3.326103": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+rBuFxPhhB05/TdNoqEBFMvYPPubRzUBBXzEYT2WvQB4O7v5S0lk8SYVdbc7uOpAKYJPR2vtAVOlAY3KBih0LA==",
-      "path": "microsoft.dotnet.upgradeassistant.extensions.default.analyzers/0.3.310801",
-      "hashPath": "microsoft.dotnet.upgradeassistant.extensions.default.analyzers.0.3.310801.nupkg.sha512"
+      "sha512": "sha512-mawMe4BVNz7XsxZ/Hd97pzAKTm07q8Soy3dx5ODsqeKc1e3OKrqUhexAIayVJ6i47+Z7Tw3pWsF/o/xS47DX0w==",
+      "path": "microsoft.dotnet.upgradeassistant.extensions.default.analyzers/0.3.326103",
+      "hashPath": "microsoft.dotnet.upgradeassistant.extensions.default.analyzers.0.3.326103.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.1": {
       "type": "package",

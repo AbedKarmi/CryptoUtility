@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>   
+ <Package  
+  xmlns="http://schemas.microsoft.com/developer/2004/01/bootstrapper"  
+  Name="DisplayName"  
+  Culture="Culture"  
+  LicenseAgreement="license.txt"  
+ >  
+  <PackageFiles>  
+   <PackageFile Name="license.txt"/>  
+  </PackageFiles>  
+  <!-- Defines a localizable string table for error messages and url's -->  
+  <Strings>  
+   <String Name="DisplayName">Microsoft Access database engine 2016 (x86, x64)</String>  
+   <String Name="Culture">en</String>  
+   <String Name="DotNetFxRequired">Installation of Microsoft Access database engine 2016 requires Microsoft .NET Framework 2.0. Contact your application vendor.</String>  
+   <String Name="InvalidPlatformWin7">Installation of Microsoft Access database engine 2016 is not supported on Windows 7. Contact your application vendor.</String>  
+   <String Name="InvalidPlatformWin2008R2">Installation of Microsoft Access database engine 2016 is not supported on Windows 2008 R2. Contact your application vendor.</String>  
+   <String Name="GeneralFailure">A fatal error occurred during the installation of Microsoft Access database engine 2016.</String>  
+   <String Name="AdminRequired">You do not have the permissions required to install this application. Please contact your administrator.</String>  
+  </Strings>  
+ </Package>  

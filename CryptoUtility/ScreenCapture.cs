@@ -1,7 +1,5 @@
 ﻿using System.Drawing;
 
-namespace CryptoUtility;
-
 internal static class ScreenCapture
 {
     public static Image CaptureScreen()

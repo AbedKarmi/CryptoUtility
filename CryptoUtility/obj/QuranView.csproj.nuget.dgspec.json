@@ -22,19 +22,23 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net6.0-windows7.0"
+          "net7.0-windows"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\.Development\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net6.0-windows7.0": {
-            "targetAlias": "net6.0-windows",
+          "net7.0-windows7.0": {
+            "targetAlias": "net7.0-windows",
             "projectReferences": {
               "D:\\.Development\\CSharp\\Crypto\\SpectrumAnalyzerLib\\SpectrumAnalyzerLib.csproj": {
                 "projectPath": "D:\\.Development\\CSharp\\Crypto\\SpectrumAnalyzerLib\\SpectrumAnalyzerLib.csproj"
+              },
+              "D:\\.Development\\CSharp\\MyLibrary\\MyLibrary.csproj": {
+                "projectPath": "D:\\.Development\\CSharp\\MyLibrary\\MyLibrary.csproj"
               }
             }
           }
@@ -46,8 +50,8 @@
         }
       },
       "frameworks": {
-        "net6.0-windows7.0": {
-          "targetAlias": "net6.0-windows",
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
           "dependencies": {
             "Be.Windows.Forms.HexBox": {
               "target": "Package",
@@ -55,11 +59,15 @@
             },
             "ILGPU": {
               "target": "Package",
-              "version": "[1.1.0, )"
+              "version": "[1.2.0, )"
             },
             "ILGPU.Algorithms": {
               "target": "Package",
-              "version": "[1.1.0, )"
+              "version": "[1.2.0, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.2.10, )"
             },
             "Microsoft.CSharp": {
               "target": "Package",
@@ -68,7 +76,7 @@
             "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[0.3.310801, )"
+              "version": "[0.3.326103, )"
             },
             "Microsoft.NETCore.Platforms": {
               "target": "Package",
@@ -165,7 +173,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -177,7 +186,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -203,6 +212,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "D:\\.Development\\nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -229,7 +239,7 @@
             "Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[0.3.310801, )"
+              "version": "[0.3.326103, )"
             },
             "Microsoft.Win32.Registry": {
               "target": "Package",
@@ -258,7 +268,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -267,7 +278,71 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\.Development\\CSharp\\MyLibrary\\MyLibrary.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\.Development\\CSharp\\MyLibrary\\MyLibrary.csproj",
+        "projectName": "MyLibrary",
+        "projectPath": "D:\\.Development\\CSharp\\MyLibrary\\MyLibrary.csproj",
+        "packagesPath": "C:\\Users\\karmi\\.nuget\\packages\\",
+        "outputPath": "D:\\.Development\\CSharp\\MyLibrary\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\karmi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0-windows"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "D:\\.Development\\nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0-windows7.0": {
+            "targetAlias": "net7.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0-windows7.0": {
+          "targetAlias": "net7.0-windows",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
